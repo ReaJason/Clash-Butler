@@ -1,0 +1,11 @@
+[[custom_groups]]
+name = "🔰 节点选择"
+type = "select"
+rule = ["[]♻️ 自动选择", "[]🎯 全球直连", ".*"]
+
+[[custom_groups]]
+name = "♻️ 自动选择"
+type = "url-test"
+rule = [".*"]
+url = "http://www.gstatic.com/generate_204"
+interval = 300
