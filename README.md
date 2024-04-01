@@ -44,7 +44,7 @@ cargo run
 2. 订阅链接生成
 
    `http://127.0.0.1:25500/sub?target=clash&url=sub1&config=external_config_url`
-3. 订阅节点去除（测速后重新生成订阅并排除没有素的节点）
+3. 订阅节点去除（测速后重新生成订阅并排除没有速度的节点）
 
    `http://127.0.0.1:25500/sub?target=clash&url=sub1&exclude=regex1|regex2`
 
