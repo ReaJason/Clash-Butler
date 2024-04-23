@@ -1,272 +1,396 @@
-use std::fs;
+use std::{env, fs};
+use std::collections::{HashMap, HashSet};
+use std::default::Default;
 use std::fs::File;
 use std::io::Write;
+use std::net::IpAddr;
 use std::path::Path;
 use std::time::Duration;
 
-use axum::{Router, routing::get};
-use axum::extract::Query;
-use regex::Regex;
+use chrono::Local;
+use clap::Parser;
 use reqwest::Client;
-use serde::Deserialize;
-use tokio::net::TcpListener;
-use tokio::signal;
-use tower_http::services::ServeDir;
-use tracing::{info, Level};
+use tracing::{error, info, Level};
 use tracing_subscriber::FmtSubscriber;
-use walkdir::WalkDir;
+
+use crate::clash::{ClashMeta, DelayTestConfig};
+use crate::settings::Settings;
+use crate::sub::{SubConfig, SubConverter};
 
 mod sub;
 mod clash;
+mod routes;
+mod risk;
+mod server;
+mod ip;
+mod cgi_trace;
+mod settings;
+
+#[derive(Parser)]
+#[command(version, about, long_about = None)]
+struct Cli {
+    // Starts the Axum server
+    #[arg(long)]
+    server: bool,
+
+    // Just test subs/test/config.yaml
+    #[arg(long)]
+    test: bool,
+}
+
+const TEST_PROXY_NAME: &str = "PROXY";
 
 #[tokio::main]
 async fn main() {
-    tracing::subscriber::set_global_default(FmtSubscriber::builder().with_max_level(Level::INFO).finish()).expect("setting default subscriber failed");
-
-    create_logs_folder();
-    sub::start_sub_converter().await;
-
-    let app = Router::new()
-        .route("/", get(root))
-        .nest_service("/subs", ServeDir::new("subs"))
-        .route("/add", get(add_sub))
-        .route("/test", get(test_config))
-        .route("/test/all", get(test_all_sub))
-        ;
-
-    let listener = TcpListener::bind("0.0.0.0:3000")
-        .await
-        .unwrap();
-
-    info!("listening on {}", listener.local_addr().unwrap());
-
-    axum::serve(listener, app)
-        .with_graceful_shutdown(shutdown_signal())
-        .await.unwrap();
-}
-
-async fn shutdown_signal() {
-    let ctrl_c = async {
-        signal::ctrl_c()
-            .await
-            .expect("failed to install Ctrl+C handler");
-    };
-
-    #[cfg(unix)]
-        let terminate = async {
-        signal::unix::signal(signal::unix::SignalKind::terminate())
-            .expect("failed to install signal handler")
-            .recv()
-            .await;
-    };
-
-    #[cfg(not(unix))]
-        let terminate = std::future::pending::<()>();
-
-    tokio::select! {
-        _ = ctrl_c => {},
-        _ = terminate => {},
+    tracing::subscriber::set_global_default(
+        FmtSubscriber::builder()
+            .with_max_level(Level::INFO)
+            .finish()
+    ).expect("setting default subscriber failed");
+    let args = Cli::parse();
+    let config = Settings::new();
+    match config {
+        Ok(mut config) => {
+            // 创建订阅测试所用的目录结构
+            create_folder();
+            if args.server {
+                // 服务端
+                // server::start_server(config).await
+            } else {
+                // 本地生成
+                if args.test {
+                    config.test = Some(true);
+                }
+                run(config).await
+            }
+        }
+        Err(e) => {
+            panic!("配置文件读取失败: {}", e)
+        }
     }
 }
 
-
-// 创建 logs 日志文件目录
-fn create_logs_folder() {
-    if Path::new("logs").exists() {
+async fn run(config: Settings) {
+    // 启动 sub converter 服务
+    let mut subconverter = SubConverter::new(config.other.sub_converter_port);
+    if let Err(e) = subconverter.start().await {
+        error!("subconverter 启动失败，{}", e);
         return;
     }
-    fs::create_dir("logs").unwrap()
-}
 
-#[test]
-fn test_create_logs_folder() {
-    create_logs_folder()
-}
+    let test_sub_file_path;
+    let mixed_port = 7999;
+    let external_port = config.other.clash_external_port;
 
-async fn root() -> &'static str {
-    "Hello, World!"
-}
+    if config.test.is_some() {
+        test_sub_file_path = env::current_dir().unwrap().join("subs/test/config.yaml").to_string_lossy().to_string();
+    } else {
+        let mut urls = config.subs;
+        if config.need_add_pool {
+            urls.extend(config.pools)
+        }
+        let sub_url = subconverter.get_clash_sub_url(SubConfig {
+            urls,
+            config: "config/test.toml".to_string(),
+            mixed_port: Some(mixed_port),
+            external_url: Some(format!(":{}", external_port)),
+            ..Default::default()
+        }).await;
 
-#[derive(Deserialize, Debug)]
-struct Sub {
-    url: String,
-}
+        if sub_url.is_empty() {
+            error!("当前无可用的待测试订阅连接，请重新修改配置文件或确保当前网络通顺");
+            subconverter.stop().unwrap();
+            return;
+        }
 
-async fn add_sub(Query(params): Query<Sub>) -> String {
-    let sub_url = params.url;
+        test_sub_file_path = download_test_sub(sub_url).await;
+    }
 
-    let sub_path = download_new_sub(&sub_url).await;
-    let test_sub_url = format!("http://127.0.0.1:25500/sub?target=clash\
-                                        &url=http://localhost:3000/subs/release/config.yaml%7Chttp://localhost:3000/{}\
-                                        &config=config/clash-test.toml", sub_path);
-    download_test_sub(&test_sub_url).await;
+    // 启动 Clash 内核
+    let mut clash_meta = ClashMeta::new(external_port, mixed_port);
+    if let Err(e) = clash_meta.start().await {
+        error!("原神启动失败，请打开 logs/clash.log，查看错误原因，{}", e);
+        clash_meta.stop().unwrap();
+        subconverter.stop().unwrap();
+        return;
+    }
 
-    exclude_test_duplicate_nodes().await;
+    match clash_meta.get_group(TEST_PROXY_NAME).await {
+        Ok(nodes) => {
+            info!("开始测试 subs/test/config.yaml 中节点的延迟速度，节点总数：{}", nodes.all.len())
+        }
+        Err(e) => {
+            error!("获取节点数失败，请检查 clash 日志文件和 subs/test/config.yaml 生成的节点是否正确, {}", e);
+            clash_meta.stop().unwrap();
+            subconverter.stop().unwrap();
+            return;
+        }
+    }
 
-    test_config().await;
+    info!("开始测试连通性");
+    let delay_results = test_node_with_delay_config(&clash_meta, &config.connect_test).await;
+    let nodes = get_all_tested_nodes(&delay_results);
+    info!("连通性测试结果：{} 个节点可用", nodes.len());
+    if config.fast_mode {
+        let release_url = subconverter.get_clash_sub_url(SubConfig {
+            urls: vec![test_sub_file_path.clone()],
+            config: config.sub_config_url,
+            includes: Some(nodes),
+            ..Default::default()
+        }).await;
+        let _release_sub_file_path = download_release_sub(release_url).await;
+    } else {
+        let new_test_sub_url = subconverter.get_clash_sub_url(SubConfig {
+            urls: vec![test_sub_file_path.clone()],
+            config: "config/test.toml".to_string(),
+            includes: Some(nodes),
+            mixed_port: Some(clash_meta.mixed_port),
+            external_url: Some(format!(":{}", clash_meta.external_port)),
+            ..Default::default()
+        }).await;
 
-    "http://localhost:3000/subs/release/config.yaml".to_string()
-}
+        download_test_sub(new_test_sub_url).await;
 
-async fn test_config() -> String {
-    let mut clash_process = clash::run().await;
-    info!("开始测试 subs/test/config.yaml 中节点的延迟速度");
+        clash_meta.restart().await.unwrap();
 
-    let exclude_nodes = check_and_get_useless_nodes().await;
-
-    let release_config_url = "https://gist.githubusercontent.com/ReaJason/633414d3b39af7dbbfcbdc08c8093d47/raw/a7d322b7c195db716435e93ca0b3a33d9c65a90b/gistfile1.txt";
-    let release_sub_url = format!("http://127.0.0.1:25500/sub?target=clash\
-                                            &url=http://localhost:3000/subs/test/config.yaml\
-                                            &config={}\
-                                            &exclude={}",
-                                  release_config_url,
-                                  urlencoding::encode(&*exclude_nodes.join("|")));
-
-    let release_path = "subs/release/config.yaml";
-    fs::copy(release_path, "subs/release/config.yaml.bak").unwrap();
-
-    let release_file = File::create(release_path).unwrap();
-    save_file_from_url(&release_sub_url, release_file).await;
-
-    clash_process.kill().unwrap();
-    clash_process.wait().unwrap();
-
-    "http://localhost:3000/subs/release/config.yaml".to_string()
-}
-
-async fn test_all_sub() -> String {
-    let mut sub_urls = Vec::new();
-
-    sub_urls.push("http://localhost:3000/subs/release/config.yaml".to_string());
-
-    // 遍历 `subs` 目录下的所有文件
-    for entry in WalkDir::new("subs").into_iter().filter_map(|e| e.ok()) {
-        let path = entry.path();
-        if path.is_file() {
-            if let Some(file_name) = path.file_name().and_then(|n| n.to_str()) {
-                sub_urls.push(format!("http://localhost:3000/subs/{}", file_name));
+        let mut nodes = vec![];
+        let mut top_node = String::new();
+        for (name, conf) in config.websites {
+            info!("当前测试站点：{}, {}", name, conf.url);
+            let delay_results = test_node_with_delay_config(&clash_meta, &conf).await;
+            if !delay_results.is_empty() {
+                nodes = get_all_tested_nodes(&delay_results);
+                top_node = get_top_node(&delay_results);
+                info!("可用节点数：{}", nodes.len());
+                info!("最低延迟节点：{}", top_node);
             }
         }
-    }
-    info!("当前一共订阅数量为：{}", sub_urls.len());
-    info!("{:?}", sub_urls);
 
-    let test_sub_url = format!("http://127.0.0.1:25500/sub?target=clash\
-                                        &url={}\
-                                        &config=config/clash-test.toml",
-                               urlencoding::encode(&sub_urls.join("|")));
-
-    download_test_sub(&test_sub_url).await;
-
-    exclude_test_duplicate_nodes().await;
-
-    test_config().await;
-
-    "http://localhost:3000/subs/release/config.yaml".to_string()
-}
-
-async fn exclude_test_duplicate_nodes() {
-    let mut clash_process = clash::run().await;
-    let proxies = clash::get_proxies().await;
-    info!("当前节点个数：{}", proxies.len());
-
-    let mut exclude_nodes = vec![];
-    for proxy in proxies {
-        let name = &proxy.name;
-        let re = Regex::new(r"\s\d+$").unwrap();
-        if re.is_match(name) {
-            info!("去重节点：{}", name);
-            exclude_nodes.push(name.clone())
+        let mut node_rename_map: HashMap<String, String> = HashMap::new();
+        let mut node_ip_map: HashMap<String, IpAddr> = HashMap::new();
+        if nodes.is_empty() {
+            clash_meta.stop().unwrap();
+            subconverter.stop().unwrap();
+            return;
         }
-    }
-
-    let test_sub_url = format!("http://127.0.0.1:25500/sub?target=clash\
-                                    &url=http://localhost:3000/subs/test/config.yaml\
-                                    &config=config/clash-test.toml&exclude={}",
-                               urlencoding::encode(&exclude_nodes.join("|")));
-    download_test_sub(&test_sub_url).await;
-    info!("节点去重成功，去除个数 {}", exclude_nodes.len());
-    clash_process.kill().unwrap();
-    clash_process.wait().unwrap();
-}
-
-async fn check_and_get_useless_nodes() -> Vec<String> {
-    let mut exclude_nodes = vec![];
-    let mut round = 0;
-    let total_round = 6;
-    loop {
-        let proxies = clash::get_proxies().await;
-        // 当测试数量大于 5 时开始计算
-        let cur_round = proxies.last().unwrap().history.len();
-        if cur_round != round {
-            round = cur_round;
-            info!("当前已测完 {} 轮，一共测试 {} 轮", round, total_round);
-        }
-
-        if cur_round >= total_round {
-            for proxy in proxies {
-                let name = &proxy.name;
-                let history = &proxy.history;
-                let delays: std::collections::HashSet<_> = history.iter().map(|h| h.delay).collect();
-                if delays.len() == 1 && *delays.iter().next().unwrap() == 0 {
-                    info!("去掉全程无速度节点：{}", name);
-                    exclude_nodes.push(name.clone());
+        for node in &nodes {
+            let ip_result = clash_meta.set_group_proxy(TEST_PROXY_NAME, node).await;
+            if ip_result.is_ok() {
+                let cloudflare_result = cgi_trace::get_ip_by_cloudflare(&clash_meta.proxy_url).await;
+                if cloudflare_result.is_ok() {
+                    let proxy_ip = cloudflare_result.unwrap();
+                    info!("proxy: {}, ip: {}", node, proxy_ip);
+                    node_ip_map.insert(node.clone(), proxy_ip);
+                } else {
+                    error!("获取节点 {} 的 IP 失败, {}", node, cloudflare_result.err().unwrap());
                 }
-
-                if history.len() >= 2
-                    && history[history.len() - 1].delay == 0
-                    && history[history.len() - 2].delay == 0 {
-                    info!("去掉多次连接无速度节点：{}", name);
-                    exclude_nodes.push(name.clone());
-                };
+            } else {
+                error!("设置节点 {} 失败, {}", node, ip_result.err().unwrap());
             }
-            break;
         }
-        tokio::time::sleep(Duration::from_secs(5)).await;
-    }
 
-    exclude_nodes
+        if clash_meta.set_group_proxy(TEST_PROXY_NAME, &top_node).await.is_ok() {
+            for (node, ip) in &node_ip_map {
+                let ip_detail_result = ip::get_ip_detail_with_proxy(ip, &clash_meta.proxy_url).await;
+                match ip_detail_result {
+                    Ok(ip_detail) => {
+                        info!("{:?}", ip_detail);
+                        if config.rename_node {
+                            let new_name = config.rename_pattern
+                                .replace("${IP}", &ip.to_string())
+                                .replace("${COUNTRY_CODE}", &ip_detail.country_code)
+                                .replace("${ISP}", &ip_detail.isp)
+                                .replace("${CITY}", &ip_detail.city);
+                            node_rename_map.insert(node.clone(), new_name);
+                        }
+                    }
+                    Err(e) => {
+                        error!("获取节点 {} 的 IP 信息失败, {}", node, e);
+                    }
+                }
+            }
+        };
+
+
+        let release_url = subconverter.get_clash_sub_url(SubConfig {
+            urls: vec![test_sub_file_path.clone()],
+            config: config.sub_config_url,
+            includes: Some(nodes),
+            rename: Some(node_rename_map.iter()
+                .map(|(k, v)| format!("{}@{}", k, v))
+                .collect::<Vec<_>>()),
+            ..Default::default()
+        }).await;
+        info!("release 转换地址：{}", release_url);
+        let release_sub_file_path = download_release_sub(release_url).await;
+        info!("release 文件地址：{}", release_sub_file_path);
+        clash_meta.stop().unwrap();
+        subconverter.stop().unwrap();
+    }
 }
 
-async fn download_test_sub(sub_url: &str) {
-    let client = Client::new();
+fn get_top_node(test_results: &Vec<HashMap<String, i64>>) -> String {
+    let mut combined_data: HashMap<String, Vec<i64>> = HashMap::new();
+    for test in test_results {
+        for (node, latency) in test {
+            combined_data.entry(node.clone()).or_default().push(*latency);
+        }
+    }
+    let node_stats: Vec<(String, i64)> = combined_data.clone()
+        .into_iter()
+        .map(|(node, latencies)| {
+            let sum: i64 = latencies.iter().sum();
+            let count = latencies.len() as i64;
+            let mean = sum / count;
+            (node, mean)
+        })
+        .collect();
+    node_stats.into_iter().min_by_key(|(_, mean)| *mean).unwrap().0
+}
+
+async fn test_node_with_delay_config(clash_meta: &ClashMeta, delay_test_config: &DelayTestConfig) -> Vec<HashMap<String, i64>> {
+    const ROUND: i32 = 10;
+    info!("测试配置：{:?}", delay_test_config);
+    let mut delay_results = vec![];
+
+    // 预热 2 轮，DNS lookup
+    for _ in 0..2 {
+        let _ = clash_meta.test_group(TEST_PROXY_NAME, delay_test_config).await;
+    }
+
+    for n in 0..ROUND {
+        info!("测试第 {} 轮", n + 1);
+        let result = clash_meta.test_group(TEST_PROXY_NAME, delay_test_config).await;
+
+        match result {
+            Ok(delay) => {
+                delay_results.push(delay.clone());
+                info!("有速度节点个数为：{}", delay.len())
+            }
+            Err(e) => {
+                info!("当前测试轮完全没有速度, {}", e)
+            }
+        }
+    }
+    delay_results
+}
+
+/*
+获取所有已测速有过一次速度的节点
+ */
+fn get_all_tested_nodes(test_results: &Vec<HashMap<String, i64>>) -> Vec<String> {
+    let mut keys_set = HashSet::new();
+    for result in test_results {
+        for key in result.keys() {
+            keys_set.insert(key.clone());
+        }
+    }
+    keys_set.into_iter().collect()
+}
+
+/*
+获取测速稳定的节点
+ */
+#[allow(dead_code)]
+fn get_stable_tested_nodes(test_results: &Vec<HashMap<String, i64>>) -> Vec<String> {
+    // 合并所有测试数据
+    let mut combined_data: HashMap<String, Vec<i64>> = HashMap::new();
+    for test in test_results {
+        for (node, latency) in test {
+            combined_data.entry(node.clone()).or_default().push(*latency);
+        }
+    }
+
+    // 计算每个节点的平均延迟和标准差
+    let mut node_stats: Vec<(String, f64)> = combined_data.clone()
+        .into_iter()
+        .filter_map(|(node, latencies)| {
+            let sum: i64 = latencies.iter().sum();
+            let count = latencies.len();
+            if count <= combined_data.len() / 2 {
+                None
+            } else {
+                let mean = sum as f64 / count as f64;
+                Some((node, mean))
+            }
+        })
+        .collect();
+
+    // 根据平均延迟对稳定的节点进行排序
+    node_stats.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
+
+    node_stats.into_iter().map(|(node, _)| node).collect()
+}
+
+async fn download_test_sub(sub_url: String) -> String {
+    let client = Client::builder().timeout(Duration::from_secs(120)).build().unwrap();
     let response = client.get(sub_url).send().await.unwrap();
     let content = response.text().await.unwrap();
-    let mut file = File::create("subs/test/config.yaml").unwrap();
+    let path = "subs/test/config.yaml";
+    let mut file = File::create(path).unwrap();
     file.write_all(content.as_bytes()).unwrap();
+    env::current_dir().unwrap().join(path).to_string_lossy().to_string()
 }
 
-async fn download_new_sub(sub_url: &str) -> String {
-    // 获取 UUID 作为文件名
-    let re = Regex::new(r"/files/(.*?)/raw").unwrap();
-    let uuid = re.captures(&sub_url)
-        .and_then(|caps| caps.get(1))
-        .map_or_else(|| {
-            format!("{:x}", md5::compute(&sub_url))
-        }, |m| m.as_str().to_string());
-
-    let file_path = format!("subs/{}", uuid);
-    info!("sub download success in {}", file_path);
-    let file = File::create(&file_path).unwrap();
-
-    save_file_from_url(sub_url, file).await;
-
-    file_path
-}
-
-async fn save_file_from_url(url: &str, mut file: File) {
+async fn download_release_sub(release_url: String) -> String {
     let client = Client::new();
-    let response = client.get(url).send().await.unwrap();
+    let response = client.get(release_url).send().await.unwrap();
     let content = response.text().await.unwrap();
+    let now = Local::now();
+    let path = format!("subs/release/{}.yaml", now.format("%Y-%m-%d_%H:%M:%S"));
+    let mut file = File::create(&path).unwrap();
     file.write_all(content.as_bytes()).unwrap();
+    env::current_dir().unwrap().join(path).to_string_lossy().to_string()
 }
 
-#[tokio::test]
-async fn test_download_new_sub() {
-    let sub_url = "https://paste.gg/p/anonymous/c89744fd11cc4f439881cd15d46c9548/files/87bb97abfb954e80a83619d677a2231c/raw";
-    let sub_path = download_new_sub(sub_url).await;
-    assert!(Path::new(&sub_path).exists());
-    let sub_url = "http://localhost:3000/subs/1.yaml";
-    let sub_path = download_new_sub(sub_url).await;
-    assert!(Path::new(&sub_path).exists());
+// 创建目录
+fn create_folder() {
+    let logs_path = "logs";
+    if !Path::new(logs_path).exists() {
+        fs::create_dir(logs_path).unwrap()
+    }
+
+    let subs_path = "subs";
+    if !Path::new(subs_path).exists() {
+        fs::create_dir(subs_path).unwrap();
+    }
+
+    let test_path = "subs/test";
+    if !Path::new(test_path).exists() {
+        fs::create_dir(test_path).unwrap();
+    }
+
+    let release_path = "subs/release";
+    if !Path::new(release_path).exists() {
+        fs::create_dir(release_path).unwrap();
+    }
+}
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_stable_nodes() {
+        // [
+        //     { "免费节点2": 829 },
+        //     { "免费节点3": 815, "免费节点2": 945, "免费节点1": 838 },
+        //     { "免费节点4": 835, "免费节点1": 850, "免费节点3": 819 },
+        //     { "免费节点1": 844, "免费节点3": 830, "免费节点2": 856 },
+        //     { "免费节点3": 857, "免费节点4": 796, "2": 911, "免费节点4": 816 },
+        //     { "免费节点1": 895, "免费节点3": 863, "免费节点4": 829 },
+        //     { "免费节点3": 837, "免费节点1": 809, "免费节点4": 849 },
+        //     { "免费节点3": 849, "免费节点2": 904, "免费节点4": 892 }
+        // ];
+
+        // 假设这是从十组测试中收集的数据
+        let test_data = vec![
+            HashMap::from([("node1".to_string(), 100), ("node2".to_string(), 200), ("node3".to_string(), 150)]),
+            HashMap::from([("node1".to_string(), 110), ("node2".to_string(), 190), ("node3".to_string(), 160)]),
+            HashMap::from([("node1".to_string(), 120), ("node3".to_string(), 10000)]),
+        ];
+
+        println!("{:?}", get_top_node(&test_data));
+    }
 }
