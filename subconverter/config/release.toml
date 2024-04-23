@@ -1,0 +1,78 @@
+version = 1
+[custom]
+clash_rule_base = "base/clash_base.yaml"
+add_emoji = true
+
+[[custom_groups]]
+name = "PROXY"
+type = "select"
+rule = ["[]LoadBalance", "[]Fallback", "[]Select", "[]HK", "[]TW", "[]JP", "[]SG", "[]US", "[]DIRECT", "[]REJECT"]
+
+[[custom_groups]]
+name = "Select"
+type = "select"
+rule = [".*"]
+
+[[custom_groups]]
+name = "LoadBalance"
+type = "load-balance"
+rule = ["^[^戏|易]*$"]
+url = "http://www.google.com/generate_204"
+interval = 600
+timeout = 3
+tolerance = 500
+
+[[custom_groups]]
+name = "Fallback"
+type = "fallback"
+rule = ["[]HK", "[]TW", "[]JP", "[]SG", "[]US"]
+url = "http://www.google.com/generate_204"
+interval = 600
+timeout = 3
+tolerance = 500
+
+[[custom_groups]]
+name = "HK"
+type = "url-test"
+rule = ["^[^戏|易|坡|本|香|巴|美|马|土|俄|酋|荷|门|韩|印|湾|英|法|德|拿|利]*(香港|HK)[^戏|易]*$"]
+url = "http://www.google.com/generate_204"
+interval = 600
+timeout = 3
+tolerance = 500
+
+[[custom_groups]]
+name = "TW"
+type = "url-test"
+rule = ["^[^戏|易|坡|本|香|巴|美|马|土|俄|酋|荷|门|韩|印|湾|英|法|德|拿|利]*(台湾|台灣|臺灣|TW)[^戏|易]*$"]
+url = "http://www.google.com/generate_204"
+interval = 600
+timeout = 3
+tolerance = 500
+
+
+[[custom_groups]]
+name = "JP"
+type = "url-test"
+rule = ["^[^戏|易|坡|本|香|巴|美|马|土|俄|酋|荷|门|韩|印|湾|英|法|德|拿|利]*(日本|JP)[^戏|易]*$"]
+url = "http://www.google.com/generate_204"
+interval = 600
+timeout = 3
+tolerance = 500
+
+[[custom_groups]]
+name = "SG"
+type = "url-test"
+rule = ["^[^戏|易|坡|本|香|巴|美|马|土|俄|酋|荷|门|韩|印|湾|英|法|德|拿|利]*(新加坡|SG)[^戏|易]*$"]
+url = "http://www.google.com/generate_204"
+interval = 600
+timeout = 3
+tolerance = 500
+
+[[custom_groups]]
+name = "US"
+type = "url-test"
+rule = ["^[^戏|易|坡|本|香|巴|美|马|土|俄|酋|荷|门|韩|印|湾|英|法|德|拿|利]*(美国|美國|US)[^戏|易]*$"]
+url = "http://www.google.com/generate_204"
+interval = 600
+timeout = 3
+tolerance = 500

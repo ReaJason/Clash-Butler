@@ -1,0 +1,9 @@
+version = 1
+[custom]
+clash_rule_base = "base/clash_base.yaml"
+
+[[custom_groups]]
+name = "PROXY"
+type = "select"
+rule = [".*"]
+

@@ -112,9 +112,9 @@ replace = '$1:$2:$3:0:0:0'
 
 [node_pref]
 udp_flag = true
-tcp_fast_open_flag = false
+tcp_fast_open_flag = true
 skip_cert_verify_flag = true
-tls13_flag = false
+tls13_flag = true
 
 sort_flag = false
 # Script used for sorting nodes. A "compare" function with 2 arguments which are the 2 nodes to be compared should be defined in the script. Supports inline script and script path.
@@ -125,7 +125,7 @@ sort_flag = false
 #}
 #'''
 
-filter_deprecated_nodes = false
+filter_deprecated_nodes = true
 append_sub_userinfo = true
 clash_use_new_field_name = true
 
@@ -164,8 +164,8 @@ replace = "_"
 match = '[-]+'
 replace = ""
 
-[[node_pref.rename_node]]
-script = "function rename(node) {const remark = node.Remark;const server = node.Server;const port = node.Port;const str = server + port;let h1 = 0xdeadbeef ^ 0, h2 = 0x41c6ce57 ^ 0;for (let i = 0, ch; i < str.length; i++) {ch = str.charCodeAt(i);h1 = Math.imul(h1 ^ ch, 2654435761);h2 = Math.imul(h2 ^ ch, 1597334677);}h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);let extra = (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString().substring(0, 5);if (remark.endsWith(extra)) return remark;return remark + '_' + extra;}"
+#[[node_pref.rename_node]]
+#script = "function rename(node) {const remark = node.Remark;const server = node.Server;const port = node.Port;const str = server + port;let h1 = 0xdeadbeef ^ 0, h2 = 0x41c6ce57 ^ 0;for (let i = 0, ch; i < str.length; i++) {ch = str.charCodeAt(i);h1 = Math.imul(h1 ^ ch, 2654435761);h2 = Math.imul(h2 ^ ch, 1597334677);}h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);let extra = (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString().substring(0, 5);if (remark.endsWith(extra)) return remark;return remark + '_' + extra;}"
 
 [managed_config]
 # Append a '#!MANAGED-CONFIG' info to Surge configurations
@@ -192,54 +192,12 @@ add_emoji = false
 remove_old_emoji = true
 
 [[emojis.emoji]]
-#match = '(流量|时间|应急)'
-#emoji = '🏳️‍🌈'
-import = "snippets/emoji.toml"
-
-# [[custom_groups]]
-# name = "Auto"
-# type = "url-test"
-# rule = [".*"]
-# url = "http://www.gstatic.com/generate_204"
-# interval = 300
-# tolerance = 150
-# lazy = true
-
-# [[custom_groups]]
-# name = "Proxy"
-# type = "select"
-# rule = [".*", "[]DIRECT"]
-# disable_udp = false
-
-# [[custom_groups]]
-# name = "LoadBalance"
-# type = "load-balance"
-# rule = [".*", "[]Proxy", "[]DIRECT"]
-# interval = 100
-# strategy = "consistent-hashing"
-# url = "http://www.gstatic.com/generate_204"
-
-[[custom_groups]]
-import = "snippets/groups.toml"
+import = "emoji.toml"
 
 [ruleset]
-# Enable generating rules with rulesets
 enabled = true
-
-# Overwrite the existing rules in rule_base
-overwrite_original_rules = false
-
-# Perform a ruleset update on request
+overwrite_original_rules = true
 update_ruleset_on_request = false
-
-# [[rulesets]]
-# group = "Proxy"
-# ruleset = "https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/Unbreak.list"
-# type = "surge-ruleset"
-# interval = 86400
-
-#[[rulesets]]
-#import = "snippets/rulesets.toml"
 
 [template]
 template_path = ""
@@ -316,10 +274,6 @@ target = "/sub?target=v2ray"
 uri = "/trojan"
 target = "/sub?target=trojan"
 
-[[aliases]]
-uri = "/test"
-target = "/render?path=templates/test.tpl"
-
 #[[tasks]]
 #name = "tick"
 #cronexp = "0/10 * * * * ?"
@@ -328,12 +282,12 @@ target = "/render?path=templates/test.tpl"
 
 [server]
 listen = "0.0.0.0"
-port = 25500
+port = 25501
 serve_file_root = "web"
 
 [advanced]
-log_level = "debug"
-print_debug_info = true
+log_level = "info"
+print_debug_info = false
 max_pending_connections = 10240
 max_concurrent_threads = 4
 max_allowed_rulesets = 64
