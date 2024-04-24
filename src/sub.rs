@@ -133,15 +133,15 @@ async fn download_new_sub(sub_url: &str) -> Result<String, Box<dyn std::error::E
     let retries = 3;
 
     loop {
-        let response = client
+        let result = client
             .get(sub_url)
             .timeout(Duration::from_secs(10))
             .send()
             .await;
-
-        match response {
-            Ok(ref resp) => {
-                return if resp.status().is_success() {
+        match result {
+            Ok(resp) => {
+                let status = resp.status();
+                return if status.is_success() {
                     // 获取 UUID 作为文件名
                     let re = Regex::new(r"/files/(.*?)/raw").unwrap();
                     let uuid = re.captures(sub_url)
@@ -154,11 +154,21 @@ async fn download_new_sub(sub_url: &str) -> Result<String, Box<dyn std::error::E
                     info!("sub download success in {}", file_path);
                     let mut file = File::create(&file_path).unwrap();
 
-                    let content = response?.text().await.unwrap();
-                    file.write_all(content.as_bytes()).unwrap();
-                    Ok(env::current_dir().unwrap().join(file_path).to_string_lossy().to_string())
+                    let content_result = resp.text().await;
+                    match content_result {
+                        Ok(content) => {
+                            file.write_all(content.as_bytes()).unwrap();
+                            Ok(env::current_dir().unwrap().join(file_path).to_string_lossy().to_string())
+                        }
+                        Err(e) => {
+                            if e.is_timeout() {
+                                continue;
+                            }
+                            return Err(Box::new(e))
+                        }
+                    }
                 } else {
-                    return Err(format!("获取订阅连失败 {} 响应码 {}", sub_url, response?.status().as_str()).into());
+                    Err(format!("获取订阅连失败 {} 响应码 {}", sub_url, status.as_str()).into())
                 };
             }
             Err(e) => {

@@ -169,6 +169,7 @@ async fn run(config: Settings) {
         let mut node_rename_map: HashMap<String, String> = HashMap::new();
         let mut node_ip_map: HashMap<String, IpAddr> = HashMap::new();
         if nodes.is_empty() {
+            error!("当前无可用节点，请尝试更换订阅节点或重试");
             clash_meta.stop().unwrap();
             subconverter.stop().unwrap();
             return;
