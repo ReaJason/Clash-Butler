@@ -83,7 +83,12 @@ async fn run(config: Settings) {
     let external_port = config.other.clash_external_port;
 
     if config.test.is_some() {
-        test_sub_file_path = env::current_dir().unwrap().join("subs/test/config.yaml").to_string_lossy().to_string();
+        let config_path = env::current_dir().unwrap().join("subs/test/config.yaml");
+        if !config_path.exists() {
+            error!("当前并没有找到可用的测试文件，请删掉 --test 后重试");
+            return;
+        }
+        test_sub_file_path = config_path.to_string_lossy().to_string();
     } else {
         let mut urls = config.subs;
         if config.need_add_pool {
@@ -98,7 +103,7 @@ async fn run(config: Settings) {
         }).await;
 
         if sub_url.is_empty() {
-            error!("当前无可用的待测试订阅连接，请重新修改配置文件或确保当前网络通顺");
+            error!("当前无可用的待测试订阅连接，请修改配置文件添加订阅链接或确保当前网络通顺");
             subconverter.stop().unwrap();
             return;
         }
@@ -109,7 +114,7 @@ async fn run(config: Settings) {
     // 启动 Clash 内核
     let mut clash_meta = ClashMeta::new(external_port, mixed_port);
     if let Err(e) = clash_meta.start().await {
-        error!("原神启动失败，请打开 logs/clash.log，查看错误原因，{}", e);
+        error!("原神启动失败，第一次启动可能会下载 geo 相关的文件，重新启动即可，打开 logs/clash.log，查看具体错误原因，{}", e);
         clash_meta.stop().unwrap();
         subconverter.stop().unwrap();
         return;
