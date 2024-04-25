@@ -131,6 +131,14 @@ async fn run(config: Settings) {
     let delay_results = test_node_with_delay_config(&clash_meta, &config.connect_test).await;
     let nodes = get_all_tested_nodes(&delay_results);
     info!("连通性测试结果：{} 个节点可用", nodes.len());
+
+    if nodes.is_empty() {
+        error!("当前无可用节点，请尝试更换订阅节点或重试");
+        clash_meta.stop().unwrap();
+        subconverter.stop().unwrap();
+        return;
+    }
+
     if config.fast_mode {
         let release_url = subconverter.get_clash_sub_url(SubConfig {
             urls: vec![test_sub_file_path.clone()],
