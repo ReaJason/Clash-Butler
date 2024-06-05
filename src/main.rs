@@ -184,49 +184,51 @@ async fn run(config: Settings) {
 
         let mut node_rename_map: HashMap<String, String> = HashMap::new();
         let mut node_ip_map: HashMap<String, IpAddr> = HashMap::new();
-        if nodes.is_empty() {
-            error!("当前无可用节点，请尝试更换订阅节点或重试");
-            clash_meta.stop().unwrap();
-            subconverter.stop().unwrap();
-            return;
-        }
-        for node in &nodes {
-            let ip_result = clash_meta.set_group_proxy(TEST_PROXY_NAME, node).await;
-            if ip_result.is_ok() {
-                let cloudflare_result = cgi_trace::get_ip_by_cloudflare(&clash_meta.proxy_url).await;
-                if cloudflare_result.is_ok() {
-                    let proxy_ip = cloudflare_result.unwrap();
-                    info!("proxy: {}, ip: {}", node, proxy_ip);
-                    node_ip_map.insert(node.clone(), proxy_ip);
-                } else {
-                    error!("获取节点 {} 的 IP 失败, {}", node, cloudflare_result.err().unwrap());
-                }
-            } else {
-                error!("设置节点 {} 失败, {}", node, ip_result.err().unwrap());
+        if config.rename_node {
+            if nodes.is_empty() {
+                error!("当前无可用节点，请尝试更换订阅节点或重试");
+                clash_meta.stop().unwrap();
+                subconverter.stop().unwrap();
+                return;
             }
-        }
+            for node in &nodes {
+                let ip_result = clash_meta.set_group_proxy(TEST_PROXY_NAME, node).await;
+                if ip_result.is_ok() {
+                    let cloudflare_result = cgi_trace::get_ip_by_cloudflare(&clash_meta.proxy_url).await;
+                    if cloudflare_result.is_ok() {
+                        let proxy_ip = cloudflare_result.unwrap();
+                        info!("proxy: {}, ip: {}", node, proxy_ip);
+                        node_ip_map.insert(node.clone(), proxy_ip);
+                    } else {
+                        error!("获取节点 {} 的 IP 失败, {}", node, cloudflare_result.err().unwrap());
+                    }
+                } else {
+                    error!("设置节点 {} 失败, {}", node, ip_result.err().unwrap());
+                }
+            }
 
-        if clash_meta.set_group_proxy(TEST_PROXY_NAME, &top_node).await.is_ok() {
-            for (node, ip) in &node_ip_map {
-                let ip_detail_result = ip::get_ip_detail_with_proxy(ip, &clash_meta.proxy_url).await;
-                match ip_detail_result {
-                    Ok(ip_detail) => {
-                        info!("{:?}", ip_detail);
-                        if config.rename_node {
-                            let new_name = config.rename_pattern
-                                .replace("${IP}", &ip.to_string())
-                                .replace("${COUNTRY_CODE}", &ip_detail.country_code)
-                                .replace("${ISP}", &ip_detail.isp)
-                                .replace("${CITY}", &ip_detail.city);
-                            node_rename_map.insert(node.clone(), new_name);
+            if clash_meta.set_group_proxy(TEST_PROXY_NAME, &top_node).await.is_ok() {
+                for (node, ip) in &node_ip_map {
+                    let ip_detail_result = ip::get_ip_detail_with_proxy(ip, &clash_meta.proxy_url).await;
+                    match ip_detail_result {
+                        Ok(ip_detail) => {
+                            info!("{:?}", ip_detail);
+                            if config.rename_node {
+                                let new_name = config.rename_pattern
+                                    .replace("${IP}", &ip.to_string())
+                                    .replace("${COUNTRY_CODE}", &ip_detail.country_code)
+                                    .replace("${ISP}", &ip_detail.isp)
+                                    .replace("${CITY}", &ip_detail.city);
+                                node_rename_map.insert(node.clone(), new_name);
+                            }
+                        }
+                        Err(e) => {
+                            error!("获取节点 {} 的 IP 信息失败, {}", node, e);
                         }
                     }
-                    Err(e) => {
-                        error!("获取节点 {} 的 IP 信息失败, {}", node, e);
-                    }
                 }
-            }
-        };
+            };
+        }
 
 
         let release_url = subconverter.get_clash_sub_url(SubConfig {
