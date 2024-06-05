@@ -151,7 +151,10 @@ async fn run(config: Settings) {
             includes: Some(nodes),
             ..Default::default()
         }).await;
-        let _release_sub_file_path = download_release_sub(release_url).await;
+        let release_sub_file_path = download_release_sub(release_url).await;
+        info!("release 文件地址：{}", release_sub_file_path);
+        clash_meta.stop().unwrap();
+        subconverter.stop().unwrap();
     } else {
         let new_test_sub_url = subconverter.get_clash_sub_url(SubConfig {
             urls: vec![test_sub_file_path.clone()],
