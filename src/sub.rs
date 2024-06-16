@@ -164,7 +164,7 @@ async fn download_new_sub(sub_url: &str) -> Result<String, Box<dyn std::error::E
                             if e.is_timeout() {
                                 continue;
                             }
-                            return Err(Box::new(e))
+                            return Err(Box::new(e));
                         }
                     }
                 } else {
