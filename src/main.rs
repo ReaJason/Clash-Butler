@@ -231,7 +231,7 @@ async fn run(config: Settings) {
                             if config.rename_node {
                                 let new_name = config.rename_pattern
                                     .replace("${IP}", &ip.to_string())
-                                    .replace("${COUNTRYCODE}", &ip_detail.country)
+                                    .replace("${COUNTRYCODE}", &ip_detail.country_code)
                                     .replace("${ISP}", &ip_detail.isp)
                                     .replace("${CITY}", &ip_detail.city);
                                 node_rename_map.insert(node.clone(), new_name);
