@@ -90,7 +90,7 @@ impl ClashMeta {
 
     pub async fn test_group(&self, group_name: &str, delay_test_config: &DelayTestConfig) -> Result<HashMap<String, i64>, Box<dyn std::error::Error>> {
         let url = format!("{}/group/{}/delay", &self.external_url, group_name);
-        let client = Client::builder().timeout(Duration::from_secs(30)).build().unwrap();
+        let client = Client::builder().timeout(Duration::from_secs(60)).build().unwrap();
         let response = client.get(&url)
             .query(&delay_test_config)
             .send()
@@ -119,11 +119,11 @@ impl ClashMeta {
         }
     }
 
-    pub async fn test_proxy(&self, proxy_name: &str, delay_test_config: DelayTestConfig) -> Result<u64, Box<dyn std::error::Error>> {
+    pub async fn test_proxy(&self, proxy_name: &str, delay_test_config: &DelayTestConfig) -> Result<u64, Box<dyn std::error::Error>> {
         let url = format!("{}/proxies/{}/delay", &self.external_url, proxy_name);
-        let client = Client::builder().timeout(Duration::from_secs(30)).build()?;
+        let client = Client::builder().timeout(Duration::from_secs(60)).build()?;
         let response = client.get(&url)
-            .query(&delay_test_config)
+            .query(delay_test_config)
             .send()
             .await?;
         if !response.status().is_success() {
@@ -131,8 +131,9 @@ impl ClashMeta {
         }
         Ok(response.json::<ProxyDelay>().await?.delay)
     }
+
     pub async fn test_direct_delay(&self) -> Result<u64, Box<dyn std::error::Error>> {
-        Ok(self.test_proxy("DIRECT", DelayTestConfig {
+        Ok(self.test_proxy("DIRECT", &DelayTestConfig {
             url: "http://www.gstatic.com/generate_204".to_string(),
             expected: Some(204),
             timeout: 200,
@@ -178,39 +179,45 @@ pub struct Group {
 
 #[cfg(test)]
 mod tests {
-    // #[tokio::test]
-    // async fn test_proxy_delay() {
-    //     let delay = test_proxy(9097, "DIRECT", &DelayTestConfig {
-    //         url: "http://www.gstatic.com/generate_204".to_string(),
-    //         expected: Some(204),
-    //         timeout: 500,
-    //     }).await.unwrap();
-    //     println!("{}", delay);
-    // }
-    //
-    // #[tokio::test]
-    // async fn test_group_proxies() {
-    //     let result = get_group(9090, "test").await;
-    //     println!("{:?}", result);
-    // }
-    //
-    // #[tokio::test]
-    // async fn test_set_group_node() {
-    //     let result = set_group_node(9090, "test", "美国凤凰城_解锁流媒体").await;
-    //     if result.is_ok() {
-    //         println!("success")
-    //     }
-    // }
+    use crate::clash::{ClashMeta, DelayTestConfig};
 
-    // #[tokio::test]
-    // #[ignore]
-    // async fn test_group_delay() {
-    //     let result = test_group(9090, "test", &DelayTestConfig {
-    //         url: "http://www.gstatic.com/generate_204".to_string(),
-    //         expected: Some(204),
-    //         timeout: 2000,
-    //     }).await;
-    //
-    //     println!("{:?}", result);
-    // }
+    #[tokio::test]
+    async fn test_proxy_delay() {
+        let clash_meta = ClashMeta::new(9091, 7891);
+        let delay = clash_meta.test_proxy("DIRECT", &DelayTestConfig {
+            url: "http://www.gstatic.com/generate_204".to_string(),
+            expected: Some(204),
+            timeout: 500,
+        }).await.unwrap();
+        println!("{}", delay);
+    }
+
+    #[tokio::test]
+    async fn test_group_proxies() {
+        let clash_meta = ClashMeta::new(9091, 7999);
+        let result = clash_meta.get_group("PROXY").await;
+        println!("{:?}", result);
+    }
+
+    #[tokio::test]
+    async fn test_set_group_node() {
+        let clash_meta = ClashMeta::new(9091, 7999);
+        let result = clash_meta.set_group_proxy("PROXY", "KR_Chuncheon_OracleCloud4").await;
+        if result.is_ok() {
+            println!("success")
+        }
+    }
+
+    #[tokio::test]
+    #[ignore]
+    async fn test_group_delay() {
+        let clash_meta = ClashMeta::new(9091, 7999);
+        let result = clash_meta.test_group("PROXY", &DelayTestConfig {
+            url: "http://www.gstatic.com/generate_204".to_string(),
+            expected: Some(204),
+            timeout: 2000,
+        }).await;
+
+        println!("{:?}", result);
+    }
 }

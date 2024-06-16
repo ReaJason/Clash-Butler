@@ -13,7 +13,7 @@ subs = [
 sub_config_url = "config/release.toml"
 # 是否重命名节点，打开后会使用 geoip 等方式进行代理真实 IP 和地理地址查询
 rename_node = true
-rename_pattern = "${COUNTRY_CODE}_${CITY}_${ISP}"
+rename_pattern = "${COUNTRYCODE}_${CITY}_${ISP}"
 
 # 是否需要加上代理池的节点一起筛选
 need_add_pool = false
@@ -45,4 +45,4 @@ timeout = 1000
 
 [other]
 sub_converter_port = 25501
-clash_external_port = 9090
+clash_external_port = 9091
