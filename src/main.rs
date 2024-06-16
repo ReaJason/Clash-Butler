@@ -7,7 +7,6 @@ use std::net::IpAddr;
 use std::path::Path;
 use std::time::Duration;
 
-use chrono::Local;
 use clap::Parser;
 use reqwest::Client;
 use tracing::{error, info, Level};
@@ -25,6 +24,7 @@ mod server;
 mod ip;
 mod cgi_trace;
 mod settings;
+mod speedtest;
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
@@ -191,16 +191,22 @@ async fn run(config: Settings) {
                 subconverter.stop().unwrap();
                 return;
             }
+            let count = config.rename_pattern.matches('_').count();
             for node in &nodes {
+                // 如果当前节点名称与需要重命名的格式下划线个数一致，暂时认为就是已经格式化好的，因此跳过
+                if node.matches('_').count() == count && !node.contains("github.com") {
+                    info!("「{node}」已符合重命名结构，跳过");
+                    continue;
+                }
                 let ip_result = clash_meta.set_group_proxy(TEST_PROXY_NAME, node).await;
                 if ip_result.is_ok() {
-                    let cloudflare_result = cgi_trace::get_ip_by_cloudflare(&clash_meta.proxy_url).await;
-                    if cloudflare_result.is_ok() {
-                        let proxy_ip = cloudflare_result.unwrap();
-                        info!("proxy: {}, ip: {}", node, proxy_ip);
+                    let ip_result = cgi_trace::get_ip(&clash_meta.proxy_url).await;
+                    if ip_result.is_ok() {
+                        let proxy_ip = ip_result.unwrap();
+                        info!("「{}」ip: {}", node, proxy_ip);
                         node_ip_map.insert(node.clone(), proxy_ip);
                     } else {
-                        error!("获取节点 {} 的 IP 失败, {}", node, cloudflare_result.err().unwrap());
+                        error!("获取节点 {} 的 IP 失败, {}", node, ip_result.err().unwrap());
                     }
                 } else {
                     error!("设置节点 {} 失败, {}", node, ip_result.err().unwrap());
@@ -209,27 +215,26 @@ async fn run(config: Settings) {
 
             if clash_meta.set_group_proxy(TEST_PROXY_NAME, &top_node).await.is_ok() {
                 for (node, ip) in &node_ip_map {
-                    let ip_detail_result = ip::get_ip_detail_with_proxy(ip, &clash_meta.proxy_url).await;
+                    let ip_detail_result = ip::get_ip_detail(ip, &clash_meta.proxy_url).await;
                     match ip_detail_result {
                         Ok(ip_detail) => {
                             info!("{:?}", ip_detail);
                             if config.rename_node {
                                 let new_name = config.rename_pattern
                                     .replace("${IP}", &ip.to_string())
-                                    .replace("${COUNTRY_CODE}", &ip_detail.country_code)
+                                    .replace("${COUNTRYCODE}", &ip_detail.country)
                                     .replace("${ISP}", &ip_detail.isp)
                                     .replace("${CITY}", &ip_detail.city);
                                 node_rename_map.insert(node.clone(), new_name);
                             }
                         }
                         Err(e) => {
-                            error!("获取节点 {} 的 IP 信息失败, {}", node, e);
+                            error!("获取节点 {node} 的 IP 信息失败, {e}");
                         }
                     }
                 }
             };
         }
-
 
         let release_url = subconverter.get_clash_sub_url(SubConfig {
             urls: vec![test_sub_file_path.clone()],
@@ -355,8 +360,9 @@ async fn download_release_sub(release_url: String) -> String {
     let client = Client::new();
     let response = client.get(release_url).send().await.unwrap();
     let content = response.text().await.unwrap();
-    let now = Local::now();
-    let path = format!("subs/release/{}.yaml", now.format("%Y-%m-%d_%H:%M:%S"));
+    // let now = Local::now();
+    // let path = format!("subs/release/{}.yaml", now.format("%Y-%m-%d_%H:%M:%S"));
+    let path = "subs/release/clash.yaml";
     let mut file = File::create(&path).unwrap();
     file.write_all(content.as_bytes()).unwrap();
     env::current_dir().unwrap().join(path).to_string_lossy().to_string()
@@ -411,5 +417,13 @@ mod tests {
         ];
 
         println!("{:?}", get_top_node(&test_data));
+    }
+
+    #[test]
+    fn test_rename_pattern() {
+        let count = "${COUNTRYCODE}_${CITY}_${ISP}".matches('_').count();
+        println!("{count}");
+        let count = "HongKong_Jordan_VertexConnectivityLLC62".matches('_').count();
+        println!("{count}")
     }
 }
