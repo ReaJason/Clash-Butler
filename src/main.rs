@@ -192,12 +192,16 @@ async fn run(config: Settings) {
                 return;
             }
             let count = config.rename_pattern.matches('_').count();
-            for node in &nodes {
+            let mut i = 0;
+            while i < nodes.len() {
+                let node = &nodes[i];
                 // 如果当前节点名称与需要重命名的格式下划线个数一致，暂时认为就是已经格式化好的，因此跳过
                 if node.matches('_').count() == count && !node.contains("github.com") {
-                    info!("「{node}」已符合重命名结构，跳过");
+                    info!("「{}」已符合重命名结构，跳过", node);
+                    i += 1;
                     continue;
                 }
+
                 let ip_result = clash_meta.set_group_proxy(TEST_PROXY_NAME, node).await;
                 if ip_result.is_ok() {
                     let ip_result = cgi_trace::get_ip(&clash_meta.proxy_url).await;
@@ -205,11 +209,16 @@ async fn run(config: Settings) {
                         let proxy_ip = ip_result.unwrap();
                         info!("「{}」ip: {}", node, proxy_ip);
                         node_ip_map.insert(node.clone(), proxy_ip);
+                        i += 1;
                     } else {
-                        error!("获取节点 {} 的 IP 失败, {}", node, ip_result.err().unwrap());
+                        let err_msg = ip_result.err().unwrap();
+                        error!("获取节点 {} 的 IP 失败, {}", node, err_msg);
+                        nodes.remove(i);
                     }
                 } else {
-                    error!("设置节点 {} 失败, {}", node, ip_result.err().unwrap());
+                    let err_msg = ip_result.err().unwrap();
+                    error!("设置节点 {} 失败, {}", node, err_msg);
+                    i += 1;
                 }
             }
 
