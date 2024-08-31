@@ -202,7 +202,7 @@ mod tests {
     #[tokio::test]
     async fn test_set_group_node() {
         let clash_meta = ClashMeta::new(9091, 7999);
-        let result = clash_meta.set_group_proxy("PROXY", "KR_Chuncheon_OracleCloud4").await;
+        let result = clash_meta.set_group_proxy("PROXY", "None_None_vmess_044").await;
         if result.is_ok() {
             println!("success")
         }
