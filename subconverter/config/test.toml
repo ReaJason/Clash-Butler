@@ -1,6 +1,7 @@
 version = 1
 [custom]
 clash_rule_base = "base/clash_base.yaml"
+exclude_remarks = ["(到期|剩余流量|时间|官网|产品|CN)"]
 
 [[custom_groups]]
 name = "PROXY"

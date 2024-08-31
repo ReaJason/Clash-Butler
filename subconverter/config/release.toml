@@ -1,7 +1,7 @@
 version = 1
 [custom]
 clash_rule_base = "base/clash_base.yaml"
-add_emoji = true
+add_emoji = false
 
 [[custom_groups]]
 name = "PROXY"

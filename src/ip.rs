@@ -4,6 +4,9 @@ use reqwest::{Client, Error};
 use serde::{Deserialize, Serialize};
 use tracing::log::error;
 
+// IP 详情查询超时时间
+const TIMEOUT: Duration = Duration::from_millis(1000);
+
 pub async fn get_ip_detail(ip_addr: &IpAddr, proxy_url: &str) -> Result<IpDetail, Box<dyn std::error::Error>> {
     match get_ip_detail_from_ipsb(ip_addr, proxy_url).await {
         Ok(ip_detail) => return Ok(ip_detail),
@@ -20,7 +23,7 @@ pub async fn get_ip_detail(ip_addr: &IpAddr, proxy_url: &str) -> Result<IpDetail
 
 pub async fn get_ip_detail_from_ipsb(ip_addr: &IpAddr, proxy_url: &str) -> Result<IpDetail, Error> {
     let client = Client::builder()
-        .timeout(Duration::from_secs(5))
+        .timeout(TIMEOUT)
         .proxy(reqwest::Proxy::all(proxy_url)?)
         .build()?;
     let url = format!("https://api.ip.sb/geoip/{}", ip_addr);
@@ -32,7 +35,7 @@ pub async fn get_ip_detail_from_ipsb(ip_addr: &IpAddr, proxy_url: &str) -> Resul
 #[allow(dead_code)]
 pub async fn get_ip_detail_from_ipapi(ip_addr: &IpAddr, proxy_url: &str) -> Result<IpDetail, Error> {
     let client = Client::builder()
-        .timeout(Duration::from_secs(5))
+        .timeout(TIMEOUT)
         .proxy(reqwest::Proxy::all(proxy_url)?)
         .build()?;
     let url = format!("http://ip-api.com/json/{}", ip_addr);
@@ -81,7 +84,7 @@ mod tests {
     use std::str::FromStr;
     use super::*;
 
-    const PROXY_URL: &str = "http://127.0.0.1:7999";
+    const PROXY_URL: &str = "http://127.0.0.1:7890";
 
     #[tokio::test]
     async fn test_ip_detail() {

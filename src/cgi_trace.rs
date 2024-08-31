@@ -13,7 +13,9 @@ const CF_TRACE_URL: &str = "https://1.0.0.1/cdn-cgi/trace";
 
 #[allow(unused)]
 const CF_CN_TRACE_URL: &str = "https://cf-ns.com/cdn-cgi/trace";
-const TIMEOUT: u64 = 5;
+
+// IP 查询超时时间
+const TIMEOUT: Duration = Duration::from_millis(1000);
 
 pub async fn get_ip(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::Error>> {
     match get_trace_info_with_proxy(proxy_url, CF_TRACE_URL).await {
@@ -31,14 +33,14 @@ pub async fn get_ip(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::Error
         Err(e) => error!("从 OpenAI 获取 IP 失败, {e}")
     }
 
-    Err("Failed to parse IP address".into())
+    Err("获取不到 IP 地址，可能节点已失效，已过滤".into())
 }
 
 // clash 规则走的是国内，没走代理所以寄
 #[allow(dead_code)]
 async fn get_ip_by_ipip(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::Error>> {
     let client = Client::builder()
-        .timeout(Duration::from_secs(TIMEOUT))
+        .timeout(TIMEOUT)
         .proxy(reqwest::Proxy::all(proxy_url)?)
         .build()?;
 
@@ -57,7 +59,7 @@ async fn get_ip_by_ipip(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::E
 
 async fn get_ip_by_ipify(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::Error>> {
     let client = Client::builder()
-        .timeout(Duration::from_secs(TIMEOUT))
+        .timeout(TIMEOUT)
         .proxy(reqwest::Proxy::all(proxy_url)?)
         .build()?;
 
@@ -105,7 +107,7 @@ fn parse_trace_info(text: String) -> TraceInfo {
 
 async fn get_trace_info_with_proxy(proxy_url: &str, trace_url: &str) -> Result<TraceInfo, Box<dyn std::error::Error>> {
     let client = Client::builder()
-        .timeout(Duration::from_secs(TIMEOUT))
+        .timeout(TIMEOUT)
         .proxy(reqwest::Proxy::all(proxy_url)?)
         .build()?;
 
