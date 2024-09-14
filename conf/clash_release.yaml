@@ -1,10 +1,10 @@
-mixed-port: {{ default(request.clash.mixed, "7890") }}
+mixed-port: 7890
 socks-port: 7891
 allow-lan: true
 bind-address: "*"
 mode: rule
 log-level: info
-external-controller: {{ default(request.clash.external, ":9090") }}
+external-controller: ":9090"
 geodata-mode: true
 geox-url:
   geosite: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat"
@@ -26,12 +26,12 @@ sniffer:
   override-destination: true
   sniff:
     TLS:
-      ports: [443, 8443]
+      ports: [ 443, 8443 ]
     HTTP:
-      ports: [80, 8080-8880]
+      ports: [ 80, 8080-8880 ]
       override-destination: true
     QUIC:
-      ports: [443, 8443]
+      ports: [ 443, 8443 ]
   force-domain:
     - +.v2ex.com
     - www.google.com
@@ -322,8 +322,63 @@ dns:
   nameserver:
     - 'https://223.5.5.5/dns-query#h3=true'
     - https://1.12.12.12/dns-query
-proxies: ~
-proxy-groups: ~
+proxies: [ ]
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - Fallback
+      - Select
+      - HK
+      - TW
+      - JP
+      - SG
+      - US
+  - name: Select
+    type: select
+    filter: ".*"
+    proxies: [ ]
+  - name: Fallback
+    type: fallback
+    url: http://www.google.com/generate_204
+    interval: 600
+    proxies: [ ]
+    filter: ".*"
+  - name: HK
+    type: url-test
+    url: http://www.google.com/generate_204
+    interval: 600
+    tolerance: 500
+    proxies: [ ]
+    filter: "(?i)港|HK|HongKong|hong kong"
+  - name: TW
+    type: url-test
+    url: http://www.google.com/generate_204
+    interval: 600
+    tolerance: 500
+    proxies: [ ]
+    filter: "(?i)台湾|新北|彰化|CHT|HINET|Taiwan|tw"
+  - name: JP
+    type: url-test
+    url: http://www.google.com/generate_204
+    interval: 600
+    tolerance: 500
+    proxies: [ ]
+    filter: "(?i)日|东京|大阪|JP|Japan|Tokyo|Osaka|Saitama"
+  - name: SG
+    type: url-test
+    url: http://www.google.com/generate_204
+    interval: 600
+    tolerance: 500
+    proxies: [ ]
+    filter: "(?i)新|狮城|SG|Singapore"
+  - name: US
+    type: url-test
+    url: http://www.google.com/generate_204
+    interval: 600
+    tolerance: 500
+    proxies: [ ]
+    filter: "(?i)美|洛杉矶|芝加哥|西雅图|America|US|United.*?States"
 rules:
   - RULE-SET,ads,REJECT
   - RULE-SET,applications,DIRECT

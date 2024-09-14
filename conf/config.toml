@@ -8,9 +8,6 @@ fast_mode = false
 subs = [
 ]
 
-# 生成订阅所使用的 subconverter 的配置地址，可使用网络地址
-# 默认为 subconverter/config/release.toml
-sub_config_url = "config/release.toml"
 # 是否重命名节点，打开后会使用 geoip 等方式进行代理真实 IP 和地理地址查询
 rename_node = true
 rename_pattern = "${COUNTRYCODE}_${CITY}_${ISP}"
@@ -19,23 +16,21 @@ rename_pattern = "${COUNTRYCODE}_${CITY}_${ISP}"
 need_add_pool = false
 # 代理节点池
 pools = [
-    "https://sub.tgzdyz2.xyz/sub",
+    "https://rvps.duckking.shop:26720/s/clashMeta/764ed3a1a918ee05994ba37a1340ca29",
+#    "https://sub.tgzdyz2.xyz/sub",
     "https://raw.githubusercontent.com/yebekhe/TVC/main/subscriptions/meta/mix",
     "https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml",
     "https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml",
     "https://raw.githubusercontent.com/Misaka-blog/chromego_merge/main/sub/base64.txt",
     "https://raw.githubusercontent.com/vxiaov/free_proxies/main/clash/clash.provider.yaml",
-    "https://raw.githubusercontent.com/aiboboxx/clashfree/main/clash.yml",
-    "https://raw.githubusercontent.com/mfuu/v2ray/master/clash.yaml",
 ]
-# https://linux.do/t/topic/44934
 
 
 # 连通性测试
 [connect_test]
 url = "http://www.gstatic.com/generate_204"
 expected = 204
-timeout = 700
+timeout = 500
 
 # 带宽测速配置
 [speed_test]
@@ -47,8 +42,4 @@ timeout = 3000
 [websites.google]
 url = "http://www.google.com/generate_204"
 expected = 204
-timeout = 700
-
-[other]
-sub_converter_port = 25501
-clash_external_port = 9091
+timeout = 500
