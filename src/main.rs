@@ -1,20 +1,16 @@
 use std::{env, fs};
 use std::collections::{HashMap, HashSet};
-use std::default::Default;
-use std::fs::File;
-use std::io::Write;
 use std::net::IpAddr;
 use std::path::Path;
-use std::time::Duration;
 
 use clap::Parser;
-use reqwest::Client;
 use tracing::{error, info, Level};
 use tracing_subscriber::FmtSubscriber;
 
 use crate::clash::{ClashMeta, DelayTestConfig};
+use crate::proxy::{parse_conf};
 use crate::settings::Settings;
-use crate::sub::{SubConfig, SubConverter};
+use crate::sub::{include_names, save_proxies_into_clash_file, SubConverter};
 
 mod sub;
 mod clash;
@@ -25,6 +21,7 @@ mod ip;
 mod cgi_trace;
 mod settings;
 mod speedtest;
+mod proxy;
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
@@ -71,103 +68,97 @@ async fn main() {
 }
 
 async fn run(config: Settings) {
-    // 启动 sub converter 服务
-    let mut subconverter = SubConverter::new(config.other.sub_converter_port);
-    if let Err(e) = subconverter.start().await {
-        error!("subconverter 启动失败，{}", e);
-        return;
-    }
-
-    let test_sub_file_path;
-    let mixed_port = 7999;
-    let external_port = config.other.clash_external_port;
-
+    let test_yaml_path = env::current_dir().unwrap().join("subs/test/config.yaml");
+    let release_yaml_path = env::current_dir().unwrap().join("subs/release/clash.yaml");
+    let test_clash_template_path = "conf/clash_test.yaml";
+    let release_clash_template_path = "conf/clash_release.yaml";
+    let test_proxies;
     if config.test.is_some() {
-        let config_path = env::current_dir().unwrap().join("subs/test/config.yaml");
-        if !config_path.exists() {
+        if !test_yaml_path.exists() {
             error!("当前并没有找到可用的测试文件，请删掉 --test 后重试");
             return;
         }
-        test_sub_file_path = config_path.to_string_lossy().to_string();
+        test_proxies = parse_conf(&test_yaml_path).unwrap();
     } else {
         let mut urls = config.subs;
         if config.need_add_pool {
             urls.extend(config.pools)
         }
-        let sub_url = subconverter.get_clash_sub_url(SubConfig {
-            urls,
-            config: "config/test.toml".to_string(),
-            mixed_port: Some(mixed_port),
-            external_url: Some(format!(":{}", external_port)),
-            ..Default::default()
-        }).await;
+        test_proxies = SubConverter::get_proxies(&urls).await;
 
-        if sub_url.is_empty() {
+        if test_proxies.is_empty() {
             error!("当前无可用的待测试订阅连接，请修改配置文件添加订阅链接或确保当前网络通顺");
-            subconverter.stop().unwrap();
             return;
         }
+    }
 
-        test_sub_file_path = download_test_sub(sub_url).await;
+    let proxies_group: Vec<_> = test_proxies
+        .chunks(200)
+        .map(|p| p.to_vec())
+        .collect();
+    let group_size = proxies_group.len();
+    if group_size > 1 {
+        info!("待测试代理数量达到 {} 个，因此以 200 为限制分为 {} 组测试，加速测试速度", test_proxies.len(), proxies_group.len());
     }
 
     // 启动 Clash 内核
-    let mut clash_meta = ClashMeta::new(external_port, mixed_port);
-    if let Err(e) = clash_meta.start().await {
-        error!("原神启动失败，第一次启动可能会下载 geo 相关的文件，重新启动即可，打开 logs/clash.log，查看具体错误原因，{}", e);
-        clash_meta.stop().unwrap();
-        subconverter.stop().unwrap();
-        return;
-    }
-
-    match clash_meta.get_group(TEST_PROXY_NAME).await {
-        Ok(nodes) => {
-            info!("开始测试 subs/test/config.yaml 中节点的延迟速度，节点总数：{}", nodes.all.len())
+    let external_port = 9091;
+    let mixed_port = 7999;
+    let mut useful_proxies = Vec::new();
+    for (index, proxies) in proxies_group.iter().enumerate() {
+        if group_size > 1 {
+            info!("正在测试第 {} 组", index + 1)
         }
-        Err(e) => {
-            error!("获取节点数失败，请检查 clash 日志文件和 subs/test/config.yaml 生成的节点是否正确, {}", e);
+        save_proxies_into_clash_file(&proxies,
+                                     test_clash_template_path.to_string(),
+                                     test_yaml_path.to_string_lossy().to_string());
+        let mut clash_meta = ClashMeta::new(external_port, mixed_port);
+        if let Err(e) = clash_meta.start().await {
+            error!("原神启动失败，第一次启动可能会下载 geo 相关的文件，重新启动即可，打开 logs/clash.log，查看具体错误原因，{}", e);
             clash_meta.stop().unwrap();
-            subconverter.stop().unwrap();
             return;
         }
+
+        match clash_meta.get_group(TEST_PROXY_NAME).await {
+            Ok(nodes) => {
+                info!("开始测试 subs/test/config.yaml 中节点的延迟速度，节点总数：{}", nodes.all.len())
+            }
+            Err(e) => {
+                error!("获取节点数失败，请检查 clash 日志文件和 subs/test/config.yaml 生成的节点是否正确, {}", e);
+                clash_meta.stop().unwrap();
+                return;
+            }
+        }
+
+        info!("开始测试连通性");
+        let delay_results = test_node_with_delay_config(&clash_meta, &config.connect_test).await;
+        let nodes = get_all_tested_nodes(&delay_results);
+        info!("连通性测试结果：{} 个节点可用", nodes.len());
+        if !nodes.is_empty() {
+            useful_proxies.extend(include_names(proxies.to_vec(), nodes))
+        }
+        clash_meta.stop().unwrap();
     }
 
-    info!("开始测试连通性");
-    let delay_results = test_node_with_delay_config(&clash_meta, &config.connect_test).await;
-    let nodes = get_all_tested_nodes(&delay_results);
-    info!("连通性测试结果：{} 个节点可用", nodes.len());
-
-    if nodes.is_empty() {
+    if useful_proxies.is_empty() {
         error!("当前无可用节点，请尝试更换订阅节点或重试");
-        clash_meta.stop().unwrap();
-        subconverter.stop().unwrap();
         return;
     }
 
     if config.fast_mode {
-        let release_url = subconverter.get_clash_sub_url(SubConfig {
-            urls: vec![test_sub_file_path.clone()],
-            config: config.sub_config_url,
-            includes: Some(nodes),
-            ..Default::default()
-        }).await;
-        let release_sub_file_path = download_release_sub(release_url).await;
-        info!("release 文件地址：{}", release_sub_file_path);
-        clash_meta.stop().unwrap();
-        subconverter.stop().unwrap();
+        save_proxies_into_clash_file(&useful_proxies, release_clash_template_path.to_string(), release_yaml_path.to_string_lossy().to_string());
+        info!("release 文件地址：{}", release_yaml_path.to_string_lossy());
     } else {
-        let new_test_sub_url = subconverter.get_clash_sub_url(SubConfig {
-            urls: vec![test_sub_file_path.clone()],
-            config: "config/test.toml".to_string(),
-            includes: Some(nodes),
-            mixed_port: Some(clash_meta.mixed_port),
-            external_url: Some(format!(":{}", clash_meta.external_port)),
-            ..Default::default()
-        }).await;
+        let mut clash_meta = ClashMeta::new(external_port, mixed_port);
+        save_proxies_into_clash_file(&useful_proxies,
+                                     test_clash_template_path.to_string(),
+                                     test_yaml_path.to_string_lossy().to_string());
 
-        download_test_sub(new_test_sub_url).await;
-
-        clash_meta.restart().await.unwrap();
+        if let Err(e) = clash_meta.start().await {
+            error!("原神启动失败，第一次启动可能会下载 geo 相关的文件，重新启动即可，打开 logs/clash.log，查看具体错误原因，{}", e);
+            clash_meta.stop().unwrap();
+            return;
+        }
 
         let mut nodes = vec![];
         let mut top_node = String::new();
@@ -188,7 +179,6 @@ async fn run(config: Settings) {
             if nodes.is_empty() {
                 error!("当前无可用节点，请尝试更换订阅节点或重试");
                 clash_meta.stop().unwrap();
-                subconverter.stop().unwrap();
                 return;
             }
             let count = config.rename_pattern.matches('_').count();
@@ -245,20 +235,27 @@ async fn run(config: Settings) {
             };
         }
 
-        let release_url = subconverter.get_clash_sub_url(SubConfig {
-            urls: vec![test_sub_file_path.clone()],
-            config: config.sub_config_url,
-            includes: Some(nodes),
-            rename: Some(node_rename_map.iter()
-                .map(|(k, v)| format!("{}@{}", k, v))
-                .collect::<Vec<_>>()),
-            ..Default::default()
-        }).await;
-        info!("release 转换地址：{}", release_url);
-        let release_sub_file_path = download_release_sub(release_url).await;
-        info!("release 文件地址：{}", release_sub_file_path);
+        let mut release_proxies = include_names(useful_proxies, nodes);
+        let mut name_counts: HashMap<String, usize> = HashMap::new();
+        if !node_rename_map.is_empty() {
+            for proxy in &mut release_proxies {
+                let mut name = if let Some(new_name) = node_rename_map.get(proxy.get_name()) {
+                    new_name.clone()
+                } else {
+                    node_ip_map.get(proxy.get_name()).unwrap().clone().to_string()
+                };
+                let count = name_counts.entry(name.clone()).or_insert(0);
+                if *count > 0 {
+                    name = format!("{}{}", name, count);
+                }
+                proxy.set_name(&name);
+                *count += 1;
+            }
+        }
+
+        save_proxies_into_clash_file(&release_proxies, release_clash_template_path.to_string(), release_yaml_path.to_string_lossy().to_string());
+        info!("release 文件地址：{}", release_yaml_path.to_string_lossy());
         clash_meta.stop().unwrap();
-        subconverter.stop().unwrap();
     }
 }
 
@@ -355,28 +352,6 @@ fn get_stable_tested_nodes(test_results: &Vec<HashMap<String, i64>>) -> Vec<Stri
     node_stats.into_iter().map(|(node, _)| node).collect()
 }
 
-async fn download_test_sub(sub_url: String) -> String {
-    let client = Client::builder().timeout(Duration::from_secs(120)).build().unwrap();
-    let response = client.get(sub_url).send().await.unwrap();
-    let content = response.text().await.unwrap();
-    let path = "subs/test/config.yaml";
-    let mut file = File::create(path).unwrap();
-    file.write_all(content.as_bytes()).unwrap();
-    env::current_dir().unwrap().join(path).to_string_lossy().to_string()
-}
-
-async fn download_release_sub(release_url: String) -> String {
-    let client = Client::new();
-    let response = client.get(release_url).send().await.unwrap();
-    let content = response.text().await.unwrap();
-    // let now = Local::now();
-    // let path = format!("subs/release/{}.yaml", now.format("%Y-%m-%d_%H:%M:%S"));
-    let path = "subs/release/clash.yaml";
-    let mut file = File::create(&path).unwrap();
-    file.write_all(content.as_bytes()).unwrap();
-    env::current_dir().unwrap().join(path).to_string_lossy().to_string()
-}
-
 // 创建目录
 fn create_folder() {
     let logs_path = "logs";
@@ -399,7 +374,6 @@ fn create_folder() {
         fs::create_dir(release_path).unwrap();
     }
 }
-
 
 #[cfg(test)]
 mod tests {

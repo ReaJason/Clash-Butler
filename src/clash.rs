@@ -90,7 +90,7 @@ impl ClashMeta {
 
     pub async fn test_group(&self, group_name: &str, delay_test_config: &DelayTestConfig) -> Result<HashMap<String, i64>, Box<dyn std::error::Error>> {
         let url = format!("{}/group/{}/delay", &self.external_url, group_name);
-        let client = Client::builder().timeout(Duration::from_secs(60)).build().unwrap();
+        let client = Client::builder().timeout(Duration::from_secs(2)).build().unwrap();
         let response = client.get(&url)
             .query(&delay_test_config)
             .send()

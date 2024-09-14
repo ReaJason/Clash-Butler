@@ -1,133 +1,123 @@
-use std::{env, fs};
+use std::collections::{HashMap, HashSet};
 use std::fs::File;
-use std::io::Write;
-use std::process::{Child, Command, Stdio};
+use std::hash::{DefaultHasher, Hash, Hasher};
+use std::io::{Read, Write};
 use std::time::Duration;
+use std::{env, io};
 
+use crate::proxy::{parse_conf, Proxy};
 use regex::Regex;
 use reqwest::Client;
+use serde_yaml::{Mapping, Value};
 use tokio::time::sleep;
 use tracing::{error, info};
 
 #[derive(Debug)]
-pub struct SubConverter {
-    pub port: u64,
-    url: String,
-    process: Option<Child>,
-    core_path: String,
-    log_path: String,
-    config_path: String,
-}
+pub struct SubConverter {}
 
 impl SubConverter {
-    pub fn new(port: u64) -> Self {
-        let converter = SubConverter {
-            port,
-            url: format!("http://127.0.0.1:{}", port),
-            process: None,
-            core_path: "subconverter/subconverter".to_string(),
-            log_path: "logs/sub.log".to_string(),
-            config_path: "subconverter/pref.toml".to_string(),
-        };
-        converter.change_sub_converter_server_port()
-            .expect("修改 subconverter 端口失败");
-        converter
-    }
-
-    pub async fn start(&mut self) -> Result<(), Box<dyn std::error::Error>> {
-        let log_file = File::create(&self.log_path)?;
-
-        Command::new("echo")
-            .arg("Hello, world!")
-            .stdout(Stdio::from(File::create("logs/test.log")?))
-            .spawn()?;
-
-
-        let sub_converter_process = Command::new(&self.core_path)
-            .stdout(Stdio::from(log_file.try_clone()?))
-            .stderr(Stdio::from(log_file))
-            .spawn()?;
-
-        tokio::time::sleep(Duration::from_secs(2)).await;
-
-        let version_url = format!("{}/version", self.url);
-        let response = reqwest::get(&version_url).await.unwrap();
-        let version = response.text().await;
-        info!("{} 服务已启动, {}", version.unwrap().trim(), version_url);
-
-        self.process = Some(sub_converter_process);
-        Ok(())
-    }
-
-    fn change_sub_converter_server_port(&self) -> Result<(), std::io::Error> {
-        let mut perf = fs::read_to_string(&self.config_path)?;
-        let port_regex = Regex::new(r"port\s=\s\d+").unwrap();
-        perf = port_regex.replace(&perf, format!("port = {}", &self.port)).to_string();
-        fs::write(&self.config_path, perf)?;
-        Ok(())
-    }
-
-    pub fn stop(mut self) -> std::io::Result<()> {
-        if let Some(mut process) = self.process.take() {
-            process.kill()?;
-            process.wait()?;
-        }
-        Ok(())
-    }
-
-    pub async fn get_clash_sub_url(&self, sub_config: SubConfig) -> String {
-        let mut subs = vec![];
-        for url in sub_config.urls {
+    pub async fn get_proxies(subs: &Vec<String>) -> Vec<Proxy> {
+        let mut proxies: Vec<Proxy> = Vec::new();
+        for url in subs {
             if url.starts_with("http") {
                 match download_new_sub(&url).await {
                     Ok(file_path) => {
-                        subs.push(file_path)
+                        proxies.extend(parse_conf(file_path).unwrap());
                     }
                     Err(e) => {
                         error!(e)
                     }
                 }
             } else {
-                subs.push(url);
+                proxies.extend(parse_conf(url).unwrap());
             }
         }
 
-        if subs.is_empty() {
-            return "".to_string();
+        if !proxies.is_empty() {
+            proxies = Self::exclude_dup_proxies(proxies);
+            Self::rename_dup_proxies_name(&mut proxies);
         }
 
-        let mut url = format!("http://127.0.0.1:{}/clash?url={}&config={}",
-                              &self.port,
-                              urlencoding::encode(&subs.join("|")),
-                              sub_config.config
-        );
+        proxies
+    }
 
-        if let Some(includes) = sub_config.includes {
-            let include_str = includes.join("|");
-            url = format!("{}&include={}", url, include_str);
+    /// 移除重复节点
+    pub fn exclude_dup_proxies(proxies: Vec<Proxy>) -> Vec<Proxy> {
+        let mut new_proxies = Vec::new();
+        if !proxies.is_empty() {
+            let set: HashSet<Proxy> = HashSet::from_iter(proxies);
+            new_proxies = set.into_iter().collect();
+            new_proxies.sort_by(|a, b| a.proxy_type.cmp(&b.proxy_type));
+        }
+        new_proxies
+    }
+
+    /// 重置节点名称
+    pub fn unset_proxies_name(proxies: &mut Vec<Proxy>) {
+        for proxy in proxies {
+            let server = proxy.get_server().to_string();
+            let hash = &mut DefaultHasher::new();
+            proxy.to_json().unwrap().hash(hash);
+            let h = hash.finish();
+            proxy.set_name(&(server + "_" + &h.to_string()[..5]));
+        }
+    }
+
+    /// 重命名相同名称的节点，在末尾加序号
+    pub fn rename_dup_proxies_name(proxies: &mut Vec<Proxy>) {
+        let mut name_counts: HashMap<String, usize> = HashMap::new();
+        for proxy in proxies {
+            let mut name = proxy.get_name().to_string();
+            let count = name_counts.entry(name.clone()).or_insert(0);
+            if *count > 0 {
+                name = format!("{}{}", name, count);
+            }
+            proxy.set_name(&name);
+            *count += 1;
+        }
+    }
+
+    // 通过配置格式，获取 clash 配置文件内容
+    pub fn get_clash_config_content(config_path: String, new_proxies: &Vec<Proxy>) -> io::Result<String> {
+        let mut file = File::open(config_path)?;
+        let mut contents = String::new();
+        file.read_to_string(&mut contents)?;
+        let mut yaml: Value = serde_yaml::from_str(&contents).expect("Failed to parse YAML");
+
+        // 插入 proxies
+        if let Some(proxies) = yaml.get_mut("proxies").and_then(Value::as_sequence_mut) {
+            for proxy in new_proxies {
+                proxies.push(Value::Mapping(serde_yaml::from_str::<Mapping>(&*proxy.to_json()?).unwrap()));
+            }
+        } else {
+            println!("Failed to find 'proxies' in the YAML file");
         }
 
-        if let Some(add_emoji) = sub_config.add_emoji {
-            url = format!("{}&add_emoji={}", url, add_emoji);
+        // 处理 proxy-groups 逻辑
+        if let Some(groups) = yaml.get_mut("proxy-groups").and_then(Value::as_sequence_mut) {
+            for group in groups.iter_mut() {
+                if let Some(group_map) = group.as_mapping_mut() {
+                    if let Some(Value::String(filter)) = group_map.get(&Value::String("filter".to_string())) {
+                        let regex = Regex::new(filter).expect("Invalid regex");
+                        if let Some(proxies) = group_map.get_mut(&Value::String("proxies".to_string())).and_then(Value::as_sequence_mut) {
+                            for proxy in new_proxies {
+                                if regex.is_match(proxy.get_name()) {
+                                    proxies.push(Value::String(proxy.get_name().to_string()));
+                                }
+                            }
+                            if proxies.is_empty() {
+                                proxies.push(Value::String("DIRECT".to_string()));
+                            }
+                        }
+                    }
+                }
+            }
         }
-
-        if let Some(rename) = sub_config.rename {
-            url = format!("{}&rename={}", url, rename.join("`"))
-        }
-
-        if let Some(mixed_port) = sub_config.mixed_port {
-            url = format!("{}&clash.mixed={}", url, mixed_port)
-        }
-
-        if let Some(external_url) = sub_config.external_url {
-            url = format!("{}&clash.external={}", url, external_url)
-        }
-
-        url
+        Ok(serde_yaml::to_string(&yaml).expect("Failed to serialize YAML"))
     }
 }
 
-async fn download_new_sub(sub_url: &str) -> Result<String, Box<dyn std::error::Error>> {
+pub async fn download_new_sub(sub_url: &str) -> Result<String, Box<dyn std::error::Error>> {
     let client = Client::new();
     let mut attempts = 0;
     let retries = 3;
@@ -187,31 +177,35 @@ async fn download_new_sub(sub_url: &str) -> Result<String, Box<dyn std::error::E
     }
 }
 
-#[derive(Debug, Default)]
-pub struct SubConfig {
-    pub urls: Vec<String>,
-    pub config: String,
-    pub includes: Option<Vec<String>>,
-    pub add_emoji: Option<bool>,
-    pub rename: Option<Vec<String>>,
-    pub mixed_port: Option<u64>,
-    pub external_url: Option<String>,
-}
 
+pub fn include_names(proxies: Vec<Proxy>, names: Vec<String>) -> Vec<Proxy> {
+    let mut release_proxies = Vec::new();
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[tokio::test]
-    async fn test_start_sub_converter() {
-        let mut subconverter = SubConverter::new(25500);
-        subconverter.start().await.unwrap();
-        subconverter.stop().unwrap();
-        match reqwest::get("http://127.0.0.1:25500/version").await {
-            Ok(_) => println!("subconverter 服务未正确关闭"),
-            Err(_) => println!("subconverter 服务已关闭"),
+    for proxy in proxies {
+        if names.contains(&proxy.get_name().to_string()) {
+            release_proxies.push(proxy);
         }
     }
+    release_proxies
 }
 
+pub fn save_proxies_into_clash_file(proxies: &Vec<Proxy>, config_path: String, save_path: String) {
+    let content = SubConverter::get_clash_config_content(config_path, proxies).unwrap();
+    let mut file = File::create(&save_path).unwrap();
+    file.write_all(content.as_bytes()).unwrap();
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use crate::proxy::parse_conf;
+
+    #[test]
+    fn test_get_clash_config_content() {
+        let path = "conf/clash_release.yaml";
+        let mut proxies = parse_conf("/Users/reajason/RustroverProjects/clash-butler/subs/0c1149d13476bbe3b62eecb7c9b895f4").unwrap();
+        SubConverter::unset_proxies_name(&mut proxies);
+        let content = SubConverter::get_clash_config_content(path.to_string(), &proxies).expect("TODO: panic message");
+        println!("{}", content);
+    }
+}
