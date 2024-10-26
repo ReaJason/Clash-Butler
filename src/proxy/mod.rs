@@ -11,18 +11,14 @@ use crate::proxy::ssr::SSR;
 use crate::proxy::trojan::Trojan;
 use crate::proxy::vless::Vless;
 use crate::proxy::vmess::Vmess;
-use base64::prelude::BASE64_STANDARD;
-use base64::{DecodeError, Engine};
-use serde::de::Error;
 use serde::{Deserialize, Deserializer, Serialize};
 use serde_json::{json, Value};
 use std::any::Any;
-use std::collections::{HashMap};
+use std::collections::HashMap;
 use std::fmt::Debug;
-use std::path::Path;
-use std::{fmt, format, fs};
 use std::hash::{Hash, Hasher};
 use std::str::FromStr;
+use std::{fmt, format};
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Ord, PartialOrd, Clone)]
 pub enum ProxyType {
@@ -68,31 +64,6 @@ pub struct GrpcOptions {
     pub grpc_service_name: Option<String>,
 }
 
-fn add_base64_padding(content: &str) -> String {
-    let mut padded = content.to_string();
-    while padded.len() % 4 != 0 {
-        padded.push('=');
-    }
-    padded
-}
-
-fn base64decode(content: &str) -> Result<String, DecodeError> {
-    let padded_content = add_base64_padding(content);
-    match BASE64_STANDARD.decode(padded_content.as_bytes()) {
-        Ok(data) => {
-            Ok(String::from_utf8(data).unwrap())
-        }
-        Err(e) => {
-            Err(e)
-        }
-    }
-}
-
-fn base64encode(content: String) -> String {
-    let b: &[u8] = content.as_bytes();
-    BASE64_STANDARD.encode(b)
-}
-
 #[derive(Debug)]
 pub struct UnsupportedLinkError {
     message: String,
@@ -106,7 +77,7 @@ impl fmt::Display for UnsupportedLinkError {
 
 impl std::error::Error for UnsupportedLinkError {}
 
-pub trait ProxyAdapter : ProxyAdapterClone {
+pub trait ProxyAdapter: ProxyAdapterClone {
     fn get_name(&self) -> &str;
     fn set_name(&mut self, name: &str);
     fn get_server(&self) -> &str;
@@ -125,7 +96,6 @@ pub trait ProxyAdapter : ProxyAdapterClone {
 }
 
 
-// 为 ProxyAdapter 增加 clone_box 方法
 pub trait ProxyAdapterClone {
     fn clone_box(&self) -> Box<dyn ProxyAdapter>;
 }
@@ -175,10 +145,7 @@ impl Proxy {
             Ok(json) => {
                 let mut json_value: Value = serde_json::from_str(&json)?;
                 if let Value::Object(ref mut map) = json_value {
-                    // TODO: type need to be first key
                     map.insert("type".to_string(), json!(self.proxy_type));
-                } else {
-                    return Err(serde_json::Error::custom("JSON is not an object"));
                 }
                 serde_json::to_string(&json_value)
             }
@@ -206,10 +173,11 @@ impl Proxy {
         }
     }
 
-    pub fn from_json(json: Value) -> Result<Proxy, UnsupportedLinkError> {
-        if let Some(proxy_type) = json.get("type") {
+    pub fn from_json(json: &str) -> Result<Proxy, UnsupportedLinkError> {
+        let value = serde_json::from_str::<Value>(json).unwrap();
+        if let Some(proxy_type) = value.get("type") {
             if proxy_type.as_str().unwrap() == "ss" {
-                return match serde_json::from_value::<SS>(json) {
+                return match serde_json::from_str::<SS>(json) {
                     Ok(ss) => {
                         Ok(Proxy::new(ProxyType::SS, Box::new(ss)))
                     }
@@ -220,7 +188,7 @@ impl Proxy {
                     }
                 };
             } else if proxy_type.as_str().unwrap() == "ssr" {
-                return match serde_json::from_value::<SSR>(json) {
+                return match serde_json::from_str::<SSR>(json) {
                     Ok(ssr) => {
                         Ok(Proxy::new(ProxyType::SSR, Box::new(ssr)))
                     }
@@ -231,7 +199,7 @@ impl Proxy {
                     }
                 };
             } else if proxy_type.as_str().unwrap() == "vmess" {
-                return match serde_json::from_value::<Vmess>(json) {
+                return match serde_json::from_str::<Vmess>(json) {
                     Ok(vmess) => {
                         Ok(Proxy::new(ProxyType::Vmess, Box::new(vmess)))
                     }
@@ -242,7 +210,7 @@ impl Proxy {
                     }
                 };
             } else if proxy_type.as_str().unwrap() == "vless" {
-                return match serde_json::from_value::<Vless>(json) {
+                return match serde_json::from_str::<Vless>(json) {
                     Ok(vless) => {
                         Ok(Proxy::new(ProxyType::Vless, Box::new(vless)))
                     }
@@ -253,7 +221,7 @@ impl Proxy {
                     }
                 };
             } else if proxy_type.as_str().unwrap() == "trojan" {
-                return match serde_json::from_value::<Trojan>(json) {
+                return match serde_json::from_str::<Trojan>(json) {
                     Ok(trojan) => {
                         Ok(Proxy::new(ProxyType::Trojan, Box::new(trojan)))
                     }
@@ -264,7 +232,7 @@ impl Proxy {
                     }
                 };
             } else if proxy_type.as_str().unwrap() == "hysteria2" {
-                return match serde_json::from_value::<Hysteria2>(json) {
+                return match serde_json::from_str::<Hysteria2>(json) {
                     Ok(hysteria2) => {
                         Ok(Proxy::new(ProxyType::Hysteria2, Box::new(hysteria2)))
                     }
@@ -281,7 +249,7 @@ impl Proxy {
             });
         }
         Err(UnsupportedLinkError {
-            message: "".to_string(),
+            message: json.to_string(),
         })
     }
 }
@@ -307,7 +275,6 @@ impl Debug for Proxy {
     }
 }
 
-// 为 Proxy 结构体实现 Clone
 impl Clone for Proxy {
     fn clone(&self) -> Self {
         Proxy {
@@ -317,94 +284,18 @@ impl Clone for Proxy {
     }
 }
 
-
-pub fn parse_conf<P: AsRef<Path>>(file_path: P) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
-    let mut conf_proxies: Vec<Proxy> = Vec::new();
-    match fs::read_to_string(file_path) {
-        Ok(contents) => {
-            match parse_yaml_content(&contents) {
-                Ok(proxies) => {
-                    conf_proxies = proxies;
-                }
-                Err(_) => {
-                    println!("try parse yaml file failed");
-                    match parse_base64_content(&contents) {
-                        Ok(proxies) => {
-                            conf_proxies = proxies;
-                        }
-                        Err(e) => {
-                            println!("{}", e);
-                            println!("try parse base64 file failed");
-                        }
-                    }
-                }
-            }
-        }
-        Err(e) => {
-            return Err(format!("Error reading file: {}", e).into())
-        }
-    }
-    Ok(conf_proxies)
-}
-
-pub fn parse_yaml_content(content: &str) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
-    let mut conf_proxies: Vec<Proxy> = Vec::new();
-    let yaml = serde_yaml::from_str::<Value>(&content)?;
-    let proxies = yaml.get("proxies").or_else(|| yaml.get("Proxies"));
-    match proxies {
-        None => {
-            return Err(format!("Proxy not found: {}", content).into());
-        }
-        Some(proxies) => {
-            if let Some(proxies_arr) = proxies.as_array() {
-                for proxy in proxies_arr {
-                    let result = Proxy::from_json(proxy.clone());
-                    match result {
-                        Ok(p) => {
-                            conf_proxies.push(p);
-                        }
-                        Err(e) => {
-                            println!("{} {:?}", e, proxy);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    Ok(conf_proxies)
-}
-
-pub fn parse_base64_content(content: &str) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
-    let mut conf_proxies: Vec<Proxy> = Vec::new();
-    let base64 = base64decode(content.trim())?;
-    base64.split("\n").filter(|line| !line.is_empty()).for_each(|line| {
-        match Proxy::from_link(line.trim().to_string()) {
-            Ok(proxy) => {
-                conf_proxies.push(proxy)
-            }
-            Err(e) => {
-                println!("{}", e);
-            }
-        }
-    });
-    Ok(conf_proxies)
-}
-
-
 pub fn deserialize_u16_or_string<'de, D>(deserializer: D) -> Result<u16, D::Error>
 where
     D: Deserializer<'de>,
 {
-    let value: serde_json::Value = Deserialize::deserialize(deserializer)?;
+    let value: Value = Deserialize::deserialize(deserializer)?;
     match value {
-        serde_json::Value::Number(num) => {
-            // If the value is already a number, try converting to u16
+        Value::Number(num) => {
             num.as_u64()
                 .and_then(|n| u16::try_from(n).ok())
                 .ok_or_else(|| serde::de::Error::custom("Invalid u16 value"))
         }
-        serde_json::Value::String(s) => {
-            // If the value is a string, try parsing it as u16
+        Value::String(s) => {
             u16::from_str(&s).map_err(serde::de::Error::custom)
         }
         _ => Err(serde::de::Error::custom("Expected a string or number")),
@@ -413,32 +304,7 @@ where
 
 #[cfg(test)]
 mod test {
-    use regex::Regex;
     use super::*;
-
-    #[test]
-    fn test_base64() {
-        // println!("{}", base64decode(String::from("c3M6Ly9ZV1Z6TFRFeU9DMW5ZMjA2WkRsak5UYzNNekk0Wm1Jek5EbG1aUT09QDEyMC4yMzIuNzMuNjg6NDA2NzYjJUYwJTlGJTg3JUFEJUYwJTlGJTg3JUIwSEsNCnNzOi8vWVdWekxURXlPQzFuWTIwNlpEbGpOVGMzTXpJNFptSXpORGxtWlE9PUAxMjAuMjMyLjczLjY4OjQ3MDM0IyVGMCU5RiU4NyVBRCVGMCU5RiU4NyVCMEhLDQpzczovL1lXVnpMVEV5T0MxblkyMDZaRGxqTlRjM016STRabUl6TkRsbVpRPT1AMTIwLjIzMi43My42ODo0MzI5NiMlRjAlOUYlODclQUQlRjAlOUYlODclQjBISw0Kc3M6Ly9ZV1Z6TFRFeU9DMW5ZMjA2WkRsak5UYzNNekk0Wm1Jek5EbG1aUT09QDEyMC4yMzIuNzMuNjg6NDQ0MjEjJUYwJTlGJTg3JUFEJUYwJTlGJTg3JUIwSEsNCnNzOi8vWVdWekxURXlPQzFuWTIwNlpEbGpOVGMzTXpJNFptSXpORGxtWlE9PUAxMjAuMjMyLjczLjY4OjQzMDg4IyVGMCU5RiU4NyVBRCVGMCU5RiU4NyVCMEhLDQpzczovL1lXVnpMVEV5T0MxblkyMDZaRGxqTlRjM016STRabUl6TkRsbVpRPT1AMTIwLjIzMi43My42ODo0NzE1MCMlRjAlOUYlODclQUQlRjAlOUYlODclQjBISw0Kc3M6Ly9ZV1Z6TFRFeU9DMW5ZMjA2WkRsak5UYzNNekk0Wm1Jek5EbG1aUT09QDEyMC4yMzIuNzMuNjg6NDM2NjQjJUYwJTlGJTg3JUFEJUYwJTlGJTg3JUIwSEsNCnNzOi8vWVdWekxURXlPQzFuWTIwNlpEbGpOVGMzTXpJNFptSXpORGxtWlE9PUAxMjAuMjMyLjczLjY4OjQwMTA3IyVGMCU5RiU4NyVBRCVGMCU5RiU4NyVCMEhLDQpzczovL1lXVnpMVEV5T0MxblkyMDZaRGxqTlRjM016STRabUl6TkRsbVpRPT1AMTIwLjIzMi43My42ODo0MTgzMiMlRjAlOUYlODclQUQlRjAlOUYlODclQjBISw0Kc3M6Ly9ZV1Z6TFRFeU9DMW5ZMjA2WkRsak5UYzNNekk0Wm1Jek5EbG1aUT09QDEyMC4yMzIuNzMuNjg6NDM2NDEjJUYwJTlGJTg3JUFEJUYwJTlGJTg3JUIwSEsNCnNzOi8vWVdWekxURXlPQzFuWTIwNlpEbGpOVGMzTXpJNFptSXpORGxtWlE9PUAyMTEuOTkuMTAyLjIyNDo0MDY3NiMlRjAlOUYlODclQUQlRjAlOUYlODclQjBISw0Kc3M6Ly9ZV1Z6TFRFeU9DMW5ZMjA2WkRsak5UYzNNekk0Wm1Jek5EbG1aUT09QDIxMS45OS4xMDIuMjI0OjQ3MDM0IyVGMCU5RiU4NyVBRCVGMCU5RiU4NyVCMEhLDQpzczovL1lXVnpMVEV5T0MxblkyMDZaRGxqTlRjM016STRabUl6TkRsbVpRPT1AMjExLjk5LjEwMi4yMjQ6NDMyOTYjJUYwJTlGJTg3JUFEJUYwJTlGJTg3JUIwSEsNCnNzOi8vWVdWekxURXlPQzFuWTIwNlpEbGpOVGMzTXpJNFptSXpORGxtWlE9PUAyMTEuOTkuMTAyLjIyNDo0NDQyMSMlRjAlOUYlODclQUQlRjAlOUYlODclQjBISw0Kc3M6Ly9ZV1Z6TFRFeU9DMW5ZMjA2WkRsak5UYzNNekk0Wm1Jek5EbG1aUT09QDIxMS45OS4xMDIuMjI0OjQzMDg4IyVGMCU5RiU4NyVBRCVGMCU5RiU4NyVCMEhLDQpzczovL1lXVnpMVEV5T0MxblkyMDZaRGxqTlRjM016STRabUl6TkRsbVpRPT1AMjExLjk5LjEwMi4yMjQ6NDcxNTAjJUYwJTlGJTg3JUFEJUYwJTlGJTg3JUIwSEsNCnNzOi8vWVdWekxURXlPQzFuWTIwNlpEbGpOVGMzTXpJNFptSXpORGxtWlE9PUAyMTEuOTkuMTAyLjIyNDo0MzY2NCMlRjAlOUYlODclQUQlRjAlOUYlODclQjBISw0Kc3M6Ly9ZV1Z6TFRFeU9DMW5ZMjA2WkRsak5UYzNNekk0Wm1Jek5EbG1aUT09QDIxMS45OS4xMDIuMjI0OjQwMTA3IyVGMCU5RiU4NyVBRCVGMCU5RiU4NyVCMEhLDQpzczovL1lXVnpMVEV5T0MxblkyMDZaRGxqTlRjM016STRabUl6TkRsbVpRPT1AMjExLjk5LjEwMi4yMjQ6NDE4MzIjJUYwJTlGJTg3JUFEJUYwJTlGJTg3JUIwSEsNCnNzOi8vWVdWekxURXlPQzFuWTIwNlpEbGpOVGMzTXpJNFptSXpORGxtWlE9PUAyMTEuOTkuMTAyLjIyNDo0MzY0MSMlRjAlOUYlODclQUQlRjAlOUYlODclQjBISw0Kc3M6Ly9ZV1Z6TFRFeU9DMW5ZMjA2WkRsak5UYzNNekk0Wm1Jek5EbG1aUT09QDEyMC4yMDQuOTQuMzA6NDYxMDEjJUYwJTlGJTg3JUJBJUYwJTlGJTg3JUI4VVMNCnNzOi8vWVdWekxURXlPQzFuWTIwNlpEbGpOVGMzTXpJNFptSXpORGxtWlE9PUAxMjAuMjA0Ljk0LjMwOjQzNzkxIyVGMCU5RiU4NyVCQSVGMCU5RiU4NyVCOFVTDQpzczovL1lXVnpMVEV5T0MxblkyMDZaRGxqTlRjM016STRabUl6TkRsbVpRPT1AMTIwLjIwNC45NC4zMDo0MjI4NSMlRjAlOUYlODclQkElRjAlOUYlODclQjhVUw0Kc3M6Ly9ZV1Z6TFRFeU9DMW5ZMjA2WkRsak5UYzNNekk0Wm1Jek5EbG1aUT09QDEyMC4yMDQuOTQuMzA6NDY4MjQjJUYwJTlGJTg3JUJBJUYwJTlGJTg3JUI4VVMNCg").as_str()).unwrap());
-        println!("{}", base64decode("eyJ2IjoiMiIsInBzIjoiXHU1MjY5XHU0ZjU5XHU2ZDQxXHU5MWNmXHVmZjFhNzkuNTEgR0IiLCJhZGQiOiJjZG5jZG5jZG5jZG4uNzg0NjU0Lnh5eiIsInBvcnQiOiIyMDUyIiwiaWQiOiIzZWE1NzhjNi0xZWFhLTRlMTUtYmZlMS05Zjc1N2I1OGU4ZjIiLCJhaWQiOiIwIiwibmV0Ijoid3MiLCJ0eXBlIjoibm9uZSIsImhvc3QiOiJjYS1jZmNkbi5haWt1bmFwcC5jb20iLCJwYXRoIjoiXC9pbmRleD9lZD0yMDQ4IiwidGxzIjoiIn0=").unwrap());
-    }
-
-    #[test]
-    fn test_base64decode() {
-        match base64decode(String::from("aGVsbG8=").as_str()) {
-            Ok(str) => {
-                assert_eq!(str, String::from("hello"))
-            }
-            Err(_) => {
-                assert!(false)
-            }
-        }
-    }
-
-    #[test]
-    fn test_base64decode_error() {
-        let Err(e) = base64decode(String::from("aGVsbG").as_str()) else { todo!() };
-        assert!(matches!(e, DecodeError::InvalidPadding))
-    }
 
     #[test]
     fn test_parse_json() {
@@ -478,64 +344,5 @@ mod test {
         println!("{:?}", proxy1);
         println!("{:?}", proxy2);
         assert_eq!(proxy1, proxy2);
-    }
-
-    #[test]
-    fn test_parser_conf() {
-        let parent = Path::new("/Users/reajason/RustroverProjects/clash-butler/subs");
-        for entry in fs::read_dir(parent).unwrap() {
-            if let Ok(entry) = entry {
-                let path = entry.path();
-                if path.is_file() {
-                    let proxies = parse_conf(&path).unwrap();
-                    println!("{:?}", path);
-                    assert_ne!(proxies.len(), 0);
-                }
-            }
-        }
-    }
-
-    #[test]
-    fn test_parse_conf() {
-        let path = Path::new("/Users/reajason/RustroverProjects/clash-butler/subs/d417717ed83bdabad1d310906a47a3a2");
-        let proxies = parse_conf(path).unwrap();
-        for proxy in &proxies {
-            println!("{:?}", proxy);
-        }
-    }
-
-    #[test]
-    fn main() {
-        // 首先，我们需要在 Cargo.toml 中添加 regex 依赖
-        // [dependencies]
-        // regex = "1.5.4"
-
-        // 创建正则表达式
-        let re = Regex::new(r"(?i)港|hk|hongkong|hong kong").unwrap();
-
-        // 测试一些字符串
-        let test_strings = vec![
-            "香港",
-            "HK",
-            "hongkong",
-            "Hong Kong",
-            "HONG KONG",
-            "Tokyo",
-            "hk island",
-        ];
-
-        for s in test_strings {
-            if re.is_match(s) {
-                println!("'{}' matches the pattern", s);
-            } else {
-                println!("'{}' does not match the pattern", s);
-            }
-        }
-
-        // 如果我们想提取匹配的部分
-        let text = "I love Hong Kong and HK is great!";
-        for cap in re.find_iter(text) {
-            println!("Found match: {} at position {:?}", cap.as_str(), cap.range());
-        }
     }
 }

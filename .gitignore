@@ -18,6 +18,3 @@ Cargo.lock
 subs/**
 
 logs/**
-
-# subconverter cache
-subconverter/cache/**

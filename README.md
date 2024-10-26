@@ -19,7 +19,7 @@
 <p align="center">
   <img alt="vscode" src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=flat-square&logo=visual-studio-code&logoColor=white" >
   <img alt="Rust" src="https://img.shields.io/badge/Rust 2021-%23000000.svg?style=flat-square&logo=rust&logoColor=white" >
-  <img alt="MacOS" src="https://img.shields.io/badge/Sonoma%2014.4.1-000000?style=flat-square&logo=macos&logoColor=F0F0F0" />
+  <img alt="MacOS" src="https://img.shields.io/badge/Sequoia%2015.0-000000?style=flat-square&logo=macos&logoColor=F0F0F0" />
 </p>
 
 ## 快速开始

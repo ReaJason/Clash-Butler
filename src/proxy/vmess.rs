@@ -1,10 +1,11 @@
 use crate::proxy::deserialize_u16_or_string;
-use crate::proxy::{base64decode, base64encode, ProxyAdapter, UnsupportedLinkError, WSOptions};
+use crate::proxy::{ProxyAdapter, UnsupportedLinkError, WSOptions};
 use serde::{Deserialize, Serialize};
 use serde_json::Error;
 use std::any::Any;
 use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
+use crate::base64::{base64decode, base64encode};
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct Vmess {
@@ -230,4 +231,12 @@ mod test {
         assert_eq!(vmess.network, None);
         assert!(vmess.ws_opts.is_none());
     }
+
+    // #[test]
+    // fn test_parse_vmess(){
+        //vmess://eyJ2IjoiMiIsInBzIjoiXHU5MDgwXHU4YmY3XHU2NWIwXHU3NTI4XHU2MjM3NjAlXHU4ZmQ0XHU1MjI5IiwiYWRkIjoiZGVmYXVsdC42NTNlYmVlYi01ZjYwLTRiZTUtOTU4ZC03YmY0ODM5Y2RjY2QuZWY2NjE2ZmQtNWIwNi00ODJmLTlkNjQtMTgzNzQ1NjU5Y2JmLmJ5dGVwcml2YXRlbGluay5jb20iLCJwb3J0IjoiNDQzIiwiaWQiOiJhNDQzMDZkNS0zMzQzLTQ0MDUtYTA4Yy0yZDU0NmE1N2QzYjgiLCJhaWQiOiIwIiwibmV0IjoiZ3JwYyIsInR5cGUiOiJub25lIiwiaG9zdCI6IiIsInBhdGgiOiIxMjMwNiIsInRscyI6InRscyIsInNuaSI6ImNkbjEuMTAzOTIub25saW5lIn0=
+        // vmess://eyJ2IjoiMiIsInBzIjoiXHU0ZTAwXHU1MTQzLmNvbSIsImFkZCI6IjEwNC4yNi40LjkzIiwicG9ydCI6IjQ0MyIsImlkIjoiYTQ0MzA2ZDUtMzM0My00NDA1LWEwOGMtMmQ1NDZhNTdkM2I4IiwiYWlkIjoiMCIsIm5ldCI6ImdycGMiLCJ0eXBlIjoibm9uZSIsImhvc3QiOiIiLCJwYXRoIjoiMTIzMDYiLCJ0bHMiOiJ0bHMiLCJzbmkiOiJjZG4yLjEwMzkyLm9ubGluZSJ9
+        // vmess://eyJ2IjoiMiIsInBzIjoieWl5dWFuamljaGFuZy5jb20iLCJhZGQiOiIxMDQuMjYuNS45MyIsInBvcnQiOiI0NDMiLCJpZCI6ImE0NDMwNmQ1LTMzNDMtNDQwNS1hMDhjLTJkNTQ2YTU3ZDNiOCIsImFpZCI6IjAiLCJuZXQiOiJncnBjIiwidHlwZSI6Im5vbmUiLCJob3N0IjoiIiwicGF0aCI6IjEyMzA2IiwidGxzIjoidGxzIiwic25pIjoiY2RuMi4xMDM5Mi5vbmxpbmUifQ==
+        // vmess://eyJ2IjoiMiIsInBzIjoiXHU5OTk5XHU2ZTJmIDAxIHwgXHU0ZTEzXHU3ZWJmIiwiYWRkIjoiaGswMS42NTNlYmVlYi01ZjYwLTRiZTUtOTU4ZC03YmY0ODM5Y2RjY2QuZWY2NjE2ZmQtNWIwNi00ODJmLTlkNjQtMTgzNzQ1NjU5Y2JmLmJ5dGVwcml2YXRlbGluay5jb20iLCJwb3J0IjoiNDQzIiwiaWQiOiJhNDQzMDZkNS0zMzQzLTQ0MDUtYTA4Yy0yZDU0NmE1N2QzYjgiLCJhaWQiOiIwIiwibmV0IjoiZ3JwYyIsInR5cGUiOiJub25lIiwiaG9zdCI6IiIsInBhdGgiOiIxMjMwNiIsInRscyI6InRscyIsInNuaSI6Ind3dy4xMjMwNi5jbiJ9
+    // }
 }

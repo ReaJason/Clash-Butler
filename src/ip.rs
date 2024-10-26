@@ -1,5 +1,7 @@
 use std::net::IpAddr;
 use std::time::Duration;
+use futures_util::future::{select_ok, BoxFuture};
+use futures_util::FutureExt;
 use reqwest::{Client, Error};
 use serde::{Deserialize, Serialize};
 use tracing::log::error;
@@ -8,17 +10,31 @@ use tracing::log::error;
 const TIMEOUT: Duration = Duration::from_millis(1000);
 
 pub async fn get_ip_detail(ip_addr: &IpAddr, proxy_url: &str) -> Result<IpDetail, Box<dyn std::error::Error>> {
-    match get_ip_detail_from_ipsb(ip_addr, proxy_url).await {
-        Ok(ip_detail) => return Ok(ip_detail),
-        Err(err) => error!("从 ipSb 获取 IP 详情失败, {err}")
-    }
+    let ipsb_future: BoxFuture<'_, Result<IpDetail, Error>> = async {
+        match get_ip_detail_from_ipsb(ip_addr, proxy_url).await {
+            Ok(ip_detail) => Ok(ip_detail),
+            Err(err) => {
+                error!("从 ipSb 获取 IP 详情失败, {err}");
+                Err(err.into())
+            }
+        }
+    }.boxed();
 
-    match get_ip_detail_from_ipapi(ip_addr, proxy_url).await {
-        Ok(ip_detail) => return Ok(ip_detail),
-        Err(err) => error!("从 ipApi 获取 IP 详情失败, {err}")
-    }
+    let ipapi_future: BoxFuture<'_, Result<IpDetail, Error>> = async {
+        match get_ip_detail_from_ipapi(ip_addr, proxy_url).await {
+            Ok(ip_detail) => Ok(ip_detail),
+            Err(err) => {
+                error!("从 ipApi 获取 IP 详情失败, {err}");
+                Err(err.into())
+            }
+        }
+    }.boxed();
 
-    Err("获取 IP 详情失败".into())
+    let futures = vec![ipsb_future, ipapi_future];
+    match select_ok(futures).await {
+        Ok((ip_detail, _)) => Ok(ip_detail),
+        Err(_) => Err("获取 IP 详情失败".into())
+    }
 }
 
 pub async fn get_ip_detail_from_ipsb(ip_addr: &IpAddr, proxy_url: &str) -> Result<IpDetail, Error> {
@@ -87,8 +103,9 @@ mod tests {
     const PROXY_URL: &str = "http://127.0.0.1:7890";
 
     #[tokio::test]
+    #[ignore]
     async fn test_ip_detail() {
-        let result = get_ip_detail(&IpAddr::from_str("152.67.206.156").unwrap(), PROXY_URL).await;
+        let result = get_ip_detail(&IpAddr::from_str("223.160.128.89").unwrap(), PROXY_URL).await;
         println!("{:?}", result);
     }
 }
