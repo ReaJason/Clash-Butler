@@ -1,16 +1,15 @@
-use std::{env, fs};
 use std::collections::{HashMap, HashSet};
 use std::net::IpAddr;
 use std::path::Path;
-
+use std::{env, fs};
 use clap::Parser;
 use tracing::{error, info, Level};
 use tracing_subscriber::FmtSubscriber;
 
 use crate::clash::{ClashMeta, DelayTestConfig};
-use crate::proxy::{parse_conf};
+use crate::proxy::Proxy;
 use crate::settings::Settings;
-use crate::sub::{include_names, save_proxies_into_clash_file, SubConverter};
+use crate::sub::SubManager;
 
 mod sub;
 mod clash;
@@ -22,6 +21,8 @@ mod cgi_trace;
 mod settings;
 mod speedtest;
 mod proxy;
+mod base64;
+mod cloudflare;
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
@@ -29,13 +30,9 @@ struct Cli {
     // Starts the Axum server
     #[arg(long)]
     server: bool,
-
-    // Just test subs/test/config.yaml
-    #[arg(long)]
-    test: bool,
 }
 
-const TEST_PROXY_NAME: &str = "PROXY";
+const TEST_PROXY_GROUP_NAME: &str = "PROXY";
 
 #[tokio::main]
 async fn main() {
@@ -47,7 +44,7 @@ async fn main() {
     let args = Cli::parse();
     let config = Settings::new();
     match config {
-        Ok(mut config) => {
+        Ok(config) => {
             // 创建订阅测试所用的目录结构
             create_folder();
             if args.server {
@@ -55,78 +52,78 @@ async fn main() {
                 // server::start_server(config).await
             } else {
                 // 本地生成
-                if args.test {
-                    config.test = Some(true);
-                }
                 run(config).await
             }
         }
         Err(e) => {
-            panic!("配置文件读取失败: {}", e)
+            error!("配置文件读取失败: {}", e)
         }
     }
 }
 
 async fn run(config: Settings) {
-    let test_yaml_path = env::current_dir().unwrap().join("subs/test/config.yaml");
+    let test_yaml_path = "subs/test/config.yaml";
+    let test_all_yaml_path = "subs/test/all.yaml";
     let release_yaml_path = env::current_dir().unwrap().join("subs/release/clash.yaml");
     let test_clash_template_path = "conf/clash_test.yaml";
     let release_clash_template_path = "conf/clash_release.yaml";
     let test_proxies;
-    if config.test.is_some() {
-        if !test_yaml_path.exists() {
-            error!("当前并没有找到可用的测试文件，请删掉 --test 后重试");
-            return;
-        }
-        test_proxies = parse_conf(&test_yaml_path).unwrap();
-    } else {
-        let mut urls = config.subs;
-        if config.need_add_pool {
-            urls.extend(config.pools)
-        }
-        test_proxies = SubConverter::get_proxies(&urls).await;
-
-        if test_proxies.is_empty() {
-            error!("当前无可用的待测试订阅连接，请修改配置文件添加订阅链接或确保当前网络通顺");
-            return;
-        }
+    let mut urls = config.subs;
+    if config.need_add_pool {
+        urls.extend(config.pools)
+    }
+    test_proxies = SubManager::get_proxies_from_urls(&urls).await;
+    info!("待测速节点个数：{}", &test_proxies.len());
+    if test_proxies.is_empty() {
+        error!("当前无可用的待测试订阅连接，请修改配置文件添加订阅链接或确保当前网络通顺");
+        return;
     }
 
+    // 全部保存一下节点信息
+    SubManager::save_proxies_into_clash_file(&test_proxies,
+                                             test_clash_template_path.to_string(),
+                                             test_all_yaml_path.to_string());
+
+    let chunk_size = 50;
     let proxies_group: Vec<_> = test_proxies
-        .chunks(200)
+        .chunks(chunk_size)
         .map(|p| p.to_vec())
         .collect();
     let group_size = proxies_group.len();
     if group_size > 1 {
-        info!("待测试代理数量达到 {} 个，因此以 200 为限制分为 {} 组测试，加速测试速度", test_proxies.len(), proxies_group.len());
+        info!("为加速测试速度，以 {} 为限制分为 {} 组测试", chunk_size, proxies_group.len());
     }
 
     // 启动 Clash 内核
     let external_port = 9091;
     let mixed_port = 7999;
     let mut useful_proxies = Vec::new();
+    let mut top_node_name = "".to_string();
+    let mut top_node_delay = i64::MAX;
     for (index, proxies) in proxies_group.iter().enumerate() {
         if group_size > 1 {
             info!("正在测试第 {} 组", index + 1)
         }
-        save_proxies_into_clash_file(&proxies,
-                                     test_clash_template_path.to_string(),
-                                     test_yaml_path.to_string_lossy().to_string());
+
+        SubManager::save_proxies_into_clash_file(&proxies,
+                                                 test_clash_template_path.to_string(),
+                                                 test_yaml_path.to_string());
+
         let mut clash_meta = ClashMeta::new(external_port, mixed_port);
         if let Err(e) = clash_meta.start().await {
             error!("原神启动失败，第一次启动可能会下载 geo 相关的文件，重新启动即可，打开 logs/clash.log，查看具体错误原因，{}", e);
             clash_meta.stop().unwrap();
-            return;
+            continue;
         }
 
-        match clash_meta.get_group(TEST_PROXY_NAME).await {
+        match clash_meta.get_group(TEST_PROXY_GROUP_NAME).await {
             Ok(nodes) => {
                 info!("开始测试 subs/test/config.yaml 中节点的延迟速度，节点总数：{}", nodes.all.len())
             }
             Err(e) => {
                 error!("获取节点数失败，请检查 clash 日志文件和 subs/test/config.yaml 生成的节点是否正确, {}", e);
                 clash_meta.stop().unwrap();
-                return;
+                continue;
             }
         }
 
@@ -135,7 +132,18 @@ async fn run(config: Settings) {
         let nodes = get_all_tested_nodes(&delay_results);
         info!("连通性测试结果：{} 个节点可用", nodes.len());
         if !nodes.is_empty() {
-            useful_proxies.extend(include_names(proxies.to_vec(), nodes))
+            let cur_useful_proxies = proxies.to_vec().into_iter()
+                .filter(|proxy| nodes.contains(&proxy.get_name().to_string()))
+                .collect::<Vec<Proxy>>();
+            info!("cur_useful_proxies len: {}", &cur_useful_proxies.len());
+            useful_proxies.extend(cur_useful_proxies);
+            info!("useful_proxies len: {}", useful_proxies.len());
+
+            let (node, delay) = get_top_node(&delay_results);
+            if delay < top_node_delay {
+                top_node_delay = delay;
+                top_node_name = node;
+            }
         }
         clash_meta.stop().unwrap();
     }
@@ -143,36 +151,29 @@ async fn run(config: Settings) {
     if useful_proxies.is_empty() {
         error!("当前无可用节点，请尝试更换订阅节点或重试");
         return;
+    } else {
+        info!("当前总可用节点个数：{}", &useful_proxies.len());
     }
 
     if config.fast_mode {
-        save_proxies_into_clash_file(&useful_proxies, release_clash_template_path.to_string(), release_yaml_path.to_string_lossy().to_string());
+        SubManager::save_proxies_into_clash_file(&useful_proxies, release_clash_template_path.to_string(), release_yaml_path.to_string_lossy().to_string());
         info!("release 文件地址：{}", release_yaml_path.to_string_lossy());
     } else {
         let mut clash_meta = ClashMeta::new(external_port, mixed_port);
-        save_proxies_into_clash_file(&useful_proxies,
-                                     test_clash_template_path.to_string(),
-                                     test_yaml_path.to_string_lossy().to_string());
+        SubManager::save_proxies_into_clash_file(&useful_proxies,
+                                                 test_clash_template_path.to_string(),
+                                                 test_yaml_path.to_string());
 
         if let Err(e) = clash_meta.start().await {
             error!("原神启动失败，第一次启动可能会下载 geo 相关的文件，重新启动即可，打开 logs/clash.log，查看具体错误原因，{}", e);
             clash_meta.stop().unwrap();
             return;
         }
+        info!("当前节点个数为：{}", useful_proxies.len());
 
-        let mut nodes = vec![];
-        let mut top_node = String::new();
-        for (name, conf) in config.websites {
-            info!("当前测试站点：{}, {}", name, conf.url);
-            let delay_results = test_node_with_delay_config(&clash_meta, &conf).await;
-            if !delay_results.is_empty() {
-                nodes = get_all_tested_nodes(&delay_results);
-                top_node = get_top_node(&delay_results);
-                info!("可用节点数：{}", nodes.len());
-                info!("最低延迟节点：{}", top_node);
-            }
-        }
-
+        let nodes = &mut useful_proxies.iter()
+            .map(|p| p.get_name().to_string())
+            .collect::<Vec<String>>();
         let mut node_rename_map: HashMap<String, String> = HashMap::new();
         let mut node_ip_map: HashMap<String, IpAddr> = HashMap::new();
         if config.rename_node {
@@ -192,12 +193,12 @@ async fn run(config: Settings) {
                     continue;
                 }
 
-                let ip_result = clash_meta.set_group_proxy(TEST_PROXY_NAME, node).await;
+                let ip_result = clash_meta.set_group_proxy(TEST_PROXY_GROUP_NAME, node).await;
                 if ip_result.is_ok() {
                     let ip_result = cgi_trace::get_ip(&clash_meta.proxy_url).await;
                     if ip_result.is_ok() {
-                        let proxy_ip = ip_result.unwrap();
-                        info!("「{}」ip: {}", node, proxy_ip);
+                        let (proxy_ip, from) = ip_result.unwrap();
+                        info!("「{}」ip: {} from: {}", node, proxy_ip, from);
                         node_ip_map.insert(node.clone(), proxy_ip);
                         i += 1;
                     } else {
@@ -212,7 +213,8 @@ async fn run(config: Settings) {
                 }
             }
 
-            if clash_meta.set_group_proxy(TEST_PROXY_NAME, &top_node).await.is_ok() {
+            if !top_node_name.is_empty()
+                && clash_meta.set_group_proxy(TEST_PROXY_GROUP_NAME, &top_node_name).await.is_ok() {
                 for (node, ip) in &node_ip_map {
                     let ip_detail_result = ip::get_ip_detail(ip, &clash_meta.proxy_url).await;
                     match ip_detail_result {
@@ -232,34 +234,33 @@ async fn run(config: Settings) {
                         }
                     }
                 }
-            };
-        }
-
-        let mut release_proxies = include_names(useful_proxies, nodes);
-        let mut name_counts: HashMap<String, usize> = HashMap::new();
-        if !node_rename_map.is_empty() {
-            for proxy in &mut release_proxies {
-                let mut name = if let Some(new_name) = node_rename_map.get(proxy.get_name()) {
-                    new_name.clone()
-                } else {
-                    node_ip_map.get(proxy.get_name()).unwrap().clone().to_string()
-                };
-                let count = name_counts.entry(name.clone()).or_insert(0);
-                if *count > 0 {
-                    name = format!("{}{}", name, count);
-                }
-                proxy.set_name(&name);
-                *count += 1;
             }
         }
 
-        save_proxies_into_clash_file(&release_proxies, release_clash_template_path.to_string(), release_yaml_path.to_string_lossy().to_string());
+        let mut release_proxies = useful_proxies
+            .into_iter()
+            .filter(|proxy: &Proxy| nodes.contains(&proxy.get_name().to_string()))
+            .collect::<Vec<Proxy>>();
+
+        if !node_rename_map.is_empty() {
+            for proxy in &mut release_proxies {
+                let name = if let Some(new_name) = node_rename_map.get(proxy.get_name()) {
+                    new_name.clone()
+                } else {
+                    proxy.get_name().to_string()
+                };
+                proxy.set_name(&name);
+            }
+        }
+
+        SubManager::rename_dup_proxies_name(&mut release_proxies);
+        SubManager::save_proxies_into_clash_file(&release_proxies, release_clash_template_path.to_string(), release_yaml_path.to_string_lossy().to_string());
         info!("release 文件地址：{}", release_yaml_path.to_string_lossy());
         clash_meta.stop().unwrap();
     }
 }
 
-fn get_top_node(test_results: &Vec<HashMap<String, i64>>) -> String {
+fn get_top_node(test_results: &Vec<HashMap<String, i64>>) -> (String, i64) {
     let mut combined_data: HashMap<String, Vec<i64>> = HashMap::new();
     for test in test_results {
         for (node, latency) in test {
@@ -275,22 +276,22 @@ fn get_top_node(test_results: &Vec<HashMap<String, i64>>) -> String {
             (node, mean)
         })
         .collect();
-    node_stats.into_iter().min_by_key(|(_, mean)| *mean).unwrap().0
+    node_stats.into_iter().min_by_key(|(_, mean)| *mean).unwrap()
 }
 
 async fn test_node_with_delay_config(clash_meta: &ClashMeta, delay_test_config: &DelayTestConfig) -> Vec<HashMap<String, i64>> {
-    const ROUND: i32 = 10;
+    const ROUND: i32 = 5;
     info!("测试配置：{:?}", delay_test_config);
     let mut delay_results = vec![];
 
     // 预热 2 轮，DNS lookup
     for _ in 0..2 {
-        let _ = clash_meta.test_group(TEST_PROXY_NAME, delay_test_config).await;
+        let _ = clash_meta.test_group(TEST_PROXY_GROUP_NAME, delay_test_config).await;
     }
 
     for n in 0..ROUND {
         info!("测试第 {} 轮", n + 1);
-        let result = clash_meta.test_group(TEST_PROXY_NAME, delay_test_config).await;
+        let result = clash_meta.test_group(TEST_PROXY_GROUP_NAME, delay_test_config).await;
 
         match result {
             Ok(delay) => {

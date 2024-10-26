@@ -50,7 +50,6 @@ impl ProxyAdapter for Trojan {
         Self: Sized,
     {
         // trojan://4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.the-best-airport.com:443?type=tcp&sni=new.download.the-best-airport.com&allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF%2001%20%7C%20%E4%B8%93%E7%BA%BF%0D
-        println!("{}", link);
         let mut url = &link[9..];
 
         let mut name = String::from("");

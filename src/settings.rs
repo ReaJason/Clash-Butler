@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use config::{Config, ConfigError, File};
 use serde::Deserialize;
 use crate::clash::DelayTestConfig;
@@ -8,15 +7,13 @@ use crate::speedtest::SpeedTestConfig;
 #[allow(unused)]
 pub struct Settings {
     pub fast_mode: bool,
-    pub test: Option<bool>,
     pub subs: Vec<String>,
     pub rename_node: bool,
     pub rename_pattern: String,
     pub need_add_pool: bool,
     pub pools: Vec<String>,
     pub connect_test: DelayTestConfig,
-    pub speed_test: SpeedTestConfig,
-    pub websites: HashMap<String, DelayTestConfig>,
+    pub speed_test: SpeedTestConfig
 }
 
 impl Settings {

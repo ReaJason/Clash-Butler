@@ -1,5 +1,6 @@
-use crate::proxy::{deserialize_u16_or_string};
-use crate::proxy::{base64decode, ProxyAdapter, UnsupportedLinkError};
+use crate::base64::{base64decode, base64encode};
+use crate::proxy::deserialize_u16_or_string;
+use crate::proxy::{ProxyAdapter, UnsupportedLinkError};
 use serde::{Deserialize, Serialize};
 use serde_json::Error;
 use std::any::Any;
@@ -41,13 +42,31 @@ impl ProxyAdapter for SS {
         &self.server
     }
 
+    /// 将节点信息转为单个分享链接
+    /// https://github.com/v2rayA/v2rayA/blob/main/service/core/serverObj/shadowsocks.go#L354
     fn to_link(&self) -> String {
-        todo!()
+        let cipher_pwd = base64encode(format!("{}:{}", &self.cipher, &self.password));
+        let server_port = format!("{}:{}", &self.server, &self.port);
+        if let Some(plugin) = &self.plugin {
+            let mut plugin = format!("plugin={plugin};");
+            if let Some(plugin_opts) = &self.plugin_opts {
+                let str = plugin_opts
+                    .iter()
+                    .map(|(key, value)| {
+                        let v = key.clone() + "=" + value;
+                        urlencoding::encode(&v).into_owned()
+                    })
+                    .collect::<Vec<_>>().join(";");
+                plugin.push_str(&str);
+            }
+            format!("ss://{}@{}?{}#{}", cipher_pwd, server_port, plugin, urlencoding::encode(&self.name))
+        } else {
+            format!("ss://{}@{}#{}", cipher_pwd, server_port, urlencoding::encode(&self.name))
+        }
     }
 
     fn from_link(link: String) -> Result<Self, UnsupportedLinkError> {
         // ss://YWVzLTEyOC1nY206ZDljNTc3MzI4ZmIzNDlmZQ==@120.232.73.68:40676#%F0%9F%87%AD%F0%9F%87%B0HK
-        println!("{}", link);
         let url: &str = &link[5..];
 
         // parse name
@@ -59,6 +78,7 @@ impl ProxyAdapter for SS {
         }
 
         // parse plugin
+        // cmM0LW1kNToydnpobzU=@120.241.144.101:2410?plugin=obfs-local;obfs%3Dhttp;obfs-host%3D89c19109670.microsoft.com&group=QHZwbmhhdA
         let url = parts[0];
         let parts: Vec<&str> = url.split("?").collect();
         let mut plugin = None;
@@ -77,11 +97,13 @@ impl ProxyAdapter for SS {
                 let plugin_params = item.split(";").collect::<Vec<_>>();
                 plugin = Some(plugin_params[0].to_string());
                 if plugin_params.len() > 1 {
-                    let mut map: HashMap::<String, String> = HashMap::new();
+                    let mut map: HashMap<String, String> = HashMap::new();
                     plugin_params[1..].iter().for_each(|param| {
                         let value = urlencoding::decode(param).unwrap_or_default().trim().to_string();
                         let kvs = value.split("=").collect::<Vec<_>>();
-                        map.insert(kvs[0].to_string(), kvs[1].to_string());
+                        if kvs.len() == 2 {
+                            map.insert(kvs[0].to_string(), kvs[1].to_string());
+                        }
                     });
                     plugin_opts = Some(map);
                 }
@@ -149,7 +171,7 @@ mod test {
     #[test]
     fn test_parse_ss() {
         let link = String::from("ss://YWVzLTEyOC1nY206ZDljNTc3MzI4ZmIzNDlmZQ==@120.232.73.68:40676#%F0%9F%87%AD%F0%9F%87%B0HK");
-        let result = SS::from_link(link);
+        let result = SS::from_link(link.clone());
         assert!(result.is_ok());
         let proxy = result.unwrap();
         assert_eq!(proxy.name, "🇭🇰HK");
@@ -157,22 +179,41 @@ mod test {
         assert_eq!(proxy.port, 40676);
         assert_eq!(proxy.password, "d9c577328fb349fe");
         assert_eq!(proxy.cipher, "aes-128-gcm");
-        println!("{}", proxy.to_json().unwrap());
+        assert_eq!(proxy.to_link(), link)
     }
 
     #[test]
     fn test_ss2() {
-        let link = String::from("ss://Y2hhY2hhMjAtaWV0ZjpIdVRhb0Nsb3Vk@cm1-hk.hutaonode3.top:12452?plugin=obfs-local;mode=websocket#%E9%A6%99%E6%B8%AF%40vpnhat");
-        let result = SS::from_link(link).unwrap();
+        let link = String::from("ss://Y2hhY2hhMjAtaWV0ZjpIdVRhb0Nsb3Vk@cm1-hk.hutaonode3.top:12452?plugin=obfs-local;mode%3Dwebsocket#%E9%A6%99%E6%B8%AF%40vpnhat");
+        let result = SS::from_link(link.clone()).unwrap();
         assert!(result.plugin.is_some());
-        println!("{:?}", result);
+        assert_eq!(result.to_link(), link);
     }
 
     #[test]
     fn test_ss3() {
-        let link = String::from("ss://cmM0LW1kNToydnpobzU=@120.241.144.101:2410?plugin=obfs-local;obfs%3Dhttp;obfs-host%3D89c19109670.microsoft.com&group=QHZwbmhhdA#%E9%A6%99%E6%B8%AFAkari-P");
-        let result = SS::from_link(link).unwrap();
-        assert!(result.plugin.is_some());
-        println!("{:?}", result);
+        let link = String::from("ss://cmM0LW1kNToydnpobzU=@120.241.144.101:2410?plugin=obfs-local;obfs%3Dhttp;obfs-host%3D89c19109670.microsoft.com#%E9%A6%99%E6%B8%AFAkari-P");
+        let ss1 = SS::from_link(link.clone()).unwrap();
+        assert_eq!(ss1.cipher, "rc4-md5");
+        assert_eq!(ss1.password, "2vzho5");
+        assert_eq!(ss1.server, "120.241.144.101");
+        assert_eq!(ss1.port, 2410);
+        assert_eq!(ss1.plugin, Some("obfs-local".to_string()));
+        let mut map = HashMap::new();
+        map.insert("obfs".to_string(), "http".to_string());
+        map.insert("obfs-host".to_string(), "89c19109670.microsoft.com".to_string());
+        assert_eq!(ss1.plugin_opts, Some(map));
+
+        let b_link = ss1.to_link();
+        let ss2 = SS::from_link(b_link.clone()).unwrap();
+        assert_eq!(ss2.cipher, "rc4-md5");
+        assert_eq!(ss2.password, "2vzho5");
+        assert_eq!(ss2.server, "120.241.144.101");
+        assert_eq!(ss2.port, 2410);
+        assert_eq!(ss2.plugin, Some("obfs-local".to_string()));
+        let mut map = HashMap::new();
+        map.insert("obfs".to_string(), "http".to_string());
+        map.insert("obfs-host".to_string(), "89c19109670.microsoft.com".to_string());
+        assert_eq!(ss2.plugin_opts, Some(map));
     }
 }

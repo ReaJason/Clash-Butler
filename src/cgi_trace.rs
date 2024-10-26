@@ -1,8 +1,9 @@
+use futures_util::FutureExt;
 use std::collections::HashMap;
 use std::net::IpAddr;
 use std::str::FromStr;
 use std::time::Duration;
-
+use futures_util::future::{select_ok, BoxFuture};
 use reqwest::{Client};
 use serde_json::Value;
 use tokio::time::sleep;
@@ -17,23 +18,42 @@ const CF_CN_TRACE_URL: &str = "https://cf-ns.com/cdn-cgi/trace";
 // IP 查询超时时间
 const TIMEOUT: Duration = Duration::from_millis(1000);
 
-pub async fn get_ip(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::Error>> {
-    match get_trace_info_with_proxy(proxy_url, CF_TRACE_URL).await {
-        Ok(trace) => return Ok(trace.ip),
-        Err(e) => error!("从 Cloudflare 获取 IP 失败, {e}")
-    }
+pub async fn get_ip(proxy_url: &str) -> Result<(IpAddr, &str), Box<dyn std::error::Error>> {
+    let cf_future: BoxFuture<'_, Result<(IpAddr, &str), Box<dyn std::error::Error>>> = async {
+        match get_trace_info_with_proxy(proxy_url, CF_TRACE_URL).await {
+            Ok(trace) => Ok((trace.ip, "cf")),
+            Err(e) => {
+                error!("从 Cloudflare 获取 IP 失败, {e}");
+                Err(e.into())
+            }
+        }
+    }.boxed();
 
-    match get_ip_by_ipify(proxy_url).await {
-        Ok(ip) => return Ok(ip),
-        Err(e) => error!("从 ipify 获取 IP 失败, {e}")
-    }
+    let ipify_future: BoxFuture<'_, Result<(IpAddr, &str), Box<dyn std::error::Error>>> = async {
+        match get_ip_by_ipify(proxy_url).await {
+            Ok(ip) => Ok((ip, "ipify")),
+            Err(e) => {
+                error!("从 ipify 获取 IP 失败, {e}");
+                Err(e.into())
+            }
+        }
+    }.boxed();
 
-    match get_trace_info_with_proxy(proxy_url, OPENAI_TRACE_URL).await {
-        Ok(trace) => return Ok(trace.ip),
-        Err(e) => error!("从 OpenAI 获取 IP 失败, {e}")
-    }
+    let openai_future: BoxFuture<'_, Result<(IpAddr, &str), Box<dyn std::error::Error>>> = async {
+        match get_trace_info_with_proxy(proxy_url, OPENAI_TRACE_URL).await {
+            Ok(trace) => Ok((trace.ip, "openai")),
+            Err(e) => {
+                error!("从 OpenAI 获取 IP 失败, {e}");
+                Err(e.into())
+            }
+        }
+    }.boxed();
 
-    Err("获取不到 IP 地址，可能节点已失效，已过滤".into())
+    let futures = vec![cf_future, ipify_future, openai_future];
+    match select_ok(futures).await {
+        Ok(((ip, from), _)) => Ok((ip, from)),
+        Err(_) => Err("获取不到 IP 地址，可能节点已失效，已过滤".into())
+    }
 }
 
 // clash 规则走的是国内，没走代理所以寄
@@ -162,12 +182,14 @@ mod tests {
     const PROXY_URL: &str = "http://127.0.0.1:7999";
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_ip() {
         let result = get_ip(PROXY_URL).await;
-        println!("{:?}", result)
+        println!("{:?}", result.unwrap())
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_trace_info_with_proxy() {
         let result = get_trace_info_with_proxy(PROXY_URL, OPENAI_TRACE_URL).await;
         println!("{:?}", result);
@@ -178,6 +200,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_get_ip_from_ipip() {
         let result = get_ip_by_ipip(PROXY_URL).await;
         println!("{:?}", result);
