@@ -5,12 +5,12 @@ mod trojan;
 mod vless;
 mod hysteria2;
 
-use crate::proxy::hysteria2::Hysteria2;
-use crate::proxy::ss::SS;
-use crate::proxy::ssr::SSR;
-use crate::proxy::trojan::Trojan;
-use crate::proxy::vless::Vless;
-use crate::proxy::vmess::Vmess;
+use crate::protocol::hysteria2::Hysteria2;
+use crate::protocol::ss::SS;
+use crate::protocol::ssr::SSR;
+use crate::protocol::trojan::Trojan;
+use crate::protocol::vless::Vless;
+use crate::protocol::vmess::Vmess;
 use serde::{Deserialize, Deserializer, Serialize};
 use serde_json::{json, Value};
 use std::any::Any;
@@ -116,7 +116,7 @@ impl Clone for Box<dyn ProxyAdapter> {
 }
 
 pub struct Proxy {
-    pub(crate) proxy_type: ProxyType,
+    pub proxy_type: ProxyType,
     pub adapter: Box<dyn ProxyAdapter>,
 }
 

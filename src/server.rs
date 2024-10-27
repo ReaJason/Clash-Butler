@@ -8,7 +8,6 @@ use std::time::Duration;
 use axum::extract::Query;
 use axum::Router;
 use axum::routing::get;
-use regex::Regex;
 use reqwest::Client;
 use serde::Deserialize;
 use tokio::net::TcpListener;

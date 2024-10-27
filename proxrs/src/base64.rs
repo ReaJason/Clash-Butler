@@ -23,7 +23,6 @@ pub fn base64encode(content: String) -> String {
 
 #[cfg(test)]
 mod tests {
-    use wasm_web_reajason::hello;
     use super::*;
 
     #[test]
@@ -42,11 +41,6 @@ mod tests {
                 assert!(false)
             }
         }
-    }
-
-    #[test]
-    fn test_base64encode() {
-        hello("123")
     }
 
     #[test]

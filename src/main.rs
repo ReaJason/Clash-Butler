@@ -7,11 +7,10 @@ use tracing::{error, info, Level};
 use tracing_subscriber::FmtSubscriber;
 
 use crate::clash::{ClashMeta, DelayTestConfig};
-use crate::proxy::Proxy;
+use proxrs::protocol::Proxy;
 use crate::settings::Settings;
-use crate::sub::SubManager;
+use proxrs::sub::SubManager;
 
-mod sub;
 mod clash;
 mod routes;
 mod risk;
@@ -20,9 +19,6 @@ mod ip;
 mod cgi_trace;
 mod settings;
 mod speedtest;
-mod proxy;
-mod base64;
-mod cloudflare;
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]

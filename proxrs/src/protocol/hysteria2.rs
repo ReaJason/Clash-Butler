@@ -1,5 +1,5 @@
-use crate::proxy::deserialize_u16_or_string;
-use crate::proxy::{ProxyAdapter, UnsupportedLinkError};
+use crate::protocol::deserialize_u16_or_string;
+use crate::protocol::{ProxyAdapter, UnsupportedLinkError};
 use serde::{Deserialize, Serialize};
 use serde_json::Error;
 use std::any::Any;
