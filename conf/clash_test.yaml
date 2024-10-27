@@ -27,6 +27,7 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-filter: [ 'rule-set:fakeip-filter' ]
   nameserver:
+    - https://223.5.5.5/dns-query
     - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
 proxies: [ ]
