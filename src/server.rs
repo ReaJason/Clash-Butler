@@ -16,7 +16,9 @@ use tower_http::services::ServeDir;
 use tracing::info;
 use walkdir::WalkDir;
 
-use crate::{clash, routes, Settings};
+use crate::clash;
+use crate::routes;
+use crate::Settings;
 
 pub async fn start_server(_config: Settings) {
     let app = Router::new()
@@ -162,8 +164,8 @@ async fn root() -> &'static str {
 //             for proxy in proxies {
 //                 let name = &proxy.name;
 //                 let history = &proxy.history;
-//                 let delays: std::collections::HashSet<_> = history.iter().map(|h| h.delay).collect();
-//                 if delays.len() == 1 && *delays.iter().next().unwrap() == 0 {
+//                 let delays: std::collections::HashSet<_> = history.iter().map(|h|
+// h.delay).collect();                 if delays.len() == 1 && *delays.iter().next().unwrap() == 0 {
 //                     info!("去掉全程无速度节点：{}", name);
 //                     exclude_nodes.push(name.clone());
 //                 }

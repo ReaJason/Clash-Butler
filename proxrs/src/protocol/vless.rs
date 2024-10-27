@@ -1,10 +1,18 @@
-use crate::protocol::{deserialize_u16_or_string, GrpcOptions, RealtyOptions};
-use crate::protocol::{ProxyAdapter, UnsupportedLinkError, WSOptions};
-use serde::{Deserialize, Serialize};
-use serde_json::Error;
 use std::any::Any;
 use std::collections::HashMap;
-use std::hash::{Hash, Hasher};
+use std::hash::Hash;
+use std::hash::Hasher;
+
+use serde::Deserialize;
+use serde::Serialize;
+use serde_json::Error;
+
+use crate::protocol::deserialize_u16_or_string;
+use crate::protocol::GrpcOptions;
+use crate::protocol::ProxyAdapter;
+use crate::protocol::RealtyOptions;
+use crate::protocol::UnsupportedLinkError;
+use crate::protocol::WSOptions;
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct Vless {
@@ -160,7 +168,10 @@ mod test {
 
     #[test]
     fn test_parse_vless() {
-        // vless://2cd6ed0f-636e-4e6c-9449-5a263d7a0fa5@192.9.165.253:20001?encryption=none&security=tls&sni=cfed.tgzdyz2.top&fp=random&type=ws&host=cfed.tgzdyz2.top&path=%2FTG%40ZDYZ2%3Fed%3D2560#TG%40ZDYZ2%20-%E6%BE%B3%E5%A4%A7%E5%88%A9%E4%BA%9A%F0%9F%87%A6%F0%9F%87%BA
+        // vless://2cd6ed0f-636e-4e6c-9449-5a263d7a0fa5@192.9.165.253:20001?encryption=none&
+        // security=tls&sni=cfed.tgzdyz2.top&fp=random&type=ws&host=cfed.tgzdyz2.top&path=%2FTG%
+        // 40ZDYZ2%3Fed%3D2560#TG%40ZDYZ2%20-%E6%BE%B3%E5%A4%A7%E5%88%A9%E4%BA%9A%F0%9F%87%A6%F0%9F%
+        // 87%BA
         let link = String::from("vless://2cd6ed0f-636e-4e6c-9449-5a263d7a0fa5@192.9.165.253:20001?encryption=none&security=tls&sni=cfed.tgzdyz2.top&fp=random&type=ws&host=cfed.tgzdyz2.top&path=%2FTG%40ZDYZ2%3Fed%3D2560#TG%40ZDYZ2%20-%E6%BE%B3%E5%A4%A7%E5%88%A9%E4%BA%9A%F0%9F%87%A6%F0%9F%87%BA");
         let vless = Vless::from_link(link).unwrap();
         assert_eq!(vless.server, "192.9.165.253");
@@ -219,27 +230,77 @@ mod test {
         println!("{}", vless.to_json().unwrap());
     }
 
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=qq#%E5%89%A9%E4%BD%99%E6%B5%81%E9%87%8F%EF%BC%9A510.48+GB
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=safari#%E8%B7%9D%E7%A6%BB%E4%B8%8B%E6%AC%A1%E9%87%8D%E7%BD%AE%E5%89%A9%E4%BD%99%EF%BC%9A29+%E5%A4%A9
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=ios#%E5%A5%97%E9%A4%90%E5%88%B0%E6%9C%9F%EF%BC%9A2024-10-16
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=edge#United+States+01
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=qq#United+States+02
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us3.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=safari#United+States+03
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us4.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=firefox#United+States+04
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@jp1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=ios#Japan+01
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@jp2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=edge#Japan+02
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@jp3.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=safari#Japan+03
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@jp4.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=qq#Japan+04
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@kr1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=safari#Korea+01
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@kr2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=firefox#Korea+02
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@hk1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=ios#Hong+Kong+01
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@hk2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=qq#Hong+Kong+02
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@id1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=ios#Indonesia+01
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@id2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=safari#Indonesia+02
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@sg1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=safari#Singapore+01
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@sg2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=safari#Singapore+02
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@sg3.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=qq#Singapore+03
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@sg4.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=qq#Singapore+04
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@uk1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=firefox#United+Kindom+01
-    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@uk2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=ios#United+Kindom+02
+    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&
+    // security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&
+    // pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&
+    // servername=python.org&spx=%2F&fp=qq#%E5%89%A9%E4%BD%99%E6%B5%81%E9%87%8F%EF%BC%9A510.48+GB
+    // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&
+    // security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&
+    // pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&
+    // servername=python.org&spx=%2F&fp=safari#%E8%B7%9D%E7%A6%BB%E4%B8%8B%E6%AC%A1%E9%87%8D%E7%BD%
+    // AE%E5%89%A9%E4%BD%99%EF%BC%9A29+%E5%A4%A9 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // us1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=ios#%E5%A5%97%E9%A4%90%E5%88%B0%E6%9C%9F%EF%
+    // BC%9A2024-10-16 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?
+    // mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&
+    // pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&
+    // servername=python.org&spx=%2F&fp=edge#United+States+01 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // us2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=qq#United+States+02 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // us3.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=safari#United+States+03 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // us4.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=firefox#United+States+04 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // jp1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=ios#Japan+01 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // jp2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=edge#Japan+02 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // jp3.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=safari#Japan+03 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // jp4.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=qq#Japan+04 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // kr1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=safari#Korea+01 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // kr2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=firefox#Korea+02 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // hk1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=ios#Hong+Kong+01 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // hk2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=qq#Hong+Kong+02 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // id1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=ios#Indonesia+01 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // id2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=safari#Indonesia+02 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // sg1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=safari#Singapore+01 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // sg2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=safari#Singapore+02 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // sg3.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=qq#Singapore+03 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // sg4.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=qq#Singapore+04 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // uk1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=firefox#United+Kindom+01 vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@
+    // uk2.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&
+    // flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&
+    // sni=python.org&servername=python.org&spx=%2F&fp=ios#United+Kindom+02
 }

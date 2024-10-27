@@ -1,7 +1,10 @@
+use config::Config;
+use config::ConfigError;
+use config::File;
+use serde::Deserialize;
+
 use crate::clash::DelayTestConfig;
 use crate::speedtest::SpeedTestConfig;
-use config::{Config, ConfigError, File};
-use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 #[allow(unused)]

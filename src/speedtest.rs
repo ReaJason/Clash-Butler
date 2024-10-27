@@ -1,7 +1,10 @@
+use std::time::Duration;
+use std::time::Instant;
+
 use futures_util::StreamExt;
 use reqwest::Proxy;
-use serde::{Deserialize, Serialize};
-use std::time::{Duration, Instant};
+use serde::Deserialize;
+use serde::Serialize;
 
 #[derive(Debug, Serialize, Deserialize)]
 #[allow(unused)]
@@ -93,5 +96,5 @@ mod test {
 //     // let avg_ttfb = total_ttfb / results.len() as u32;
 //     // let avg_bandwidth = total_bandwidth / results.len() as f64;
 //
-//     // println!("Average TTFB: {:.2?} seconds, Average Bandwidth: {:.2} bytes/sec", avg_ttfb, avg_bandwidth);
-// }
+//     // println!("Average TTFB: {:.2?} seconds, Average Bandwidth: {:.2} bytes/sec", avg_ttfb,
+// avg_bandwidth); }

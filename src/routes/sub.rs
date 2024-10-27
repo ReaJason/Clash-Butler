@@ -1,5 +1,6 @@
 #![allow(unused)]
-use axum::{routing::get, Router};
+use axum::routing::get;
+use axum::Router;
 
 pub fn sub_router() -> Router {
     Router::new().route("/sub", get(sub_handler))

@@ -1,11 +1,13 @@
-use futures_util::future::{select_ok, BoxFuture};
-use futures_util::FutureExt;
-use reqwest::Client;
-use serde_json::Value;
 use std::collections::HashMap;
 use std::net::IpAddr;
 use std::str::FromStr;
 use std::time::Duration;
+
+use futures_util::future::select_ok;
+use futures_util::future::BoxFuture;
+use futures_util::FutureExt;
+use reqwest::Client;
+use serde_json::Value;
 use tokio::time::sleep;
 use tracing::log::error;
 

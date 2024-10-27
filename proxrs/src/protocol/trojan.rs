@@ -1,10 +1,15 @@
-use crate::protocol::deserialize_u16_or_string;
-use crate::protocol::{ProxyAdapter, UnsupportedLinkError};
-use serde::{Deserialize, Serialize};
-use serde_json::Error;
 use std::any::Any;
 use std::collections::HashMap;
-use std::hash::{Hash, Hasher};
+use std::hash::Hash;
+use std::hash::Hasher;
+
+use serde::Deserialize;
+use serde::Serialize;
+use serde_json::Error;
+
+use crate::protocol::deserialize_u16_or_string;
+use crate::protocol::ProxyAdapter;
+use crate::protocol::UnsupportedLinkError;
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct Trojan {
@@ -48,7 +53,10 @@ impl ProxyAdapter for Trojan {
     where
         Self: Sized,
     {
-        // trojan://4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.the-best-airport.com:443?type=tcp&sni=new.download.the-best-airport.com&allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF%2001%20%7C%20%E4%B8%93%E7%BA%BF%0D
+        // trojan://4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.
+        // 6df03129.the-best-airport.com:443?type=tcp&sni=new.download.the-best-airport.com&
+        // allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF%2001%20%7C%20%E4%B8%93%E7%BA%
+        // BF%0D
         let mut url = &link[9..];
 
         let mut name = String::from("");
@@ -57,7 +65,8 @@ impl ProxyAdapter for Trojan {
             name = urlencoding::decode(v2).unwrap().to_string();
         }
         // b7c0a9b4-0b85-4e93-921e-63bef702172b@111.38.53.159:41001
-        // 4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.the-best-airport.com:443?type=tcp&sni=new.download.the-best-airport.com&allowInsecure=1
+        // 4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.
+        // the-best-airport.com:443?type=tcp&sni=new.download.the-best-airport.com&allowInsecure=1
         let parts: Vec<&str> = url.split("?").collect();
         let mut network = None;
         let mut sni = None;
@@ -77,7 +86,8 @@ impl ProxyAdapter for Trojan {
         }
 
         let url = parts[0];
-        // 4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.the-best-airport.com:443
+        // 4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.
+        // the-best-airport.com:443
         let parts: Vec<&str> = url.split("@").collect();
         let password = String::from(parts[0]);
 

@@ -2,12 +2,16 @@
 
 use std::collections::HashMap;
 use std::fs::File;
-use std::process::{Child, Command, Stdio};
+use std::process::Child;
+use std::process::Command;
+use std::process::Stdio;
 use std::time::Duration;
 
 use reqwest::Client;
-use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
+use serde::Deserialize;
+use serde::Serialize;
+use serde_json::json;
+use serde_json::Value;
 use tokio::time::sleep;
 use tracing::info;
 
@@ -195,7 +199,8 @@ pub struct Group {
 
 #[cfg(test)]
 mod tests {
-    use crate::clash::{ClashMeta, DelayTestConfig};
+    use crate::clash::ClashMeta;
+    use crate::clash::DelayTestConfig;
 
     #[tokio::test]
     async fn test_proxy_delay() {

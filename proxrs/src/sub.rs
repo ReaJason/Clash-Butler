@@ -1,16 +1,24 @@
-use crate::base64::base64decode;
-use crate::protocol::Proxy;
-use regex::Regex;
-use reqwest::Client;
-use serde_yaml::{Mapping, Value};
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
+use std::collections::HashSet;
+use std::fs;
 use std::fs::File;
-use std::hash::{DefaultHasher, Hash, Hasher};
-use std::io::{Read, Write};
+use std::hash::DefaultHasher;
+use std::hash::Hash;
+use std::hash::Hasher;
+use std::io;
+use std::io::Read;
+use std::io::Write;
 use std::path::Path;
 use std::time::Duration;
-use std::{fs, io};
+
+use regex::Regex;
+use reqwest::Client;
+use serde_yaml::Mapping;
+use serde_yaml::Value;
 use tokio::time::sleep;
+
+use crate::base64::base64decode;
+use crate::protocol::Proxy;
 
 #[derive(Debug)]
 pub struct SubManager {}
@@ -80,7 +88,8 @@ impl SubManager {
                         match content_result {
                             Ok(content) => {
                                 // file.write_all(content.as_bytes()).unwrap();
-                                // Ok(env::current_dir().unwrap().join(file_path).to_string_lossy().to_string())
+                                // Ok(env::current_dir().unwrap().join(file_path).to_string_lossy().
+                                // to_string())
                                 Ok(content)
                             }
                             Err(e) => {
@@ -118,14 +127,12 @@ impl SubManager {
     pub fn parse_from_path<P: AsRef<Path>>(
         file_path: P,
     ) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
-        let conf_proxies;
         match fs::read_to_string(file_path) {
             Ok(contents) => {
-                conf_proxies = Self::parse_content(contents)?;
+                Ok(Self::parse_content(contents)?)
             }
-            Err(e) => return Err(format!("Error reading file: {}", e).into()),
+            Err(e) => Err(format!("Error reading file: {}", e).into()),
         }
-        Ok(conf_proxies)
     }
 
     /// 从字符串中解析代理
@@ -328,8 +335,9 @@ impl SubManager {
 
 #[cfg(test)]
 mod test {
-    use super::*;
     use std::path::PathBuf;
+
+    use super::*;
 
     #[test]
     fn test_get_clash_config_content() {

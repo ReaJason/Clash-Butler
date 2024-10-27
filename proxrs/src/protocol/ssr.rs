@@ -1,11 +1,16 @@
-use crate::base64::base64decode;
-use crate::protocol::deserialize_u16_or_string;
-use crate::protocol::{ProxyAdapter, UnsupportedLinkError};
-use serde::{Deserialize, Serialize};
-use serde_json::Error;
 use std::any::Any;
 use std::collections::HashMap;
-use std::hash::{Hash, Hasher};
+use std::hash::Hash;
+use std::hash::Hasher;
+
+use serde::Deserialize;
+use serde::Serialize;
+use serde_json::Error;
+
+use crate::base64::base64decode;
+use crate::protocol::deserialize_u16_or_string;
+use crate::protocol::ProxyAdapter;
+use crate::protocol::UnsupportedLinkError;
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct Ssr {
@@ -53,7 +58,9 @@ impl ProxyAdapter for Ssr {
         // ssr://dmlwLmJhc2ljbm9kZS5ob3N0OjExODQ1OmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0Zjp0bHMxLjJfdGlja2V0X2F1dGg6Um1oaVpUQjYvP3JlbWFya3M9VUhKdkxlbW1tZWE0cnlCSVMwZmt1S2psaGFqb3A2UHBsSUhrdUtoQk1nPT0mb2Jmc3BhcmFtPU5tWTBNV0l5TkM1dGFXTnliM052Wm5RdVkyOXQmcHJvdG9wYXJhbT1NalE2VTNCWlZYUlFaVXBaYUZKck5FWlhRdz09
         let url: &str = &link[6..];
 
-        // vip.basicnode.host:11845:auth_aes128_sha1:chacha20-ietf:tls1.2_ticket_auth:RmhiZTB6/?remarks=UHJvLemmmea4ryBIS0fkuKjlhajop6PplIHkuKhBMg==&obfsparam=NmY0MWIyNC5taWNyb3NvZnQuY29t&protoparam=MjQ6U3BZVXRQZUpZaFJrNEZXQw==
+        // vip.basicnode.host:11845:auth_aes128_sha1:chacha20-ietf:tls1.2_ticket_auth:RmhiZTB6/?
+        // remarks=UHJvLemmmea4ryBIS0fkuKjlhajop6PplIHkuKhBMg==&
+        // obfsparam=NmY0MWIyNC5taWNyb3NvZnQuY29t&protoparam=MjQ6U3BZVXRQZUpZaFJrNEZXQw==
         let url = base64decode(url);
         let parts: Vec<&str> = url.split("/?").collect();
 

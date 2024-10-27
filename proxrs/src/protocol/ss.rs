@@ -1,11 +1,17 @@
-use crate::base64::{base64decode, base64encode};
-use crate::protocol::deserialize_u16_or_string;
-use crate::protocol::{ProxyAdapter, UnsupportedLinkError};
-use serde::{Deserialize, Serialize};
-use serde_json::Error;
 use std::any::Any;
 use std::collections::HashMap;
-use std::hash::{Hash, Hasher};
+use std::hash::Hash;
+use std::hash::Hasher;
+
+use serde::Deserialize;
+use serde::Serialize;
+use serde_json::Error;
+
+use crate::base64::base64decode;
+use crate::base64::base64encode;
+use crate::protocol::deserialize_u16_or_string;
+use crate::protocol::ProxyAdapter;
+use crate::protocol::UnsupportedLinkError;
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct SS {
