@@ -41,9 +41,7 @@ pub struct Vmess {
 
 impl PartialEq for Vmess {
     fn eq(&self, other: &Self) -> bool {
-        self.server == other.server
-            && self.port == other.port
-            && self.uuid == other.uuid
+        self.server == other.server && self.port == other.port && self.uuid == other.uuid
     }
 }
 
@@ -170,11 +168,9 @@ impl ProxyAdapter for Vmess {
         // parse grpc sni
         if network.as_deref().is_some_and(|s| s == "grpc") {
             let sni = parsed["sni"].as_str().map(|s| s.to_string());
-            grpc_opts = Some(
-                GrpcOptions {
-                    grpc_service_name: sni
-                }
-            )
+            grpc_opts = Some(GrpcOptions {
+                grpc_service_name: sni,
+            })
         }
 
         if let Some(net) = network.as_deref() {
@@ -190,8 +186,12 @@ impl ProxyAdapter for Vmess {
         }
 
         let servername = parsed["sni"].as_str().map(|s| s.to_string());
-        let udp = parsed["udp"].as_str().map(|s| s.parse::<bool>().unwrap_or(true));
-        let tls = parsed["tls"].as_str().map(|s| s.parse::<bool>().unwrap_or(false));
+        let udp = parsed["udp"]
+            .as_str()
+            .map(|s| s.parse::<bool>().unwrap_or(true));
+        let tls = parsed["tls"]
+            .as_str()
+            .map(|s| s.parse::<bool>().unwrap_or(false));
         Ok(Vmess {
             name,
             server,
@@ -236,7 +236,6 @@ impl ProxyAdapter for Vmess {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -270,6 +269,11 @@ mod test {
         let link = String::from("vmess://eyJ2IjoiMiIsInBzIjoiXHU5MDgwXHU4YmY3XHU2NWIwXHU3NTI4XHU2MjM3NjAlXHU4ZmQ0XHU1MjI5IiwiYWRkIjoiZGVmYXVsdC42NTNlYmVlYi01ZjYwLTRiZTUtOTU4ZC03YmY0ODM5Y2RjY2QuZWY2NjE2ZmQtNWIwNi00ODJmLTlkNjQtMTgzNzQ1NjU5Y2JmLmJ5dGVwcml2YXRlbGluay5jb20iLCJwb3J0IjoiNDQzIiwiaWQiOiJhNDQzMDZkNS0zMzQzLTQ0MDUtYTA4Yy0yZDU0NmE1N2QzYjgiLCJhaWQiOiIwIiwibmV0IjoiZ3JwYyIsInR5cGUiOiJub25lIiwiaG9zdCI6IiIsInBhdGgiOiIxMjMwNiIsInRscyI6InRscyIsInNuaSI6ImNkbjEuMTAzOTIub25saW5lIn0=");
         let vmess = Vmess::from_link(link).unwrap();
         assert_eq!(Some("grpc".to_string()), vmess.network);
-        assert_eq!(Some(GrpcOptions { grpc_service_name: Some("cdn1.10392.online".to_string()) }), vmess.grpc_opts);
+        assert_eq!(
+            Some(GrpcOptions {
+                grpc_service_name: Some("cdn1.10392.online".to_string())
+            }),
+            vmess.grpc_opts
+        );
     }
 }

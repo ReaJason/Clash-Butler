@@ -24,23 +24,13 @@ impl SubManager {
     pub async fn get_proxies_from_url(url: String) -> Vec<Proxy> {
         let mut proxies: Vec<Proxy> = Vec::new();
         if url.starts_with("http") {
-            match Self::get_content_from_sub_url(&url).await {
-                Ok(file_path) => {
-                    proxies = Self::parse_content(file_path).unwrap();
-                }
-                Err(_) => {}
+            if let Ok(file_path) = Self::get_content_from_sub_url(&url).await {
+                proxies = Self::parse_content(file_path).unwrap();
             }
-        } else {
-            if Path::new(&url).is_file() {
-                proxies = Self::parse_from_path(&url).unwrap();
-            } else {
-                match Self::parse_content(url.to_string()) {
-                    Ok(p) => {
-                        proxies.extend(p);
-                    }
-                    Err(_) => {}
-                }
-            }
+        } else if Path::new(&url).is_file() {
+            proxies = Self::parse_from_path(&url).unwrap();
+        } else if let Ok(p) = Self::parse_content(url.to_string()) {
+            proxies.extend(p);
         }
         proxies
     }
@@ -115,21 +105,25 @@ impl SubManager {
                 attempts += 1;
                 sleep(Duration::from_secs(1)).await;
             } else {
-                return Err(format!("当前链接 {} 无法访问，已跳过，或请确保当前网络通顺", sub_url).into());
+                return Err(format!(
+                    "当前链接 {} 无法访问，已跳过，或请确保当前网络通顺",
+                    sub_url
+                )
+                .into());
             }
         }
     }
 
     /// 从本地文件中解析代理
-    pub fn parse_from_path<P: AsRef<Path>>(file_path: P) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
+    pub fn parse_from_path<P: AsRef<Path>>(
+        file_path: P,
+    ) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
         let conf_proxies;
         match fs::read_to_string(file_path) {
             Ok(contents) => {
                 conf_proxies = Self::parse_content(contents)?;
             }
-            Err(e) => {
-                return Err(format!("Error reading file: {}", e).into())
-            }
+            Err(e) => return Err(format!("Error reading file: {}", e).into()),
         }
         Ok(conf_proxies)
     }
@@ -144,28 +138,23 @@ impl SubManager {
             Ok(proxies) => {
                 conf_proxies = proxies;
             }
-            Err(_) => {
-                match Self::parse_base64_content(&content) {
-                    Ok(proxies) => {
+            Err(_) => match Self::parse_base64_content(&content) {
+                Ok(proxies) => {
+                    conf_proxies = proxies;
+                }
+                Err(_) => {
+                    if let Ok(proxies) = Self::parse_links_content(&content) {
                         conf_proxies = proxies;
                     }
-                    Err(_) => {
-                        match Self::parse_links_content(&content) {
-                            Ok(proxies) => {
-                                conf_proxies = proxies;
-                            }
-                            Err(_) => {}
-                        }
-                    }
                 }
-            }
+            },
         }
         Ok(conf_proxies)
     }
 
     fn parse_yaml_content(content: &str) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
         let mut conf_proxies: Vec<Proxy> = Vec::new();
-        let yaml = serde_yaml::from_str::<serde_json::Value>(&content)?;
+        let yaml = serde_yaml::from_str::<serde_json::Value>(content)?;
         let proxies = yaml.get("proxies").or_else(|| yaml.get("Proxies"));
         match proxies {
             None => {
@@ -193,24 +182,25 @@ impl SubManager {
     fn parse_base64_content(content: &str) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
         let mut conf_proxies: Vec<Proxy> = Vec::new();
         let base64 = base64decode(content.trim());
-        base64.split("\n").filter(|line| !line.is_empty()).for_each(|line| {
-            match Proxy::from_link(line.trim().to_string()) {
-                Ok(proxy) => {
-                    conf_proxies.push(proxy)
-                }
+        base64
+            .split("\n")
+            .filter(|line| !line.is_empty())
+            .for_each(|line| match Proxy::from_link(line.trim().to_string()) {
+                Ok(proxy) => conf_proxies.push(proxy),
                 Err(e) => {
                     println!("{}", e);
                 }
-            }
-        });
+            });
         Ok(conf_proxies)
     }
 
     fn parse_links_content(content: &str) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
         let mut conf_proxies: Vec<Proxy> = Vec::new();
-        let links = content.split("\n")
+        let links = content
+            .split("\n")
             .filter(|line| !line.is_empty())
-            .map(|link| link.trim()).collect::<Vec<&str>>();
+            .map(|link| link.trim())
+            .collect::<Vec<&str>>();
         for link in links {
             if let Ok(proxy) = Proxy::from_link(link.trim().to_string()) {
                 conf_proxies.push(proxy)
@@ -274,7 +264,10 @@ impl SubManager {
     }
 
     // 通过配置格式，获取 clash 配置文件内容
-    pub fn get_clash_config_content(config_path: String, new_proxies: &Vec<Proxy>) -> io::Result<String> {
+    pub fn get_clash_config_content(
+        config_path: String,
+        new_proxies: &Vec<Proxy>,
+    ) -> io::Result<String> {
         let mut file = File::open(config_path)?;
         let mut contents = String::new();
         file.read_to_string(&mut contents)?;
@@ -283,19 +276,29 @@ impl SubManager {
         // 插入 proxies
         if let Some(proxies) = yaml.get_mut("proxies").and_then(Value::as_sequence_mut) {
             for proxy in new_proxies {
-                proxies.push(Value::Mapping(serde_yaml::from_str::<Mapping>(&*proxy.to_json()?).unwrap()));
+                proxies.push(Value::Mapping(
+                    serde_yaml::from_str::<Mapping>(&proxy.to_json()?).unwrap(),
+                ));
             }
         } else {
             println!("Failed to find 'proxies' in the YAML file");
         }
 
         // 处理 proxy-groups 逻辑
-        if let Some(groups) = yaml.get_mut("proxy-groups").and_then(Value::as_sequence_mut) {
+        if let Some(groups) = yaml
+            .get_mut("proxy-groups")
+            .and_then(Value::as_sequence_mut)
+        {
             for group in groups.iter_mut() {
                 if let Some(group_map) = group.as_mapping_mut() {
-                    if let Some(Value::String(filter)) = group_map.get(&Value::String("filter".to_string())) {
+                    if let Some(Value::String(filter)) =
+                        group_map.get(Value::String("filter".to_string()))
+                    {
                         let regex = Regex::new(filter).expect("Invalid regex");
-                        if let Some(proxies) = group_map.get_mut(&Value::String("proxies".to_string())).and_then(Value::as_sequence_mut) {
+                        if let Some(proxies) = group_map
+                            .get_mut(Value::String("proxies".to_string()))
+                            .and_then(Value::as_sequence_mut)
+                        {
                             for proxy in new_proxies {
                                 if regex.is_match(proxy.get_name()) {
                                     proxies.push(Value::String(proxy.get_name().to_string()));
@@ -312,7 +315,11 @@ impl SubManager {
         Ok(serde_yaml::to_string(&yaml).expect("Failed to serialize YAML"))
     }
 
-    pub fn save_proxies_into_clash_file(proxies: &Vec<Proxy>, config_path: String, save_path: String) {
+    pub fn save_proxies_into_clash_file(
+        proxies: &Vec<Proxy>,
+        config_path: String,
+        save_path: String,
+    ) {
         let content = SubManager::get_clash_config_content(config_path, proxies).unwrap();
         let mut file = File::create(&save_path).unwrap();
         file.write_all(content.as_bytes()).unwrap();
@@ -327,7 +334,10 @@ mod test {
     #[test]
     fn test_get_clash_config_content() {
         let path = "conf/clash_release.yaml";
-        let mut proxies = SubManager::parse_from_path("/Users/reajason/RustroverProjects/clash-butler/subs/0c1149d13476bbe3b62eecb7c9b895f4").unwrap();
+        let mut proxies = SubManager::parse_from_path(
+            "/Users/reajason/RustroverProjects/clash-butler/subs/0c1149d13476bbe3b62eecb7c9b895f4",
+        )
+        .unwrap();
         SubManager::unset_proxies_name(&mut proxies);
         let content = SubManager::get_clash_config_content(path.to_string(), &proxies).unwrap();
         println!("{}", content);
@@ -345,7 +355,9 @@ mod test {
     #[test]
     #[ignore]
     fn test_parse_conf() {
-        let path = Path::new("/Users/reajason/RustroverProjects/clash-butler/subs/d417717ed83bdabad1d310906a47a3a2");
+        let path = Path::new(
+            "/Users/reajason/RustroverProjects/clash-butler/subs/d417717ed83bdabad1d310906a47a3a2",
+        );
         let proxies = SubManager::parse_from_path(path).unwrap();
         for proxy in &proxies {
             println!("{:?}", proxy);
@@ -362,11 +374,13 @@ mod test {
 
     #[test]
     fn test_rename_dup_proxies_name() {
-        let content = String::from("ss://cmM0LW1kNToydnpobzU=@120.241.144.101:2410#name\n\
+        let content = String::from(
+            "ss://cmM0LW1kNToydnpobzU=@120.241.144.101:2410#name\n\
         ss://cmM0LW1kNToydnpobzU=@120.241.144.101:2410#name1\n\
         ss://cmM0LW1kNToydnpobzU=@120.241.144.101:2410#name1\n\
         ss://cmM0LW1kNToydnpobzU=@120.241.144.101:2410#name\n\
-        ss://cmM0LW1kNToydnpobzU=@120.241.144.101:2410#xixi");
+        ss://cmM0LW1kNToydnpobzU=@120.241.144.101:2410#xixi",
+        );
 
         let mut proxies = SubManager::parse_content(content).unwrap();
         assert_eq!(proxies.len(), 5);
@@ -382,5 +396,18 @@ mod test {
         assert_eq!(proxies.get(2).unwrap().get_name(), "name3");
         assert_eq!(proxies.get(3).unwrap().get_name(), "name4");
         assert_eq!(proxies.get(4).unwrap().get_name(), "xixi");
+    }
+
+    #[tokio::test]
+    async fn test_merge_config() {
+        let urls = vec![
+            "https://paste.gg/p/anonymous/0531f293e5c34a949dc4ca1a2f3eea18/files/9733a0df99cf47fab1ee33575032ba39/raw".to_string(),
+            "https://paste.gg/p/anonymous/8701805e1f36400f9741ce1491b8e648/files/3ce16ab390d649b486fb0a0be9964535/raw".to_string()];
+        let proxies = SubManager::get_proxies_from_urls(&urls).await;
+        let release_clash_template_path =
+            "/Users/reajason/RustroverProjects/clash-butler/conf/clash_release.yaml".to_string();
+        let save_path =
+            "/Users/reajason/RustroverProjects/clash-butler/subs/release/merge.yaml".to_string();
+        SubManager::save_proxies_into_clash_file(&proxies, release_clash_template_path, save_path);
     }
 }

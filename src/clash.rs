@@ -88,13 +88,17 @@ impl ClashMeta {
         Ok(group)
     }
 
-    pub async fn test_group(&self, group_name: &str, delay_test_config: &DelayTestConfig) -> Result<HashMap<String, i64>, Box<dyn std::error::Error>> {
+    pub async fn test_group(
+        &self,
+        group_name: &str,
+        delay_test_config: &DelayTestConfig,
+    ) -> Result<HashMap<String, i64>, Box<dyn std::error::Error>> {
         let url = format!("{}/group/{}/delay", &self.external_url, group_name);
-        let client = Client::builder().timeout(Duration::from_secs(1)).build().unwrap();
-        let response = client.get(&url)
-            .query(&delay_test_config)
-            .send()
-            .await?;
+        let client = Client::builder()
+            .timeout(Duration::from_secs(1))
+            .build()
+            .unwrap();
+        let response = client.get(&url).query(&delay_test_config).send().await?;
         if !response.status().is_success() {
             return Err(Box::from("获取分组延迟失败".to_string()));
         }
@@ -115,17 +119,18 @@ impl ClashMeta {
                     Ok(result)
                 }
             }
-            _ => Err(Box::from("所有节点无速度"))
+            _ => Err(Box::from("所有节点无速度")),
         }
     }
 
-    pub async fn test_proxy(&self, proxy_name: &str, delay_test_config: &DelayTestConfig) -> Result<u64, Box<dyn std::error::Error>> {
+    pub async fn test_proxy(
+        &self,
+        proxy_name: &str,
+        delay_test_config: &DelayTestConfig,
+    ) -> Result<u64, Box<dyn std::error::Error>> {
         let url = format!("{}/proxies/{}/delay", &self.external_url, proxy_name);
         let client = Client::builder().timeout(Duration::from_secs(60)).build()?;
-        let response = client.get(&url)
-            .query(delay_test_config)
-            .send()
-            .await?;
+        let response = client.get(&url).query(delay_test_config).send().await?;
         if !response.status().is_success() {
             return Err(Box::from("获取分组延迟失败".to_string()));
         }
@@ -133,18 +138,29 @@ impl ClashMeta {
     }
 
     pub async fn test_direct_delay(&self) -> Result<u64, Box<dyn std::error::Error>> {
-        Ok(self.test_proxy("DIRECT", &DelayTestConfig {
-            url: "http://www.gstatic.com/generate_204".to_string(),
-            expected: Some(204),
-            timeout: 200,
-        }).await?)
+        self.test_proxy(
+            "DIRECT",
+            &DelayTestConfig {
+                url: "http://www.gstatic.com/generate_204".to_string(),
+                expected: Some(204),
+                timeout: 200,
+            },
+        )
+        .await
     }
 
-    pub async fn set_group_proxy(&self, group_name: &str, proxy_name: &str) -> Result<bool, Box<dyn std::error::Error>> {
+    pub async fn set_group_proxy(
+        &self,
+        group_name: &str,
+        proxy_name: &str,
+    ) -> Result<bool, Box<dyn std::error::Error>> {
         let url = format!("{}/proxies/{}", &self.external_url, group_name);
         let client = Client::builder().timeout(Duration::from_secs(5)).build()?;
-        let response = client.put(url).json(&json!({"name": proxy_name}))
-            .send().await?;
+        let response = client
+            .put(url)
+            .json(&json!({"name": proxy_name}))
+            .send()
+            .await?;
         Ok(response.status().is_success())
     }
 }
@@ -184,11 +200,17 @@ mod tests {
     #[tokio::test]
     async fn test_proxy_delay() {
         let clash_meta = ClashMeta::new(9091, 7891);
-        let delay = clash_meta.test_proxy("DIRECT", &DelayTestConfig {
-            url: "http://www.gstatic.com/generate_204".to_string(),
-            expected: Some(204),
-            timeout: 500,
-        }).await.unwrap();
+        let delay = clash_meta
+            .test_proxy(
+                "DIRECT",
+                &DelayTestConfig {
+                    url: "http://www.gstatic.com/generate_204".to_string(),
+                    expected: Some(204),
+                    timeout: 500,
+                },
+            )
+            .await
+            .unwrap();
         println!("{}", delay);
     }
 
@@ -202,7 +224,9 @@ mod tests {
     #[tokio::test]
     async fn test_set_group_node() {
         let clash_meta = ClashMeta::new(9091, 7999);
-        let result = clash_meta.set_group_proxy("PROXY", "None_None_vmess_044").await;
+        let result = clash_meta
+            .set_group_proxy("PROXY", "None_None_vmess_044")
+            .await;
         if result.is_ok() {
             println!("success")
         }
@@ -212,11 +236,16 @@ mod tests {
     #[ignore]
     async fn test_group_delay() {
         let clash_meta = ClashMeta::new(9090, 7890);
-        let result = clash_meta.test_group("Select", &DelayTestConfig {
-            url: "http://www.google.com/generate_204".to_string(),
-            expected: Some(204),
-            timeout: 500,
-        }).await;
+        let result = clash_meta
+            .test_group(
+                "Select",
+                &DelayTestConfig {
+                    url: "http://www.google.com/generate_204".to_string(),
+                    expected: Some(204),
+                    timeout: 500,
+                },
+            )
+            .await;
 
         println!("{:?}", result);
     }

@@ -7,12 +7,8 @@ pub fn base64decode(content: &str) -> String {
         padded_content.push('=');
     }
     match BASE64_STANDARD.decode(padded_content.as_bytes()) {
-        Ok(data) => {
-            String::from_utf8(data).unwrap()
-        }
-        Err(_) => {
-            content.to_string()
-        }
+        Ok(data) => String::from_utf8(data).unwrap(),
+        Err(_) => content.to_string(),
     }
 }
 

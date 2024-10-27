@@ -18,41 +18,46 @@ const CF_CN_TRACE_URL: &str = "https://cf-ns.com/cdn-cgi/trace";
 // IP 查询超时时间
 const TIMEOUT: Duration = Duration::from_millis(1000);
 
+type IpBoxFuture<'a> = BoxFuture<'a, Result<(IpAddr, &'a str), Box<dyn std::error::Error>>>;
+
 pub async fn get_ip(proxy_url: &str) -> Result<(IpAddr, &str), Box<dyn std::error::Error>> {
-    let cf_future: BoxFuture<'_, Result<(IpAddr, &str), Box<dyn std::error::Error>>> = async {
+    let cf_future: IpBoxFuture = async {
         match get_trace_info_with_proxy(proxy_url, CF_TRACE_URL).await {
             Ok(trace) => Ok((trace.ip, "cf")),
             Err(e) => {
                 error!("从 Cloudflare 获取 IP 失败, {e}");
-                Err(e.into())
+                Err(e)
             }
         }
-    }.boxed();
+    }
+    .boxed();
 
-    let ipify_future: BoxFuture<'_, Result<(IpAddr, &str), Box<dyn std::error::Error>>> = async {
+    let ipify_future: IpBoxFuture = async {
         match get_ip_by_ipify(proxy_url).await {
             Ok(ip) => Ok((ip, "ipify")),
             Err(e) => {
                 error!("从 ipify 获取 IP 失败, {e}");
-                Err(e.into())
+                Err(e)
             }
         }
-    }.boxed();
+    }
+    .boxed();
 
-    let openai_future: BoxFuture<'_, Result<(IpAddr, &str), Box<dyn std::error::Error>>> = async {
+    let openai_future: IpBoxFuture = async {
         match get_trace_info_with_proxy(proxy_url, OPENAI_TRACE_URL).await {
             Ok(trace) => Ok((trace.ip, "openai")),
             Err(e) => {
                 error!("从 OpenAI 获取 IP 失败, {e}");
-                Err(e.into())
+                Err(e)
             }
         }
-    }.boxed();
+    }
+    .boxed();
 
     let futures = vec![cf_future, ipify_future, openai_future];
     match select_ok(futures).await {
         Ok(((ip, from), _)) => Ok((ip, from)),
-        Err(_) => Err("获取不到 IP 地址，可能节点已失效，已过滤".into())
+        Err(_) => Err("获取不到 IP 地址，可能节点已失效，已过滤".into()),
     }
 }
 
@@ -83,7 +88,10 @@ async fn get_ip_by_ipify(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::
         .proxy(reqwest::Proxy::all(proxy_url)?)
         .build()?;
 
-    let response = client.get("https://api4.ipify.org/?format=json").send().await?;
+    let response = client
+        .get("https://api4.ipify.org/?format=json")
+        .send()
+        .await?;
     let body = response.text().await?;
 
     let value: Value = serde_json::from_str(&body)?;
@@ -125,7 +133,10 @@ fn parse_trace_info(text: String) -> TraceInfo {
     }
 }
 
-async fn get_trace_info_with_proxy(proxy_url: &str, trace_url: &str) -> Result<TraceInfo, Box<dyn std::error::Error>> {
+async fn get_trace_info_with_proxy(
+    proxy_url: &str,
+    trace_url: &str,
+) -> Result<TraceInfo, Box<dyn std::error::Error>> {
     let client = Client::builder()
         .timeout(TIMEOUT)
         .proxy(reqwest::Proxy::all(proxy_url)?)
@@ -152,7 +163,6 @@ async fn get_trace_info_with_proxy(proxy_url: &str, trace_url: &str) -> Result<T
     unreachable!()
 }
 
-
 #[derive(Debug)]
 #[allow(unused)]
 struct TraceInfo {
@@ -173,7 +183,6 @@ struct TraceInfo {
     rbi: String,
     kex: String,
 }
-
 
 #[cfg(test)]
 mod tests {

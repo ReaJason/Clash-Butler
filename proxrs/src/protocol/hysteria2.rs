@@ -39,9 +39,7 @@ pub struct Hysteria2 {
 
 impl PartialEq for Hysteria2 {
     fn eq(&self, other: &Self) -> bool {
-        self.server == other.server
-            && self.password == other.password
-            && self.port == other.port
+        self.server == other.server && self.password == other.password && self.port == other.port
     }
 }
 
@@ -63,9 +61,9 @@ impl ProxyAdapter for Hysteria2 {
     }
 
     /*
-        https://github.com/apernet/hysteria/blob/21ea2a024a5bd2d85b8c3e1350038fa178f0901b/app/cmd/client.go#L346
-        hysteria2://auth@server:port/?insecure=1&sni=&obfs=&obfs-password=&pinSHA256=
-     */
+       https://github.com/apernet/hysteria/blob/21ea2a024a5bd2d85b8c3e1350038fa178f0901b/app/cmd/client.go#L346
+       hysteria2://auth@server:port/?insecure=1&sni=&obfs=&obfs-password=&pinSHA256=
+    */
     fn from_link(link: String) -> Result<Self, UnsupportedLinkError>
     where
         Self: Sized,
@@ -99,7 +97,14 @@ impl ProxyAdapter for Hysteria2 {
         let down = params_map.get("down").cloned();
         let mut alpn = None;
         if let Some(value) = params_map.get("alpn").cloned() {
-            alpn = Some(value.split(",").collect::<Vec<_>>().into_iter().map(|s| s.to_string()).collect());
+            alpn = Some(
+                value
+                    .split(",")
+                    .collect::<Vec<_>>()
+                    .into_iter()
+                    .map(|s| s.to_string())
+                    .collect(),
+            );
         }
         let obfs = params_map.get("obfs").cloned();
         let obfs_password = params_map.get("obfs-password").cloned();
@@ -121,7 +126,6 @@ impl ProxyAdapter for Hysteria2 {
                 ports = Some(String::from(parts[1]));
             }
         }
-
 
         if name.is_empty() {
             name = server.clone() + port.to_string().as_str();

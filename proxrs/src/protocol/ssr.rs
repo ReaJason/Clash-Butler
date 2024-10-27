@@ -8,7 +8,7 @@ use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
-pub struct SSR {
+pub struct Ssr {
     pub name: String,
     pub server: String,
     #[serde(deserialize_with = "deserialize_u16_or_string")]
@@ -23,15 +23,13 @@ pub struct SSR {
     pub protocol_param: Option<String>,
 }
 
-impl PartialEq for SSR {
+impl PartialEq for Ssr {
     fn eq(&self, other: &Self) -> bool {
-        self.server == other.server
-            && self.port == other.port
-            && self.password == other.password
+        self.server == other.server && self.port == other.port && self.password == other.password
     }
 }
 
-impl ProxyAdapter for SSR {
+impl ProxyAdapter for Ssr {
     fn get_name(&self) -> &str {
         &self.name
     }
@@ -83,7 +81,7 @@ impl ProxyAdapter for SSR {
             name = result.clone();
         }
 
-        Ok(SSR {
+        Ok(Ssr {
             name,
             server,
             port,
@@ -105,7 +103,7 @@ impl ProxyAdapter for SSR {
     }
 
     fn eq(&self, other: &dyn ProxyAdapter) -> bool {
-        if let Some(other) = other.as_any().downcast_ref::<SSR>() {
+        if let Some(other) = other.as_any().downcast_ref::<Ssr>() {
             self == other
         } else {
             false
@@ -126,7 +124,7 @@ mod test {
     #[test]
     fn test_parse_ssr() {
         let link = String::from("ssr://dmlwLmJhc2ljbm9kZS5ob3N0OjExODQ1OmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0Zjp0bHMxLjJfdGlja2V0X2F1dGg6Um1oaVpUQjYvP3JlbWFya3M9VUhKdkxlbW1tZWE0cnlCSVMwZmt1S2psaGFqb3A2UHBsSUhrdUtoQk1nPT0mb2Jmc3BhcmFtPU5tWTBNV0l5TkM1dGFXTnliM052Wm5RdVkyOXQmcHJvdG9wYXJhbT1NalE2VTNCWlZYUlFaVXBaYUZKck5FWlhRdz09");
-        let ssr = SSR::from_link(link).unwrap();
+        let ssr = Ssr::from_link(link).unwrap();
         assert_eq!(ssr.server, "vip.basicnode.host");
         assert_eq!(ssr.port, 11845);
         assert_eq!(ssr.password, "Fhbe0z");
@@ -141,7 +139,7 @@ mod test {
     #[test]
     fn test_parse_ssr2() {
         let link = String::from("ssr://dXMtYW0zLmVxbm9kZS5uZXQ6ODA4MTpvcmlnaW46YWVzLTI1Ni1jZmI6dGxzMS4yX3RpY2tldF9hdXRoOlptOTFPRTFDUjJscS8/b2Jmc3BhcmFtPSZwcm90b3BhcmFtPSZyZW1hcmtzPXNzcl9tZXRhXzExJnByb3RvcGFyYW09Jm9iZnNwYXJhbT0=");
-        let ssr = SSR::from_link(link).unwrap();
+        let ssr = Ssr::from_link(link).unwrap();
         assert_eq!(ssr.server, "us-am3.eqnode.net");
         assert_eq!(ssr.port, 8081);
         assert_eq!(ssr.password, "fou8MBGij");

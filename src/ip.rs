@@ -9,31 +9,36 @@ use tracing::log::error;
 // IP 详情查询超时时间
 const TIMEOUT: Duration = Duration::from_millis(1000);
 
-pub async fn get_ip_detail(ip_addr: &IpAddr, proxy_url: &str) -> Result<IpDetail, Box<dyn std::error::Error>> {
+pub async fn get_ip_detail(
+    ip_addr: &IpAddr,
+    proxy_url: &str,
+) -> Result<IpDetail, Box<dyn std::error::Error>> {
     let ipsb_future: BoxFuture<'_, Result<IpDetail, Error>> = async {
         match get_ip_detail_from_ipsb(ip_addr, proxy_url).await {
             Ok(ip_detail) => Ok(ip_detail),
             Err(err) => {
                 error!("从 ipSb 获取 IP 详情失败, {err}");
-                Err(err.into())
+                Err(err)
             }
         }
-    }.boxed();
+    }
+    .boxed();
 
     let ipapi_future: BoxFuture<'_, Result<IpDetail, Error>> = async {
         match get_ip_detail_from_ipapi(ip_addr, proxy_url).await {
             Ok(ip_detail) => Ok(ip_detail),
             Err(err) => {
                 error!("从 ipApi 获取 IP 详情失败, {err}");
-                Err(err.into())
+                Err(err)
             }
         }
-    }.boxed();
+    }
+    .boxed();
 
     let futures = vec![ipsb_future, ipapi_future];
     match select_ok(futures).await {
         Ok((ip_detail, _)) => Ok(ip_detail),
-        Err(_) => Err("获取 IP 详情失败".into())
+        Err(_) => Err("获取 IP 详情失败".into()),
     }
 }
 
@@ -49,7 +54,10 @@ pub async fn get_ip_detail_from_ipsb(ip_addr: &IpAddr, proxy_url: &str) -> Resul
 }
 
 #[allow(dead_code)]
-pub async fn get_ip_detail_from_ipapi(ip_addr: &IpAddr, proxy_url: &str) -> Result<IpDetail, Error> {
+pub async fn get_ip_detail_from_ipapi(
+    ip_addr: &IpAddr,
+    proxy_url: &str,
+) -> Result<IpDetail, Error> {
     let client = Client::builder()
         .timeout(TIMEOUT)
         .proxy(reqwest::Proxy::all(proxy_url)?)

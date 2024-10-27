@@ -26,20 +26,17 @@ pub async fn start_server(_config: Settings) {
         // .route("/test", get(test_config))
         // .route("/test/all", get(test_all_sub))
         .merge(routes::sub::sub_router())
-        .merge(routes::config::config_router())
-        ;
+        .merge(routes::config::config_router());
 
-    let listener = TcpListener::bind("0.0.0.0:3003")
-        .await
-        .unwrap();
+    let listener = TcpListener::bind("0.0.0.0:3003").await.unwrap();
 
     info!("listening on {}", listener.local_addr().unwrap());
 
     axum::serve(listener, app)
         .with_graceful_shutdown(shutdown_signal())
-        .await.unwrap();
+        .await
+        .unwrap();
 }
-
 
 async fn root() -> &'static str {
     "👋 Clash-Butler!"
