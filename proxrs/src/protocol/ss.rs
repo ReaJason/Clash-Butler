@@ -66,11 +66,8 @@ impl ProxyAdapter for SS {
     }
 
     fn from_link(link: String) -> Result<Self, UnsupportedLinkError> {
-        // ss://YWVzLTEyOC1nY206ZDljNTc3MzI4ZmIzNDlmZQ==@120.232.73.68:40676#%F0%9F%87%AD%F0%9F%87%B0HK
-        let url: &str = &link[5..];
-
+        let url = base64decode(&link[5..]);
         // parse name
-        // [YWVzLTEyOC1nY206ZDljNTc3MzI4ZmIzNDlmZQ==@120.232.73.68:40676, %F0%9F%87%AD%F0%9F%87%B0HK]
         let mut name = String::from("");
         let parts: Vec<&str> = url.split("#").collect();
         if parts.len() > 1 {
@@ -78,7 +75,6 @@ impl ProxyAdapter for SS {
         }
 
         // parse plugin
-        // cmM0LW1kNToydnpobzU=@120.241.144.101:2410?plugin=obfs-local;obfs%3Dhttp;obfs-host%3D89c19109670.microsoft.com&group=QHZwbmhhdA
         let url = parts[0];
         let parts: Vec<&str> = url.split("?").collect();
         let mut plugin = None;
@@ -111,18 +107,16 @@ impl ProxyAdapter for SS {
         }
 
         // parse server port
-        // YWVzLTEyOC1nY206ZDljNTc3MzI4ZmIzNDlmZQ==@120.232.73.68:40676
         let url = parts[0];
         let parts: Vec<&str> = url.split("@").collect();
 
         let mut cipher = String::from("");
         let mut password = String::from("");
 
-        if let Ok(secret) = base64decode(parts[0]) {
-            let parts: Vec<&str> = secret.split(":").collect();
-            cipher = parts[0].parse().unwrap();
-            password = parts[1].parse().unwrap();
-        }
+        let secret = base64decode(parts[0]);
+        let parts: Vec<&str> = secret.split(":").collect();
+        cipher = parts[0].parse().unwrap();
+        password = parts[1].parse().unwrap();
 
         let server_port = parts[1];
         let parts: Vec<&str> = server_port.split(":").collect();
@@ -179,6 +173,14 @@ mod test {
         assert_eq!(proxy.password, "d9c577328fb349fe");
         assert_eq!(proxy.cipher, "aes-128-gcm");
         assert_eq!(proxy.to_link(), link)
+    }
+
+    #[test]
+    fn test_parse_base64_ss() {
+        let link = String::from("ss://YWVzLTI1Ni1nY206UTFHVVo3VkRQWk9BU0M5SEAxMjAuMjQxLjQ1LjUwOjE3MDAxI1VTLTAx");
+        let result = SS::from_link(link.clone()).unwrap();
+        assert_eq!("Q1GUZ7VDPZOASC9H", result.password);
+        assert_eq!("aes-256-gcm", result.cipher);
     }
 
     #[test]
