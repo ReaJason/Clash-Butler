@@ -1,7 +1,7 @@
-use config::{Config, ConfigError, File};
-use serde::Deserialize;
 use crate::clash::DelayTestConfig;
 use crate::speedtest::SpeedTestConfig;
+use config::{Config, ConfigError, File};
+use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 #[allow(unused)]
@@ -13,7 +13,7 @@ pub struct Settings {
     pub need_add_pool: bool,
     pub pools: Vec<String>,
     pub connect_test: DelayTestConfig,
-    pub speed_test: SpeedTestConfig
+    pub speed_test: SpeedTestConfig,
 }
 
 impl Settings {

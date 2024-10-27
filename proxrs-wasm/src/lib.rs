@@ -18,6 +18,6 @@ pub fn greet() {
     alert("Hello, wasm-web!");
 }
 
-pub fn hello(s: &str){
+pub fn hello(s: &str) {
     alert(&format!("Hello, {}!", s));
 }

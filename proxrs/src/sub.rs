@@ -28,9 +28,7 @@ impl SubManager {
                 Ok(file_path) => {
                     proxies = Self::parse_content(file_path).unwrap();
                 }
-                Err(_) => {
-
-                }
+                Err(_) => {}
             }
         } else {
             if Path::new(&url).is_file() {
@@ -40,8 +38,7 @@ impl SubManager {
                     Ok(p) => {
                         proxies.extend(p);
                     }
-                    Err(_) => {
-                    }
+                    Err(_) => {}
                 }
             }
         }
@@ -157,8 +154,7 @@ impl SubManager {
                             Ok(proxies) => {
                                 conf_proxies = proxies;
                             }
-                            Err(_) => {
-                            }
+                            Err(_) => {}
                         }
                     }
                 }
@@ -196,7 +192,7 @@ impl SubManager {
 
     fn parse_base64_content(content: &str) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
         let mut conf_proxies: Vec<Proxy> = Vec::new();
-        let base64 = base64decode(content.trim())?;
+        let base64 = base64decode(content.trim());
         base64.split("\n").filter(|line| !line.is_empty()).for_each(|line| {
             match Proxy::from_link(line.trim().to_string()) {
                 Ok(proxy) => {
