@@ -6,6 +6,13 @@ edition = "2021"
 [workspace]
 members = ["proxrs", "proxrs-wasm"]
 
+[profile.dev]
+opt-level = 1 # Example setting, you can customize as needed
+debug = true
+
+[profile.release]
+opt-level = "s"
+
 [dependencies]
 proxrs = { path = "proxrs" }
 axum = "0.7.5"

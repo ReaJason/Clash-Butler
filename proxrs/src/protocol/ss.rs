@@ -166,7 +166,6 @@ impl ProxyAdapter for SS {
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::proxy::ProxyAdapter;
 
     #[test]
     fn test_parse_ss() {
