@@ -1,13 +1,13 @@
+mod hysteria2;
 mod ss;
 mod ssr;
-mod vmess;
 mod trojan;
 mod vless;
-mod hysteria2;
+mod vmess;
 
 use crate::protocol::hysteria2::Hysteria2;
 use crate::protocol::ss::SS;
-use crate::protocol::ssr::SSR;
+use crate::protocol::ssr::Ssr;
 use crate::protocol::trojan::Trojan;
 use crate::protocol::vless::Vless;
 use crate::protocol::vmess::Vmess;
@@ -95,7 +95,6 @@ pub trait ProxyAdapter: ProxyAdapterClone {
     fn hash(&self, state: &mut dyn Hasher);
 }
 
-
 pub trait ProxyAdapterClone {
     fn clone_box(&self) -> Box<dyn ProxyAdapter>;
 }
@@ -129,7 +128,7 @@ impl Proxy {
     }
 
     pub fn get_name(&self) -> &str {
-        &self.adapter.get_name()
+        self.adapter.get_name()
     }
 
     pub fn set_name(&mut self, name: &str) {
@@ -137,7 +136,7 @@ impl Proxy {
     }
 
     pub fn get_server(&self) -> &str {
-        &self.adapter.get_server()
+        self.adapter.get_server()
     }
 
     pub fn to_json(&self) -> Result<String, serde_json::Error> {
@@ -149,7 +148,7 @@ impl Proxy {
                 }
                 serde_json::to_string(&json_value)
             }
-            Err(e) => { Err(e) }
+            Err(e) => Err(e),
         }
     }
 
@@ -157,15 +156,27 @@ impl Proxy {
         if link.starts_with("ss://") {
             Ok(Proxy::new(ProxyType::SS, Box::new(SS::from_link(link)?)))
         } else if link.starts_with("ssr://") {
-            Ok(Proxy::new(ProxyType::SSR, Box::new(SSR::from_link(link)?)))
+            Ok(Proxy::new(ProxyType::SSR, Box::new(Ssr::from_link(link)?)))
         } else if link.starts_with("vmess://") {
-            Ok(Proxy::new(ProxyType::Vmess, Box::new(Vmess::from_link(link)?)))
+            Ok(Proxy::new(
+                ProxyType::Vmess,
+                Box::new(Vmess::from_link(link)?),
+            ))
         } else if link.starts_with("trojan://") {
-            Ok(Proxy::new(ProxyType::Trojan, Box::new(Trojan::from_link(link)?)))
+            Ok(Proxy::new(
+                ProxyType::Trojan,
+                Box::new(Trojan::from_link(link)?),
+            ))
         } else if link.starts_with("hysteria2://") {
-            Ok(Proxy::new(ProxyType::Hysteria2, Box::new(Hysteria2::from_link(link)?)))
+            Ok(Proxy::new(
+                ProxyType::Hysteria2,
+                Box::new(Hysteria2::from_link(link)?),
+            ))
         } else if link.starts_with("vless://") {
-            Ok(Proxy::new(ProxyType::Vless, Box::new(Vless::from_link(link)?)))
+            Ok(Proxy::new(
+                ProxyType::Vless,
+                Box::new(Vless::from_link(link)?),
+            ))
         } else {
             Err(UnsupportedLinkError {
                 message: format!("Unsupported link format: {}", link),
@@ -178,69 +189,45 @@ impl Proxy {
         if let Some(proxy_type) = value.get("type") {
             if proxy_type.as_str().unwrap() == "ss" {
                 return match serde_json::from_str::<SS>(json) {
-                    Ok(ss) => {
-                        Ok(Proxy::new(ProxyType::SS, Box::new(ss)))
-                    }
-                    Err(e) => {
-                        Err(UnsupportedLinkError {
-                            message: format!("{}", e),
-                        })
-                    }
+                    Ok(ss) => Ok(Proxy::new(ProxyType::SS, Box::new(ss))),
+                    Err(e) => Err(UnsupportedLinkError {
+                        message: format!("{}", e),
+                    }),
                 };
             } else if proxy_type.as_str().unwrap() == "ssr" {
-                return match serde_json::from_str::<SSR>(json) {
-                    Ok(ssr) => {
-                        Ok(Proxy::new(ProxyType::SSR, Box::new(ssr)))
-                    }
-                    Err(e) => {
-                        Err(UnsupportedLinkError {
-                            message: format!("{}", e),
-                        })
-                    }
+                return match serde_json::from_str::<Ssr>(json) {
+                    Ok(ssr) => Ok(Proxy::new(ProxyType::SSR, Box::new(ssr))),
+                    Err(e) => Err(UnsupportedLinkError {
+                        message: format!("{}", e),
+                    }),
                 };
             } else if proxy_type.as_str().unwrap() == "vmess" {
                 return match serde_json::from_str::<Vmess>(json) {
-                    Ok(vmess) => {
-                        Ok(Proxy::new(ProxyType::Vmess, Box::new(vmess)))
-                    }
-                    Err(e) => {
-                        Err(UnsupportedLinkError {
-                            message: format!("{}", e),
-                        })
-                    }
+                    Ok(vmess) => Ok(Proxy::new(ProxyType::Vmess, Box::new(vmess))),
+                    Err(e) => Err(UnsupportedLinkError {
+                        message: format!("{}", e),
+                    }),
                 };
             } else if proxy_type.as_str().unwrap() == "vless" {
                 return match serde_json::from_str::<Vless>(json) {
-                    Ok(vless) => {
-                        Ok(Proxy::new(ProxyType::Vless, Box::new(vless)))
-                    }
-                    Err(e) => {
-                        Err(UnsupportedLinkError {
-                            message: format!("{}", e),
-                        })
-                    }
+                    Ok(vless) => Ok(Proxy::new(ProxyType::Vless, Box::new(vless))),
+                    Err(e) => Err(UnsupportedLinkError {
+                        message: format!("{}", e),
+                    }),
                 };
             } else if proxy_type.as_str().unwrap() == "trojan" {
                 return match serde_json::from_str::<Trojan>(json) {
-                    Ok(trojan) => {
-                        Ok(Proxy::new(ProxyType::Trojan, Box::new(trojan)))
-                    }
-                    Err(e) => {
-                        Err(UnsupportedLinkError {
-                            message: format!("{}", e),
-                        })
-                    }
+                    Ok(trojan) => Ok(Proxy::new(ProxyType::Trojan, Box::new(trojan))),
+                    Err(e) => Err(UnsupportedLinkError {
+                        message: format!("{}", e),
+                    }),
                 };
             } else if proxy_type.as_str().unwrap() == "hysteria2" {
                 return match serde_json::from_str::<Hysteria2>(json) {
-                    Ok(hysteria2) => {
-                        Ok(Proxy::new(ProxyType::Hysteria2, Box::new(hysteria2)))
-                    }
-                    Err(e) => {
-                        Err(UnsupportedLinkError {
-                            message: format!("{}", e),
-                        })
-                    }
+                    Ok(hysteria2) => Ok(Proxy::new(ProxyType::Hysteria2, Box::new(hysteria2))),
+                    Err(e) => Err(UnsupportedLinkError {
+                        message: format!("{}", e),
+                    }),
                 };
             }
         } else {
@@ -279,7 +266,7 @@ impl Clone for Proxy {
     fn clone(&self) -> Self {
         Proxy {
             proxy_type: self.proxy_type.clone(), // 确保 ProxyType 实现了 Clone
-            adapter: self.adapter.clone(), // 使用 adapter 的 clone_box 方法
+            adapter: self.adapter.clone(),       // 使用 adapter 的 clone_box 方法
         }
     }
 }
@@ -290,14 +277,11 @@ where
 {
     let value: Value = Deserialize::deserialize(deserializer)?;
     match value {
-        Value::Number(num) => {
-            num.as_u64()
-                .and_then(|n| u16::try_from(n).ok())
-                .ok_or_else(|| serde::de::Error::custom("Invalid u16 value"))
-        }
-        Value::String(s) => {
-            u16::from_str(&s).map_err(serde::de::Error::custom)
-        }
+        Value::Number(num) => num
+            .as_u64()
+            .and_then(|n| u16::try_from(n).ok())
+            .ok_or_else(|| serde::de::Error::custom("Invalid u16 value")),
+        Value::String(s) => u16::from_str(&s).map_err(serde::de::Error::custom),
         _ => Err(serde::de::Error::custom("Expected a string or number")),
     }
 }
@@ -321,19 +305,34 @@ mod test {
         assert_eq!(Proxy::from_link(ss_link).unwrap().proxy_type, ProxyType::SS);
 
         let ssr_link = "ssr://dmlwLmJhc2ljbm9kZS5ob3N0OjExODQ1OmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0Zjp0bHMxLjJfdGlja2V0X2F1dGg6Um1oaVpUQjYvP3JlbWFya3M9VUhKdkxlbW1tZWE0cnlCSVMwZmt1S2psaGFqb3A2UHBsSUhrdUtoQk1nPT0mb2Jmc3BhcmFtPU5tWTBNV0l5TkM1dGFXTnliM052Wm5RdVkyOXQmcHJvdG9wYXJhbT1NalE2VTNCWlZYUlFaVXBaYUZKck5FWlhRdz09".to_string();
-        assert_eq!(Proxy::from_link(ssr_link).unwrap().proxy_type, ProxyType::SSR);
+        assert_eq!(
+            Proxy::from_link(ssr_link).unwrap().proxy_type,
+            ProxyType::SSR
+        );
 
         let hysteria2_link = "hysteria2://bfbe4deb-07c8-450b-945e-e3c7676ba5ed@163.123.192.167:50000/?insecure=1&sni=www.microsoft.com&mport=50000-50080#%E5%89%A9%E4%BD%99%E6%B5%81%E9%87%8F%EF%BC%9A163.97%20GB".to_string();
-        assert_eq!(Proxy::from_link(hysteria2_link).unwrap().proxy_type, ProxyType::Hysteria2);
+        assert_eq!(
+            Proxy::from_link(hysteria2_link).unwrap().proxy_type,
+            ProxyType::Hysteria2
+        );
 
         let trojan_link = "trojan://4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.the-best-airport.com:443?type=tcp&sni=new.download.the-best-airport.com&allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF%2001%20%7C%20%E4%B8%93%E7%BA%BF%0D".to_string();
-        assert_eq!(Proxy::from_link(trojan_link).unwrap().proxy_type, ProxyType::Trojan);
+        assert_eq!(
+            Proxy::from_link(trojan_link).unwrap().proxy_type,
+            ProxyType::Trojan
+        );
 
         let vmess_link = "vmess://eyJ2IjoiMiIsInBzIjoiQHZwbnBvb2wiLCJhZGQiOiJrci5haWt1bmFwcC5jb20iLCJwb3J0IjoyMDAwNiwiaWQiOiIyMTM2ZGM2Yy01ZmQ0LTRiZmQtODhhMS0yYWVlYTk4ODhmOGIiLCJhaWQiOjAsInNjeSI6ImF1dG8iLCJuZXQiOiIiLCJ0bHMiOiIifQ==".to_string();
-        assert_eq!(Proxy::from_link(vmess_link).unwrap().proxy_type, ProxyType::Vmess);
+        assert_eq!(
+            Proxy::from_link(vmess_link).unwrap().proxy_type,
+            ProxyType::Vmess
+        );
 
         let vless_link = "vless://2cd6ed0f-636e-4e6c-9449-5a263d7a0fa5@192.9.165.253:20001?encryption=none&security=tls&sni=cfed.tgzdyz2.top&fp=random&type=ws&host=cfed.tgzdyz2.top&path=%2FTG%40ZDYZ2%3Fed%3D2560#TG%40ZDYZ2%20-%E6%BE%B3%E5%A4%A7%E5%88%A9%E4%BA%9A%F0%9F%87%A6%F0%9F%87%BA".to_string();
-        assert_eq!(Proxy::from_link(vless_link).unwrap().proxy_type, ProxyType::Vless);
+        assert_eq!(
+            Proxy::from_link(vless_link).unwrap().proxy_type,
+            ProxyType::Vless
+        );
     }
 
     #[test]
