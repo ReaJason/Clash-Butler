@@ -1,9 +1,9 @@
-use std::net::IpAddr;
-use std::time::Duration;
 use futures_util::future::{select_ok, BoxFuture};
 use futures_util::FutureExt;
 use reqwest::{Client, Error};
 use serde::{Deserialize, Serialize};
+use std::net::IpAddr;
+use std::time::Duration;
 use tracing::log::error;
 
 // IP 详情查询超时时间
@@ -97,8 +97,8 @@ pub struct IpApiDetail {
 
 #[cfg(test)]
 mod tests {
-    use std::str::FromStr;
     use super::*;
+    use std::str::FromStr;
 
     const PROXY_URL: &str = "http://127.0.0.1:7890";
 

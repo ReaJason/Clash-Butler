@@ -1,5 +1,5 @@
 #![allow(unused)]
-use axum::{Router, routing::get};
+use axum::{routing::get, Router};
 
 pub fn config_router() -> Router {
     Router::new()

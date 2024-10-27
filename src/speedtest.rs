@@ -1,8 +1,8 @@
-use reqwest;
-use std::time::{Instant, Duration};
 use futures_util::StreamExt;
+use reqwest;
 use reqwest::Proxy;
 use serde::{Deserialize, Serialize};
+use std::time::{Duration, Instant};
 
 #[derive(Debug, Serialize, Deserialize)]
 #[allow(unused)]

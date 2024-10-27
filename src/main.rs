@@ -1,14 +1,14 @@
+use clap::Parser;
 use std::collections::{HashMap, HashSet};
 use std::net::IpAddr;
 use std::path::Path;
 use std::{env, fs};
-use clap::Parser;
 use tracing::{error, info, Level};
 use tracing_subscriber::FmtSubscriber;
 
 use crate::clash::{ClashMeta, DelayTestConfig};
-use proxrs::protocol::Proxy;
 use crate::settings::Settings;
+use proxrs::protocol::Proxy;
 use proxrs::sub::SubManager;
 
 mod clash;
