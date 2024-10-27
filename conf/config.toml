@@ -6,6 +6,7 @@ fast_mode = false
 # 支持本地地址（绝对地址）/User/xxx/xx.yml
 # 支持单个订阅链接，ss://xxx
 subs = [
+    "https://sub.reajason.eu.org/clash.yaml"
 ]
 
 # 是否重命名节点，打开后会使用 geoip 等方式进行代理真实 IP 和地理地址查询
@@ -16,19 +17,15 @@ rename_pattern = "${COUNTRYCODE}_${CITY}_${ISP}"
 need_add_pool = false
 # 代理节点池
 pools = [
-    "https://rvps.duckking.shop:26720/s/clashMeta/764ed3a1a918ee05994ba37a1340ca29",
-#    "https://sub.tgzdyz2.xyz/sub",
-    "https://raw.githubusercontent.com/yebekhe/TVC/main/subscriptions/meta/mix",
-    "https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml",
-    "https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml",
-    "https://raw.githubusercontent.com/Misaka-blog/chromego_merge/main/sub/base64.txt",
-    "https://raw.githubusercontent.com/vxiaov/free_proxies/main/clash/clash.provider.yaml",
+    "https://sub.ss5.xyz/",
+    "https://igdux.top/~Clash",
+    #    "https://sub.tgzdyz2.xyz/sub",
+    "https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml"
 ]
-
 
 # 连通性测试
 [connect_test]
-url = "http://www.gstatic.com/generate_204"
+url = "http://www.google.com/generate_204"
 expected = 204
 timeout = 500
 
@@ -37,9 +34,3 @@ timeout = 500
 enabled = false
 url = "https://speed.cloudflare.com/__down?bytes=104857600"
 timeout = 3000
-
-# 网站测试配置
-[websites.google]
-url = "http://www.google.com/generate_204"
-expected = 204
-timeout = 500
