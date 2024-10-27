@@ -1,15 +1,21 @@
-use clap::Parser;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
+use std::collections::HashSet;
+use std::env;
+use std::fs;
 use std::net::IpAddr;
 use std::path::Path;
-use std::{env, fs};
-use tracing::{error, info, Level};
-use tracing_subscriber::FmtSubscriber;
 
-use crate::clash::{ClashMeta, DelayTestConfig};
-use crate::settings::Settings;
+use clap::Parser;
 use proxrs::protocol::Proxy;
 use proxrs::sub::SubManager;
+use tracing::error;
+use tracing::info;
+use tracing::Level;
+use tracing_subscriber::FmtSubscriber;
+
+use crate::clash::ClashMeta;
+use crate::clash::DelayTestConfig;
+use crate::settings::Settings;
 
 mod cgi_trace;
 mod clash;
@@ -202,7 +208,8 @@ async fn run(config: Settings) {
             let mut i = 0;
             while i < nodes.len() {
                 let node = &nodes[i];
-                // 如果当前节点名称与需要重命名的格式下划线个数一致，暂时认为就是已经格式化好的，因此跳过
+                // 如果当前节点名称与需要重命名的格式下划线个数一致，暂时认为就是已经格式化好的，
+                // 因此跳过
                 if node.matches('_').count() == count && !node.contains("github.com") {
                     info!("「{}」已符合重命名结构，跳过", node);
                     i += 1;

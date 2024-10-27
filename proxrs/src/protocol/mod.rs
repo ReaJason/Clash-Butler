@@ -5,20 +5,27 @@ mod trojan;
 mod vless;
 mod vmess;
 
+use std::any::Any;
+use std::collections::HashMap;
+use std::fmt;
+use std::fmt::Debug;
+use std::format;
+use std::hash::Hash;
+use std::hash::Hasher;
+use std::str::FromStr;
+
+use serde::Deserialize;
+use serde::Deserializer;
+use serde::Serialize;
+use serde_json::json;
+use serde_json::Value;
+
 use crate::protocol::hysteria2::Hysteria2;
 use crate::protocol::ss::SS;
 use crate::protocol::ssr::Ssr;
 use crate::protocol::trojan::Trojan;
 use crate::protocol::vless::Vless;
 use crate::protocol::vmess::Vmess;
-use serde::{Deserialize, Deserializer, Serialize};
-use serde_json::{json, Value};
-use std::any::Any;
-use std::collections::HashMap;
-use std::fmt::Debug;
-use std::hash::{Hash, Hasher};
-use std::str::FromStr;
-use std::{fmt, format};
 
 #[derive(Debug, PartialEq, Eq, Hash, Serialize, Deserialize, Ord, PartialOrd, Clone)]
 pub enum ProxyType {

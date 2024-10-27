@@ -1,6 +1,7 @@
 #![allow(dead_code)]
 
-use scraper::{Html, Selector};
+use scraper::Html;
+use scraper::Selector;
 use tracing::log;
 
 pub async fn is_clean_proxy(proxy_port: i64) -> (String, bool) {

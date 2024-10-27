@@ -1,10 +1,15 @@
-use crate::protocol::deserialize_u16_or_string;
-use crate::protocol::{ProxyAdapter, UnsupportedLinkError};
-use serde::{Deserialize, Serialize};
-use serde_json::Error;
 use std::any::Any;
 use std::collections::HashMap;
-use std::hash::{Hash, Hasher};
+use std::hash::Hash;
+use std::hash::Hasher;
+
+use serde::Deserialize;
+use serde::Serialize;
+use serde_json::Error;
+
+use crate::protocol::deserialize_u16_or_string;
+use crate::protocol::ProxyAdapter;
+use crate::protocol::UnsupportedLinkError;
 
 #[derive(Deserialize, Serialize, Debug, Eq, Clone)]
 pub struct Hysteria2 {
@@ -68,7 +73,9 @@ impl ProxyAdapter for Hysteria2 {
     where
         Self: Sized,
     {
-        // hysteria2://bfbe4deb-07c8-450b-945e-e3c7676ba5ed@163.123.192.167:50000/?insecure=1&sni=www.microsoft.com&mport=50000-50080#%E5%89%A9%E4%BD%99%E6%B5%81%E9%87%8F%EF%BC%9A163.97%20GB
+        // hysteria2://bfbe4deb-07c8-450b-945e-e3c7676ba5ed@163.123.192.167:50000/?insecure=1&
+        // sni=www.microsoft.com&mport=50000-50080#%E5%89%A9%E4%BD%99%E6%B5%81%E9%87%8F%EF%BC%9A163.
+        // 97%20GB
         let url = &link[12..];
         let parts = url.split("#").collect::<Vec<_>>();
         let mut name = "".to_string();
