@@ -1,5 +1,5 @@
 use crate::base64::base64decode;
-use crate::proxy::Proxy;
+use crate::protocol::Proxy;
 use regex::Regex;
 use reqwest::Client;
 use serde_yaml::{Mapping, Value};
@@ -11,7 +11,6 @@ use std::path::Path;
 use std::time::Duration;
 use std::{fs, io};
 use tokio::time::sleep;
-use tracing::{error, info};
 
 #[derive(Debug)]
 pub struct SubManager {}
@@ -28,24 +27,20 @@ impl SubManager {
             match Self::get_content_from_sub_url(&url).await {
                 Ok(file_path) => {
                     proxies = Self::parse_content(file_path).unwrap();
-                    info!("从 {} 地址中解析出节点个数：{}", &url, &proxies.len())
                 }
-                Err(e) => {
-                    error!(e)
+                Err(_) => {
+
                 }
             }
         } else {
             if Path::new(&url).is_file() {
                 proxies = Self::parse_from_path(&url).unwrap();
-                info!("从 {} 文件中解析出节点个数：{}", &url, &proxies.len())
             } else {
                 match Self::parse_content(url.to_string()) {
                     Ok(p) => {
                         proxies.extend(p);
-                        info!("从 {} base64 文本中解析出节点个数：{}", &url[..16], &proxies.len())
                     }
-                    Err(e) => {
-                        error!("{}", e)
+                    Err(_) => {
                     }
                 }
             }
@@ -92,7 +87,6 @@ impl SubManager {
                         //     }, |m| m.as_str().to_string());
 
                         // let file_path = PathBuf::from_iter(vec!["subs", &uuid.to_string()]);
-                        // info!("sub download success in {}", file_path.to_string_lossy());
                         // let mut file = File::create(&file_path).unwrap();
 
                         let content_result = resp.text().await;
@@ -163,8 +157,7 @@ impl SubManager {
                             Ok(proxies) => {
                                 conf_proxies = proxies;
                             }
-                            Err(e) => {
-                                error!("{}", e);
+                            Err(_) => {
                             }
                         }
                     }
