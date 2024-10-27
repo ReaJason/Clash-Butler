@@ -37,9 +37,7 @@ pub struct Vless {
 
 impl PartialEq for Vless {
     fn eq(&self, other: &Self) -> bool {
-        self.server == other.server
-            && self.port == other.port
-            && self.uuid == other.uuid
+        self.server == other.server && self.port == other.port && self.uuid == other.uuid
     }
 }
 
@@ -95,12 +93,12 @@ impl ProxyAdapter for Vless {
             if let Some(host) = params_map.get("host") {
                 headers.insert(String::from("host"), host.to_string());
             }
-            ws_opts = Some(
-                WSOptions {
-                    path: params_map.get("path").map(|s| urlencoding::decode(s).unwrap().to_string()),
-                    headers: Some(headers),
-                }
-            )
+            ws_opts = Some(WSOptions {
+                path: params_map
+                    .get("path")
+                    .map(|s| urlencoding::decode(s).unwrap().to_string()),
+                headers: Some(headers),
+            })
         }
 
         let url = parts[0];
@@ -156,7 +154,6 @@ impl ProxyAdapter for Vless {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -175,10 +172,13 @@ mod test {
         assert_eq!(vless.network, Some("ws".to_string()));
         let mut headers = HashMap::new();
         headers.insert("host".to_string(), "cfed.tgzdyz2.top".to_string());
-        assert_eq!(vless.ws_opts, Some(WSOptions {
-            path: Some("/TG@ZDYZ2?ed=2560".to_string()),
-            headers: Some(headers),
-        }));
+        assert_eq!(
+            vless.ws_opts,
+            Some(WSOptions {
+                path: Some("/TG@ZDYZ2?ed=2560".to_string()),
+                headers: Some(headers),
+            })
+        );
         assert_eq!(vless.fingerprint, Some("random".to_string()));
         println!("{}", vless.to_json().unwrap());
 
@@ -211,11 +211,13 @@ mod test {
         assert_eq!(vless.flow, Some("xtls-rprx-vision".to_string()));
         assert_eq!(vless.network, Some("tcp".to_string()));
         assert_eq!(vless.uuid, "bfbe4deb-07c8-450b-945e-e3c7676ba5ed");
-        assert_eq!(vless.servername, Some("djdownloadkr1.xn--4gq62f52gopi49k.com".to_string()));
+        assert_eq!(
+            vless.servername,
+            Some("djdownloadkr1.xn--4gq62f52gopi49k.com".to_string())
+        );
         assert_eq!(vless.fingerprint, Some("safari".to_string()));
         println!("{}", vless.to_json().unwrap());
     }
-
 
     // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=qq#%E5%89%A9%E4%BD%99%E6%B5%81%E9%87%8F%EF%BC%9A510.48+GB
     // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&servername=python.org&spx=%2F&fp=safari#%E8%B7%9D%E7%A6%BB%E4%B8%8B%E6%AC%A1%E9%87%8D%E7%BD%AE%E5%89%A9%E4%BD%99%EF%BC%9A29+%E5%A4%A9

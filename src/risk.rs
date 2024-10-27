@@ -11,7 +11,6 @@ async fn is_clean_ip() -> (String, bool) {
     is_clean(None).await
 }
 
-
 async fn is_clean(proxy_port: Option<i64>) -> (String, bool) {
     let client;
     if let Some(port) = proxy_port {
@@ -29,9 +28,15 @@ async fn is_clean(proxy_port: Option<i64>) -> (String, bool) {
     let html = Html::parse_document(&body);
     log::debug!("{:?}", html);
     let ip_selector = Selector::parse(r#"#lisfw > div > div:nth-child(2) > h3 > span"#).unwrap();
-    let vpn_selector = Selector::parse(r#"#lisfw > div > div:nth-last-child(2) > h3 > span"#).unwrap();
+    let vpn_selector =
+        Selector::parse(r#"#lisfw > div > div:nth-last-child(2) > h3 > span"#).unwrap();
     let ip = html.select(&ip_selector).next().unwrap().inner_html();
-    let is_clean = html.select(&vpn_selector).next().unwrap().inner_html().contains("Clean IP");
+    let is_clean = html
+        .select(&vpn_selector)
+        .next()
+        .unwrap()
+        .inner_html()
+        .contains("Clean IP");
 
     if is_clean {
         log::info!("{ip} is a clean ip");

@@ -1,5 +1,4 @@
 use futures_util::StreamExt;
-use reqwest;
 use reqwest::Proxy;
 use serde::{Deserialize, Serialize};
 use std::time::{Duration, Instant};
@@ -13,9 +12,12 @@ pub struct SpeedTestConfig {
 }
 
 #[allow(dead_code)]
-async fn test_download(url: &str, timeout: Duration, proxy_url: Option<&str>) -> Result<(Duration, f64, Duration), reqwest::Error> {
-    let client_builder = reqwest::Client::builder()
-        .timeout(timeout);
+async fn test_download(
+    url: &str,
+    timeout: Duration,
+    proxy_url: Option<&str>,
+) -> Result<(Duration, f64, Duration), reqwest::Error> {
+    let client_builder = reqwest::Client::builder().timeout(timeout);
 
     let client = if let Some(proxy) = proxy_url {
         client_builder.proxy(Proxy::all(proxy)?).build()?
@@ -40,7 +42,7 @@ async fn test_download(url: &str, timeout: Duration, proxy_url: Option<&str>) ->
         total_bytes += chunk?.len();
     }
     let total_duration = start.elapsed();
-    let bandwidth = (total_bytes as f64 / 1024.0) / total_duration.as_secs_f64();  // KB per second
+    let bandwidth = (total_bytes as f64 / 1024.0) / total_duration.as_secs_f64(); // KB per second
     Ok((total_duration, bandwidth, first_byte_time))
 }
 
@@ -50,10 +52,16 @@ mod test {
 
     #[tokio::test]
     async fn test_download() {
-        let url = "https://speed.cloudflare.com/__down?bytes=1024";  // 100MB download
-        match crate::speedtest::test_download(url, Duration::from_secs(10), Some("http://127.0.0.1:7890")).await {
+        let url = "https://speed.cloudflare.com/__down?bytes=1024"; // 100MB download
+        match crate::speedtest::test_download(
+            url,
+            Duration::from_secs(10),
+            Some("http://127.0.0.1:7890"),
+        )
+        .await
+        {
             Ok(result) => println!("{:?}", result),
-            Err(e) => eprintln!("{:?}", e)
+            Err(e) => eprintln!("{:?}", e),
         }
     }
 }

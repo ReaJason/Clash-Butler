@@ -23,9 +23,9 @@ pub struct SS {
 
 impl PartialEq for SS {
     fn eq(&self, other: &Self) -> bool {
-        self.server == self.server
-            && self.port == other.port
-            && self.password == other.password
+        self.server.eq(&other.server)
+            && self.port.eq(&other.port)
+            && self.password.eq(&other.password)
     }
 }
 
@@ -56,12 +56,24 @@ impl ProxyAdapter for SS {
                         let v = key.clone() + "=" + value;
                         urlencoding::encode(&v).into_owned()
                     })
-                    .collect::<Vec<_>>().join(";");
+                    .collect::<Vec<_>>()
+                    .join(";");
                 plugin.push_str(&str);
             }
-            format!("ss://{}@{}?{}#{}", cipher_pwd, server_port, plugin, urlencoding::encode(&self.name))
+            format!(
+                "ss://{}@{}?{}#{}",
+                cipher_pwd,
+                server_port,
+                plugin,
+                urlencoding::encode(&self.name)
+            )
         } else {
-            format!("ss://{}@{}#{}", cipher_pwd, server_port, urlencoding::encode(&self.name))
+            format!(
+                "ss://{}@{}#{}",
+                cipher_pwd,
+                server_port,
+                urlencoding::encode(&self.name)
+            )
         }
     }
 
@@ -71,7 +83,10 @@ impl ProxyAdapter for SS {
         let mut name = String::from("");
         let parts: Vec<&str> = url.split("#").collect();
         if parts.len() > 1 {
-            name = urlencoding::decode(parts[1]).unwrap_or_default().trim().to_string();
+            name = urlencoding::decode(parts[1])
+                .unwrap_or_default()
+                .trim()
+                .to_string();
         }
 
         // parse plugin
@@ -95,7 +110,10 @@ impl ProxyAdapter for SS {
                 if plugin_params.len() > 1 {
                     let mut map: HashMap<String, String> = HashMap::new();
                     plugin_params[1..].iter().for_each(|param| {
-                        let value = urlencoding::decode(param).unwrap_or_default().trim().to_string();
+                        let value = urlencoding::decode(param)
+                            .unwrap_or_default()
+                            .trim()
+                            .to_string();
                         let kvs = value.split("=").collect::<Vec<_>>();
                         if kvs.len() == 2 {
                             map.insert(kvs[0].to_string(), kvs[1].to_string());
@@ -174,7 +192,9 @@ mod test {
 
     #[test]
     fn test_parse_base64_ss() {
-        let link = String::from("ss://YWVzLTI1Ni1nY206UTFHVVo3VkRQWk9BU0M5SEAxMjAuMjQxLjQ1LjUwOjE3MDAxI1VTLTAx");
+        let link = String::from(
+            "ss://YWVzLTI1Ni1nY206UTFHVVo3VkRQWk9BU0M5SEAxMjAuMjQxLjQ1LjUwOjE3MDAxI1VTLTAx",
+        );
         let result = SS::from_link(link.clone()).unwrap();
         assert_eq!("Q1GUZ7VDPZOASC9H", result.password);
         assert_eq!("aes-256-gcm", result.cipher);
@@ -199,7 +219,10 @@ mod test {
         assert_eq!(ss1.plugin, Some("obfs-local".to_string()));
         let mut map = HashMap::new();
         map.insert("obfs".to_string(), "http".to_string());
-        map.insert("obfs-host".to_string(), "89c19109670.microsoft.com".to_string());
+        map.insert(
+            "obfs-host".to_string(),
+            "89c19109670.microsoft.com".to_string(),
+        );
         assert_eq!(ss1.plugin_opts, Some(map));
 
         let b_link = ss1.to_link();
@@ -211,7 +234,10 @@ mod test {
         assert_eq!(ss2.plugin, Some("obfs-local".to_string()));
         let mut map = HashMap::new();
         map.insert("obfs".to_string(), "http".to_string());
-        map.insert("obfs-host".to_string(), "89c19109670.microsoft.com".to_string());
+        map.insert(
+            "obfs-host".to_string(),
+            "89c19109670.microsoft.com".to_string(),
+        );
         assert_eq!(ss2.plugin_opts, Some(map));
     }
 }

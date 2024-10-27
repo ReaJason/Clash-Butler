@@ -27,7 +27,6 @@ impl PartialEq for Trojan {
     }
 }
 
-
 impl ProxyAdapter for Trojan {
     fn get_name(&self) -> &str {
         &self.name
@@ -77,7 +76,6 @@ impl ProxyAdapter for Trojan {
             skip_cert_verify = params_map.get("allowInsecure").map(|value| value == "1");
         }
 
-
         let url = parts[0];
         // 4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.the-best-airport.com:443
         let parts: Vec<&str> = url.split("@").collect();
@@ -121,7 +119,6 @@ impl ProxyAdapter for Trojan {
     }
 }
 
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -130,10 +127,16 @@ mod test {
     fn test_parse_trojan() {
         let link = String::from("trojan://4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.the-best-airport.com:443?type=tcp&sni=new.download.the-best-airport.com&allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF%2001%20%7C%20%E4%B8%93%E7%BA%BF%0D");
         let trojan = Trojan::from_link(link).unwrap();
-        assert_eq!(trojan.server, "hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.the-best-airport.com");
+        assert_eq!(
+            trojan.server,
+            "hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.the-best-airport.com"
+        );
         assert_eq!(trojan.port, 443);
         assert_eq!(trojan.password, "4fee57cc-ee15-4800-888f-3493f7b261f2");
-        assert_eq!(trojan.sni, Some("new.download.the-best-airport.com".to_string()));
+        assert_eq!(
+            trojan.sni,
+            Some("new.download.the-best-airport.com".to_string())
+        );
         assert_eq!(trojan.skip_cert_verify, Some(true));
         assert_eq!(trojan.network, Some("tcp".to_string()));
         println!("{:?}", trojan.to_json());

@@ -1,5 +1,5 @@
-pub mod protocol;
 pub mod base64;
+pub mod protocol;
 pub mod sub;
 
 pub fn add(left: u64, right: u64) -> u64 {
