@@ -208,9 +208,11 @@ async fn run(config: Settings) {
             let mut i = 0;
             while i < nodes.len() {
                 let node = &nodes[i];
-                // 如果当前节点名称与需要重命名的格式下划线个数一致，暂时认为就是已经格式化好的，
-                // 因此跳过
-                if node.matches('_').count() == count && !node.contains("github.com") {
+                // 如果当前节点名称与需要重命名的格式下划线个数一致，暂时认为就是已经格式化好的
+                if node.matches('_').count() == count
+                    && !node.contains("github.com")
+                    && !node.contains("WangCai")
+                {
                     info!("「{}」已符合重命名结构，跳过", node);
                     i += 1;
                     continue;

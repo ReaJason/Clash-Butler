@@ -124,7 +124,7 @@ impl ProxyAdapter for Vless {
         };
 
         if name.is_empty() {
-            name = server.clone().to_owned() + port.to_string().as_str();
+            name = server.to_owned() + port.to_string().as_str();
         }
 
         Ok(Vless {

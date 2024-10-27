@@ -407,7 +407,9 @@ mod test {
     #[tokio::test]
     async fn test_merge_config() {
         let urls = vec![
-            "https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml".to_string()];
+            "https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml"
+                .to_string(),
+        ];
         let proxies = SubManager::get_proxies_from_urls(&urls).await;
         let release_clash_template_path =
             "/Users/reajason/RustroverProjects/clash-butler/conf/clash_release.yaml".to_string();
