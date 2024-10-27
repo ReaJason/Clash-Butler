@@ -55,13 +55,7 @@ impl ProxyAdapter for Ssr {
     where
         Self: Sized,
     {
-        // ssr://dmlwLmJhc2ljbm9kZS5ob3N0OjExODQ1OmF1dGhfYWVzMTI4X3NoYTE6Y2hhY2hhMjAtaWV0Zjp0bHMxLjJfdGlja2V0X2F1dGg6Um1oaVpUQjYvP3JlbWFya3M9VUhKdkxlbW1tZWE0cnlCSVMwZmt1S2psaGFqb3A2UHBsSUhrdUtoQk1nPT0mb2Jmc3BhcmFtPU5tWTBNV0l5TkM1dGFXTnliM052Wm5RdVkyOXQmcHJvdG9wYXJhbT1NalE2VTNCWlZYUlFaVXBaYUZKck5FWlhRdz09
-        let url: &str = &link[6..];
-
-        // vip.basicnode.host:11845:auth_aes128_sha1:chacha20-ietf:tls1.2_ticket_auth:RmhiZTB6/?
-        // remarks=UHJvLemmmea4ryBIS0fkuKjlhajop6PplIHkuKhBMg==&
-        // obfsparam=NmY0MWIyNC5taWNyb3NvZnQuY29t&protoparam=MjQ6U3BZVXRQZUpZaFJrNEZXQw==
-        let url = base64decode(url);
+        let url = base64decode(&link[6..]);
         let parts: Vec<&str> = url.split("/?").collect();
 
         let params = parts[1];
@@ -72,8 +66,7 @@ impl ProxyAdapter for Ssr {
                 params_map.insert(key, value);
             }
         }
-        // vip.basicnode.host:11845:auth_aes128_sha1:chacha20-ietf:tls1.2_ticket_auth:RmhiZTB6
-        // &server, &port, &protocol, &method, &obfs, &password
+
         let url = parts[0];
         let values: Vec<&str> = url.split(":").collect();
         let server = String::from(values[0]);
