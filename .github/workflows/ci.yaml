@@ -27,6 +27,7 @@ jobs:
       - run: cargo +nightly clippy
       - run: cargo +nightly fmt
   build:
+    name: Build
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
