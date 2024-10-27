@@ -15,7 +15,7 @@ pub struct Hysteria2 {
     pub port: u16,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ports: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none", rename = "hop-interval")]
     pub hop_interval: Option<u16>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub up: Option<String>,
