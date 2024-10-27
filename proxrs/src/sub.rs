@@ -407,13 +407,12 @@ mod test {
     #[tokio::test]
     async fn test_merge_config() {
         let urls = vec![
-            "https://paste.gg/p/anonymous/0531f293e5c34a949dc4ca1a2f3eea18/files/9733a0df99cf47fab1ee33575032ba39/raw".to_string(),
-            "https://paste.gg/p/anonymous/8701805e1f36400f9741ce1491b8e648/files/3ce16ab390d649b486fb0a0be9964535/raw".to_string()];
+            "https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml".to_string()];
         let proxies = SubManager::get_proxies_from_urls(&urls).await;
         let release_clash_template_path =
             "/Users/reajason/RustroverProjects/clash-butler/conf/clash_release.yaml".to_string();
         let save_path =
-            "/Users/reajason/RustroverProjects/clash-butler/subs/release/merge.yaml".to_string();
+            "/Users/reajason/RustroverProjects/clash-butler/subs/release/proxy.yaml".to_string();
         SubManager::save_proxies_into_clash_file(&proxies, release_clash_template_path, save_path);
     }
 }

@@ -112,18 +112,25 @@ impl ProxyAdapter for Vless {
         let url = parts[0];
         let parts: Vec<&str> = url.split("@").collect();
         let uuid = String::from(parts[0]);
-        let parts: Vec<&str> = parts[1].split(":").collect();
-        let server = String::from(parts[0]);
-        let port = parts[1].parse::<u16>().unwrap();
+
+        let addr = parts[1];
+        let (server, port) = if addr.starts_with('[') {
+            // IPv6 format: [2001:bc8:1d90:d4e::]:9999
+            let (ip, port) = addr.rsplit_once(':').unwrap_or((addr, ""));
+            (ip.trim_matches('[').trim_matches(']'), port)
+        } else {
+            // IPv4 format: 146.56.43.3:443
+            addr.split_once(':').unwrap_or((addr, ""))
+        };
 
         if name.is_empty() {
-            name = server.clone() + port.to_string().as_str();
+            name = server.clone().to_owned() + port.to_string().as_str();
         }
 
         Ok(Vless {
             name,
-            server,
-            port,
+            server: server.to_owned(),
+            port: port.parse::<u16>().unwrap(),
             uuid,
             flow,
             udp: Some(true),
@@ -228,6 +235,13 @@ mod test {
         );
         assert_eq!(vless.fingerprint, Some("safari".to_string()));
         println!("{}", vless.to_json().unwrap());
+    }
+
+    #[test]
+    fn test_parse_vless2() {
+        let link = String::from("vless://eb3b564b-4b6e-4733-8d03-c6130b858562@[2001:bc8:1d90:d4e::]:9999?encryption=none&security=reality&sni=swdist.apple.com&fp=chrome&pbk=UK7qxWWGfRQcQfwaGpHnqmmqqJBut4jxve8AeDDJ2UI&sid=aaa666&type=grpc&authority=&serviceName=applestore&mode=gun#%E6%B3%A2%E5%85%B0v6");
+        let vless = Vless::from_link(link).unwrap();
+        assert_eq!("2001:bc8:1d90:d4e::", vless.server);
     }
 
     // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&
