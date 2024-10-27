@@ -1,4 +1,4 @@
-use crate::protocol::deserialize_u16_or_string;
+use crate::protocol::{deserialize_u16_or_string, GrpcOptions};
 use crate::protocol::{ProxyAdapter, UnsupportedLinkError, WSOptions};
 use serde::{Deserialize, Serialize};
 use serde_json::Error;
@@ -31,6 +31,8 @@ pub struct Vmess {
     skip_cert_verify: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "ws-opts")]
     ws_opts: Option<WSOptions>,
+    #[serde(skip_serializing_if = "Option::is_none", rename = "grpc-opts")]
+    grpc_opts: Option<GrpcOptions>,
 }
 
 impl PartialEq for Vmess {
@@ -146,8 +148,20 @@ impl ProxyAdapter for Vmess {
                 });
             }
 
+            let mut grpc_opts = None;
+
+            // parse grpc sni
+            if network.as_deref().is_some_and(|s| s == "grpc") {
+                let sni = parsed["sni"].as_str().map(|s| s.to_string());
+                grpc_opts = Some(
+                    GrpcOptions {
+                        grpc_service_name: sni
+                    }
+                )
+            }
+
             if let Some(net) = network.as_deref() {
-                if net == "quic" || net == "http" || net == "grpc" {
+                if net == "quic" || net == "http" {
                     return Err(UnsupportedLinkError {
                         message: format!("vmess not suitable for network type {}", net),
                     });
@@ -175,6 +189,7 @@ impl ProxyAdapter for Vmess {
                 network,
                 skip_cert_verify: Some(true),
                 ws_opts,
+                grpc_opts,
             })
         } else {
             Err(UnsupportedLinkError {
@@ -213,15 +228,6 @@ mod test {
 
     #[test]
     fn test_parse_vmess() {
-        let link = String::from("vmess://eyJ2IjoiMiIsInBzIjoiXHU1MmEwXHU2MmZmXHU1OTI3IDAzIFx1OWFkOFx1OTAxZlx1ZmYwODAuMVx1NTAwZFx1NmQ0MVx1OTFjZlx1NmQ4OFx1ODAxN1x1ZmYwOSIsImFkZCI6ImNkbmNkbmNkbmNkbi43ODQ2NTQueHl6IiwicG9ydCI6IjIwNTIiLCJpZCI6IjNlYTU3OGM2LTFlYWEtNGUxNS1iZmUxLTlmNzU3YjU4ZThmMiIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6ImNhLWNmY2RuLmFpa3VuYXBwLmNvbSIsInBhdGgiOiJcL2luZGV4P2VkPTIwNDgiLCJ0bHMiOiIifQ==");
-        let vmess = Vmess::from_link(link).unwrap();
-        assert_eq!(vmess.server, "cdncdncdncdn.784654.xyz");
-        assert_eq!(vmess.port, 2052);
-        assert_eq!(vmess.uuid, "3ea578c6-1eaa-4e15-bfe1-9f757b58e8f2");
-        assert_eq!(vmess.alter_id, 0);
-        assert_eq!(vmess.network, Some("ws".to_string()));
-        assert!(vmess.ws_opts.is_some());
-
         let link = String::from("vmess://eyJ2IjoiMiIsInBzIjoiQHZwbnBvb2wiLCJhZGQiOiJrci5haWt1bmFwcC5jb20iLCJwb3J0IjoyMDAwNiwiaWQiOiIyMTM2ZGM2Yy01ZmQ0LTRiZmQtODhhMS0yYWVlYTk4ODhmOGIiLCJhaWQiOjAsInNjeSI6ImF1dG8iLCJuZXQiOiIiLCJ0bHMiOiIifQ==");
         let vmess = Vmess::from_link(link).unwrap();
         assert_eq!(vmess.server, "kr.aikunapp.com");
@@ -232,11 +238,23 @@ mod test {
         assert!(vmess.ws_opts.is_none());
     }
 
-    // #[test]
-    // fn test_parse_vmess(){
-        //vmess://eyJ2IjoiMiIsInBzIjoiXHU5MDgwXHU4YmY3XHU2NWIwXHU3NTI4XHU2MjM3NjAlXHU4ZmQ0XHU1MjI5IiwiYWRkIjoiZGVmYXVsdC42NTNlYmVlYi01ZjYwLTRiZTUtOTU4ZC03YmY0ODM5Y2RjY2QuZWY2NjE2ZmQtNWIwNi00ODJmLTlkNjQtMTgzNzQ1NjU5Y2JmLmJ5dGVwcml2YXRlbGluay5jb20iLCJwb3J0IjoiNDQzIiwiaWQiOiJhNDQzMDZkNS0zMzQzLTQ0MDUtYTA4Yy0yZDU0NmE1N2QzYjgiLCJhaWQiOiIwIiwibmV0IjoiZ3JwYyIsInR5cGUiOiJub25lIiwiaG9zdCI6IiIsInBhdGgiOiIxMjMwNiIsInRscyI6InRscyIsInNuaSI6ImNkbjEuMTAzOTIub25saW5lIn0=
-        // vmess://eyJ2IjoiMiIsInBzIjoiXHU0ZTAwXHU1MTQzLmNvbSIsImFkZCI6IjEwNC4yNi40LjkzIiwicG9ydCI6IjQ0MyIsImlkIjoiYTQ0MzA2ZDUtMzM0My00NDA1LWEwOGMtMmQ1NDZhNTdkM2I4IiwiYWlkIjoiMCIsIm5ldCI6ImdycGMiLCJ0eXBlIjoibm9uZSIsImhvc3QiOiIiLCJwYXRoIjoiMTIzMDYiLCJ0bHMiOiJ0bHMiLCJzbmkiOiJjZG4yLjEwMzkyLm9ubGluZSJ9
-        // vmess://eyJ2IjoiMiIsInBzIjoieWl5dWFuamljaGFuZy5jb20iLCJhZGQiOiIxMDQuMjYuNS45MyIsInBvcnQiOiI0NDMiLCJpZCI6ImE0NDMwNmQ1LTMzNDMtNDQwNS1hMDhjLTJkNTQ2YTU3ZDNiOCIsImFpZCI6IjAiLCJuZXQiOiJncnBjIiwidHlwZSI6Im5vbmUiLCJob3N0IjoiIiwicGF0aCI6IjEyMzA2IiwidGxzIjoidGxzIiwic25pIjoiY2RuMi4xMDM5Mi5vbmxpbmUifQ==
-        // vmess://eyJ2IjoiMiIsInBzIjoiXHU5OTk5XHU2ZTJmIDAxIHwgXHU0ZTEzXHU3ZWJmIiwiYWRkIjoiaGswMS42NTNlYmVlYi01ZjYwLTRiZTUtOTU4ZC03YmY0ODM5Y2RjY2QuZWY2NjE2ZmQtNWIwNi00ODJmLTlkNjQtMTgzNzQ1NjU5Y2JmLmJ5dGVwcml2YXRlbGluay5jb20iLCJwb3J0IjoiNDQzIiwiaWQiOiJhNDQzMDZkNS0zMzQzLTQ0MDUtYTA4Yy0yZDU0NmE1N2QzYjgiLCJhaWQiOiIwIiwibmV0IjoiZ3JwYyIsInR5cGUiOiJub25lIiwiaG9zdCI6IiIsInBhdGgiOiIxMjMwNiIsInRscyI6InRscyIsInNuaSI6Ind3dy4xMjMwNi5jbiJ9
-    // }
+    #[test]
+    fn test_parse_ws_vmess() {
+        let link = String::from("vmess://eyJ2IjoiMiIsInBzIjoiXHU1MmEwXHU2MmZmXHU1OTI3IDAzIFx1OWFkOFx1OTAxZlx1ZmYwODAuMVx1NTAwZFx1NmQ0MVx1OTFjZlx1NmQ4OFx1ODAxN1x1ZmYwOSIsImFkZCI6ImNkbmNkbmNkbmNkbi43ODQ2NTQueHl6IiwicG9ydCI6IjIwNTIiLCJpZCI6IjNlYTU3OGM2LTFlYWEtNGUxNS1iZmUxLTlmNzU3YjU4ZThmMiIsImFpZCI6IjAiLCJuZXQiOiJ3cyIsInR5cGUiOiJub25lIiwiaG9zdCI6ImNhLWNmY2RuLmFpa3VuYXBwLmNvbSIsInBhdGgiOiJcL2luZGV4P2VkPTIwNDgiLCJ0bHMiOiIifQ==");
+        let vmess = Vmess::from_link(link).unwrap();
+        assert_eq!(vmess.server, "cdncdncdncdn.784654.xyz");
+        assert_eq!(vmess.port, 2052);
+        assert_eq!(vmess.uuid, "3ea578c6-1eaa-4e15-bfe1-9f757b58e8f2");
+        assert_eq!(vmess.alter_id, 0);
+        assert_eq!(vmess.network, Some("ws".to_string()));
+        assert!(vmess.ws_opts.is_some());
+    }
+
+    #[test]
+    fn test_parse_grpc_vmess() {
+        let link = String::from("vmess://eyJ2IjoiMiIsInBzIjoiXHU5MDgwXHU4YmY3XHU2NWIwXHU3NTI4XHU2MjM3NjAlXHU4ZmQ0XHU1MjI5IiwiYWRkIjoiZGVmYXVsdC42NTNlYmVlYi01ZjYwLTRiZTUtOTU4ZC03YmY0ODM5Y2RjY2QuZWY2NjE2ZmQtNWIwNi00ODJmLTlkNjQtMTgzNzQ1NjU5Y2JmLmJ5dGVwcml2YXRlbGluay5jb20iLCJwb3J0IjoiNDQzIiwiaWQiOiJhNDQzMDZkNS0zMzQzLTQ0MDUtYTA4Yy0yZDU0NmE1N2QzYjgiLCJhaWQiOiIwIiwibmV0IjoiZ3JwYyIsInR5cGUiOiJub25lIiwiaG9zdCI6IiIsInBhdGgiOiIxMjMwNiIsInRscyI6InRscyIsInNuaSI6ImNkbjEuMTAzOTIub25saW5lIn0=");
+        let vmess = Vmess::from_link(link).unwrap();
+        assert_eq!(Some("grpc".to_string()), vmess.network);
+        assert_eq!(Some(GrpcOptions { grpc_service_name: Some("cdn1.10392.online".to_string()) }), vmess.grpc_opts);
+    }
 }
