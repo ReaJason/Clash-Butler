@@ -24,7 +24,8 @@ jobs:
         with:
           components: rustfmt,clippy
       - uses: Swatinem/rust-cache@v2
-      - run: cargo +nightly x lint
+      - run: cargo +nightly clippy
+      - run: cargo +nightly fmt
   build:
     runs-on: ubuntu-22.04
     steps:

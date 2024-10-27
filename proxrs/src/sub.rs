@@ -128,9 +128,7 @@ impl SubManager {
         file_path: P,
     ) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
         match fs::read_to_string(file_path) {
-            Ok(contents) => {
-                Ok(Self::parse_content(contents)?)
-            }
+            Ok(contents) => Ok(Self::parse_content(contents)?),
             Err(e) => Err(format!("Error reading file: {}", e).into()),
         }
     }
