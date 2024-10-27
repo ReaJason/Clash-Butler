@@ -1,4 +1,4 @@
-use crate::protocol::{deserialize_u16_or_string, GrpcOptions};
+use crate::protocol::{deserialize_u16_or_string, GrpcOptions, RealtyOptions};
 use crate::protocol::{ProxyAdapter, UnsupportedLinkError, WSOptions};
 use serde::{Deserialize, Serialize};
 use serde_json::Error;
@@ -18,6 +18,8 @@ pub struct Vmess {
     alter_id: u16,
     cipher: String,
     #[serde(skip_serializing_if = "Option::is_none")]
+    alpn: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tls: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     udp: Option<bool>,
@@ -33,6 +35,8 @@ pub struct Vmess {
     ws_opts: Option<WSOptions>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "grpc-opts")]
     grpc_opts: Option<GrpcOptions>,
+    #[serde(skip_serializing_if = "Option::is_none", rename = "reality-opts")]
+    realty_opts: Option<RealtyOptions>,
 }
 
 impl PartialEq for Vmess {
@@ -60,6 +64,8 @@ pub struct VmessProtocol {
     pub path: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tls: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub alpn: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sni: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -94,6 +100,12 @@ impl ProxyAdapter for Vmess {
             }
         }
 
+        let mut alpn = None;
+
+        if self.alpn.is_some() {
+            alpn = Some(self.alpn.clone().unwrap().join(","))
+        }
+
         let vmess = VmessProtocol {
             v: "2".to_string(),
             ps: self.name.clone(),
@@ -103,6 +115,7 @@ impl ProxyAdapter for Vmess {
             aid: self.alter_id,
             scy: self.cipher.clone(),
             net: self.network.clone(),
+            alpn,
             host,
             path,
             tls: self.tls,
@@ -131,6 +144,11 @@ impl ProxyAdapter for Vmess {
                 || parsed["port"].as_u64().unwrap() as u16,
                 |s| s.parse::<u16>().unwrap(),
             );
+
+            let mut alpn = None;
+            if let Some(p) = parsed["alpn"].as_str() {
+                alpn = Some(p.split(",").map(|s| s.to_string()).collect());
+            }
 
             let mut network = parsed["net"].as_str().map(|s| s.to_string());
             let mut ws_opts = None;
@@ -184,12 +202,14 @@ impl ProxyAdapter for Vmess {
                 cipher: "auto".to_string(),
                 tls,
                 udp,
+                alpn,
                 servername,
                 fingerprint: Some(String::from("chrome")),
                 network,
                 skip_cert_verify: Some(true),
                 ws_opts,
                 grpc_opts,
+                realty_opts: None,
             })
         } else {
             Err(UnsupportedLinkError {
