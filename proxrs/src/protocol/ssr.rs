@@ -1,3 +1,4 @@
+use crate::base64::base64decode;
 use crate::protocol::deserialize_u16_or_string;
 use crate::protocol::{ProxyAdapter, UnsupportedLinkError};
 use serde::{Deserialize, Serialize};
@@ -5,7 +6,6 @@ use serde_json::Error;
 use std::any::Any;
 use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
-use crate::base64::base64decode;
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct SSR {
@@ -56,17 +56,14 @@ impl ProxyAdapter for SSR {
         let url: &str = &link[6..];
 
         // vip.basicnode.host:11845:auth_aes128_sha1:chacha20-ietf:tls1.2_ticket_auth:RmhiZTB6/?remarks=UHJvLemmmea4ryBIS0fkuKjlhajop6PplIHkuKhBMg==&obfsparam=NmY0MWIyNC5taWNyb3NvZnQuY29t&protoparam=MjQ6U3BZVXRQZUpZaFJrNEZXQw==
-        let url = base64decode(url).unwrap();
+        let url = base64decode(url);
         let parts: Vec<&str> = url.split("/?").collect();
 
         let params = parts[1];
         let mut params_map: HashMap<&str, String> = HashMap::new();
         for param in params.split("&") {
             if let Some((key, value)) = param.split_once('=') {
-                let mut value = value.parse::<String>().unwrap();
-                if let Ok(d) = base64decode(&value) {
-                    value = d;
-                }
+                let value = base64decode(&value.parse::<String>().unwrap());
                 params_map.insert(key, value);
             }
         }
@@ -79,10 +76,7 @@ impl ProxyAdapter for SSR {
         let protocol = String::from(values[2]);
         let cipher = String::from(values[3]);
         let obfs = String::from(values[4]);
-        let mut password = String::from("");
-        if let Ok(pwd) = base64decode(values[5]) {
-            password = pwd;
-        }
+        let password = base64decode(values[5]);
 
         let mut name = String::from("");
         if let Some(result) = params_map.get("remarks") {
