@@ -1,3 +1,4 @@
+use crate::base64::{base64decode, base64encode};
 use crate::protocol::{deserialize_u16_or_string, GrpcOptions, RealtyOptions};
 use crate::protocol::{ProxyAdapter, UnsupportedLinkError, WSOptions};
 use serde::{Deserialize, Serialize};
@@ -5,7 +6,6 @@ use serde_json::Error;
 use std::any::Any;
 use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
-use crate::base64::{base64decode, base64encode};
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct Vmess {
@@ -129,93 +129,87 @@ impl ProxyAdapter for Vmess {
     where
         Self: Sized,
     {
-        let url = &link[8..];
-        if let Ok(data) = base64decode(url) {
-            let parsed: serde_json::Value = serde_json::from_str(&data).unwrap();
+        let url = base64decode(&link[8..]);
+        let parsed: serde_json::Value = serde_json::from_str(&url).unwrap();
 
-            let name = String::from(parsed["ps"].as_str().unwrap());
-            let server = parsed["add"].as_str().unwrap().to_string();
-            let alter_id = parsed["aid"].as_str().map_or_else(
-                || parsed["aid"].as_u64().unwrap() as u16,
-                |s| s.parse::<u16>().unwrap(),
-            );
-            let uuid = parsed["id"].as_str().unwrap().to_string();
-            let port = parsed["port"].as_str().map_or_else(
-                || parsed["port"].as_u64().unwrap() as u16,
-                |s| s.parse::<u16>().unwrap(),
-            );
+        let name = String::from(parsed["ps"].as_str().unwrap());
+        let server = parsed["add"].as_str().unwrap().to_string();
+        let alter_id = parsed["aid"].as_str().map_or_else(
+            || parsed["aid"].as_u64().unwrap() as u16,
+            |s| s.parse::<u16>().unwrap(),
+        );
+        let uuid = parsed["id"].as_str().unwrap().to_string();
+        let port = parsed["port"].as_str().map_or_else(
+            || parsed["port"].as_u64().unwrap() as u16,
+            |s| s.parse::<u16>().unwrap(),
+        );
 
-            let mut alpn = None;
-            if let Some(p) = parsed["alpn"].as_str() {
-                alpn = Some(p.split(",").map(|s| s.to_string()).collect());
+        let mut alpn = None;
+        if let Some(p) = parsed["alpn"].as_str() {
+            alpn = Some(p.split(",").map(|s| s.to_string()).collect());
+        }
+
+        let mut network = parsed["net"].as_str().map(|s| s.to_string());
+        let mut ws_opts = None;
+
+        // parse ws-opts
+        if network.as_deref().is_some_and(|s| s == "ws") {
+            let path = parsed["path"].as_str().map(|s| s.to_string());
+            let mut headers = HashMap::new();
+            if let Some(host) = parsed["host"].as_str() {
+                headers.insert(String::from("host"), host.to_string());
             }
+            ws_opts = Some(WSOptions {
+                path,
+                headers: Some(headers),
+            });
+        }
 
-            let mut network = parsed["net"].as_str().map(|s| s.to_string());
-            let mut ws_opts = None;
+        let mut grpc_opts = None;
 
-            // parse ws-opts
-            if network.as_deref().is_some_and(|s| s == "ws") {
-                let path = parsed["path"].as_str().map(|s| s.to_string());
-                let mut headers = HashMap::new();
-                if let Some(host) = parsed["host"].as_str() {
-                    headers.insert(String::from("host"), host.to_string());
+        // parse grpc sni
+        if network.as_deref().is_some_and(|s| s == "grpc") {
+            let sni = parsed["sni"].as_str().map(|s| s.to_string());
+            grpc_opts = Some(
+                GrpcOptions {
+                    grpc_service_name: sni
                 }
-                ws_opts = Some(WSOptions {
-                    path,
-                    headers: Some(headers),
+            )
+        }
+
+        if let Some(net) = network.as_deref() {
+            if net == "quic" || net == "http" {
+                return Err(UnsupportedLinkError {
+                    message: format!("vmess not suitable for network type {}", net),
                 });
             }
 
-            let mut grpc_opts = None;
-
-            // parse grpc sni
-            if network.as_deref().is_some_and(|s| s == "grpc") {
-                let sni = parsed["sni"].as_str().map(|s| s.to_string());
-                grpc_opts = Some(
-                    GrpcOptions {
-                        grpc_service_name: sni
-                    }
-                )
+            if net.is_empty() {
+                network = None;
             }
-
-            if let Some(net) = network.as_deref() {
-                if net == "quic" || net == "http" {
-                    return Err(UnsupportedLinkError {
-                        message: format!("vmess not suitable for network type {}", net),
-                    });
-                }
-
-                if net.is_empty() {
-                    network = None;
-                }
-            }
-
-            let servername = parsed["sni"].as_str().map(|s| s.to_string());
-            let udp = parsed["udp"].as_str().map(|s| s.parse::<bool>().unwrap_or(true));
-            let tls = parsed["tls"].as_str().map(|s| s.parse::<bool>().unwrap_or(false));
-            Ok(Vmess {
-                name,
-                server,
-                port,
-                uuid,
-                alter_id,
-                cipher: "auto".to_string(),
-                tls,
-                udp,
-                alpn,
-                servername,
-                fingerprint: Some(String::from("chrome")),
-                network,
-                skip_cert_verify: Some(true),
-                ws_opts,
-                grpc_opts,
-                realty_opts: None,
-            })
-        } else {
-            Err(UnsupportedLinkError {
-                message: format!("Unsupported link format, base64 decode error: {}", link),
-            })
         }
+
+        let servername = parsed["sni"].as_str().map(|s| s.to_string());
+        let udp = parsed["udp"].as_str().map(|s| s.parse::<bool>().unwrap_or(true));
+        let tls = parsed["tls"].as_str().map(|s| s.parse::<bool>().unwrap_or(false));
+        Ok(Vmess {
+            name,
+            server,
+            port,
+            uuid,
+            alter_id,
+            cipher: "auto".to_string(),
+            tls,
+            udp,
+            alpn,
+            servername,
+            fingerprint: Some(String::from("chrome")),
+            network,
+            skip_cert_verify: Some(true),
+            ws_opts,
+            grpc_opts,
+            realty_opts: None,
+        })
     }
 
     fn to_json(&self) -> Result<String, Error> {
@@ -238,6 +232,7 @@ impl ProxyAdapter for Vmess {
         self.server.hash(&mut state);
         self.port.hash(&mut state);
         self.uuid.hash(&mut state);
+        self.network.hash(&mut state);
     }
 }
 

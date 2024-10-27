@@ -152,6 +152,7 @@ impl ProxyAdapter for Vless {
         self.server.hash(&mut state);
         self.port.hash(&mut state);
         self.uuid.hash(&mut state);
+        self.network.hash(&mut state);
     }
 }
 
