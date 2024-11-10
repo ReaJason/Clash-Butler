@@ -29,6 +29,8 @@ jobs:
   build:
     name: Build
     runs-on: macos-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: Swatinem/rust-cache@v2
@@ -37,8 +39,6 @@ jobs:
       - name: Run
         run: cargo run
       - name: Upload
-        uses: actions/upload-artifact@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          name: clash.yaml
-          path: subs/release/clash.yaml
-          retention-days: 5
+          commit_message: "docs: update yaml"
