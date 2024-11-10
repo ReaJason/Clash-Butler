@@ -99,7 +99,7 @@ impl ClashMeta {
     ) -> Result<HashMap<String, i64>, Box<dyn std::error::Error>> {
         let url = format!("{}/group/{}/delay", &self.external_url, group_name);
         let client = Client::builder()
-            .timeout(Duration::from_secs(1))
+            .timeout(Duration::from_secs(10))
             .build()
             .unwrap();
         let response = client.get(&url).query(&delay_test_config).send().await?;
@@ -240,14 +240,14 @@ mod tests {
     #[tokio::test]
     #[ignore]
     async fn test_group_delay() {
-        let clash_meta = ClashMeta::new(9090, 7890);
+        let clash_meta = ClashMeta::new(9091, 7890);
         let result = clash_meta
             .test_group(
-                "Select",
+                "PROXY",
                 &DelayTestConfig {
                     url: "http://www.google.com/generate_204".to_string(),
                     expected: Some(204),
-                    timeout: 500,
+                    timeout: 1000,
                 },
             )
             .await;

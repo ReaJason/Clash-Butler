@@ -16,7 +16,7 @@ concurrency:
 jobs:
   check:
     name: Check
-    runs-on: ubuntu-22.04
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install toolchain
@@ -28,11 +28,17 @@ jobs:
       - run: cargo +nightly fmt
   build:
     name: Build
-    runs-on: ubuntu-22.04
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: Swatinem/rust-cache@v2
       - name: Build
         run: cargo build --verbose
-        #- name: Run tests
-        #run: cargo test --verbose
+      - name: Run
+        run: cargo run
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: clash.yaml
+          path: subs/release/clash.yaml
+          retention-days: 5
