@@ -67,7 +67,7 @@ async fn main() {
 async fn run(config: Settings) {
     let test_yaml_path = "subs/test/config.yaml";
     let test_all_yaml_path = "subs/test/all.yaml";
-    let release_yaml_path = env::current_dir().unwrap().join("subs/release/clash.yaml");
+    let release_yaml_path = env::current_dir().unwrap().join("clash.yaml");
     let test_clash_template_path = "conf/clash_test.yaml";
     let release_clash_template_path = "conf/clash_release.yaml";
     let mut urls = config.subs;
