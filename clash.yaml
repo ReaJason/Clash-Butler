@@ -1,0 +1,720 @@
+mixed-port: 7890
+socks-port: 7891
+allow-lan: true
+bind-address: '*'
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+external-ui: ui
+external-ui-url: https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
+geox-url:
+  geoip: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
+  geosite: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
+  mmdb: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
+  asn: https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb
+geo-auto-update: true
+geo-update-interval: 24
+profile:
+  store-selected: true
+  store-fake-ip: true
+find-process-mode: strict
+global-client-fingerprint: chrome
+tcp-concurrent: true
+unified-delay: true
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    TLS:
+      ports:
+      - 443
+      - 8443
+    HTTP:
+      ports:
+      - 80
+      - 8080-8880
+      override-destination: true
+    QUIC:
+      ports:
+      - 443
+      - 8443
+  force-domain:
+  - +.v2ex.com
+  - www.google.com
+  - google.com
+  skip-domain:
+  - Mijia Cloud
+  - dlg.io.mi.com
+  - +.apple.com
+tun:
+  enable: true
+  stack: mixed
+  strict_route: true
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  dns-hijack:
+  - any:53
+  - tcp://any:53
+dns:
+  enable: true
+  prefer-h3: true
+  ipv6: true
+  listen: 0.0.0.0:53
+  fake-ip-range: 198.18.0.1/16
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+  - rule-set:fakeip-filter,private,cn
+  nameserver:
+  - https://223.5.5.5/dns-query
+  - https://doh.pub/dns-query
+  - https://dns.alidns.com/dns-query
+proxies:
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV1
+  password: 1RWwXhwfAB5gAEozU4G2Pg
+  port: 8080
+  server: 45.87.175.181
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: HK_Hong Kong_Akile LTD1
+  password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
+  port: 100
+  server: vip.cwy-water.filegear-sg.me
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: GB_London_Global Connectivity Solutions LLP
+  password: 7ZaTlsc9otw2qoPswW7rtd
+  port: 12575
+  server: 89.185.84.185
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost1
+  password: zDNVedRFPQexG9v
+  port: 6379
+  server: 69.50.95.53
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV2
+  password: cvII85TrW6n0OGyfpHVS1u
+  port: 8080
+  server: 45.87.175.192
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV3
+  password: 1RWwXhwfAB5gAEozU4G2Pg
+  port: 8080
+  server: 45.87.175.192
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV4
+  password: 1RWwXhwfAB5gAEozU4G2Pg
+  port: 8080
+  server: 45.87.175.199
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost2
+  password: pKEW8JPByTVTLtM
+  port: 443
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-cfb
+  name: US_Portland_Amazon.com, Inc.1
+  password: amazonskr05
+  port: 443
+  server: 54.68.160.24
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost3
+  password: TEzjfAYq2IjtuoS
+  port: 6697
+  server: 69.50.95.53
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: MY_Kuala Lumpur_Octopus Web Solution Inc1
+  password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
+  port: 101
+  server: vip.hwwater.filegear-sg.me
+  type: ss
+- cipher: aes-256-cfb
+  name: US_Portland_Amazon.com, Inc.2
+  password: amazonskr05
+  port: 443
+  server: 54.213.228.61
+  type: ss
+- cipher: aes-128-gcm
+  name: JP_Tokyo_Datacamp Limited1
+  password: shadowsocks
+  port: 443
+  server: 149.22.87.240
+  type: ss
+- cipher: aes-256-cfb
+  name: US_Portland_Amazon.com, Inc.3
+  password: amazonskr05
+  port: 443
+  server: 35.85.38.218
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost4
+  password: FoOiGlkAA9yPEGP
+  port: 7307
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-128-gcm
+  name: JP_Tokyo_Datacamp Limited2
+  password: shadowsocks
+  port: 443
+  server: 149.22.87.241
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV5
+  password: 1RWwXhwfAB5gAEozU4G2Pg
+  port: 8080
+  server: 45.87.175.164
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Atlanta_GTHost1
+  password: cdBIDV42DCwnfIN
+  port: 8118
+  server: 38.121.43.204
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV6
+  password: 4a2rfixophdjffa8KVA4Aa
+  port: 8080
+  server: beesyar.org
+  type: ss
+- cipher: aes-128-gcm
+  name: US_Seattle_Datacamp Limited
+  password: shadowsocks
+  port: 443
+  server: 212.102.47.131
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Atlanta_GTHost2
+  password: PCnnH6SQSnfoS27
+  port: 8090
+  server: 38.121.43.204
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost5
+  password: cdBIDV42DCwnfIN
+  port: 8119
+  server: 69.50.95.53
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV7
+  password: cvII85TrW6n0OGyfpHVS1u
+  port: 8080
+  server: 45.87.175.157
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV8
+  password: cvII85TrW6n0OGyfpHVS1u
+  port: 8080
+  server: 45.87.175.164
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV9
+  password: 4a2rfixophdjffa8KVA4Aa
+  port: 8080
+  server: 45.87.175.164
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost6
+  password: PCnnH6SQSnfoS27
+  port: 8091
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-128-gcm
+  name: CA_Vancouver_Datacamp Limited
+  password: shadowsocks
+  port: 443
+  server: 149.22.95.183
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: HK_Hong Kong_Stacks Inc
+  password: 6f02d584-48ba-497d-8063-9fbe4d8f60a9
+  port: 11001
+  server: 183.232.229.165
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV10
+  password: 4a2rfixophdjffa8KVA4Aa
+  port: 8080
+  server: 45.87.175.181
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: IE_Dublin_Microsoft Corporation
+  password: qM7y4D7jun6cC5NMdQ3FE5
+  port: 64401
+  server: 52.169.126.67
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV11
+  password: 1RWwXhwfAB5gAEozU4G2Pg
+  port: 8080
+  server: beesyar.org
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Los Angeles_GTHost1
+  password: faBAoD54k87UJG7
+  port: 2376
+  server: 38.114.114.143
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Miami_GTHost
+  password: g5MeD6Ft3CWlJId
+  port: 5003
+  server: 38.110.1.197
+  type: ss
+- cipher: aes-128-gcm
+  name: US_New York_Datacamp Limited
+  password: shadowsocks
+  port: 443
+  server: 37.19.198.160
+  type: ss
+- cipher: aes-256-cfb
+  name: PL_Warsaw_Melbikomas UAB
+  password: ueLXVkvh4hckhErQ
+  port: 9060
+  server: 217.30.10.18
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: US_Riverdale Park_American Information Network
+  password: 5cp9Z3iWnJZ2
+  port: 443
+  server: 205.134.180.150
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV12
+  password: cvII85TrW6n0OGyfpHVS1u
+  port: 8080
+  server: 45.87.175.181
+  type: ss
+- cipher: aes-256-cfb
+  name: KR_Seoul_Amazon.com, Inc.
+  password: amazonskr05
+  port: 443
+  server: 3.35.137.32
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: HK_Hong Kong_Akile LTD2
+  password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
+  port: 117
+  server: vip.cwy-water.filegear-sg.me
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost7
+  password: Y6R9pAtvxxzmGC
+  port: 3306
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost8
+  password: kDWvXYZoTBcGkC4
+  port: 8882
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Washington_GTHost
+  password: faBAoD54k87UJG7
+  port: 2376
+  server: 23.154.136.247
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost9
+  password: KixLvKzwjekG00rm
+  port: 5500
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost10
+  password: cdBIDV42DCwnfIN
+  port: 8118
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost11
+  password: Y6R9pAtvxxzmGC
+  port: 3389
+  server: 69.50.95.53
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV13
+  password: 4a2rfixophdjffa8KVA4Aa
+  port: 8080
+  server: 45.87.175.157
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV14
+  password: 1RWwXhwfAB5gAEozU4G2Pg
+  port: 8080
+  server: 45.87.175.178
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost12
+  password: kDWvXYZoTBcGkC4
+  port: 8881
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost13
+  password: lGqs95QkFHo2NV
+  port: 5498
+  server: 69.50.95.53
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: MY_Kuala Lumpur_Octopus Web Solution Inc2
+  password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
+  port: 100
+  server: vip.hwwater.filegear-sg.me
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Los Angeles_GTHost2
+  password: pKEW8JPByTVTLtM
+  port: 443
+  server: 38.114.114.143
+  type: ss
+- cipher: aes-256-cfb
+  name: US_Portland_Amazon.com, Inc.4
+  password: amazonskr05
+  port: 443
+  server: 54.244.81.162
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: KR_Seoul_Kaopu Cloud HK Limited
+  password: f8f7aCzcPKbsF8p3
+  port: 990
+  server: 154.90.63.193
+  type: ss
+- cipher: aes-128-gcm
+  name: US_Dallas_Datacamp Limited
+  password: shadowsocks
+  port: 443
+  server: 156.146.38.168
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Los Angeles_GTHost3
+  password: RexnBgU7EV5ADxG
+  port: 7002
+  server: 38.114.114.143
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV15
+  password: oZIoA69Q8yhcQV8ka3Pa3A
+  port: 8080
+  server: 193.29.139.202
+  type: ss
+- alterId: 0
+  cipher: auto
+  fingerprint: chrome
+  name: HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet1
+  network: tcp
+  port: 15372
+  server: cwy-water.filegear-sg.me
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  uuid: 86b2bbb5-deac-4068-9669-9d85c7fbffce
+- alterId: 0
+  cipher: auto
+  fingerprint: chrome
+  name: HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet2
+  network: tcp
+  port: 15371
+  server: cwy-water.filegear-sg.me
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  uuid: 86b2bbb5-deac-4068-9669-9d85c7fbffce
+- name: JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited
+  password: JH9NEZKTib
+  port: 17748
+  server: djvp.sywk.com.cn
+  sni: djvp.sywk.com.cn
+  type: trojan
+proxy-groups:
+- name: PROXY
+  type: select
+  proxies:
+  - Fallback
+  - Select
+  - HK
+  - TW
+  - JP
+  - SG
+  - US
+- name: Select
+  type: select
+  filter: .*
+  proxies:
+  - NL_Amsterdam_Greenhost BV1
+  - HK_Hong Kong_Akile LTD1
+  - GB_London_Global Connectivity Solutions LLP
+  - US_Denver_GTHost1
+  - NL_Amsterdam_Greenhost BV2
+  - NL_Amsterdam_Greenhost BV3
+  - NL_Amsterdam_Greenhost BV4
+  - US_Denver_GTHost2
+  - US_Portland_Amazon.com, Inc.1
+  - US_Denver_GTHost3
+  - MY_Kuala Lumpur_Octopus Web Solution Inc1
+  - US_Portland_Amazon.com, Inc.2
+  - JP_Tokyo_Datacamp Limited1
+  - US_Portland_Amazon.com, Inc.3
+  - US_Denver_GTHost4
+  - JP_Tokyo_Datacamp Limited2
+  - NL_Amsterdam_Greenhost BV5
+  - US_Atlanta_GTHost1
+  - NL_Amsterdam_Greenhost BV6
+  - US_Seattle_Datacamp Limited
+  - US_Atlanta_GTHost2
+  - US_Denver_GTHost5
+  - NL_Amsterdam_Greenhost BV7
+  - NL_Amsterdam_Greenhost BV8
+  - NL_Amsterdam_Greenhost BV9
+  - US_Denver_GTHost6
+  - CA_Vancouver_Datacamp Limited
+  - HK_Hong Kong_Stacks Inc
+  - NL_Amsterdam_Greenhost BV10
+  - IE_Dublin_Microsoft Corporation
+  - NL_Amsterdam_Greenhost BV11
+  - US_Los Angeles_GTHost1
+  - US_Miami_GTHost
+  - US_New York_Datacamp Limited
+  - PL_Warsaw_Melbikomas UAB
+  - US_Riverdale Park_American Information Network
+  - NL_Amsterdam_Greenhost BV12
+  - KR_Seoul_Amazon.com, Inc.
+  - HK_Hong Kong_Akile LTD2
+  - US_Denver_GTHost7
+  - US_Denver_GTHost8
+  - US_Washington_GTHost
+  - US_Denver_GTHost9
+  - US_Denver_GTHost10
+  - US_Denver_GTHost11
+  - NL_Amsterdam_Greenhost BV13
+  - NL_Amsterdam_Greenhost BV14
+  - US_Denver_GTHost12
+  - US_Denver_GTHost13
+  - MY_Kuala Lumpur_Octopus Web Solution Inc2
+  - US_Los Angeles_GTHost2
+  - US_Portland_Amazon.com, Inc.4
+  - KR_Seoul_Kaopu Cloud HK Limited
+  - US_Dallas_Datacamp Limited
+  - US_Los Angeles_GTHost3
+  - NL_Amsterdam_Greenhost BV15
+  - HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet1
+  - HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet2
+  - JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited
+- name: Fallback
+  type: fallback
+  url: http://www.google.com/generate_204
+  interval: 600
+  proxies:
+  - HK
+  - TW
+  - JP
+  - SG
+  - US
+- name: HK
+  type: url-test
+  url: http://www.google.com/generate_204
+  interval: 600
+  tolerance: 500
+  proxies:
+  - HK_Hong Kong_Akile LTD1
+  - HK_Hong Kong_Stacks Inc
+  - HK_Hong Kong_Akile LTD2
+  - KR_Seoul_Kaopu Cloud HK Limited
+  - HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet1
+  - HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet2
+  filter: (?i)港|HK|HongKong|hong kong
+- name: TW
+  type: url-test
+  url: http://www.google.com/generate_204
+  interval: 600
+  tolerance: 500
+  proxies:
+  - DIRECT
+  filter: 台湾|TW|Tw|Taiwan|新北|彰化|CHT|HINET
+- name: JP
+  type: url-test
+  url: http://www.google.com/generate_204
+  interval: 600
+  tolerance: 500
+  proxies:
+  - JP_Tokyo_Datacamp Limited1
+  - JP_Tokyo_Datacamp Limited2
+  - JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited
+  filter: (?i)日|东京|大阪|JP|Japan|Tokyo|Osaka|Saitama
+- name: SG
+  type: url-test
+  url: http://www.google.com/generate_204
+  interval: 600
+  tolerance: 500
+  proxies:
+  - DIRECT
+  filter: (?i)新|狮城|SG|Singapore
+- name: US
+  type: url-test
+  url: http://www.google.com/generate_204
+  interval: 600
+  tolerance: 500
+  proxies:
+  - US_Denver_GTHost1
+  - US_Denver_GTHost2
+  - US_Portland_Amazon.com, Inc.1
+  - US_Denver_GTHost3
+  - MY_Kuala Lumpur_Octopus Web Solution Inc1
+  - US_Portland_Amazon.com, Inc.2
+  - US_Portland_Amazon.com, Inc.3
+  - US_Denver_GTHost4
+  - US_Atlanta_GTHost1
+  - US_Seattle_Datacamp Limited
+  - US_Atlanta_GTHost2
+  - US_Denver_GTHost5
+  - US_Denver_GTHost6
+  - US_Los Angeles_GTHost1
+  - US_Miami_GTHost
+  - US_New York_Datacamp Limited
+  - US_Riverdale Park_American Information Network
+  - US_Denver_GTHost7
+  - US_Denver_GTHost8
+  - US_Washington_GTHost
+  - US_Denver_GTHost9
+  - US_Denver_GTHost10
+  - US_Denver_GTHost11
+  - US_Denver_GTHost12
+  - US_Denver_GTHost13
+  - MY_Kuala Lumpur_Octopus Web Solution Inc2
+  - US_Los Angeles_GTHost2
+  - US_Portland_Amazon.com, Inc.4
+  - US_Dallas_Datacamp Limited
+  - US_Los Angeles_GTHost3
+  filter: (?i)美|洛杉矶|芝加哥|西雅图|America|US|United.*?States
+rules:
+- RULE-SET,ads,REJECT
+- RULE-SET,applications,DIRECT
+- RULE-SET,private,DIRECT
+- RULE-SET,apple-cn,DIRECT
+- RULE-SET,games-cn,DIRECT
+- RULE-SET,google-cn,DIRECT
+- RULE-SET,bilibili,DIRECT
+- RULE-SET,cn,DIRECT
+- RULE-SET,ai,PROXY
+- RULE-SET,proxy,PROXY
+- RULE-SET,telegramip,PROXY,no-resolve
+- RULE-SET,privateip,DIRECT,no-resolve
+- RULE-SET,cnip,DIRECT,no-resolve
+- GEOIP,LAN,DIRECT,no-resolve
+- GEOIP,CN,DIRECT,no-resolve
+- MATCH,PROXY
+rule-providers:
+  fakeip-filter:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/fakeip-filter.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/fakeip-filter.mrs
+    interval: 86400
+  ads:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/ads.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/ads.mrs
+    interval: 86400
+  applications:
+    type: http
+    behavior: classical
+    format: text
+    path: ./rules/applications.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/applications.list
+    interval: 86400
+  private:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/private.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/private.mrs
+    interval: 86400
+  games-cn:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/games-cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/games-cn.mrs
+    interval: 86400
+  microsoft-cn:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/microsoft-cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/microsoft-cn.mrs
+    interval: 86400
+  apple-cn:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/apple-cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/apple-cn.mrs
+    interval: 86400
+  google-cn:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/google-cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/google-cn.mrs
+    interval: 86400
+  bilibili:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/bilibili.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/bilibili.mrs
+    interval: 86400
+  ai:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/ai.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/ai.mrs
+    interval: 86400
+  proxy:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/proxy.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/proxy.mrs
+    interval: 86400
+  cn:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/cn.mrs
+    interval: 86400
+  telegramip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    path: ./rules/telegramip.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/telegramip.mrs
+    interval: 86400
+  privateip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    path: ./rules/privateip.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/privateip.mrs
+    interval: 86400
+  cnip:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    path: ./rules/cnip.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/cnip.mrs
+    interval: 86400
