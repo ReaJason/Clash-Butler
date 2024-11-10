@@ -6,7 +6,11 @@ fast_mode = false
 # 支持本地地址（绝对地址）/User/xxx/xx.yml
 # 支持单个订阅链接，ss://xxx
 subs = [
-    "https://sub.reajason.eu.org/clash.yaml"
+    "https://sub.reajason.eu.org/clash.yaml",
+    "https://s1.byte16.com/api/v1/client/subscribe?token=feba159f3478ff8936f52a43d88aae8b",
+    "https://www.cwy-water.us.kg/api/v1/client/subscribe?token=daa0f9c43c5b7f91a08aee21dab0138c",
+    "https://guanxi.us.kg/guanxi",
+    "https://naiher.me/vdnYUg.txt",
 ]
 
 # 是否重命名节点，打开后会使用 geoip 等方式进行代理真实 IP 和地理地址查询
@@ -14,12 +18,9 @@ rename_node = true
 rename_pattern = "${COUNTRYCODE}_${CITY}_${ISP}"
 
 # 是否需要加上代理池的节点一起筛选
-need_add_pool = false
+need_add_pool = true
 # 代理节点池
 pools = [
-    "https://sub.ss5.xyz/",
-    "https://igdux.top/~Clash",
-    #    "https://sub.tgzdyz2.xyz/sub",
     "https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml"
 ]
 
