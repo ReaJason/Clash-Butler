@@ -7,8 +7,8 @@ use serde::Deserialize;
 use serde::Serialize;
 use serde_json::Error;
 
-use crate::protocol::deserialize_u16_or_string;
 use crate::protocol::deserialize_from_string;
+use crate::protocol::deserialize_u16_or_string;
 use crate::protocol::ProxyAdapter;
 use crate::protocol::UnsupportedLinkError;
 
@@ -71,7 +71,12 @@ impl ProxyAdapter for Hysteria2 {
     }
 
     fn to_link(&self) -> String {
-        let mut params = "insecure=".to_string() + if self.skip_cert_verify.unwrap_or(false) { "1" } else { "0" };
+        let mut params = "insecure=".to_string()
+            + if self.skip_cert_verify.unwrap_or(false) {
+                "1"
+            } else {
+                "0"
+            };
         if let Some(sni) = &self.sni {
             params += &format!("&sni={}", urlencoding::encode(sni));
         }
@@ -93,7 +98,14 @@ impl ProxyAdapter for Hysteria2 {
         if let Some(alpn) = &self.alpn {
             params += &format!("&alpn={}", alpn.join(","));
         }
-        format!("hysteria2://{}@{}:{}/?{}#{}", &self.password, &self.server, &self.port, &params, urlencoding::encode(&self.name))
+        format!(
+            "hysteria2://{}@{}:{}/?{}#{}",
+            &self.password,
+            &self.server,
+            &self.port,
+            &params,
+            urlencoding::encode(&self.name)
+        )
     }
 
     /*

@@ -43,7 +43,7 @@ async fn main() {
             .with_max_level(Level::INFO)
             .finish(),
     )
-        .expect("setting default subscriber failed");
+    .expect("setting default subscriber failed");
     let args = Cli::parse();
     let config = Settings::new();
     match config {
@@ -215,7 +215,7 @@ async fn run(config: Settings) {
                                 openai_is_ok = true;
                             }
                             Err(err) => {
-                                error!("「{}」 openai is not ok, {:#}",node, err)
+                                error!("「{}」 openai is not ok, {:#}", node, err)
                             }
                         }
 
@@ -226,11 +226,12 @@ async fn run(config: Settings) {
                                 claude_is_ok = true;
                             }
                             Err(err) => {
-                                error!("「{}」 claude is not ok, {:#}",node, err)
+                                error!("「{}」 claude is not ok, {:#}", node, err)
                             }
                         }
 
-                        let ip_detail_result = ip::get_ip_detail(&proxy_ip, &clash_meta.proxy_url).await;
+                        let ip_detail_result =
+                            ip::get_ip_detail(&proxy_ip, &clash_meta.proxy_url).await;
                         match ip_detail_result {
                             Ok(ip_detail) => {
                                 info!("{:?}", ip_detail);
