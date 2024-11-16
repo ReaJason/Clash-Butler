@@ -76,6 +76,8 @@ proxy-groups:
       - JP
       - SG
       - US
+      - OpenAI
+      - Claude
   - name: Select
     type: select
     filter: ".*"
@@ -125,6 +127,20 @@ proxy-groups:
     tolerance: 500
     proxies: [ ]
     filter: "(?i)美|洛杉矶|芝加哥|西雅图|America|US|United.*?States"
+  - name: OpenAI
+    type: url-test
+    url: http://www.google.com/generate_204
+    interval: 600
+    tolerance: 500
+    proxies: [ PROXY ]
+    filter: "(?i)OpenAI"
+  - name: Claude
+    type: url-test
+    url: http://www.google.com/generate_204
+    interval: 600
+    tolerance: 500
+    proxies: [ PROXY ]
+    filter: "(?i)Claude"
 rules:
   - RULE-SET,ads,REJECT
   - RULE-SET,applications,DIRECT
@@ -134,8 +150,9 @@ rules:
   - RULE-SET,google-cn,DIRECT
   - RULE-SET,bilibili,DIRECT
   - RULE-SET,cn,DIRECT
-  - RULE-SET,ai,PROXY
-  - RULE-SET,proxy,PROXY
+  - RULE-SET,claude,Claude
+  - RULE-SET,ai,OpenAI
+  - RULE-SET,youtube,PROXY
   - RULE-SET,telegramip,PROXY,no-resolve
   - RULE-SET,privateip,DIRECT,no-resolve
   - RULE-SET,cnip,DIRECT,no-resolve
@@ -221,16 +238,23 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/ai.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/ai.mrs"
+    url: "https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/ai/ai.mrs"
     interval: 86400
-    # https://gitlab.com/lodepuly/vpn_tool/-/blob/master/Tool/Clash/Rule/AI.yaml
 
-  proxy:
+  claude:
     type: http
     behavior: domain
     format: mrs
-    path: ./rules/proxy.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/proxy.mrs"
+    path: ./rules/claude.mrs
+    url: "https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/claude/claude.mrs"
+    interval: 86400
+
+  youtube:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/youtube.mrs
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/youtube.mrs"
     interval: 86400
 
   cn:

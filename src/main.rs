@@ -2,7 +2,6 @@ use std::collections::HashMap;
 use std::collections::HashSet;
 use std::env;
 use std::fs;
-use std::net::IpAddr;
 use std::path::Path;
 
 use clap::Parser;
@@ -25,6 +24,7 @@ mod routes;
 mod server;
 mod settings;
 mod speedtest;
+mod website;
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
@@ -43,7 +43,7 @@ async fn main() {
             .with_max_level(Level::INFO)
             .finish(),
     )
-    .expect("setting default subscriber failed");
+        .expect("setting default subscriber failed");
     let args = Cli::parse();
     let config = Settings::new();
     match config {
@@ -88,7 +88,7 @@ async fn run(config: Settings) {
         test_all_yaml_path.to_string(),
     );
 
-    let chunk_size = 50;
+    let chunk_size = config.test_group_size;
     let proxies_group: Vec<_> = test_proxies
         .chunks(chunk_size)
         .map(|p| p.to_vec())
@@ -106,8 +106,6 @@ async fn run(config: Settings) {
     let external_port = 9091;
     let mixed_port = 7999;
     let mut useful_proxies = Vec::new();
-    let mut top_node_name = "".to_string();
-    let mut top_node_delay = i64::MAX;
     for (index, proxies) in proxies_group.iter().enumerate() {
         if group_size > 1 {
             info!("正在测试第 {} 组", index + 1)
@@ -153,12 +151,6 @@ async fn run(config: Settings) {
             info!("cur_useful_proxies len: {}", &cur_useful_proxies.len());
             useful_proxies.extend(cur_useful_proxies);
             info!("useful_proxies len: {}", useful_proxies.len());
-
-            let (node, delay) = get_top_node(&delay_results);
-            if delay < top_node_delay {
-                top_node_delay = delay;
-                top_node_name = node;
-            }
         }
         clash_meta.stop().unwrap();
     }
@@ -197,27 +189,15 @@ async fn run(config: Settings) {
             .map(|p| p.get_name().to_string())
             .collect::<Vec<String>>();
         let mut node_rename_map: HashMap<String, String> = HashMap::new();
-        let mut node_ip_map: HashMap<String, IpAddr> = HashMap::new();
         if config.rename_node {
             if nodes.is_empty() {
                 error!("当前无可用节点，请尝试更换订阅节点或重试");
                 clash_meta.stop().unwrap();
                 return;
             }
-            let count = config.rename_pattern.matches('_').count();
             let mut i = 0;
             while i < nodes.len() {
                 let node = &nodes[i];
-                // 如果当前节点名称与需要重命名的格式下划线个数一致，暂时认为就是已经格式化好的
-                if node.matches('_').count() == count
-                    && !node.contains("github.com")
-                    && !node.contains("WangCai")
-                {
-                    info!("「{}」已符合重命名结构，跳过", node);
-                    i += 1;
-                    continue;
-                }
-
                 let ip_result = clash_meta
                     .set_group_proxy(TEST_PROXY_GROUP_NAME, node)
                     .await;
@@ -226,8 +206,66 @@ async fn run(config: Settings) {
                     if ip_result.is_ok() {
                         let (proxy_ip, from) = ip_result.unwrap();
                         info!("「{}」ip: {} from: {}", node, proxy_ip, from);
-                        node_ip_map.insert(node.clone(), proxy_ip);
                         i += 1;
+
+                        let mut openai_is_ok = false;
+                        match website::openai_is_ok(&clash_meta.proxy_url).await {
+                            Ok(_) => {
+                                info!("「{}」 openai is ok", node);
+                                openai_is_ok = true;
+                            }
+                            Err(err) => {
+                                error!("「{}」 openai is not ok, {:#}",node, err)
+                            }
+                        }
+
+                        let mut claude_is_ok = false;
+                        match website::claude_is_ok(&clash_meta.proxy_url).await {
+                            Ok(_) => {
+                                info!("「{}」 claude is ok", node);
+                                claude_is_ok = true;
+                            }
+                            Err(err) => {
+                                error!("「{}」 claude is not ok, {:#}",node, err)
+                            }
+                        }
+
+                        let ip_detail_result = ip::get_ip_detail(&proxy_ip, &clash_meta.proxy_url).await;
+                        match ip_detail_result {
+                            Ok(ip_detail) => {
+                                info!("{:?}", ip_detail);
+                                if config.rename_node {
+                                    let mut new_name = config
+                                        .rename_pattern
+                                        .replace("${IP}", &proxy_ip.to_string())
+                                        .replace("${COUNTRYCODE}", &ip_detail.country_code)
+                                        .replace("${ISP}", &ip_detail.isp)
+                                        .replace("${CITY}", &ip_detail.city);
+                                    if openai_is_ok {
+                                        new_name += "_OpenAI";
+                                    }
+                                    if claude_is_ok {
+                                        new_name += "_Claude";
+                                    }
+                                    node_rename_map.insert(node.clone(), new_name);
+                                }
+                            }
+                            Err(e) => {
+                                error!("获取节点 {node} 的 IP 信息失败, {e}");
+                                if !openai_is_ok && !claude_is_ok {
+                                    nodes.remove(i);
+                                } else {
+                                    let mut new_name = proxy_ip.to_string();
+                                    if openai_is_ok {
+                                        new_name += "_OpenAI";
+                                    }
+                                    if claude_is_ok {
+                                        new_name += "_Claude";
+                                    }
+                                    node_rename_map.insert(node.clone(), new_name);
+                                }
+                            }
+                        }
                     } else {
                         let err_msg = ip_result.err().unwrap();
                         error!("获取节点 {} 的 IP 失败, {}", node, err_msg);
@@ -237,34 +275,6 @@ async fn run(config: Settings) {
                     let err_msg = ip_result.err().unwrap();
                     error!("设置节点 {} 失败, {}", node, err_msg);
                     i += 1;
-                }
-            }
-
-            if !top_node_name.is_empty()
-                && clash_meta
-                    .set_group_proxy(TEST_PROXY_GROUP_NAME, &top_node_name)
-                    .await
-                    .is_ok()
-            {
-                for (node, ip) in &node_ip_map {
-                    let ip_detail_result = ip::get_ip_detail(ip, &clash_meta.proxy_url).await;
-                    match ip_detail_result {
-                        Ok(ip_detail) => {
-                            info!("{:?}", ip_detail);
-                            if config.rename_node {
-                                let new_name = config
-                                    .rename_pattern
-                                    .replace("${IP}", &ip.to_string())
-                                    .replace("${COUNTRYCODE}", &ip_detail.country_code)
-                                    .replace("${ISP}", &ip_detail.isp)
-                                    .replace("${CITY}", &ip_detail.city);
-                                node_rename_map.insert(node.clone(), new_name);
-                            }
-                        }
-                        Err(e) => {
-                            error!("获取节点 {node} 的 IP 信息失败, {e}");
-                        }
-                    }
                 }
             }
         }
@@ -296,6 +306,7 @@ async fn run(config: Settings) {
     }
 }
 
+#[allow(dead_code)]
 fn get_top_node(test_results: &Vec<HashMap<String, i64>>) -> (String, i64) {
     let mut combined_data: HashMap<String, Vec<i64>> = HashMap::new();
     for test in test_results {
