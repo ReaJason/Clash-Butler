@@ -293,6 +293,23 @@ where
     }
 }
 
+pub fn deserialize_from_string<'de, D>(deserializer: D) -> Result<Option<String>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    // 使用 Option<serde_json::Value> 来处理任意类型
+    let value: Value = Deserialize::deserialize(deserializer)?;
+    match value {
+        Value::Number(n) => {
+            Ok(Some(n.to_string()))
+        }
+        Value::String(s) => {
+            Ok(Some(s))
+        }
+        _ => Err(serde::de::Error::custom("Expected a string")),
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::*;

@@ -8,6 +8,7 @@ use serde::Serialize;
 use serde_json::Error;
 
 use crate::protocol::deserialize_u16_or_string;
+use crate::protocol::deserialize_from_string;
 use crate::protocol::ProxyAdapter;
 use crate::protocol::UnsupportedLinkError;
 
@@ -22,9 +23,17 @@ pub struct Hysteria2 {
     pub ports: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "hop-interval")]
     pub hop_interval: Option<u16>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "deserialize_from_string"
+    )]
     pub up: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "deserialize_from_string"
+    )]
     pub down: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub obfs: Option<String>,
@@ -62,7 +71,29 @@ impl ProxyAdapter for Hysteria2 {
     }
 
     fn to_link(&self) -> String {
-        todo!()
+        let mut params = "insecure=".to_string() + if self.skip_cert_verify.unwrap_or(false) { "1" } else { "0" };
+        if let Some(sni) = &self.sni {
+            params += &format!("&sni={}", urlencoding::encode(sni));
+        }
+        if let Some(obfs) = &self.obfs {
+            params += &format!("&obfs={}", obfs);
+        }
+        if let Some(obfs_password) = &self.obfs_password {
+            params += &format!("&obfs-password={}", obfs_password);
+        }
+        if let Some(ports) = &self.ports {
+            params += &format!("&mport={}", ports);
+        }
+        if let Some(up) = &self.up {
+            params += &format!("&up={}", urlencoding::encode(up));
+        }
+        if let Some(down) = &self.down {
+            params += &format!("&down={}", urlencoding::encode(down));
+        }
+        if let Some(alpn) = &self.alpn {
+            params += &format!("&alpn={}", alpn.join(","));
+        }
+        format!("hysteria2://{}@{}:{}/?{}#{}", &self.password, &self.server, &self.port, &params, urlencoding::encode(&self.name))
     }
 
     /*
@@ -102,6 +133,7 @@ impl ProxyAdapter for Hysteria2 {
         let sni = params_map.get("sni").cloned();
         let up = params_map.get("up").cloned();
         let down = params_map.get("down").cloned();
+        let mut ports = params_map.get("mport").cloned();
         let mut alpn = None;
         if let Some(value) = params_map.get("alpn").cloned() {
             alpn = Some(
@@ -122,7 +154,6 @@ impl ProxyAdapter for Hysteria2 {
         let parts: Vec<&str> = parts[1].split(":").collect();
         let server = String::from(parts[0]);
         let port;
-        let mut ports = None;
         match parts[1].parse::<u16>() {
             Ok(p) => {
                 port = p;
@@ -185,16 +216,37 @@ mod test {
     use super::*;
 
     #[test]
-    fn test_parse_vless() {
+    fn test_parse_hysteria2() {
         let link = String::from("hysteria2://bfbe4deb-07c8-450b-945e-e3c7676ba5ed@163.123.192.167:50000/?insecure=1&sni=www.microsoft.com&mport=50000-50080#%E5%89%A9%E4%BD%99%E6%B5%81%E9%87%8F%EF%BC%9A163.97%20GB");
-        let hysteria2 = Hysteria2::from_link(link).unwrap();
+        let hysteria2 = Hysteria2::from_link(link.clone()).unwrap();
         assert_eq!(hysteria2.server, "163.123.192.167");
         assert_eq!(hysteria2.port, 50000);
         assert_eq!(hysteria2.ports, Some("50000-50080".to_string()));
         assert_eq!(hysteria2.password, "bfbe4deb-07c8-450b-945e-e3c7676ba5ed");
         assert_eq!(hysteria2.sni, Some("www.microsoft.com".to_string()));
         assert_eq!(hysteria2.skip_cert_verify, Some(true));
-        assert_eq!(hysteria2.fingerprint, Some("chrome".to_string()));
-        println!("{}", hysteria2.to_json().unwrap());
+        assert_eq!(hysteria2.client_fingerprint, Some("chrome".to_string()));
+        assert_eq!(hysteria2.to_link(), link);
+    }
+
+    #[test]
+    fn test_hysteria2_from_json() {
+        let json = r#"{
+                "auth": "836e5ec1-382f-4325-a1dd-e6b5cf2a3632",
+                "name": "JP_01",
+                "password": "836e5ec1-382f-4325-a1dd-e6b5cf2a3632",
+                "port": 23030,
+                "up": 100,
+                "down": 100,
+                "server": "tokyo2-500m.node.xn--l6qx3lcvp58x.com",
+                "skip-cert-verify": true,
+                "sni": "2.nodes.yljc.online",
+                "type": "hysteria2",
+                "udp": true
+            }"#;
+
+        let hysteria: Hysteria2 = serde_json::from_str(json).unwrap();
+        assert_eq!(hysteria.name, "JP_01");
+        assert_eq!(hysteria.up, Some("100".to_string()))
     }
 }
