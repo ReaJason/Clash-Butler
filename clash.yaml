@@ -71,370 +71,480 @@ dns:
   - https://doh.pub/dns-query
   - https://dns.alidns.com/dns-query
 proxies:
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV1
-  password: 1RWwXhwfAB5gAEozU4G2Pg
-  port: 8080
-  server: 45.87.175.181
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: HK_Hong Kong_Akile LTD1
-  password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
-  port: 100
-  server: vip.cwy-water.filegear-sg.me
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: GB_London_Global Connectivity Solutions LLP
-  password: 7ZaTlsc9otw2qoPswW7rtd
-  port: 12575
-  server: 89.185.84.185
-  type: ss
 - cipher: aes-256-gcm
-  name: US_Denver_GTHost1
-  password: zDNVedRFPQexG9v
-  port: 6379
-  server: 69.50.95.53
+  name: 142.202.48.105_OpenAI_Claude
+  password: Y6R9pAtvxxzmGC
+  port: 3389
+  server: 142.202.48.105
   type: ss
+- name: 18.199.108.131_Claude
+  network: tcp
+  password: telegram-id-privatevpns
+  port: 22222
+  server: 18.199.108.131
+  sni: trojan.burgerip.co.uk
+  type: trojan
 - cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV2
-  password: cvII85TrW6n0OGyfpHVS1u
-  port: 8080
-  server: 45.87.175.192
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV3
-  password: 1RWwXhwfAB5gAEozU4G2Pg
-  port: 8080
-  server: 45.87.175.192
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV4
-  password: 1RWwXhwfAB5gAEozU4G2Pg
-  port: 8080
-  server: 45.87.175.199
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost2
-  password: pKEW8JPByTVTLtM
-  port: 443
-  server: 69.50.95.53
-  type: ss
-- cipher: aes-256-cfb
-  name: US_Portland_Amazon.com, Inc.1
-  password: amazonskr05
-  port: 443
-  server: 54.68.160.24
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost3
-  password: TEzjfAYq2IjtuoS
-  port: 6697
-  server: 69.50.95.53
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: MY_Kuala Lumpur_Octopus Web Solution Inc1
-  password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
-  port: 101
-  server: vip.hwwater.filegear-sg.me
-  type: ss
-- cipher: aes-256-cfb
-  name: US_Portland_Amazon.com, Inc.2
-  password: amazonskr05
-  port: 443
-  server: 54.213.228.61
-  type: ss
-- cipher: aes-128-gcm
-  name: JP_Tokyo_Datacamp Limited1
-  password: shadowsocks
-  port: 443
-  server: 149.22.87.240
-  type: ss
-- cipher: aes-256-cfb
-  name: US_Portland_Amazon.com, Inc.3
-  password: amazonskr05
-  port: 443
-  server: 35.85.38.218
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost4
-  password: FoOiGlkAA9yPEGP
-  port: 7307
-  server: 69.50.95.53
-  type: ss
-- cipher: aes-128-gcm
-  name: JP_Tokyo_Datacamp Limited2
-  password: shadowsocks
-  port: 443
-  server: 149.22.87.241
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV5
-  password: 1RWwXhwfAB5gAEozU4G2Pg
-  port: 8080
-  server: 45.87.175.164
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Atlanta_GTHost1
-  password: cdBIDV42DCwnfIN
-  port: 8118
-  server: 38.121.43.204
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV6
-  password: 4a2rfixophdjffa8KVA4Aa
+  name: 193.29.139.138_OpenAI_Claude
+  password: QCXDxuDlTTMD7jtgHUjIoj
   port: 8080
   server: beesyar.org
   type: ss
+- cipher: chacha20-ietf-poly1305
+  name: 193.29.139.173_OpenAI_Claude
+  password: 1RWwXhwfAB5gAEozU4G2Pg
+  port: 8080
+  server: beesyar.org
+  type: ss
+- name: 34.250.198.44_OpenAI_Claude
+  network: tcp
+  password: telegram-id-privatevpns
+  port: 22222
+  server: 34.250.198.44
+  sni: trojan.burgerip.co.uk
+  type: trojan
 - cipher: aes-128-gcm
-  name: US_Seattle_Datacamp Limited
-  password: shadowsocks
-  port: 443
-  server: 212.102.47.131
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Atlanta_GTHost2
-  password: PCnnH6SQSnfoS27
-  port: 8090
-  server: 38.121.43.204
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost5
-  password: cdBIDV42DCwnfIN
-  port: 8119
-  server: 69.50.95.53
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV7
-  password: cvII85TrW6n0OGyfpHVS1u
-  port: 8080
-  server: 45.87.175.157
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV8
-  password: cvII85TrW6n0OGyfpHVS1u
-  port: 8080
-  server: 45.87.175.164
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV9
-  password: 4a2rfixophdjffa8KVA4Aa
-  port: 8080
-  server: 45.87.175.164
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost6
-  password: PCnnH6SQSnfoS27
-  port: 8091
-  server: 69.50.95.53
-  type: ss
-- cipher: aes-128-gcm
-  name: CA_Vancouver_Datacamp Limited
+  name: CA_Vancouver_Datacamp Limited_OpenAI_Claude
   password: shadowsocks
   port: 443
   server: 149.22.95.183
   type: ss
+- name: Euro😈github.com/Ruk1ng001_
+  network: tcp
+  password: telegram-id-privatevpns
+  port: 22222
+  server: 18.194.92.223
+  sni: trojan.burgerip.co.uk
+  type: trojan
 - cipher: chacha20-ietf-poly1305
-  name: HK_Hong Kong_Stacks Inc
-  password: 6f02d584-48ba-497d-8063-9fbe4d8f60a9
-  port: 11001
-  server: 183.232.229.165
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV10
-  password: 4a2rfixophdjffa8KVA4Aa
-  port: 8080
-  server: 45.87.175.181
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: IE_Dublin_Microsoft Corporation
-  password: qM7y4D7jun6cC5NMdQ3FE5
-  port: 64401
-  server: 52.169.126.67
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV11
-  password: 1RWwXhwfAB5gAEozU4G2Pg
-  port: 8080
-  server: beesyar.org
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Los Angeles_GTHost1
-  password: faBAoD54k87UJG7
-  port: 2376
-  server: 38.114.114.143
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Miami_GTHost
-  password: g5MeD6Ft3CWlJId
-  port: 5003
-  server: 38.110.1.197
-  type: ss
-- cipher: aes-128-gcm
-  name: US_New York_Datacamp Limited
-  password: shadowsocks
-  port: 443
-  server: 37.19.198.160
-  type: ss
-- cipher: aes-256-cfb
-  name: PL_Warsaw_Melbikomas UAB
-  password: ueLXVkvh4hckhErQ
-  port: 9060
-  server: 217.30.10.18
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: US_Riverdale Park_American Information Network
-  password: 5cp9Z3iWnJZ2
-  port: 443
-  server: 205.134.180.150
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV12
-  password: cvII85TrW6n0OGyfpHVS1u
-  port: 8080
-  server: 45.87.175.181
-  type: ss
-- cipher: aes-256-cfb
-  name: KR_Seoul_Amazon.com, Inc.
-  password: amazonskr05
-  port: 443
-  server: 3.35.137.32
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: HK_Hong Kong_Akile LTD2
+  name: HK_Hong Kong_Akile LTD_OpenAI1
   password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
   port: 117
   server: vip.cwy-water.filegear-sg.me
   type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost7
-  password: Y6R9pAtvxxzmGC
-  port: 3306
-  server: 69.50.95.53
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost8
-  password: kDWvXYZoTBcGkC4
-  port: 8882
-  server: 69.50.95.53
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Washington_GTHost
-  password: faBAoD54k87UJG7
-  port: 2376
-  server: 23.154.136.247
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost9
-  password: KixLvKzwjekG00rm
-  port: 5500
-  server: 69.50.95.53
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost10
-  password: cdBIDV42DCwnfIN
-  port: 8118
-  server: 69.50.95.53
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost11
-  password: Y6R9pAtvxxzmGC
-  port: 3389
-  server: 69.50.95.53
-  type: ss
 - cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV13
-  password: 4a2rfixophdjffa8KVA4Aa
-  port: 8080
-  server: 45.87.175.157
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV14
-  password: 1RWwXhwfAB5gAEozU4G2Pg
-  port: 8080
-  server: 45.87.175.178
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost12
-  password: kDWvXYZoTBcGkC4
-  port: 8881
-  server: 69.50.95.53
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Denver_GTHost13
-  password: lGqs95QkFHo2NV
-  port: 5498
-  server: 69.50.95.53
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: MY_Kuala Lumpur_Octopus Web Solution Inc2
+  name: HK_Hong Kong_Akile LTD_OpenAI2
   password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
   port: 100
-  server: vip.hwwater.filegear-sg.me
-  type: ss
-- cipher: aes-256-gcm
-  name: US_Los Angeles_GTHost2
-  password: pKEW8JPByTVTLtM
-  port: 443
-  server: 38.114.114.143
+  server: vip.cwy-water.filegear-sg.me
   type: ss
 - cipher: aes-256-cfb
-  name: US_Portland_Amazon.com, Inc.4
+  name: JP_Tokyo_Amazon Technologies Inc._Claude
   password: amazonskr05
   port: 443
-  server: 54.244.81.162
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: KR_Seoul_Kaopu Cloud HK Limited
-  password: f8f7aCzcPKbsF8p3
-  port: 990
-  server: 154.90.63.193
+  server: 13.230.104.31
   type: ss
 - cipher: aes-128-gcm
-  name: US_Dallas_Datacamp Limited
+  name: JP_Tokyo_Datacamp Limited_OpenAI_Claude1
   password: shadowsocks
   port: 443
-  server: 156.146.38.168
+  server: 149.22.87.241
   type: ss
-- cipher: aes-256-gcm
-  name: US_Los Angeles_GTHost3
-  password: RexnBgU7EV5ADxG
-  port: 7002
-  server: 38.114.114.143
+- cipher: aes-128-gcm
+  name: JP_Tokyo_Datacamp Limited_OpenAI_Claude2
+  password: shadowsocks
+  port: 443
+  server: 149.22.87.240
   type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV15
-  password: oZIoA69Q8yhcQV8ka3Pa3A
-  port: 8080
-  server: 193.29.139.202
-  type: ss
-- alterId: 0
-  cipher: auto
-  fingerprint: chrome
-  name: HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet1
-  network: tcp
-  port: 15372
-  server: cwy-water.filegear-sg.me
-  skip-cert-verify: true
-  tls: false
-  type: vmess
-  uuid: 86b2bbb5-deac-4068-9669-9d85c7fbffce
-- alterId: 0
-  cipher: auto
-  fingerprint: chrome
-  name: HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet2
-  network: tcp
-  port: 15371
-  server: cwy-water.filegear-sg.me
-  skip-cert-verify: true
-  tls: false
-  type: vmess
-  uuid: 86b2bbb5-deac-4068-9669-9d85c7fbffce
-- name: JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited
+- name: JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited_OpenAI_Claude
   password: JH9NEZKTib
   port: 17748
   server: djvp.sywk.com.cn
   sni: djvp.sywk.com.cn
   type: trojan
+- cipher: aes-256-cfb
+  name: KR_Seoul_Amazon Technologies Inc._OpenAI_Claude
+  password: amazonskr05
+  port: 443
+  server: 13.125.37.249
+  type: ss
+- cipher: aes-256-cfb
+  name: KR_Seoul_Amazon.com, Inc._OpenAI_Claude
+  password: amazonskr05
+  port: 443
+  server: 3.35.137.32
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: KR_Seoul_Kaopu Cloud HK Limited_OpenAI_Claude
+  password: f8f7aCzcPKbsF8p3
+  port: 990
+  server: 154.90.63.193
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: MY_Kuala Lumpur_Akile LTD_OpenAI1
+  password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
+  port: 101
+  server: vip.hwwater.filegear-sg.me
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: MY_Kuala Lumpur_Akile LTD_OpenAI2
+  password: 86b2bbb5-deac-4068-9669-9d85c7fbffce
+  port: 100
+  server: vip.hwwater.filegear-sg.me
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI
+  password: cvII85TrW6n0OGyfpHVS1u
+  port: 8080
+  server: beesyar.org
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI_Claude1
+  password: cvII85TrW6n0OGyfpHVS1u
+  port: 8080
+  server: 45.87.175.166
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI_Claude2
+  password: 4a2rfixophdjffa8KVA4Aa
+  port: 8080
+  server: 45.87.175.166
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI_Claude3
+  password: 1RWwXhwfAB5gAEozU4G2Pg
+  port: 8080
+  server: 45.87.175.166
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI_Claude4
+  password: cvII85TrW6n0OGyfpHVS1u
+  port: 8080
+  server: 45.87.175.178
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI_Claude5
+  password: 4a2rfixophdjffa8KVA4Aa
+  port: 8080
+  server: 45.87.175.157
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI_Claude6
+  password: cvII85TrW6n0OGyfpHVS1u
+  port: 8080
+  server: 45.87.175.157
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI_Claude7
+  password: oZIoA69Q8yhcQV8ka3Pa3A
+  port: 8080
+  server: 193.29.139.202
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI_Claude8
+  password: 1RWwXhwfAB5gAEozU4G2Pg
+  port: 8080
+  server: 45.87.175.178
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Greenhost BV_OpenAI_Claude9
+  password: 4a2rfixophdjffa8KVA4Aa
+  port: 8080
+  server: beesyar.org
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Ashburn_GTHost_OpenAI_Claude1
+  password: e4FCWrgpkji3QY
+  port: 9102
+  server: 142.202.49.122
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Ashburn_GTHost_OpenAI_Claude2
+  password: cdBIDV42DCwnfIN
+  port: 8118
+  server: 142.202.49.122
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Ashburn_GTHost_OpenAI_Claude3
+  password: XKFKl2rULjIp74
+  port: 8008
+  server: 142.202.49.122
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Ashburn_GTHost_OpenAI_Claude4
+  password: e4FCWrgpkji3QY
+  port: 9101
+  server: 142.202.49.122
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Ashburn_GTHost_OpenAI_Claude5
+  password: FoOiGlkAA9yPEGP
+  port: 7306
+  server: 142.202.49.122
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Ashburn_GTHost_OpenAI_Claude6
+  password: KixLvKzwjekG00rm
+  port: 5500
+  server: 142.202.49.122
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Atlanta_GTHost_OpenAI_Claude1
+  password: cdBIDV42DCwnfIN
+  port: 8118
+  server: 38.121.43.204
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Atlanta_GTHost_OpenAI_Claude2
+  password: PCnnH6SQSnfoS27
+  port: 8090
+  server: 38.121.43.204
+  type: ss
+- cipher: aes-128-gcm
+  name: US_Dallas_Datacamp Limited_OpenAI_Claude
+  password: shadowsocks
+  port: 443
+  server: 156.146.38.168
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude1
+  password: cdBIDV42DCwnfIN
+  port: 8118
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude10
+  password: KixLvKzwjekG00rm
+  port: 5500
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude11
+  password: zDNVedRFPQexG9v
+  port: 6379
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude12
+  password: pKEW8JPByTVTLtM
+  port: 443
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude13
+  password: TEzjfAYq2IjtuoS
+  port: 6697
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude2
+  password: lGqs95QkFHo2NV
+  port: 5498
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude3
+  password: FoOiGlkAA9yPEGP
+  port: 7307
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude4
+  password: Y6R9pAtvxxzmGC
+  port: 3306
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude5
+  password: kDWvXYZoTBcGkC4
+  port: 8882
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude6
+  password: cdBIDV42DCwnfIN
+  port: 8119
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude7
+  password: kDWvXYZoTBcGkC4
+  port: 8881
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude8
+  password: PCnnH6SQSnfoS27
+  port: 8091
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Denver_GTHost_OpenAI_Claude9
+  password: Y6R9pAtvxxzmGC
+  port: 3389
+  server: 69.50.95.53
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Los Angeles_GTHost_OpenAI_Claude1
+  password: RexnBgU7EV5ADxG
+  port: 7002
+  server: 38.114.114.143
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Los Angeles_GTHost_OpenAI_Claude2
+  password: pKEW8JPByTVTLtM
+  port: 443
+  server: 38.114.114.143
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Los Angeles_GTHost_OpenAI_Claude3
+  password: faBAoD54k87UJG7
+  port: 2376
+  server: 38.114.114.143
+  type: ss
+- alterId: 0
+  cipher: auto
+  name: US_Los Angeles_Psychz Networks_OpenAI_Claude1
+  network: ws
+  port: 2095
+  server: 104.19.32.216
+  servername: ip23.6016725.xyz
+  tls: false
+  type: vmess
+  udp: true
+  uuid: 18d96190-c10f-448f-a82a-2d36df5c3cde
+  ws-opts:
+    headers:
+      Host: ip23.6016725.xyz
+    path: github.com/Alvin9999
+- alterId: 0
+  cipher: auto
+  name: US_Los Angeles_Psychz Networks_OpenAI_Claude2
+  network: ws
+  port: 2082
+  server: 104.26.5.112
+  servername: ip30.6929198.xyz
+  tls: false
+  type: vmess
+  udp: true
+  uuid: 5f3f09ad-89cb-4e94-a7ad-aa8239913555
+  ws-opts:
+    headers:
+      Host: ip30.6929198.xyz
+    path: github.com/Alvin9999
+- alterId: 0
+  cipher: auto
+  name: US_Los Angeles_Psychz Networks_OpenAI_Claude3
+  network: ws
+  port: 2082
+  server: 162.159.140.56
+  servername: ip30.6929198.xyz
+  tls: false
+  type: vmess
+  udp: true
+  uuid: 5f3f09ad-89cb-4e94-a7ad-aa8239913555
+  ws-opts:
+    headers:
+      Host: ip30.6929198.xyz
+    path: github.com/Alvin9999
+- alterId: 0
+  cipher: auto
+  name: US_Los Angeles_Psychz Networks_OpenAI_Claude4
+  network: ws
+  port: 2086
+  server: 104.21.238.37
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  uuid: ee420fda-efb7-48a8-9249-8987e36ebd9e
+  ws-opts:
+    headers:
+      host: ip33.9447609.xyz
+    path: github.com/Alvin9999
+- alterId: 0
+  cipher: auto
+  name: US_Los Angeles_Psychz Networks_OpenAI_Claude5
+  network: ws
+  port: 2086
+  server: 104.21.238.36
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  uuid: ee420fda-efb7-48a8-9249-8987e36ebd9e
+  ws-opts:
+    headers:
+      host: ip33.9447609.xyz
+    path: github.com/Alvin9999
+- alterId: 0
+  cipher: auto
+  name: US_Los Angeles_Psychz Networks_OpenAI_Claude6
+  network: ws
+  port: 2095
+  server: 162.159.140.56
+  servername: ip23.6016725.xyz
+  tls: false
+  type: vmess
+  udp: true
+  uuid: 18d96190-c10f-448f-a82a-2d36df5c3cde
+  ws-opts:
+    headers:
+      Host: ip23.6016725.xyz
+    path: github.com/Alvin9999
+- alterId: 0
+  cipher: auto
+  name: US_Los Angeles_Psychz Networks_OpenAI_Claude7
+  network: ws
+  port: 2095
+  server: 172.64.166.2
+  servername: ip23.6016725.xyz
+  tls: false
+  type: vmess
+  udp: true
+  uuid: 18d96190-c10f-448f-a82a-2d36df5c3cde
+  ws-opts:
+    headers:
+      Host: ip23.6016725.xyz
+    path: github.com/Alvin9999
+- alterId: 0
+  cipher: auto
+  name: US_Los Angeles_Psychz Networks_OpenAI_Claude8
+  network: ws
+  port: 2086
+  server: 104.21.238.38
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  uuid: ee420fda-efb7-48a8-9249-8987e36ebd9e
+  ws-opts:
+    headers:
+      host: ip33.9447609.xyz
+    path: github.com/Alvin9999
+- cipher: aes-256-gcm
+  name: US_Miami_GTHost_OpenAI_Claude
+  password: g5MeD6Ft3CWlJId
+  port: 5003
+  server: 38.110.1.197
+  type: ss
+- cipher: aes-128-gcm
+  name: US_New York_Datacamp Limited_OpenAI_Claude
+  password: shadowsocks
+  port: 443
+  server: 37.19.198.160
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Newark_GTHost_OpenAI_Claude
+  password: g5MeD6Ft3CWlJId
+  port: 5004
+  server: 142.202.48.105
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: US_Purcellville_American Information Network_OpenAI_Claude
+  password: 5cp9Z3iWnJZ2
+  port: 443
+  server: 205.134.180.150
+  type: ss
+- cipher: aes-128-gcm
+  name: US_Seattle_Datacamp Limited_OpenAI_Claude
+  password: shadowsocks
+  port: 443
+  server: 212.102.47.131
+  type: ss
+- cipher: aes-256-gcm
+  name: US_Washington_GTHost_OpenAI_Claude
+  password: faBAoD54k87UJG7
+  port: 2376
+  server: 23.154.136.247
+  type: ss
 proxy-groups:
 - name: PROXY
   type: select
@@ -446,69 +556,79 @@ proxy-groups:
   - JP
   - SG
   - US
+  - OpenAI
+  - Claude
 - name: Select
   type: select
   filter: .*
   proxies:
-  - NL_Amsterdam_Greenhost BV1
-  - HK_Hong Kong_Akile LTD1
-  - GB_London_Global Connectivity Solutions LLP
-  - US_Denver_GTHost1
-  - NL_Amsterdam_Greenhost BV2
-  - NL_Amsterdam_Greenhost BV3
-  - NL_Amsterdam_Greenhost BV4
-  - US_Denver_GTHost2
-  - US_Portland_Amazon.com, Inc.1
-  - US_Denver_GTHost3
-  - MY_Kuala Lumpur_Octopus Web Solution Inc1
-  - US_Portland_Amazon.com, Inc.2
-  - JP_Tokyo_Datacamp Limited1
-  - US_Portland_Amazon.com, Inc.3
-  - US_Denver_GTHost4
-  - JP_Tokyo_Datacamp Limited2
-  - NL_Amsterdam_Greenhost BV5
-  - US_Atlanta_GTHost1
-  - NL_Amsterdam_Greenhost BV6
-  - US_Seattle_Datacamp Limited
-  - US_Atlanta_GTHost2
-  - US_Denver_GTHost5
-  - NL_Amsterdam_Greenhost BV7
-  - NL_Amsterdam_Greenhost BV8
-  - NL_Amsterdam_Greenhost BV9
-  - US_Denver_GTHost6
-  - CA_Vancouver_Datacamp Limited
-  - HK_Hong Kong_Stacks Inc
-  - NL_Amsterdam_Greenhost BV10
-  - IE_Dublin_Microsoft Corporation
-  - NL_Amsterdam_Greenhost BV11
-  - US_Los Angeles_GTHost1
-  - US_Miami_GTHost
-  - US_New York_Datacamp Limited
-  - PL_Warsaw_Melbikomas UAB
-  - US_Riverdale Park_American Information Network
-  - NL_Amsterdam_Greenhost BV12
-  - KR_Seoul_Amazon.com, Inc.
-  - HK_Hong Kong_Akile LTD2
-  - US_Denver_GTHost7
-  - US_Denver_GTHost8
-  - US_Washington_GTHost
-  - US_Denver_GTHost9
-  - US_Denver_GTHost10
-  - US_Denver_GTHost11
-  - NL_Amsterdam_Greenhost BV13
-  - NL_Amsterdam_Greenhost BV14
-  - US_Denver_GTHost12
-  - US_Denver_GTHost13
-  - MY_Kuala Lumpur_Octopus Web Solution Inc2
-  - US_Los Angeles_GTHost2
-  - US_Portland_Amazon.com, Inc.4
-  - KR_Seoul_Kaopu Cloud HK Limited
-  - US_Dallas_Datacamp Limited
-  - US_Los Angeles_GTHost3
-  - NL_Amsterdam_Greenhost BV15
-  - HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet1
-  - HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet2
-  - JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited
+  - 142.202.48.105_OpenAI_Claude
+  - 18.199.108.131_Claude
+  - 193.29.139.138_OpenAI_Claude
+  - 193.29.139.173_OpenAI_Claude
+  - 34.250.198.44_OpenAI_Claude
+  - CA_Vancouver_Datacamp Limited_OpenAI_Claude
+  - Euro😈github.com/Ruk1ng001_
+  - HK_Hong Kong_Akile LTD_OpenAI1
+  - HK_Hong Kong_Akile LTD_OpenAI2
+  - JP_Tokyo_Amazon Technologies Inc._Claude
+  - JP_Tokyo_Datacamp Limited_OpenAI_Claude1
+  - JP_Tokyo_Datacamp Limited_OpenAI_Claude2
+  - JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited_OpenAI_Claude
+  - KR_Seoul_Amazon Technologies Inc._OpenAI_Claude
+  - KR_Seoul_Amazon.com, Inc._OpenAI_Claude
+  - KR_Seoul_Kaopu Cloud HK Limited_OpenAI_Claude
+  - MY_Kuala Lumpur_Akile LTD_OpenAI1
+  - MY_Kuala Lumpur_Akile LTD_OpenAI2
+  - NL_Amsterdam_Greenhost BV_OpenAI
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude1
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude2
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude3
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude4
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude5
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude6
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude7
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude8
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude9
+  - US_Ashburn_GTHost_OpenAI_Claude1
+  - US_Ashburn_GTHost_OpenAI_Claude2
+  - US_Ashburn_GTHost_OpenAI_Claude3
+  - US_Ashburn_GTHost_OpenAI_Claude4
+  - US_Ashburn_GTHost_OpenAI_Claude5
+  - US_Ashburn_GTHost_OpenAI_Claude6
+  - US_Atlanta_GTHost_OpenAI_Claude1
+  - US_Atlanta_GTHost_OpenAI_Claude2
+  - US_Dallas_Datacamp Limited_OpenAI_Claude
+  - US_Denver_GTHost_OpenAI_Claude1
+  - US_Denver_GTHost_OpenAI_Claude10
+  - US_Denver_GTHost_OpenAI_Claude11
+  - US_Denver_GTHost_OpenAI_Claude12
+  - US_Denver_GTHost_OpenAI_Claude13
+  - US_Denver_GTHost_OpenAI_Claude2
+  - US_Denver_GTHost_OpenAI_Claude3
+  - US_Denver_GTHost_OpenAI_Claude4
+  - US_Denver_GTHost_OpenAI_Claude5
+  - US_Denver_GTHost_OpenAI_Claude6
+  - US_Denver_GTHost_OpenAI_Claude7
+  - US_Denver_GTHost_OpenAI_Claude8
+  - US_Denver_GTHost_OpenAI_Claude9
+  - US_Los Angeles_GTHost_OpenAI_Claude1
+  - US_Los Angeles_GTHost_OpenAI_Claude2
+  - US_Los Angeles_GTHost_OpenAI_Claude3
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude1
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude2
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude3
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude4
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude5
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude6
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude7
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude8
+  - US_Miami_GTHost_OpenAI_Claude
+  - US_New York_Datacamp Limited_OpenAI_Claude
+  - US_Newark_GTHost_OpenAI_Claude
+  - US_Purcellville_American Information Network_OpenAI_Claude
+  - US_Seattle_Datacamp Limited_OpenAI_Claude
+  - US_Washington_GTHost_OpenAI_Claude
 - name: Fallback
   type: fallback
   url: http://www.google.com/generate_204
@@ -525,12 +645,9 @@ proxy-groups:
   interval: 600
   tolerance: 500
   proxies:
-  - HK_Hong Kong_Akile LTD1
-  - HK_Hong Kong_Stacks Inc
-  - HK_Hong Kong_Akile LTD2
-  - KR_Seoul_Kaopu Cloud HK Limited
-  - HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet1
-  - HK_Central_Hong Kong Telecommunications (HKT) Limited Mass Internet2
+  - HK_Hong Kong_Akile LTD_OpenAI1
+  - HK_Hong Kong_Akile LTD_OpenAI2
+  - KR_Seoul_Kaopu Cloud HK Limited_OpenAI_Claude
   filter: (?i)港|HK|HongKong|hong kong
 - name: TW
   type: url-test
@@ -546,9 +663,10 @@ proxy-groups:
   interval: 600
   tolerance: 500
   proxies:
-  - JP_Tokyo_Datacamp Limited1
-  - JP_Tokyo_Datacamp Limited2
-  - JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited
+  - JP_Tokyo_Amazon Technologies Inc._Claude
+  - JP_Tokyo_Datacamp Limited_OpenAI_Claude1
+  - JP_Tokyo_Datacamp Limited_OpenAI_Claude2
+  - JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited_OpenAI_Claude
   filter: (?i)日|东京|大阪|JP|Japan|Tokyo|Osaka|Saitama
 - name: SG
   type: url-test
@@ -564,37 +682,185 @@ proxy-groups:
   interval: 600
   tolerance: 500
   proxies:
-  - US_Denver_GTHost1
-  - US_Denver_GTHost2
-  - US_Portland_Amazon.com, Inc.1
-  - US_Denver_GTHost3
-  - MY_Kuala Lumpur_Octopus Web Solution Inc1
-  - US_Portland_Amazon.com, Inc.2
-  - US_Portland_Amazon.com, Inc.3
-  - US_Denver_GTHost4
-  - US_Atlanta_GTHost1
-  - US_Seattle_Datacamp Limited
-  - US_Atlanta_GTHost2
-  - US_Denver_GTHost5
-  - US_Denver_GTHost6
-  - US_Los Angeles_GTHost1
-  - US_Miami_GTHost
-  - US_New York_Datacamp Limited
-  - US_Riverdale Park_American Information Network
-  - US_Denver_GTHost7
-  - US_Denver_GTHost8
-  - US_Washington_GTHost
-  - US_Denver_GTHost9
-  - US_Denver_GTHost10
-  - US_Denver_GTHost11
-  - US_Denver_GTHost12
-  - US_Denver_GTHost13
-  - MY_Kuala Lumpur_Octopus Web Solution Inc2
-  - US_Los Angeles_GTHost2
-  - US_Portland_Amazon.com, Inc.4
-  - US_Dallas_Datacamp Limited
-  - US_Los Angeles_GTHost3
+  - US_Ashburn_GTHost_OpenAI_Claude1
+  - US_Ashburn_GTHost_OpenAI_Claude2
+  - US_Ashburn_GTHost_OpenAI_Claude3
+  - US_Ashburn_GTHost_OpenAI_Claude4
+  - US_Ashburn_GTHost_OpenAI_Claude5
+  - US_Ashburn_GTHost_OpenAI_Claude6
+  - US_Atlanta_GTHost_OpenAI_Claude1
+  - US_Atlanta_GTHost_OpenAI_Claude2
+  - US_Dallas_Datacamp Limited_OpenAI_Claude
+  - US_Denver_GTHost_OpenAI_Claude1
+  - US_Denver_GTHost_OpenAI_Claude10
+  - US_Denver_GTHost_OpenAI_Claude11
+  - US_Denver_GTHost_OpenAI_Claude12
+  - US_Denver_GTHost_OpenAI_Claude13
+  - US_Denver_GTHost_OpenAI_Claude2
+  - US_Denver_GTHost_OpenAI_Claude3
+  - US_Denver_GTHost_OpenAI_Claude4
+  - US_Denver_GTHost_OpenAI_Claude5
+  - US_Denver_GTHost_OpenAI_Claude6
+  - US_Denver_GTHost_OpenAI_Claude7
+  - US_Denver_GTHost_OpenAI_Claude8
+  - US_Denver_GTHost_OpenAI_Claude9
+  - US_Los Angeles_GTHost_OpenAI_Claude1
+  - US_Los Angeles_GTHost_OpenAI_Claude2
+  - US_Los Angeles_GTHost_OpenAI_Claude3
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude1
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude2
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude3
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude4
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude5
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude6
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude7
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude8
+  - US_Miami_GTHost_OpenAI_Claude
+  - US_New York_Datacamp Limited_OpenAI_Claude
+  - US_Newark_GTHost_OpenAI_Claude
+  - US_Purcellville_American Information Network_OpenAI_Claude
+  - US_Seattle_Datacamp Limited_OpenAI_Claude
+  - US_Washington_GTHost_OpenAI_Claude
   filter: (?i)美|洛杉矶|芝加哥|西雅图|America|US|United.*?States
+- name: OpenAI
+  type: url-test
+  url: http://www.google.com/generate_204
+  interval: 600
+  tolerance: 500
+  proxies:
+  - 142.202.48.105_OpenAI_Claude
+  - 193.29.139.138_OpenAI_Claude
+  - 193.29.139.173_OpenAI_Claude
+  - 34.250.198.44_OpenAI_Claude
+  - CA_Vancouver_Datacamp Limited_OpenAI_Claude
+  - HK_Hong Kong_Akile LTD_OpenAI1
+  - HK_Hong Kong_Akile LTD_OpenAI2
+  - JP_Tokyo_Datacamp Limited_OpenAI_Claude1
+  - JP_Tokyo_Datacamp Limited_OpenAI_Claude2
+  - JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited_OpenAI_Claude
+  - KR_Seoul_Amazon Technologies Inc._OpenAI_Claude
+  - KR_Seoul_Amazon.com, Inc._OpenAI_Claude
+  - KR_Seoul_Kaopu Cloud HK Limited_OpenAI_Claude
+  - MY_Kuala Lumpur_Akile LTD_OpenAI1
+  - MY_Kuala Lumpur_Akile LTD_OpenAI2
+  - NL_Amsterdam_Greenhost BV_OpenAI
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude1
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude2
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude3
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude4
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude5
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude6
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude7
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude8
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude9
+  - US_Ashburn_GTHost_OpenAI_Claude1
+  - US_Ashburn_GTHost_OpenAI_Claude2
+  - US_Ashburn_GTHost_OpenAI_Claude3
+  - US_Ashburn_GTHost_OpenAI_Claude4
+  - US_Ashburn_GTHost_OpenAI_Claude5
+  - US_Ashburn_GTHost_OpenAI_Claude6
+  - US_Atlanta_GTHost_OpenAI_Claude1
+  - US_Atlanta_GTHost_OpenAI_Claude2
+  - US_Dallas_Datacamp Limited_OpenAI_Claude
+  - US_Denver_GTHost_OpenAI_Claude1
+  - US_Denver_GTHost_OpenAI_Claude10
+  - US_Denver_GTHost_OpenAI_Claude11
+  - US_Denver_GTHost_OpenAI_Claude12
+  - US_Denver_GTHost_OpenAI_Claude13
+  - US_Denver_GTHost_OpenAI_Claude2
+  - US_Denver_GTHost_OpenAI_Claude3
+  - US_Denver_GTHost_OpenAI_Claude4
+  - US_Denver_GTHost_OpenAI_Claude5
+  - US_Denver_GTHost_OpenAI_Claude6
+  - US_Denver_GTHost_OpenAI_Claude7
+  - US_Denver_GTHost_OpenAI_Claude8
+  - US_Denver_GTHost_OpenAI_Claude9
+  - US_Los Angeles_GTHost_OpenAI_Claude1
+  - US_Los Angeles_GTHost_OpenAI_Claude2
+  - US_Los Angeles_GTHost_OpenAI_Claude3
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude1
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude2
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude3
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude4
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude5
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude6
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude7
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude8
+  - US_Miami_GTHost_OpenAI_Claude
+  - US_New York_Datacamp Limited_OpenAI_Claude
+  - US_Newark_GTHost_OpenAI_Claude
+  - US_Purcellville_American Information Network_OpenAI_Claude
+  - US_Seattle_Datacamp Limited_OpenAI_Claude
+  - US_Washington_GTHost_OpenAI_Claude
+  filter: (?i)OpenAI
+- name: Claude
+  type: url-test
+  url: http://www.google.com/generate_204
+  interval: 600
+  tolerance: 500
+  proxies:
+  - 142.202.48.105_OpenAI_Claude
+  - 18.199.108.131_Claude
+  - 193.29.139.138_OpenAI_Claude
+  - 193.29.139.173_OpenAI_Claude
+  - 34.250.198.44_OpenAI_Claude
+  - CA_Vancouver_Datacamp Limited_OpenAI_Claude
+  - JP_Tokyo_Amazon Technologies Inc._Claude
+  - JP_Tokyo_Datacamp Limited_OpenAI_Claude1
+  - JP_Tokyo_Datacamp Limited_OpenAI_Claude2
+  - JP_Tokyo_Shenzhen Tencent Computer Systems Company Limited_OpenAI_Claude
+  - KR_Seoul_Amazon Technologies Inc._OpenAI_Claude
+  - KR_Seoul_Amazon.com, Inc._OpenAI_Claude
+  - KR_Seoul_Kaopu Cloud HK Limited_OpenAI_Claude
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude1
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude2
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude3
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude4
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude5
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude6
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude7
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude8
+  - NL_Amsterdam_Greenhost BV_OpenAI_Claude9
+  - US_Ashburn_GTHost_OpenAI_Claude1
+  - US_Ashburn_GTHost_OpenAI_Claude2
+  - US_Ashburn_GTHost_OpenAI_Claude3
+  - US_Ashburn_GTHost_OpenAI_Claude4
+  - US_Ashburn_GTHost_OpenAI_Claude5
+  - US_Ashburn_GTHost_OpenAI_Claude6
+  - US_Atlanta_GTHost_OpenAI_Claude1
+  - US_Atlanta_GTHost_OpenAI_Claude2
+  - US_Dallas_Datacamp Limited_OpenAI_Claude
+  - US_Denver_GTHost_OpenAI_Claude1
+  - US_Denver_GTHost_OpenAI_Claude10
+  - US_Denver_GTHost_OpenAI_Claude11
+  - US_Denver_GTHost_OpenAI_Claude12
+  - US_Denver_GTHost_OpenAI_Claude13
+  - US_Denver_GTHost_OpenAI_Claude2
+  - US_Denver_GTHost_OpenAI_Claude3
+  - US_Denver_GTHost_OpenAI_Claude4
+  - US_Denver_GTHost_OpenAI_Claude5
+  - US_Denver_GTHost_OpenAI_Claude6
+  - US_Denver_GTHost_OpenAI_Claude7
+  - US_Denver_GTHost_OpenAI_Claude8
+  - US_Denver_GTHost_OpenAI_Claude9
+  - US_Los Angeles_GTHost_OpenAI_Claude1
+  - US_Los Angeles_GTHost_OpenAI_Claude2
+  - US_Los Angeles_GTHost_OpenAI_Claude3
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude1
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude2
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude3
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude4
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude5
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude6
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude7
+  - US_Los Angeles_Psychz Networks_OpenAI_Claude8
+  - US_Miami_GTHost_OpenAI_Claude
+  - US_New York_Datacamp Limited_OpenAI_Claude
+  - US_Newark_GTHost_OpenAI_Claude
+  - US_Purcellville_American Information Network_OpenAI_Claude
+  - US_Seattle_Datacamp Limited_OpenAI_Claude
+  - US_Washington_GTHost_OpenAI_Claude
+  filter: (?i)Claude
 rules:
 - RULE-SET,ads,REJECT
 - RULE-SET,applications,DIRECT
@@ -604,8 +870,9 @@ rules:
 - RULE-SET,google-cn,DIRECT
 - RULE-SET,bilibili,DIRECT
 - RULE-SET,cn,DIRECT
-- RULE-SET,ai,PROXY
-- RULE-SET,proxy,PROXY
+- RULE-SET,claude,Claude
+- RULE-SET,ai,OpenAI
+- RULE-SET,youtube,PROXY
 - RULE-SET,telegramip,PROXY,no-resolve
 - RULE-SET,privateip,DIRECT,no-resolve
 - RULE-SET,cnip,DIRECT,no-resolve
@@ -681,14 +948,21 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/ai.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/ai.mrs
+    url: https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/ai/ai.mrs
     interval: 86400
-  proxy:
+  claude:
     type: http
     behavior: domain
     format: mrs
-    path: ./rules/proxy.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/proxy.mrs
+    path: ./rules/claude.mrs
+    url: https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/claude/claude.mrs
+    interval: 86400
+  youtube:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./rules/youtube.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/youtube.mrs
     interval: 86400
   cn:
     type: http
