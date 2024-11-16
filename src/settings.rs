@@ -14,6 +14,7 @@ pub struct Settings {
     pub rename_node: bool,
     pub rename_pattern: String,
     pub need_add_pool: bool,
+    pub test_group_size: usize,
     pub pools: Vec<String>,
     pub connect_test: DelayTestConfig,
     pub speed_test: SpeedTestConfig,

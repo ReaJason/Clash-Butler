@@ -18,7 +18,7 @@ const CF_TRACE_URL: &str = "https://1.0.0.1/cdn-cgi/trace";
 const CF_CN_TRACE_URL: &str = "https://cf-ns.com/cdn-cgi/trace";
 
 // IP 查询超时时间
-const TIMEOUT: Duration = Duration::from_millis(1000);
+const TIMEOUT: Duration = Duration::from_secs(5);
 
 type IpBoxFuture<'a> = BoxFuture<'a, Result<(IpAddr, &'a str), Box<dyn std::error::Error>>>;
 

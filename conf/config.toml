@@ -6,11 +6,7 @@ fast_mode = false
 # 支持本地地址（绝对地址）/User/xxx/xx.yml
 # 支持单个订阅链接，ss://xxx
 subs = [
-    "https://sub.reajason.eu.org/clash.yaml",
-    "https://s1.byte16.com/api/v1/client/subscribe?token=feba159f3478ff8936f52a43d88aae8b",
-    "https://www.cwy-water.us.kg/api/v1/client/subscribe?token=daa0f9c43c5b7f91a08aee21dab0138c",
-    "https://guanxi.us.kg/guanxi",
-    "https://naiher.me/vdnYUg.txt",
+    "https://raw.githubusercontent.com/ReaJason/Clash-Butler/refs/heads/master/clash.yaml"
 ]
 
 # 是否重命名节点，打开后会使用 geoip 等方式进行代理真实 IP 和地理地址查询
@@ -23,6 +19,9 @@ need_add_pool = true
 pools = [
     "https://raw.githubusercontent.com/Ruk1ng001/freeSub/main/clash.yaml"
 ]
+
+# 测试分组大小
+test_group_size = 50
 
 # 连通性测试
 [connect_test]
