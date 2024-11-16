@@ -2,7 +2,7 @@ mixed-port: 7999
 allow-lan: true
 bind-address: "*"
 mode: rule
-log-level: info
+log-level: debug
 external-controller: ":9091"
 geodata-mode: true
 geox-url:

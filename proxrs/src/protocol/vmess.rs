@@ -139,7 +139,7 @@ impl ProxyAdapter for Vmess {
         let url = base64decode(&link[8..]);
         let parsed: serde_json::Value = serde_json::from_str(&url).unwrap();
 
-        let name = String::from(parsed["ps"].as_str().unwrap());
+        let name = String::from(parsed["ps"].as_str().unwrap_or_default());
         let server = parsed["add"].as_str().unwrap().to_string();
         let alter_id = parsed["aid"].as_str().map_or_else(
             || parsed["aid"].as_u64().unwrap() as u16,
