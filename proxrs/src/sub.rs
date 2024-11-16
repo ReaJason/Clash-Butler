@@ -268,7 +268,7 @@ impl SubManager {
         }
 
         // 以名称重新排序
-        proxies.sort_by(|a, b| a.get_name().cmp(&b.get_name()));
+        proxies.sort_by(|a, b| a.get_name().cmp(b.get_name()));
     }
 
     // 通过配置格式，获取 clash 配置文件内容
@@ -311,7 +311,10 @@ impl SubManager {
                             for proxy in new_proxies {
                                 if regex.is_match(proxy.get_name()) {
                                     if !removed_default
-                                        && proxies.get(0).is_some_and(|p| p.as_str().unwrap().eq("PROXY")) {
+                                        && proxies
+                                            .first()
+                                            .is_some_and(|p| p.as_str().unwrap().eq("PROXY"))
+                                    {
                                         proxies.remove(0);
                                         removed_default = true;
                                     }
@@ -352,7 +355,7 @@ mod test {
         let mut proxies = SubManager::parse_from_path(
             "/Users/reajason/RustroverProjects/clash-butler/subs/0c1149d13476bbe3b62eecb7c9b895f4",
         )
-            .unwrap();
+        .unwrap();
         SubManager::unset_proxies_name(&mut proxies);
         let content = SubManager::get_clash_config_content(path.to_string(), &proxies).unwrap();
         println!("{}", content);
@@ -429,16 +432,12 @@ mod test {
 
     #[tokio::test]
     async fn test_rename() {
-        let urls = vec![
-            "/Users/reajason/RustroverProjects/clash-butler/clash.yaml"
-                .to_string(),
-        ];
+        let urls = vec!["/Users/reajason/RustroverProjects/clash-butler/clash.yaml".to_string()];
         let mut proxies = SubManager::get_proxies_from_urls(&urls).await;
         SubManager::rename_dup_proxies_name(&mut proxies);
         let release_clash_template_path =
             "/Users/reajason/RustroverProjects/clash-butler/conf/clash_release.yaml".to_string();
-        let save_path =
-            "/Users/reajason/RustroverProjects/clash-butler/clash1.yaml".to_string();
+        let save_path = "/Users/reajason/RustroverProjects/clash-butler/clash1.yaml".to_string();
         SubManager::save_proxies_into_clash_file(&proxies, release_clash_template_path, save_path)
     }
 }
