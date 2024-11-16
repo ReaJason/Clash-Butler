@@ -244,6 +244,13 @@ mod test {
         assert_eq!("2001:bc8:1d90:d4e::", vless.server);
     }
 
+    #[test]
+    fn test_parse_vless3() {
+        let link = "vless://fa3129d0-5d5c-4bdf-99d7-708b25e92241@[2603:c022:8013:f300:2859:298e:1387:7c28]:35803?encryption=none&security=reality&sni=sega.com&fp=firefox&pbk=euJOlEl0IAbuX8rsStBPM_DVHBtWF0e5uinEhHCzYxw&sid=32ae7737&spx=%2F&type=tcp&headerType=none#yx9mzoya".to_string();
+        let vless = Vless::from_link(link).unwrap();
+        assert_eq!(vless.server, "2603:c022:8013:f300:2859:298e:1387:7c28");
+    }
+
     // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&
     // security=reality&encryption=none&type=tcp&flow=xtls-rprx-vision&
     // pbk=Kyrdn7OhtL66JwSRScElBxoFSZLr5beafP4njt_Y_G0&sid=a3ffb25d&sni=python.org&

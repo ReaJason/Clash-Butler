@@ -242,6 +242,13 @@ mod test {
     }
 
     #[test]
+    fn test_ok() {
+        let link = "hysteria2://jfVRhwnzx1PNAvCOYM7Vf0sheE4@hy2.jimsblog.us.kg:35808/?mport=35808,35808-35850&sni=hy2.jimsblog.us.kg#Hysteria2".to_string();
+        let hysteria2 = Hysteria2::from_link(link);
+        assert!(hysteria2.is_ok())
+    }
+
+    #[test]
     fn test_hysteria2_from_json() {
         let json = r#"{
                 "auth": "836e5ec1-382f-4325-a1dd-e6b5cf2a3632",
