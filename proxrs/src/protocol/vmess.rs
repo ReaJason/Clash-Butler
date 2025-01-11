@@ -18,34 +18,34 @@ use crate::protocol::WSOptions;
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct Vmess {
-    name: String,
-    server: String,
+    pub name: String,
+    pub server: String,
     #[serde(deserialize_with = "deserialize_u16_or_string")]
-    port: u16,
-    uuid: String,
+    pub port: u16,
+    pub uuid: String,
     #[serde(deserialize_with = "deserialize_u16_or_string", rename = "alterId")]
-    alter_id: u16,
-    cipher: String,
+    pub alter_id: u16,
+    pub cipher: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    alpn: Option<Vec<String>>,
+    pub alpn: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    tls: Option<bool>,
+    pub tls: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    udp: Option<bool>,
+    pub udp: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    servername: Option<String>,
+    pub servername: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    fingerprint: Option<String>,
+    pub fingerprint: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    network: Option<String>,
+    pub network: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "skip-cert-verify")]
-    skip_cert_verify: Option<bool>,
+    pub skip_cert_verify: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "ws-opts")]
-    ws_opts: Option<WSOptions>,
+    pub ws_opts: Option<WSOptions>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "grpc-opts")]
-    grpc_opts: Option<GrpcOptions>,
+    pub grpc_opts: Option<GrpcOptions>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "reality-opts")]
-    realty_opts: Option<RealtyOptions>,
+    pub realty_opts: Option<RealtyOptions>,
 }
 
 impl PartialEq for Vmess {
@@ -137,88 +137,136 @@ impl ProxyAdapter for Vmess {
         Self: Sized,
     {
         let url = base64decode(&link[8..]);
-        let parsed: serde_json::Value = serde_json::from_str(&url).unwrap();
+        match serde_json::from_str::<serde_json::Value>(&url) {
+            Ok(parsed) => {
+                let name = String::from(parsed["ps"].as_str().unwrap_or_default());
+                let server = parsed["add"].as_str().unwrap().to_string();
+                let alter_id = parsed["aid"].as_str().map_or_else(
+                    || parsed["aid"].as_u64().unwrap() as u16,
+                    |s| s.parse::<u16>().unwrap(),
+                );
+                let uuid = parsed["id"].as_str().unwrap().to_string();
+                let port = parsed["port"].as_str().map_or_else(
+                    || parsed["port"].as_u64().unwrap() as u16,
+                    |s| s.parse::<u16>().unwrap(),
+                );
 
-        let name = String::from(parsed["ps"].as_str().unwrap_or_default());
-        let server = parsed["add"].as_str().unwrap().to_string();
-        let alter_id = parsed["aid"].as_str().map_or_else(
-            || parsed["aid"].as_u64().unwrap() as u16,
-            |s| s.parse::<u16>().unwrap(),
-        );
-        let uuid = parsed["id"].as_str().unwrap().to_string();
-        let port = parsed["port"].as_str().map_or_else(
-            || parsed["port"].as_u64().unwrap() as u16,
-            |s| s.parse::<u16>().unwrap(),
-        );
+                let mut alpn = None;
+                if let Some(p) = parsed["alpn"].as_str() {
+                    alpn = Some(p.split(",").map(|s| s.to_string()).collect());
+                }
 
-        let mut alpn = None;
-        if let Some(p) = parsed["alpn"].as_str() {
-            alpn = Some(p.split(",").map(|s| s.to_string()).collect());
-        }
+                let mut network = parsed["net"].as_str().map(|s| s.to_string());
+                let mut ws_opts = None;
 
-        let mut network = parsed["net"].as_str().map(|s| s.to_string());
-        let mut ws_opts = None;
+                // parse ws-opts
+                if network.as_deref().is_some_and(|s| s == "ws") {
+                    let path = parsed["path"].as_str().map(|s| s.to_string());
+                    let mut headers = HashMap::new();
+                    if let Some(host) = parsed["host"].as_str() {
+                        headers.insert(String::from("host"), host.to_string());
+                    }
+                    ws_opts = Some(WSOptions {
+                        path,
+                        headers: Some(headers),
+                    });
+                }
 
-        // parse ws-opts
-        if network.as_deref().is_some_and(|s| s == "ws") {
-            let path = parsed["path"].as_str().map(|s| s.to_string());
-            let mut headers = HashMap::new();
-            if let Some(host) = parsed["host"].as_str() {
-                headers.insert(String::from("host"), host.to_string());
+                let mut grpc_opts = None;
+
+                // parse grpc sni
+                if network.as_deref().is_some_and(|s| s == "grpc") {
+                    let sni = parsed["sni"].as_str().map(|s| s.to_string());
+                    grpc_opts = Some(GrpcOptions {
+                        grpc_service_name: sni,
+                    })
+                }
+
+                if let Some(net) = network.as_deref() {
+                    if net == "quic" || net == "http" {
+                        return Err(UnsupportedLinkError {
+                            message: format!("vmess not suitable for network type {}", net),
+                        });
+                    }
+
+                    if net.is_empty() {
+                        network = None;
+                    }
+                }
+
+                let servername = parsed["sni"].as_str().map(|s| s.to_string());
+                let udp = parsed["udp"]
+                    .as_str()
+                    .map(|s| s.parse::<bool>().unwrap_or(true));
+                let tls = parsed["tls"]
+                    .as_str()
+                    .map(|s| s.parse::<bool>().unwrap_or(false));
+                Ok(Vmess {
+                    name,
+                    server,
+                    port,
+                    uuid,
+                    alter_id,
+                    cipher: "auto".to_string(),
+                    tls,
+                    udp,
+                    alpn,
+                    servername,
+                    fingerprint: Some(String::from("chrome")),
+                    network,
+                    skip_cert_verify: Some(true),
+                    ws_opts,
+                    grpc_opts,
+                    realty_opts: None,
+                })
             }
-            ws_opts = Some(WSOptions {
-                path,
-                headers: Some(headers),
-            });
-        }
+            Err(_) => {
+                // parse params
+                let parts: Vec<&str> = url.split("?").collect();
+                let params = parts[1];
+                let mut params_map: HashMap<&str, String> = HashMap::new();
+                for param in params.split("&") {
+                    if let Some((key, value)) = param.split_once('=') {
+                        let value = value.parse::<String>().unwrap();
+                        params_map.insert(key, value);
+                    }
+                }
+                let alter_id = params_map.get("alterId").unwrap().parse::<u16>().unwrap();
+                let name = params_map.get("remarks").unwrap().to_string();
 
-        let mut grpc_opts = None;
+                // parse server port
+                let url = base64decode(parts[0]);
+                let secret_server_port_parts: Vec<&str> = url.split("@").collect();
 
-        // parse grpc sni
-        if network.as_deref().is_some_and(|s| s == "grpc") {
-            let sni = parsed["sni"].as_str().map(|s| s.to_string());
-            grpc_opts = Some(GrpcOptions {
-                grpc_service_name: sni,
-            })
-        }
+                let secret = base64decode(secret_server_port_parts[0]);
+                let cipher_pwd_parts: Vec<&str> = secret.splitn(2, ":").collect();
+                let cipher = cipher_pwd_parts[0].parse().unwrap();
+                let uuid = cipher_pwd_parts[1].parse().unwrap();
 
-        if let Some(net) = network.as_deref() {
-            if net == "quic" || net == "http" {
-                return Err(UnsupportedLinkError {
-                    message: format!("vmess not suitable for network type {}", net),
-                });
+                let server_port = secret_server_port_parts[1];
+                let server_port_parts: Vec<&str> = server_port.split(":").collect();
+                let server = server_port_parts[0].parse::<String>().unwrap();
+                let port = server_port_parts[1].parse::<u16>().unwrap();
+                Ok(Vmess{
+                    name,
+                    server,
+                    port,
+                    uuid,
+                    alter_id,
+                    cipher,
+                    alpn: None,
+                    tls: None,
+                    udp: None,
+                    servername: None,
+                    fingerprint: None,
+                    network: None,
+                    skip_cert_verify: Some(true),
+                    ws_opts: None,
+                    grpc_opts: None,
+                    realty_opts: None,
+                })
             }
-
-            if net.is_empty() {
-                network = None;
-            }
         }
-
-        let servername = parsed["sni"].as_str().map(|s| s.to_string());
-        let udp = parsed["udp"]
-            .as_str()
-            .map(|s| s.parse::<bool>().unwrap_or(true));
-        let tls = parsed["tls"]
-            .as_str()
-            .map(|s| s.parse::<bool>().unwrap_or(false));
-        Ok(Vmess {
-            name,
-            server,
-            port,
-            uuid,
-            alter_id,
-            cipher: "auto".to_string(),
-            tls,
-            udp,
-            alpn,
-            servername,
-            fingerprint: Some(String::from("chrome")),
-            network,
-            skip_cert_verify: Some(true),
-            ws_opts,
-            grpc_opts,
-            realty_opts: None,
-        })
     }
 
     fn to_json(&self) -> Result<String, Error> {
@@ -256,6 +304,19 @@ mod test {
         assert_eq!(vmess.server, "kr.aikunapp.com");
         assert_eq!(vmess.port, 20006);
         assert_eq!(vmess.uuid, "2136dc6c-5fd4-4bfd-88a1-2aeea9888f8b");
+        assert_eq!(vmess.alter_id, 0);
+        assert_eq!(vmess.network, None);
+        assert!(vmess.ws_opts.is_none());
+    }
+
+    #[test]
+    fn test_parse_ss_vmess() {
+        let link = String::from("vmess://YXV0bzoyMTc5ZjE3OS01MzYwLTRiYzAtOWJjYS1mZmQ1NDAzNjNlNGFAMjAzLjY2LjE0LjQ4OjQ1MTE2?remarks=%F0%9F%87%B9%F0%9F%87%BC%20%E6%B8%AF%E4%BB%94&obfs=none&alterId=0");
+        let vmess = Vmess::from_link(link).unwrap();
+        assert_eq!(vmess.server, "203.66.14.48");
+        assert_eq!(vmess.port, 45116);
+        assert_eq!(vmess.uuid, "2179f179-5360-4bc0-9bca-ffd540363e4a");
+        assert_eq!(vmess.cipher, "auto");
         assert_eq!(vmess.alter_id, 0);
         assert_eq!(vmess.network, None);
         assert!(vmess.ws_opts.is_none());

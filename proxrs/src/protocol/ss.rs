@@ -96,7 +96,7 @@ impl ProxyAdapter for SS {
         }
 
         // parse plugin
-        let url = parts[0];
+        let url = base64decode(parts[0]);
         let parts: Vec<&str> = url.split("?").collect();
         let mut plugin = None;
         let mut plugin_opts = None;
@@ -135,7 +135,7 @@ impl ProxyAdapter for SS {
         let secret_server_port_parts: Vec<&str> = url.split("@").collect();
 
         let secret = base64decode(secret_server_port_parts[0]);
-        let cipher_pwd_parts: Vec<&str> = secret.split(":").collect();
+        let cipher_pwd_parts: Vec<&str> = secret.splitn(2, ":").collect();
         let cipher = cipher_pwd_parts[0].parse().unwrap();
         let password = cipher_pwd_parts[1].parse().unwrap();
 
@@ -204,6 +204,16 @@ mod test {
         let result = SS::from_link(link.clone()).unwrap();
         assert_eq!("Q1GUZ7VDPZOASC9H", result.password);
         assert_eq!("aes-256-gcm", result.cipher);
+    }
+
+    #[test]
+    fn test_parse_base64_ss1() {
+        let link = String::from(
+            "ss://MjAyMi1ibGFrZTMtYWVzLTI1Ni1nY206emtWV2lPU1o4OEVnZi9LSlE1azFlWFRZUFNMNXhZWEZ6OTFPanBFRWE1UT06dzZLQTFFYkNrM2hpdWJQZWlMMktkUUJjcG9kbUl3c1VlcDJBLzFVd3hLbz1AYXdzMS5pb2xvZnQubWU6NDg1Njc#%F0%9F%87%AF%F0%9F%87%B5%20AWS",
+        );
+        let result = SS::from_link(link.clone()).unwrap();
+        assert_eq!("zkVWiOSZ88Egf/KJQ5k1eXTYPSL5xYXFz91OjpEEa5Q=:w6KA1EbCk3hiubPeiL2KdQBcpodmIwsUep2A/1UwxKo=", result.password);
+        assert_eq!("2022-blake3-aes-256-gcm", result.cipher);
     }
 
     #[test]
