@@ -16,31 +16,31 @@ use crate::protocol::WSOptions;
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct Vless {
-    name: String,
-    server: String,
+    pub name: String,
+    pub server: String,
     #[serde(deserialize_with = "deserialize_u16_or_string")]
-    port: u16,
-    uuid: String,
+    pub port: u16,
+    pub uuid: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    flow: Option<String>,
+    pub flow: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    tls: Option<bool>,
+    pub tls: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    udp: Option<bool>,
+    pub udp: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "skip-cert-verify")]
-    skip_cert_verify: Option<bool>,
+    pub skip_cert_verify: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    fingerprint: Option<String>,
+    pub fingerprint: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    servername: Option<String>,
+    pub servername: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    network: Option<String>,
+    pub network: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "ws-opts")]
-    ws_opts: Option<WSOptions>,
+    pub ws_opts: Option<WSOptions>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "reality-opts")]
-    reality_opts: Option<RealtyOptions>,
+    pub reality_opts: Option<RealtyOptions>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "grpc-opts")]
-    grpc_opts: Option<GrpcOptions>,
+    pub grpc_opts: Option<GrpcOptions>,
 }
 
 impl PartialEq for Vless {
@@ -78,14 +78,16 @@ impl ProxyAdapter for Vless {
         }
 
         let url = parts[0];
+        let mut params_map: HashMap<&str, String> = HashMap::new();
         let parts = url.split("?").collect::<Vec<_>>();
 
-        let params = parts[1];
-        let mut params_map: HashMap<&str, String> = HashMap::new();
-        for param in params.split("&") {
-            if let Some((key, value)) = param.split_once('=') {
-                let value = value.parse::<String>().unwrap();
-                params_map.insert(key, value);
+        if parts.len() > 1 {
+            let params = parts[1];
+            for param in params.split("&") {
+                if let Some((key, value)) = param.split_once('=') {
+                    let value = value.parse::<String>().unwrap();
+                    params_map.insert(key, value);
+                }
             }
         }
 

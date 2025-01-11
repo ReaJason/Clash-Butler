@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::net::IpAddr;
+use std::net::{IpAddr, Ipv4Addr};
 use std::str::FromStr;
 use std::time::Duration;
 
@@ -118,7 +118,7 @@ fn parse_trace_info(text: String) -> TraceInfo {
     TraceInfo {
         fl: map.get("fl").unwrap_or(&String::new()).clone(),
         h: map.get("h").unwrap_or(&String::new()).clone(),
-        ip: IpAddr::from_str(&map.get("ip").unwrap().clone()).unwrap(),
+        ip: IpAddr::from_str(&map.get("ip").unwrap_or(&String::new()).clone()).unwrap_or(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1))),
         ts: map.get("ts").unwrap_or(&String::new()).clone(),
         visit_scheme: map.get("visit_scheme").unwrap_or(&String::new()).clone(),
         uag: map.get("uag").unwrap_or(&String::new()).clone(),

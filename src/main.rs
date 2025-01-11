@@ -206,8 +206,6 @@ async fn run(config: Settings) {
                     if ip_result.is_ok() {
                         let (proxy_ip, from) = ip_result.unwrap();
                         info!("「{}」ip: {} from: {}", node, proxy_ip, from);
-                        i += 1;
-
                         let mut openai_is_ok = false;
                         match website::openai_is_ok(&clash_meta.proxy_url).await {
                             Ok(_) => {
@@ -275,8 +273,8 @@ async fn run(config: Settings) {
                 } else {
                     let err_msg = ip_result.err().unwrap();
                     error!("设置节点 {} 失败, {}", node, err_msg);
-                    i += 1;
                 }
+                i += 1;
             }
         }
 
