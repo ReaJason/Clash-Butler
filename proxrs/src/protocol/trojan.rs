@@ -67,7 +67,11 @@ impl ProxyAdapter for Trojan {
         // b7c0a9b4-0b85-4e93-921e-63bef702172b@111.38.53.159:41001
         // 4fee57cc-ee15-4800-888f-3493f7b261f2@hk1.ee2c9087-71b0-70af-7924-09d714b25b96.6df03129.
         // the-best-airport.com:443?type=tcp&sni=new.download.the-best-airport.com&allowInsecure=1
-        let parts: Vec<&str> = url.split("?").collect();
+        // 53fa8faf-ba4b-4322-9c69-a3e5b1555049@156.238.18.163:2095/?type=ws
+        let mut parts: Vec<&str> = url.split("/?").collect();
+        if parts.len() == 1 {
+            parts = url.split("?").collect();
+        }
         let mut network = None;
         let mut sni = None;
         let mut skip_cert_verify = None;

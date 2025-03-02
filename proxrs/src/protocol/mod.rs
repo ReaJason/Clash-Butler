@@ -1,9 +1,9 @@
-mod hysteria2;
 mod ss;
 mod ssr;
 mod trojan;
 pub(crate) mod vless;
 pub(crate) mod vmess;
+pub(crate) mod hysteria2;
 
 use std::any::Any;
 use std::collections::HashMap;
