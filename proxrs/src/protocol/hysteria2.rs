@@ -41,7 +41,7 @@ pub struct Hysteria2 {
     pub obfs_password: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sni: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none", rename = "skip-cert-verify")]
     pub skip_cert_verify: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub fingerprint: Option<String>,
@@ -142,7 +142,7 @@ impl ProxyAdapter for Hysteria2 {
         }
 
         let skip_cert_verify = params_map.get("insecure").is_some_and(|s| s == "1");
-        let sni = params_map.get("sni").cloned();
+        let sni = params_map.get("sni").or(params_map.get("peer")).cloned();
         let up = params_map.get("up").cloned();
         let down = params_map.get("down").cloned();
         let mut ports = params_map.get("mport").cloned();

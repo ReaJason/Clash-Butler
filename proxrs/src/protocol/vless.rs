@@ -79,7 +79,10 @@ impl ProxyAdapter for Vless {
 
         let url = parts[0];
         let mut params_map: HashMap<&str, String> = HashMap::new();
-        let parts = url.split("?").collect::<Vec<_>>();
+        let mut parts = url.split("/?").collect::<Vec<_>>();
+        if parts.len() == 1 {
+            parts = url.split("?").collect::<Vec<_>>();
+        }
 
         if parts.len() > 1 {
             let params = parts[1];
