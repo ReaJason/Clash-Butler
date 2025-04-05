@@ -76,8 +76,6 @@ proxy-groups:
       - JP
       - SG
       - US
-      - OpenAI
-      - Claude
   - name: Select
     type: select
     filter: ".*"
@@ -96,35 +94,35 @@ proxy-groups:
     type: url-test
     url: http://www.google.com/generate_204
     interval: 600
-    tolerance: 500
+    tolerance: 2000
     proxies: [ ]
     filter: "(?i)港|HK|HongKong|hong kong"
   - name: TW
     type: url-test
     url: http://www.google.com/generate_204
     interval: 600
-    tolerance: 500
+    tolerance: 2000
     proxies: [ ]
     filter: "台湾|TW|Tw|Taiwan|新北|彰化|CHT|HINET"
   - name: JP
     type: url-test
     url: http://www.google.com/generate_204
     interval: 600
-    tolerance: 500
+    tolerance: 2000
     proxies: [ ]
     filter: "(?i)日|东京|大阪|JP|Japan|Tokyo|Osaka|Saitama"
   - name: SG
     type: url-test
     url: http://www.google.com/generate_204
     interval: 600
-    tolerance: 500
+    tolerance: 2000
     proxies: [ ]
     filter: "(?i)新|狮城|SG|Singapore"
   - name: US
     type: url-test
     url: http://www.google.com/generate_204
     interval: 600
-    tolerance: 500
+    tolerance: 2000
     proxies: [ ]
     filter: "(?i)美|洛杉矶|芝加哥|西雅图|America|US|United.*?States"
   - name: OpenAI
