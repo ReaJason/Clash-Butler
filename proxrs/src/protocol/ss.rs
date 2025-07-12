@@ -6,6 +6,7 @@ use std::hash::Hasher;
 use serde::Deserialize;
 use serde::Serialize;
 use serde_json::Error;
+use serde_json::Value;
 
 use crate::base64::base64decode;
 use crate::base64::base64encode;
@@ -24,7 +25,7 @@ pub struct SS {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub plugin: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none", rename = "plugin-opts")]
-    pub plugin_opts: Option<HashMap<String, String>>,
+    pub plugin_opts: Option<HashMap<String, Value>>,
 }
 
 impl PartialEq for SS {
@@ -59,7 +60,7 @@ impl ProxyAdapter for SS {
                 let str = plugin_opts
                     .iter()
                     .map(|(key, value)| {
-                        let v = key.clone() + "=" + value;
+                        let v = key.clone() + "=" + value.as_str().unwrap();
                         urlencoding::encode(&v).into_owned()
                     })
                     .collect::<Vec<_>>()
@@ -114,7 +115,7 @@ impl ProxyAdapter for SS {
                 let plugin_params = item.split(";").collect::<Vec<_>>();
                 plugin = Some(plugin_params[0].to_string());
                 if plugin_params.len() > 1 {
-                    let mut map: HashMap<String, String> = HashMap::new();
+                    let mut map: HashMap<String, Value> = HashMap::new();
                     plugin_params[1..].iter().for_each(|param| {
                         let value = urlencoding::decode(param)
                             .unwrap_or_default()
@@ -122,7 +123,7 @@ impl ProxyAdapter for SS {
                             .to_string();
                         let kvs = value.split("=").collect::<Vec<_>>();
                         if kvs.len() == 2 {
-                            map.insert(kvs[0].to_string(), kvs[1].to_string());
+                            map.insert(kvs[0].to_string(), kvs[1].into());
                         }
                     });
                     plugin_opts = Some(map);
@@ -233,12 +234,9 @@ mod test {
         assert_eq!(ss1.server, "120.241.144.101");
         assert_eq!(ss1.port, 2410);
         assert_eq!(ss1.plugin, Some("obfs-local".to_string()));
-        let mut map = HashMap::new();
-        map.insert("obfs".to_string(), "http".to_string());
-        map.insert(
-            "obfs-host".to_string(),
-            "89c19109670.microsoft.com".to_string(),
-        );
+        let mut map = HashMap::<String, Value>::new();
+        map.insert("obfs".to_string(), "http".into());
+        map.insert("obfs-host".into(), "89c19109670.microsoft.com".into());
         assert_eq!(ss1.plugin_opts, Some(map));
 
         let b_link = ss1.to_link();
@@ -248,12 +246,42 @@ mod test {
         assert_eq!(ss2.server, "120.241.144.101");
         assert_eq!(ss2.port, 2410);
         assert_eq!(ss2.plugin, Some("obfs-local".to_string()));
-        let mut map = HashMap::new();
-        map.insert("obfs".to_string(), "http".to_string());
-        map.insert(
-            "obfs-host".to_string(),
-            "89c19109670.microsoft.com".to_string(),
-        );
+        let mut map = HashMap::<String, Value>::new();
+        map.insert("obfs".to_string(), "http".into());
+        map.insert("obfs-host".into(), "89c19109670.microsoft.com".into());
         assert_eq!(ss2.plugin_opts, Some(map));
+    }
+
+    #[test]
+    fn test_ss_json() {
+        let json_data = r#"
+    {
+        "name":"hello",
+        "cipher": "aes-256-gcm",
+        "type":"ss",
+        "password":"941cbc4237e0",
+        "server":"121.127.231.239",
+        "port": 636,
+        "plugin": "v2ray-plugin",
+        "plugin-opts": {
+            "host": "example.com",
+            "mode": "websocket",
+            "mux": true,
+            "port": 443,
+            "tls": true,
+            "skip-cert-verify": false
+        }
+    }
+    "#;
+
+        match serde_json::from_str::<SS>(json_data) {
+            Ok(ss) => {
+                println!("{:?}", ss);
+                assert!(ss.plugin_opts.is_some());
+            }
+            Err(e) => {
+                println!("{}", e);
+            }
+        };
     }
 }
