@@ -68,6 +68,7 @@ async fn run(config: Settings) {
     let test_yaml_path = "subs/test/config.yaml";
     let test_all_yaml_path = "subs/test/all.yaml";
     let release_yaml_path = env::current_dir().unwrap().join("clash.yaml");
+    // let release_base64_path = env::current_dir().unwrap().join("proxies.txt");
     let test_clash_template_path = "conf/clash_test.yaml";
     let release_clash_template_path = "conf/clash_release.yaml";
     let mut urls = config.subs;
@@ -103,8 +104,8 @@ async fn run(config: Settings) {
     }
 
     // 启动 Clash 内核
-    let external_port = 9091;
-    let mixed_port = 7999;
+    let external_port = 9095;
+    let mixed_port = 7998;
     let mut useful_proxies = Vec::new();
     for (index, proxies) in proxies_group.iter().enumerate() {
         if group_size > 1 {
@@ -206,14 +207,14 @@ async fn run(config: Settings) {
                     if ip_result.is_ok() {
                         let (proxy_ip, from) = ip_result.unwrap();
                         info!("「{}」ip: {} from: {}", node, proxy_ip, from);
-                        let mut openai_is_ok = false;
-                        match website::openai_is_ok(&clash_meta.proxy_url).await {
+                        let mut gemini_is_ok = false;
+                        match website::gemini_is_ok(&clash_meta.proxy_url).await {
                             Ok(_) => {
-                                info!("「{}」 openai is ok", node);
-                                openai_is_ok = true;
+                                info!("「{}」 gemini is ok", node);
+                                gemini_is_ok = true;
                             }
                             Err(err) => {
-                                error!("「{}」 openai is not ok, {:#}", node, err)
+                                error!("「{}」 gemini is not ok, {:#}", node, err)
                             }
                         }
 
@@ -227,44 +228,36 @@ async fn run(config: Settings) {
                                 error!("「{}」 claude is not ok, {:#}", node, err)
                             }
                         }
-
+                        if !gemini_is_ok && !claude_is_ok {
+                            nodes.remove(i);
+                            continue;
+                        }
                         let ip_detail_result =
                             ip::get_ip_detail(&proxy_ip, &clash_meta.proxy_url).await;
+                        let mut new_name = proxy_ip.to_string();
                         match ip_detail_result {
                             Ok(ip_detail) => {
                                 info!("{:?}", ip_detail);
                                 if config.rename_node {
-                                    let mut new_name = config
+                                    new_name = config
                                         .rename_pattern
                                         .replace("${IP}", &proxy_ip.to_string())
                                         .replace("${COUNTRYCODE}", &ip_detail.country_code)
                                         .replace("${ISP}", &ip_detail.isp)
                                         .replace("${CITY}", &ip_detail.city);
-                                    if openai_is_ok {
-                                        new_name += "_OpenAI";
-                                    }
-                                    if claude_is_ok {
-                                        new_name += "_Claude";
-                                    }
-                                    node_rename_map.insert(node.clone(), new_name);
                                 }
                             }
                             Err(e) => {
                                 error!("获取节点 {node} 的 IP 信息失败, {e}");
-                                if !openai_is_ok && !claude_is_ok {
-                                    nodes.remove(i);
-                                } else {
-                                    let mut new_name = proxy_ip.to_string();
-                                    if openai_is_ok {
-                                        new_name += "_OpenAI";
-                                    }
-                                    if claude_is_ok {
-                                        new_name += "_Claude";
-                                    }
-                                    node_rename_map.insert(node.clone(), new_name);
-                                }
                             }
                         }
+                        if gemini_is_ok {
+                            new_name += "_Gemini";
+                        }
+                        if claude_is_ok {
+                            new_name += "_Claude";
+                        }
+                        node_rename_map.insert(node.clone(), new_name);
                     } else {
                         let err_msg = ip_result.err().unwrap();
                         error!("获取节点 {} 的 IP 失败, {}", node, err_msg);
