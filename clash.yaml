@@ -1,5 +1,4 @@
 mixed-port: 7890
-socks-port: 7891
 allow-lan: true
 bind-address: '*'
 mode: rule
@@ -8,9 +7,9 @@ external-controller: 127.0.0.1:9090
 external-ui: ui
 external-ui-url: https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
 geox-url:
-  geoip: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
-  geosite: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
-  mmdb: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
+  geosite: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
+  geoip: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
+  mmdb: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
   asn: https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb
 geo-auto-update: true
 geo-update-interval: 24
@@ -71,480 +70,445 @@ dns:
   - https://doh.pub/dns-query
   - https://dns.alidns.com/dns-query
 proxies:
-- name: 199.38.148.95_OpenAI
-  network: ws
-  port: 80
-  server: 45.80.111.134
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66/?ed=2560'
-- name: AE_Dubai_Oracle Corporation_OpenAI1
-  network: ws
-  port: 8880
-  server: 45.131.208.9
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@ShadowProxy66/?ed=2560
-- name: AE_Dubai_Oracle Corporation_OpenAI2
-  network: ws
-  port: 2053
-  server: 172.66.44.174
-  servername: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
+- name: 103.12.77.191_Claude
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 103.12.77.191
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
   skip-cert-verify: false
   tls: true
   type: vless
   udp: true
-  uuid: 80764883-7f6b-4c46-8ecd-887cdf541c07
-  ws-opts:
-    headers:
-      Host: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
-    path: /oqlixwai6lzpnumq
-- name: DE_Falkenstein_Hetzner Online GmbH_OpenAI1
-  network: ws
-  port: 8880
-  server: 45.131.210.20
-  servername: reedfree8mahsang2.redorg.ir
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: 103.12.77.48_Claude
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 103.12.77.48
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
   skip-cert-verify: false
-  tls: false
+  tls: true
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /?ed=2560
-- name: DE_Falkenstein_Hetzner Online GmbH_OpenAI2
-  network: ws
-  port: 80
-  server: 45.131.4.157
-  servername: redfree8.pooriashop.ir
-  tls: false
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: 103.81.84.57_Claude
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 103.81.84.57
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
+  skip-cert-verify: false
+  tls: true
   type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: DE_Falkenstein_Hetzner Online GmbH_OpenAI3
+  udp: true
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: 103.81.86.172_Claude
+  network: tcp
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 103.81.86.172
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
+  tls: true
+  type: vless
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- alterId: 0
+  cipher: auto
+  name: 107.174.26.18_Claude
   network: ws
   port: 443
-  server: 172.66.45.24
-  servername: reAl-madrID9248.pagEs.dEv
+  server: 3DdDf.444652.xYZ
+  servername: 3dddf.444652.xyz
   skip-cert-verify: false
   tls: true
-  type: vless
-  udp: true
-  uuid: f744c2dc-1359-494c-9808-d81ce7665d58
+  type: vmess
+  uuid: cdec9d57-661d-456a-bbf2-b4c38e9c6711
   ws-opts:
     headers:
-      Host: reAl-madrID9248.pagEs.dEv
-    path: /LQlBRp7bKt33t0q2?ed=2560
-- name: DE_Falkenstein_Hetzner Online GmbH_OpenAI4
+      Host: 3DdDf.444652.xYZ
+    path: /9dZlJLjHHrL0VwSolbqFpg
+- name: 107.175.212.252_Claude
   network: ws
-  port: 2087
-  server: 172.67.171.131
-  servername: invINCIBLE.FAfa20.SHOp
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 376734bc-4db8-4317-b451-af0262cb01c7
-  ws-opts:
-    headers:
-      Host: invINCIBLE.FAfa20.SHOp
-    path: /FnxOCItzWpgMrgmD/NzguNDYuNTYuNDI=?ed=2560
-- name: DE_Falkenstein_Hetzner Online GmbH_OpenAI5
-  network: ws
-  port: 8443
-  server: 172.67.148.229
-  servername: InVinCIble.faFA20.sHop
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 376734bc-4db8-4317-b451-af0262cb01c7
-  ws-opts:
-    headers:
-      Host: InVinCIble.faFA20.sHop
-    path: /hjj7ZLPwtn7oT2JS/NzguNDYuNTYuNDI=?ed=2560
-- name: DE_Falkenstein_Hetzner Online GmbH_OpenAI6
-  network: ws
-  port: 2087
-  server: 104.21.95.229
-  servername: invINCIBLE.FAfa20.SHOp
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 376734bc-4db8-4317-b451-af0262cb01c7
-  ws-opts:
-    headers:
-      Host: invINCIBLE.FAfa20.SHOp
-    path: /FnxOCItzWpgMrgmD/NzguNDYuNTYuNDI=?ed=2560
-- name: DE_Falkenstein_Hetzner Online GmbH_OpenAI7
-  network: ws
-  port: 8443
-  server: 104.21.39.214
-  servername: InVinCIble.faFA20.sHop
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 376734bc-4db8-4317-b451-af0262cb01c7
-  ws-opts:
-    headers:
-      Host: InVinCIble.faFA20.sHop
-    path: /hjj7ZLPwtn7oT2JS/NzguNDYuNTYuNDI=?ed=2560
-- name: DE_Frankfurt_GTHost_OpenAI1
-  network: ws
-  port: 2053
-  server: 172.67.171.131
-  servername: inVINCIble.fAFA20.Shop
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 376734bc-4db8-4317-b451-af0262cb01c7
-  ws-opts:
-    headers:
-      Host: inVINCIble.fAFA20.Shop
-    path: /yRVRnY2jDtjg67UV/c2hpcmVuLnlhZW1pa28uZ2dmZi5uZXQ=?ed=2560
-- name: DE_Frankfurt_GTHost_OpenAI2
-  network: ws
-  port: 2087
-  server: 104.21.75.120
-  servername: InvInciBLe.FAFa20.sHop
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 376734bc-4db8-4317-b451-af0262cb01c7
-  ws-opts:
-    headers:
-      Host: InvInciBLe.FAFa20.sHop
-    path: /hoOUCl9QWMZ9zBtD/c2hpcmVuLnlhZW1pa28uZ2dmZi5uZXQ=?ed=2560
-- name: FR_Paris_Online S.A.S._OpenAI
-  password: dongtaiwang.com
-  port: 50066
-  server: 51.159.226.1
+  port: 443
+  server: sssxxxcft6.444752.xyz
+  servername: sssxxxcft6.444752.xyz
   skip-cert-verify: true
-  sni: www.bing.com
-  type: hysteria2
-- name: FR_Paris_SCALEWAY_OpenAI
-  password: dongtaiwang.com
-  port: 31180
-  server: 51.159.111.32
-  skip-cert-verify: true
-  sni: apple.com
-  type: hysteria2
-- name: JP_Tokyo_Tencent Cloud Computing (Beijing) Co1
-  network: ws
-  port: 8880
-  server: 89.116.161.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
+  tls: true
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 512d9674-db12-44ca-a1b5-654244549b65
   ws-opts:
     headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: JP_Tokyo_Tencent Cloud Computing (Beijing) Co2
-  network: ws
-  port: 8880
-  server: 86.38.214.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: JP_Tokyo_Tencent Cloud Computing (Beijing) Co3
-  network: ws
-  port: 8880
-  server: 185.207.199.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: JP_Tokyo_Tencent Cloud Computing (Beijing) Co4
-  network: ws
-  port: 8880
-  server: 140.99.233.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: JP_Tokyo_Tencent Cloud Computing (Beijing) Co5
-  network: ws
-  port: 8880
-  server: 159.246.55.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: JP_Tokyo_Tencent Cloud Computing (Beijing) Co6
-  network: ws
-  port: 8880
-  server: 45.135.235.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- cipher: aes-256-cfb
-  name: MD_Chisinau_EDIS_OpenAI
-  password: f8f7aCzcPKbsF8p3
-  port: 989
-  server: 45.153.124.90
+      Host: sssxxxcft6.444752.xyz
+    path: /zzMtGpHptl8a7dX3JIrYk7zm
+- cipher: aes-256-gcm
+  name: 137.220.142.143_Claude
+  password: 887bfcf43b52
+  plugin: v2ray-plugin
+  plugin-opts:
+    host: jp6v1.lingjfjkm002.com
+    mode: websocket
+    mux: true
+    path: /svynueogf
+    skip-cert-verify: false
+    tls: true
+  port: 636
+  server: 137.220.142.143
   type: ss
-- name: NL_Amsterdam_Aeza International LTD_OpenAI1
+- cipher: aes-256-gcm
+  name: 137.220.191.38_Claude1
+  password: 823e135ed103
+  plugin: v2ray-plugin
+  plugin-opts:
+    host: jp7v1.lingjfjkm002.com
+    mode: websocket
+    mux: true
+    path: /dchlbvrbbotc
+    skip-cert-verify: false
+    tls: true
+  port: 636
+  server: 137.220.191.40
+  type: ss
+- cipher: aes-256-gcm
+  name: 137.220.191.38_Claude2
+  password: 823e135ed103
+  plugin: v2ray-plugin
+  plugin-opts:
+    host: jp7v1.lingjfjkm002.com
+    mode: websocket
+    mux: true
+    path: /dchlbvrbbotc
+    skip-cert-verify: false
+    tls: true
+  port: 636
+  server: 137.220.191.38
+  type: ss
+- name: 14|DE_speednode_1
   network: ws
   port: 8880
-  server: 45.131.208.108
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@ShadowProxy66/?ed=2560
-- name: NL_Amsterdam_Aeza International LTD_OpenAI2
-  network: ws
-  port: 8880
-  server: 45.131.208.208
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /@ShadowProxy66?ed=2560
-- name: NL_Amsterdam_Aeza International LTD_OpenAI3
-  network: ws
-  port: 80
-  server: 45.131.4.20
-  servername: redfree8.pooriashop.ir
-  tls: false
-  type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: NL_Amsterdam_Aeza International LTD_OpenAI4
-  network: ws
-  port: 80
-  server: 185.174.138.6
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66/?ed=2560'
-- name: NL_Amsterdam_Aeza International LTD_OpenAI5
-  network: ws
-  port: 80
-  server: 45.8.211.139
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66/?ed=2560'
-- name: NL_Dronten_Digital City FZE_OpenAI
-  network: ws
-  port: 2087
-  server: 172.67.175.148
-  servername: InvInciBLe.FAFa20.sHop
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 376734bc-4db8-4317-b451-af0262cb01c7
-  ws-opts:
-    headers:
-      Host: InvInciBLe.FAFa20.sHop
-    path: /hoOUCl9QWMZ9zBtD/c2hpcmVuLnlhZW1pa28uZ2dmZi5uZXQ=?ed=2560
-- name: SG_Singapore_Shenzhen Tencent Computer Systems Company Limited_OpenAI
-  network: ws
-  port: 8880
-  server: 108.162.194.63
-  servername: sg.laoyoutiao.link
-  skip-cert-verify: false
+  server: 5.10.214.213
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: true
   tls: false
   type: vless
   udp: true
   uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   ws-opts:
     headers:
-      Host: sg.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: TR_Izmir_Alastyr Telekomunikasyon A.S._OpenAI
-  network: ws
-  port: 443
-  server: 104.16.243.59
-  servername: NGINX.NSCl.IR
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 75fde681-ec64-4654-86fa-30732e8e179c
-  ws-opts:
-    headers:
-      Host: NGINX.NSCl.IR
-    path: /assets
-- name: US_Ashburn_Oracle Corporation_OpenAI1
-  network: ws
-  port: 2083
-  server: 104.21.95.229
-  servername: iNvINCiBLe.faFa20.shOp
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 376734bc-4db8-4317-b451-af0262cb01c7
-  ws-opts:
-    headers:
-      Host: iNvINCiBLe.faFa20.shOp
-    path: /AFCier7hMiNrfcmm/MTI5LjE1OS44NC43MQ==?ed=2560
-- name: US_Ashburn_Oracle Corporation_OpenAI2
+      host: jp.laoyoutiao.link
+    path: /
+- name: 14|DE_speednode_2
   network: ws
   port: 8880
-  server: 45.12.30.74
+  server: 5.10.214.81
   servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
+  skip-cert-verify: true
   tls: false
   type: vless
   udp: true
   uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
   ws-opts:
     headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /@ShadowProxy66?ed=2560
-- alterId: 0
-  cipher: auto
-  name: US_Buffalo_HostPapa_OpenAI1
-  network: ws
-  port: 443
-  server: sSsdCVfBGNjkI.931.PP.Ua
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: a4e8ec0a-75d0-4fc5-837a-4973ed3a9d3e
-  ws-opts:
-    headers:
-      Host: sssdcvfbgnjki.931.pp.ua
-    path: /14Fziqw1hYgCXNutkS5H
-- alterId: 0
-  cipher: auto
-  name: US_Buffalo_HostPapa_OpenAI2
-  network: ws
-  port: 443
-  server: dddfFFvvBnhJU.931.pP.uA
-  tls: true
-  type: vmess
-  uuid: a4e8ec0a-75d0-4fc5-837a-4973ed3a9d3e
-  ws-opts:
-    headers:
-      Host: dddfffvvbnhju.931.pp.ua
-    path: /14Fziqw1hYgCXNutkS5H
-- name: US_Buffalo_HostPapa_OpenAI3
-  network: ws
-  port: 443
-  server: xcvbnnmklo.00890604.xyz
-  servername: xCVbNNMklo.00890604.xyZ
-  tls: true
-  type: vless
-  udp: true
-  uuid: a7c9c017-db10-4d15-b01b-0634db498b57
-  ws-opts:
-    headers:
-      Host: xcvbnnmklo.00890604.xyz
-    path: /xZjr7v1DqrYyamxeTh7sLJtI1
-- name: US_Buffalo_HostPapa_OpenAI4
-  network: ws
-  port: 443
-  server: rrrfgt6.890604.filegear-sg.me
-  servername: rrRFgt6.890604.fiLeGEAR-Sg.ME
-  tls: true
-  type: vless
-  udp: true
-  uuid: 07a3df8f-2a2c-42f8-ad92-65889d90f3bf
-  ws-opts:
-    headers:
-      Host: rrrfgt6.890604.filegear-sg.me
-    path: /5UW2C42lpZ7Dj4VDwVOkZfoq
-- name: US_Buffalo_HostPapa_OpenAI5
+      host: reedfree8mahsang2.redorg.ir
+    path: /Telegram@V2rayN5
+- name: 14|DE_speednode_3
   network: ws
   port: 8880
-  server: 193.227.99.251
+  server: 5.10.214.247
+  servername: ex.sue.x10.mx
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
+  ws-opts:
+    headers:
+      host: ex.sue.x10.mx
+    path: /Telegram🇨🇳
+- name: 14|DE_speednode_4
+  network: ws
+  port: 8880
+  server: 5.10.214.99
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /TelegramU0001F1E8U0001F1F3
+- name: 14|GB_speednode_1
+  network: ws
+  port: 8880
+  server: 25.26.27.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳
+- name: 14|GB_speednode_2
+  network: ws
+  port: 8880
+  server: 25.25.25.177
+  servername: ip.langmanshanxi.top
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|JP_speednode_
+  network: ws
+  port: 8880
+  server: 154.92.9.63
+  servername: sg.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: sg.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: 14|LU_speednode_
+  network: ws
+  port: 8880
+  server: 188.42.89.20
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: 14|NL_speednode_
+  network: ws
+  port: 8880
+  server: 5.10.244.251
   servername: Telegram-channel-WangCai2
-  skip-cert-verify: false
+  skip-cert-verify: true
   tls: false
   type: vless
   udp: true
   uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   ws-opts:
     headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: US_Buffalo_HostPapa_OpenAI6
+      host: cf.d3z.net
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: 14|RU_speednode_
+  network: ws
+  port: 8880
+  server: 45.67.215.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: jp.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: 14|SA_speednode_
+  network: ws
+  port: 8880
+  server: 91.209.253.177
+  servername: ip.langmanshanxi.top
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /telegram🇨🇳 @wangcai2 /
+- name: 14|SI_speednode_
+  network: ws
+  port: 8880
+  server: 92.60.74.20
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: 14|US_speednode_1
+  network: ws
+  port: 8880
+  server: 160.79.104.251
+  servername: cf.d3z.net
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_10
+  network: ws
+  port: 8880
+  server: 66.81.247.213
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: jp.laoyoutiao.link
+    path: /
+- name: 14|US_speednode_2
+  network: ws
+  port: 8880
+  server: 135.84.79.177
+  servername: ip.langmanshanxi.top
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /TELEGRAM-v2ray_configs_pools_v2ray_configs_pools_v2ray_configs_pools
+- name: 14|US_speednode_3
+  network: ws
+  port: 80
+  server: 66.81.247.192
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /Channel+id:+@ShadowProxy66/
+- name: 14|US_speednode_4
+  network: ws
+  port: 8880
+  server: 69.84.182.247
+  servername: ex.sue.x10.mx
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
+  ws-opts:
+    headers:
+      host: ex.sue.x10.mx
+    path: /Telegram🇨🇳
+- name: 14|US_speednode_5
+  network: ws
+  port: 8880
+  server: 160.79.105.13
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 9f3c4ab7-ea26-4d96-91a9-c85ff64ad9a0
+  ws-opts:
+    headers:
+      host: c.82313369.xyz
+    path: /Telegram🇨🇳
+- name: 14|US_speednode_6
+  network: ws
+  port: 8880
+  server: 167.68.42.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: jp.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: 14|US_speednode_7
+  network: ws
+  port: 8880
+  server: 195.13.55.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: jp.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: 14|US_speednode_8
+  network: ws
+  port: 8880
+  server: 199.34.229.254
+  servername: yg.bantony199.top
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
+  ws-opts:
+    headers:
+      host: yg.bantony199.top
+    path: /
+- name: 14|US_speednode_9
+  network: ws
+  port: 8880
+  server: 209.94.90.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳
+- name: 160.250.65.124_Claude
+  network: tcp
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 160.250.65.124
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
+  tls: true
+  type: vless
+  udp: true
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: 192.3.179.114_Claude
   network: ws
   port: 443
   server: 172.67.161.129
@@ -558,92 +522,165 @@ proxies:
     headers:
       Host: eeEEEeR.666470.xYZ
     path: /6DuxYMYmrGrnGKRtF5UvWyyVQu
-- name: US_Buffalo_HostPapa_OpenAI7
+- name: 192.3.179.121_Claude
   network: ws
   port: 443
-  server: 104.21.13.36
-  servername: XcdvfGBnHU7.0890604.XyZ
+  server: 104.21.44.248
+  servername: EDfrT.frEEvPNatm2025.DPdNS.oRG
   skip-cert-verify: false
   tls: true
   type: vless
   udp: true
-  uuid: a7c9c017-db10-4d15-b01b-0634db498b57
+  uuid: ffcf7ec1-3e09-4821-b3d9-b426a107b73b
   ws-opts:
     headers:
-      Host: XcdvfGBnHU7.0890604.XyZ
-    path: /xZjr7v1DqrYyamxeTh7sLJtI1
-- name: US_Buffalo_HostPapa_OpenAI8
-  network: ws
-  port: 443
-  server: 104.21.9.71
-  servername: ddDDdDDdDDF.777198.XyZ
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: c226ac5d-65e9-4379-95c3-fb542bc242d8
-  ws-opts:
-    headers:
-      Host: ddDDdDDdDDF.777198.XyZ
-    path: /OjdW89Bpg4ykd4O
-- name: US_Buffalo_HostPapa_OpenAI9
-  network: ws
-  port: 443
-  server: 104.21.90.226
-  servername: eEedFR5.7777155.Xyz
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: e4cbe8b8-37db-4aaa-8469-b84f34c51ebc
-  ws-opts:
-    headers:
-      Host: eEedFR5.7777155.Xyz
-    path: /6OWLjRc26b0nHYr5hYXD
-- name: US_Dallas_HostPapa_OpenAI1
-  network: ws
-  port: 8443
-  server: www.gco.gov.qa
-  servername: nptian.xiaotianvpn.sbs
-  tls: true
-  type: vless
-  uuid: 0343e230-5132-4e98-844e-b42ad1a6a273
-  ws-opts:
-    headers:
-      Host: nptian.xiaotianvpn.sbs
-    path: /?ed=2560
-- name: US_Dallas_HostPapa_OpenAI2
+      Host: EDfrT.frEEvPNatm2025.DPdNS.oRG
+    path: /O9jlBCbIm3xr1D40NK
+- name: 1|🇦🇪1 |  1.2MB/s|0%|Disney|Opena...
   network: ws
   port: 8880
-  server: 27.50.48.251
-  servername: Telegram-channel-WangCai2
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: US_Dallas_Total Uptime Technologies_OpenAI1
-  network: ws
-  port: 80
-  server: 45.80.111.92
+  server: 192.0.63.20
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
   tls: false
   type: vless
   udp: true
   uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
   ws-opts:
     headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram:@ShadowProxy66/?ed=2560
-- name: US_Dallas_Total Uptime Technologies_OpenAI10
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: 1|🇺🇸123 |  1.3MB/s|61%|Disney|Op...
   network: ws
   port: 8880
-  server: 45.142.120.145
-  servername: reedfree8mahsang2.redorg.ir
+  server: 156.238.18.106
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: yd.laoyoutiao.link
+    path: /Telegram🇨🇳 @MxlShare @WangCai2 /
+- cipher: aes-128-gcm
+  name: 203.231.242.12_Claude
+  password: VXPipi29nxMO
+  plugin: obfs
+  plugin-opts:
+    host: 182039459a34f64238143cd31ddebbc914362.taobao.com
+    mode: http
+  port: 1052
+  server: kr2.qiangdong.xyz
+  type: ss
+- name: 59.153.216.133_Claude
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 59.153.216.133
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
   skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: 59.153.217.133_Claude
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 59.153.217.133
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: 59.153.217.57_Claude
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 59.153.217.57
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: 59.153.218.14_Claude
+  network: tcp
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 59.153.218.14
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
+  tls: true
+  type: vless
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: CA_Toronto_Cloudflare, Inc._Gemini_Claude1
+  password: cfe032e4-1bc3-454f-9d09-301b0aea08ff
+  port: 45979
+  server: 150.230.30.237
+  skip-cert-verify: true
+  sni: www.bing.com
+  type: hysteria2
+- alpn:
+  - h3
+  name: CA_Toronto_Cloudflare, Inc._Gemini_Claude2
+  password: 862e90e1-2f26-4506-b8b9-0adf20da05fc
+  port: 54530
+  server: 129.153.59.124
+  skip-cert-verify: true
+  sni: www.bing.com
+  type: hysteria2
+- name: DE_Falkenstein_Hetzner Online GmbH_Claude1
+  network: ws
+  port: 8880
+  server: 185.176.24.238
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: DE_Falkenstein_Hetzner Online GmbH_Claude2
+  network: ws
+  port: 8880
+  server: 162.159.248.20
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: DE_Falkenstein_Hetzner Online GmbH_Claude3
+  network: ws
+  port: 8880
+  server: 154.197.108.20
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: DE_Falkenstein_Hetzner Online GmbH_Claude4
+  network: ws
+  port: 8880
+  server: 185.174.138.0
   tls: false
   type: vless
   udp: true
@@ -652,7 +689,30 @@ proxies:
     headers:
       Host: reedfree8mahsang2.redorg.ir
     path: /@ShadowProxy66?ed=2560
-- name: US_Dallas_Total Uptime Technologies_OpenAI2
+- name: DE_Falkenstein_Hetzner Online GmbH_Gemini1
+  network: ws
+  port: 80
+  server: 45.131.4.147
+  tls: false
+  type: vless
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram@WangCai2/?ed
+- name: DE_Falkenstein_Hetzner Online GmbH_Gemini2
+  network: ws
+  port: 80
+  server: 45.131.210.50
+  servername: redfree8.pooriashop.ir
+  tls: false
+  type: vless
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram@WangCai2/?ed
+- name: DE_Falkenstein_Hetzner Online GmbH_Gemini3
   network: ws
   port: 8880
   server: 188.42.89.100
@@ -666,366 +726,7 @@ proxies:
     headers:
       Host: reedfree8mahsang2.redorg.ir
     path: '/Channel id: @ShadowProxy66?ed=2560'
-- name: US_Dallas_Total Uptime Technologies_OpenAI3
-  network: ws
-  port: 8880
-  server: 45.131.6.68
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66?ed=2560'
-- name: US_Dallas_Total Uptime Technologies_OpenAI4
-  network: ws
-  port: 80
-  server: 45.131.4.147
-  tls: false
-  type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram@WangCai2/?ed
-- name: US_Dallas_Total Uptime Technologies_OpenAI5
-  network: ws
-  port: 8880
-  server: 45.131.4.34
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@ShadowProxy66/?ed=2560
-- name: US_Dallas_Total Uptime Technologies_OpenAI6
-  network: ws
-  port: 8880
-  server: 45.8.211.219
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66?ed=2560'
-- name: US_Dallas_Total Uptime Technologies_OpenAI7
-  network: ws
-  port: 2083
-  server: 172.66.44.253
-  servername: neT-AcCOUNt02.PAGEs.DeV
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: efed37ed-37e5-4100-a540-049dc7929984
-  ws-opts:
-    headers:
-      Host: neT-AcCOUNt02.PAGEs.DeV
-    path: /jUXebvkLkt60NJnG?ed=2560
-- name: US_Dallas_Total Uptime Technologies_OpenAI8
-  network: ws
-  port: 8443
-  server: 172.66.44.253
-  servername: net-aCcOUNt02.Pages.DEv
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: efed37ed-37e5-4100-a540-049dc7929984
-  ws-opts:
-    headers:
-      Host: net-aCcOUNt02.Pages.DEv
-    path: /dy26vBaDi5RTblzP?ed=2560
-- name: US_Dallas_Total Uptime Technologies_OpenAI9
-  network: ws
-  port: 443
-  server: 172.67.178.14
-  servername: MaIncrafT.dPdnS.OrG
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 252df5e8-0428-4345-b236-a6dae7b3457d
-  ws-opts:
-    headers:
-      Host: MaIncrafT.dPdnS.OrG
-    path: /HcFmPxmQkiv44jMu?ed=2560
-- name: US_Elk Grove Village_HostPapa
-  network: ws
-  port: 443
-  server: 172.67.188.188
-  servername: SssXzAw.444652.XYZ
-  tls: true
-  type: vless
-  udp: true
-  uuid: 0f7070cd-c91d-4532-a51f-56da4f0e94be
-  ws-opts:
-    headers:
-      Host: SssXzAw.444652.XYZ
-    path: /nSABZLQbEUSLppj7jCmY
-- name: US_Elk Grove Village_HostPapa_OpenAI1
-  network: ws
-  port: 443
-  server: sxxcer4.000890604.xyz
-  servername: sxXCer4.000890604.xYz
-  tls: true
-  type: vless
-  udp: true
-  uuid: 13e26f64-2e0c-4461-92cd-d83294cc18f0
-  ws-opts:
-    headers:
-      Host: sxXCer4.000890604.xYz
-    path: /WfxcqrR5ycVpIit2OdWk0KwirdY
-- name: US_Elk Grove Village_HostPapa_OpenAI2
-  network: ws
-  port: 443
-  server: 444444444444r.333756.xyz
-  servername: 444444444444R.333756.xyz
-  tls: true
-  type: vless
-  udp: true
-  uuid: 03e92910-34b1-4245-ac63-04a865f43cd5
-  ws-opts:
-    headers:
-      Host: 444444444444r.333756.xyz
-    path: /f7vKDX2UecxmlPhIJoo2wcE6Q
-- name: US_Elk Grove Village_HostPapa_OpenAI3
-  network: ws
-  port: 443
-  server: www.gov.se
-  servername: nptian.xiaotianvpn.sbs
-  tls: true
-  type: vless
-  uuid: 0343e230-5132-4e98-844e-b42ad1a6a273
-  ws-opts:
-    headers:
-      Host: nptian.xiaotianvpn.sbs
-    path: /?ed=2560
-- name: US_Elk Grove Village_HostPapa_OpenAI4
-  network: ws
-  port: 443
-  server: 172.64.68.58
-  servername: hai.gdz.buzz
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 8f7fe273-e06d-47d5-9deb-d7b3c95dc573
-  ws-opts:
-    headers:
-      Host: hai.gdz.buzz
-    path: /?ed=2560
-- name: US_Elk Grove Village_HostPapa_OpenAI5
-  network: ws
-  port: 443
-  server: 104.21.65.31
-  servername: SssXzAw.444652.XYZ
-  tls: true
-  type: vless
-  uuid: 0f7070cd-c91d-4532-a51f-56da4f0e94be
-  ws-opts:
-    headers:
-      Host: SssXzAw.444652.XYZ
-    path: /nSABZLQbEUSLppj7jCmY
-- name: US_Elk Grove Village_HostPapa_OpenAI6
-  network: ws
-  port: 443
-  server: 104.21.76.21
-  servername: wWwde.00890604.xyz
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 13e26f64-2e0c-4461-92cd-d83294cc18f0
-  ws-opts:
-    headers:
-      Host: wWwde.00890604.xyz
-    path: /WfxcqrR5ycVpIit2OdWk0KwirdY
-- name: US_Elk Grove Village_HostPapa_OpenAI7
-  network: ws
-  port: 8880
-  server: 160.153.1.251
-  servername: Telegram-channel-WangCai2
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- cipher: aes-256-cfb
-  name: US_Los Angeles_Dedicated.com_OpenAI
-  password: f8f7aCzcPKbsF8p3
-  port: 989
-  server: 104.192.226.106
-  type: ss
-- alterId: 0
-  cipher: auto
-  name: US_Los Angeles_HostPapa_OpenAI1
-  network: ws
-  port: 80
-  server: 222222r.11890604.xyz
-  skip-cert-verify: true
-  tls: false
-  type: vmess
-  udp: true
-  uuid: f898ffcb-6417-4373-9640-0b66091e8206
-  ws-opts:
-    headers:
-      Host: 222222r.11890604.xyz
-    path: /GnJ3bBxV91uFkYtuzXyJ5XNeH1R1
-- name: US_Los Angeles_HostPapa_OpenAI2
-  network: ws
-  port: 443
-  server: 222222r.11890604.xyz
-  servername: 222222r.11890604.xyz
-  tls: true
-  type: vless
-  udp: true
-  uuid: f898ffcb-6417-4373-9640-0b66091e8206
-  ws-opts:
-    headers:
-      Host: 222222r.11890604.xyz
-    path: /33CYL4twIwItuzXyJ5XNeH1R1
-- name: US_Los Angeles_HostPapa_OpenAI3
-  network: ws
-  port: 2096
-  server: www.gov.ua
-  servername: nptian.xiaotianvpn.sbs
-  tls: true
-  type: vless
-  uuid: 0343e230-5132-4e98-844e-b42ad1a6a273
-  ws-opts:
-    headers:
-      Host: nptian.xiaotianvpn.sbs
-    path: /?ed=2560
-- name: US_Los Angeles_Psychz Networks_OpenAI
-  password: dongtaiwang.com
-  port: 4710
-  server: 108.181.5.130
-  skip-cert-verify: true
-  sni: apple.com
-  type: hysteria2
-- name: US_New York_Coaxial Cable LLC_OpenAI
-  network: ws
-  port: 443
-  server: www.racknerd.com
-  servername: legend-us.lzjnb.shop
-  skip-cert-verify: true
-  tls: true
-  type: vless
-  udp: true
-  uuid: 6337837a-2b47-4e0d-a695-75c5a4a8ad51
-  ws-opts:
-    headers:
-      Host: legend-us.lzjnb.shop
-    path: /t.me/lzjjjjjjjjjjj
-- alterId: 0
-  cipher: auto
-  name: US_New York_Massivegrid LTD
-  network: ws
-  port: 443
-  server: FffvvVbnhJui8.222560.XYz
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: 7701ddf5-6a48-401b-a3ec-8af52b6deb48
-  ws-opts:
-    headers:
-      Host: fffvvvbnhjui8.222560.xyz
-    path: /mlyR5tmcKx3hweBopuhWEbIX
-- alterId: 0
-  cipher: auto
-  name: US_New York_Massivegrid LTD_OpenAI
-  network: ws
-  port: 443
-  server: SSsXXXCvBnmjKi.931.Pp.uA
-  skip-cert-verify: true
-  tls: true
-  type: vmess
-  udp: true
-  uuid: da128246-33b0-4c88-a44e-d91e9e0a1e05
-  ws-opts:
-    headers:
-      Host: sssxxxcvbnmjki.931.pp.ua
-    path: /0FhUkqQUdxOhMB9JsgTazwz9
-- name: US_Phoenix_Oracle Corporation1
-  network: ws
-  port: 8880
-  server: 162.159.134.20
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: US_Phoenix_Oracle Corporation2
-  network: ws
-  port: 8880
-  server: 45.80.111.20
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: US_Phoenix_Oracle Corporation3
-  network: ws
-  port: 8880
-  server: 91.193.58.43
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: US_Phoenix_Oracle Corporation4
-  network: ws
-  port: 8880
-  server: 164.38.155.20
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: US_Phoenix_Oracle Corporation_OpenAI1
-  network: ws
-  port: 8880
-  server: 162.159.3.20
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: US_Phoenix_Oracle Corporation_OpenAI2
-  network: ws
-  port: 8880
-  server: 188.42.145.20
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: US_Portland_Amazon.com, Inc._OpenAI1
+- name: DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
   network: ws
   port: 2087
   server: newmtproxi.pages.dev
@@ -1039,10 +740,62 @@ proxies:
     headers:
       Host: newmtproxi.pages.dev
     path: /frzapd2v2VXBMkxJ?ed=2560
-- name: US_Portland_Amazon.com, Inc._OpenAI2
+- name: DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
   network: ws
-  port: 2095
-  server: 45.80.111.119
+  port: 8880
+  server: 45.131.211.224
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /@ShadowProxy66?ed=2560
+- name: DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
+  network: ws
+  port: 80
+  server: 45.131.4.20
+  servername: redfree8.pooriashop.ir
+  tls: false
+  type: vless
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
+- name: FR_Paris_Online S.A.S._Claude
+  password: dongtaiwang.com
+  port: 50066
+  server: 51.159.226.1
+  skip-cert-verify: true
+  sni: www.bing.com
+  type: hysteria2
+- name: FR_Paris_SCALEWAY_Claude
+  password: dongtaiwang.com
+  port: 31180
+  server: 51.159.111.32
+  skip-cert-verify: true
+  sni: apple.com
+  type: hysteria2
+- name: NL_Amsterdam_Aeza International LTD_Claude1
+  network: ws
+  port: 8880
+  server: 5.10.215.208
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: NL_Amsterdam_Aeza International LTD_Claude2
+  network: ws
+  port: 8880
+  server: 45.131.208.208
   servername: reedfree8mahsang2.redorg.ir
   skip-cert-verify: false
   tls: false
@@ -1052,65 +805,11 @@ proxies:
   ws-opts:
     headers:
       Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram:TM-@AZARBAYJAB1+TM-@AZARBAYJAB1+TM-@AZARBAYJAB1+TM-@AZARBAYJAB1+TM-@AZARBAYJAB1
-- name: US_Portland_Amazon.com, Inc._OpenAI3
+    path: /@ShadowProxy66?ed=2560
+- name: NL_Amsterdam_Aeza International LTD_Gemini_Claude
   network: ws
   port: 80
-  server: 45.131.210.50
-  servername: redfree8.pooriashop.ir
-  tls: false
-  type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram@WangCai2/?ed
-- name: US_Portland_Amazon.com, Inc._OpenAI4
-  network: ws
-  port: 2053
-  server: 172.66.47.82
-  servername: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 80764883-7f6b-4c46-8ecd-887cdf541c07
-  ws-opts:
-    headers:
-      Host: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
-    path: /oqLIXWAi6lzpnumQ
-- name: US_Portland_Amazon.com, Inc._OpenAI5
-  network: ws
-  port: 443
-  server: 104.16.3.5
-  servername: gulf-d96.pages.dev
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 963816bd-b6e7-4648-abff-8af25bc07d87
-  ws-opts:
-    headers:
-      Host: gulf-d96.pages.dev
-    path: /ecY3gziM8W6ud5yj?ed=2560
-- name: US_Portland_Amazon.com, Inc._OpenAI6
-  network: ws
-  port: 2053
-  server: 104.21.16.1
-  servername: 6Ny8J3m9BCe4gTsPtivSObeOkZvyI8CM.paGeS.DEV
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 35bdc608-822d-42eb-ad20-4bb23e9c052b
-  ws-opts:
-    headers:
-      Host: 6Ny8J3m9BCe4gTsPtivSObeOkZvyI8CM.paGeS.DEV
-    path: /1BvBMhk9nOFvi0vn?ed=2560
-- name: US_San Jose_Amazon.com, Inc._OpenAI1
-  network: ws
-  port: 80
-  server: 45.12.30.136
+  server: 45.131.7.64
   servername: reedfree8mahsang2.redorg.ir
   skip-cert-verify: false
   tls: false
@@ -1121,101 +820,250 @@ proxies:
     headers:
       Host: reedfree8mahsang2.redorg.ir
     path: '/Channel id: @ShadowProxy66/?ed=2560'
-- name: US_San Jose_Amazon.com, Inc._OpenAI2
+- client-fingerprint: chrome
+  name: SG_Singapore_Hetzner Online GmbH_Claude
+  obfs: salamander
+  obfs_password: The_Sefr-chibegam
+  password: user10.khobbebinSEFRinjast128161
+  port: 443
+  server: lake.zone1.center
+  skip-cert-verify: false
+  type: hysteria2
+- name: TR_Izmir_Alastyr Telekomunikasyon A.S._Claude
   network: ws
-  port: 8880
-  server: 195.245.221.187
-  tls: false
+  port: 443
+  server: 104.19.54.50
+  servername: HarmonY-427.pages.DEV
+  skip-cert-verify: false
+  tls: true
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 3c36eadb-747a-4166-8db0-23fec9883ea2
   ws-opts:
     headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /@ShadowProxy66?ed=2560
-- name: US_San Jose_Amazon.com, Inc._OpenAI3
+      Host: HarmonY-427.pages.DEV
+    path: /?ed=2048
+- alterId: 0
+  cipher: auto
+  name: US_Buffalo_HostPapa_Claude1
   network: ws
-  port: 2087
-  server: 172.66.44.225
-  servername: nEwMTPROxI.PAGes.DEv
+  port: 80
+  server: EeEDCFVg.999824.xYZ
+  servername: eeedcfvg.999824.xyz
+  skip-cert-verify: false
+  tls: false
+  type: vmess
+  uuid: cdec9d57-661d-456a-bbf2-b4c38e9c6711
+  ws-opts:
+    headers:
+      Host: EeEDCFVg.999824.xYZ
+    path: /9dZlJLjHHrL0VwSolbqFpg
+- name: US_Buffalo_HostPapa_Claude2
+  network: ws
+  port: 443
+  server: xcvbnnmklo.00890604.xyz
+  servername: xCVbNNMklo.00890604.xyZ
+  tls: true
+  type: vless
+  udp: true
+  uuid: a7c9c017-db10-4d15-b01b-0634db498b57
+  ws-opts:
+    headers:
+      Host: xcvbnnmklo.00890604.xyz
+    path: /xZjr7v1DqrYyamxeTh7sLJtI1
+- name: US_Buffalo_HostPapa_Claude3
+  network: ws
+  port: 443
+  server: 104.21.9.71
+  servername: ddDDdDDdDDF.777198.XyZ
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: c226ac5d-65e9-4379-95c3-fb542bc242d8
+  ws-opts:
+    headers:
+      Host: ddDDdDDdDDF.777198.XyZ
+    path: /OjdW89Bpg4ykd4O
+- name: US_Buffalo_HostPapa_Claude4
+  network: ws
+  port: 443
+  server: 104.21.94.69
+  servername: FfFfffFFFf.000890604.Xyz
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: bce0c7cb-08d1-46a7-b77b-7bff8b46252f
+  ws-opts:
+    headers:
+      Host: FfFfffFFFf.000890604.Xyz
+    path: /Ryxyg63Pk7cFSnZBROjL3Q5vTymr
+- name: US_Buffalo_HostPapa_Claude5
+  network: ws
+  port: 443
+  server: 104.21.90.226
+  servername: eEedFR5.7777155.Xyz
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: e4cbe8b8-37db-4aaa-8469-b84f34c51ebc
+  ws-opts:
+    headers:
+      Host: eEedFR5.7777155.Xyz
+    path: /6OWLjRc26b0nHYr5hYXD
+- name: US_Dallas_HostPapa_Gemini
+  network: ws
+  port: 8880
+  server: 160.153.1.251
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
-  tls: true
+  tls: false
   type: vless
   udp: true
-  uuid: 2cec2733-389a-46a7-9053-218594a6336d
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   ws-opts:
     headers:
-      Host: nEwMTPROxI.PAGes.DEv
-    path: /
-- name: US_San Jose_Amazon.com, Inc._OpenAI4
+      host: cf.d3z.net
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: US_Dallas_HostPapa_Gemini_Claude1
+  network: ws
+  port: 8880
+  server: 185.133.35.251
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      host: cf.d3z.net
+    path: /Telegramًں‡¨ًں‡³
+- name: US_Dallas_HostPapa_Gemini_Claude2
+  network: ws
+  port: 8880
+  server: 45.81.58.251
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Elk Grove Village_HostPapa_Gemini_Claude1
+  network: ws
+  port: 8880
+  server: 5.10.214.251
+  servername: cf.d3z.net
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: US_Elk Grove Village_HostPapa_Gemini_Claude2
+  network: ws
+  port: 8880
+  server: 194.76.18.254
+  servername: yg.bantony199.top
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
+  ws-opts:
+    headers:
+      host: yg.bantony199.top
+    path: /Telegram🇨🇳
+- name: US_Elk Grove Village_HostPapa_Gemini_Claude3
   network: ws
   port: 443
-  server: 104.21.35.171
-  servername: MaIncrafT.dPdnS.OrG
-  skip-cert-verify: false
+  server: sxxcer4.000890604.xyz
+  servername: sxXCer4.000890604.xYz
   tls: true
   type: vless
   udp: true
-  uuid: 252df5e8-0428-4345-b236-a6dae7b3457d
+  uuid: 13e26f64-2e0c-4461-92cd-d83294cc18f0
   ws-opts:
     headers:
-      Host: MaIncrafT.dPdnS.OrG
-    path: /HcFmPxmQkiv44jMu?ed=2560
-- name: US_San Jose_Amazon.com, Inc._OpenAI5
+      Host: sxXCer4.000890604.xYz
+    path: /WfxcqrR5ycVpIit2OdWk0KwirdY
+- name: US_Elk Grove Village_HostPapa_Gemini_Claude4
+  network: ws
+  port: 8880
+  server: 154.206.12.251
+  servername: Telegram-channel-WangCai2
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Elk Grove Village_HostPapa_Gemini_Claude5
+  network: ws
+  port: 8880
+  server: 45.194.53.251
+  servername: Telegram-channel-WangCai2
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Los Angeles_HostPapa_Claude
   network: ws
   port: 443
-  server: 104.26.13.31
-  servername: FinLAnd-A3r.pAgES.dEv
+  server: 222222r.11890604.xyz
+  servername: 222222r.11890604.xyz
   tls: true
   type: vless
   udp: true
-  uuid: 3130e111-a06c-4388-aeda-4b43f6e8e51f
+  uuid: f898ffcb-6417-4373-9640-0b66091e8206
   ws-opts:
     headers:
-      Host: finland-a3r.pages.dev
-      User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.63 Safari/537.36
-    path: /Tel-@V2ray_Alpha/?ed=2560
-- name: ❓_🇪🇸_💻_github.com/Ruk1ng001_
+      Host: 222222r.11890604.xyz
+    path: /33CYL4twIwItuzXyJ5XNeH1R1
+- name: US_Los Angeles_HostPapa_Gemini
   network: ws
   port: 8880
-  server: 185.251.82.63
-  servername: jp.laoyoutiao.link
+  server: 27.50.48.251
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: false
   tls: false
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   ws-opts:
     headers:
-      Host: jp.laoyoutiao.link
+      Host: cf.d3z.net
     path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇬🇧_💻_github.com/Ruk1ng001_1
+- name: US_Los Angeles_HostPapa_Gemini_Claude1
   network: ws
   port: 8880
-  server: 185.162.229.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
+  server: 102.177.189.254
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
   ws-opts:
     headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇬🇧_💻_github.com/Ruk1ng001_2
-  network: ws
-  port: 8880
-  server: 45.12.30.145
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@vpnAndroid2/?ed=2560
-- name: ❓_🇯🇵_💻_github.com/Ruk1ng001_
+      host: yg.bantony199.top
+    path: /Telegram🇨🇳
+- name: US_Los Angeles_HostPapa_Gemini_Claude2
   network: ws
   port: 8880
   server: 154.197.80.251
@@ -1229,43 +1077,7 @@ proxies:
     headers:
       Host: cf.d3z.net
     path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇳🇱_💻_github.com/Ruk1ng001_1
-  network: ws
-  port: 8880
-  server: 45.131.7.174
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@ShadowProxy66/?ed=2560
-- name: ❓_🇳🇱_💻_github.com/Ruk1ng001_2
-  network: ws
-  port: 8880
-  server: 45.131.211.224
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /@ShadowProxy66?ed=2560
-- name: ❓_🇳🇱_💻_github.com/Ruk1ng001_3
-  network: ws
-  port: 80
-  server: 45.131.210.52
-  servername: redfree8.pooriashop.ir
-  tls: false
-  type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram@WangCai2/?ed
-- name: ❓_🇳🇿_💻_github.com/Ruk1ng001_
+- name: US_Los Angeles_HostPapa_Gemini_Claude3
   network: ws
   port: 8880
   server: 114.129.43.251
@@ -1278,10 +1090,346 @@ proxies:
     headers:
       Host: cf.d3z.net
     path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇷🇺_💻_github.com/Ruk1ng001_
+- name: US_Los Angeles_Psychz Networks_Claude
+  password: dongtaiwang.com
+  port: 4710
+  server: 108.181.5.130
+  skip-cert-verify: true
+  sni: apple.com
+  type: hysteria2
+- alterId: 0
+  cipher: auto
+  name: US_New York_Massivegrid LTD_Claude1
+  network: ws
+  port: 443
+  server: SSsXXXCvBnmjKi.931.Pp.uA
+  skip-cert-verify: true
+  tls: true
+  type: vmess
+  udp: true
+  uuid: da128246-33b0-4c88-a44e-d91e9e0a1e05
+  ws-opts:
+    headers:
+      Host: sssxxxcvbnmjki.931.pp.ua
+    path: /0FhUkqQUdxOhMB9JsgTazwz9
+- alterId: 0
+  cipher: auto
+  name: US_New York_Massivegrid LTD_Claude2
+  network: ws
+  port: 80
+  server: aAZXsdE.003330333.xYZ
+  skip-cert-verify: false
+  tls: false
+  type: vmess
+  uuid: 10b1e371-d734-4306-b67f-0fc1f95c2485
+  ws-opts:
+    headers:
+      Host: aazxsde.003330333.xyz
+    path: /SXjq8YlnGNBlbnEsM
+- name: US_Phoenix_Oracle Corporation_Claude1
   network: ws
   port: 8880
-  server: 185.174.138.0
+  server: 185.238.228.20
+  servername: us.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: us.laoyoutiao.link
+    path: /
+- name: US_Phoenix_Oracle Corporation_Claude2
+  network: ws
+  port: 8880
+  server: 91.193.58.69
+  servername: us.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: us.laoyoutiao.link
+    path: /
+- name: US_Phoenix_Oracle Corporation_Claude3
+  network: ws
+  port: 8880
+  server: 188.42.145.20
+  servername: us.laoyoutiao.link
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      host: us.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3 @MxlShare @WangCai2 /
+- name: US_Phoenix_Oracle Corporation_Claude4
+  network: ws
+  port: 80
+  server: 141.193.213.254
+  tls: false
+  type: vless
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: us.laoyoutiao.link
+    path: Telegram🇨🇳 @MxlShare+@WangCai2+/?ed=2560
+- name: US_Portland_Amazon.com, Inc._Gemini
+  network: ws
+  port: 80
+  server: 45.131.4.157
+  servername: redfree8.pooriashop.ir
+  tls: false
+  type: vless
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
+- name: US_San Jose_Amazon.com, Inc._Claude1
+  network: ws
+  port: 443
+  server: 185.176.24.159
+  servername: FREEDOm.ZiStarvInbioTeCh.ir
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: 0a506a60-ae3e-499d-9cbd-ab003f9f3f3b
+  ws-opts:
+    headers:
+      Host: freedom.zistarvinbiotech.ir
+    path: /Telegram@V2ray_Alpha/?ed=2560
+- name: US_San Jose_Amazon.com, Inc._Claude2
+  network: ws
+  port: 8880
+  server: 45.131.7.174
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /Telegram@ShadowProxy66/?ed=2560
+- name: US_San Jose_Amazon.com, Inc._Gemini1
+  network: ws
+  port: 8880
+  server: 5.10.247.170
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /TelegramU0001F1E8U0001F1F3
+- name: US_San Jose_Amazon.com, Inc._Gemini2
+  network: ws
+  port: 80
+  server: 185.174.138.6
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: '/Channel id: @ShadowProxy66/?ed=2560'
+- name: US_San Jose_Amazon.com, Inc._Gemini_Claude
+  network: ws
+  port: 8880
+  server: 45.159.216.20
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- alterId: 0
+  cipher: auto
+  name: US_Secaucus_Massivegrid LTD_Gemini_Claude1
+  network: ws
+  port: 80
+  server: 172.67.149.239
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  udp: true
+  uuid: 3d9741da-c0e4-47cc-a5e0-f1af3d337dae
+  ws-opts:
+    headers:
+      Host: vvvvvvvvvvvvvvb.4444926.xyz
+    path: /U2Z0FoBkgtZqfwAwY2SNm
+- alterId: 0
+  cipher: auto
+  name: US_Secaucus_Massivegrid LTD_Gemini_Claude2
+  network: ws
+  port: 80
+  server: 104.21.75.75
+  tls: false
+  type: vmess
+  uuid: cf8c791e-9d0b-4e90-aaf6-41ac62468416
+  ws-opts:
+    headers:
+      Host: eeeeer.857856.xyz
+    path: /CpsfR28bJO8180gomOew3d
+- name: US_Sterling_Total Uptime Technologies_Claude1
+  network: ws
+  port: 8880
+  server: 195.85.23.200
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /Telegram@vpnAndroid2/?ed=2560
+- name: US_Sterling_Total Uptime Technologies_Claude2
+  network: ws
+  port: 80
+  server: 45.12.30.136
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: '/Channel id: @ShadowProxy66/?ed=2560'
+- name: US_Sterling_Total Uptime Technologies_Claude3
+  network: ws
+  port: 8880
+  server: 45.131.210.20
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /?ed=2560
+- name: US_Sterling_Total Uptime Technologies_Claude4
+  network: ws
+  port: 80
+  server: 45.159.216.56
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /Telegram:@vpnAndroid2/?ed=2560
+- name: US_Sterling_Total Uptime Technologies_Gemini1
+  network: ws
+  port: 2053
+  server: 188.114.97.183
+  servername: nOCTYq.pAGES.DEV
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: eb568786-bb3f-4f02-a25c-7183e800a0ba
+  ws-opts:
+    headers:
+      Host: nOCTYq.pAGES.DEV
+    path: /bPJ4mgkJbA7CnY7q?ed=2560
+- name: US_Sterling_Total Uptime Technologies_Gemini2
+  network: ws
+  port: 8443
+  server: 188.114.96.153
+  servername: noctyQ.pAGES.DEV
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: eb568786-bb3f-4f02-a25c-7183e800a0ba
+  ws-opts:
+    headers:
+      Host: noctyQ.pAGES.DEV
+    path: /
+- name: US_Sterling_Total Uptime Technologies_Gemini_Claude1
+  network: ws
+  port: 8880
+  server: 185.221.160.110
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: US_Sterling_Total Uptime Technologies_Gemini_Claude2
+  network: ws
+  port: 8880
+  server: 212.183.88.20
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: US_Sterling_Total Uptime Technologies_Gemini_Claude3
+  network: ws
+  port: 8880
+  server: 45.131.208.108
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /Telegram@ShadowProxy66/?ed=2560
+- name: US_Sterling_Total Uptime Technologies_Gemini_Claude4
+  network: ws
+  port: 2087
+  server: 172.66.47.31
+  servername: nEwMTPROxI.PAGes.DEv
+  skip-cert-verify: true
+  tls: true
+  type: vless
+  udp: true
+  uuid: 2cec2733-389a-46a7-9053-218594a6336d
+  ws-opts:
+    headers:
+      Host: nEwMTPROxI.PAGes.DEv
+    path: /
+- name: US_Sterling_Total Uptime Technologies_Gemini_Claude5
+  network: ws
+  port: 8880
+  server: 45.142.120.145
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
   tls: false
   type: vless
   udp: true
@@ -1290,6 +1438,288 @@ proxies:
     headers:
       Host: reedfree8mahsang2.redorg.ir
     path: /@ShadowProxy66?ed=2560
+- name: US_Sterling_Total Uptime Technologies_Gemini_Claude6
+  network: ws
+  port: 2053
+  server: 104.21.16.1
+  servername: 6Ny8J3m9BCe4gTsPtivSObeOkZvyI8CM.paGeS.DEV
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: 35bdc608-822d-42eb-ad20-4bb23e9c052b
+  ws-opts:
+    headers:
+      Host: 6Ny8J3m9BCe4gTsPtivSObeOkZvyI8CM.paGeS.DEV
+    path: /1BvBMhk9nOFvi0vn?ed=2560
+- fingerprint: ''
+  name: fr|0bfc|puddincat07@Telegram
+  network: ws
+  port: 22224
+  server: 13.36.253.184
+  servername: trojan.burgerip.co.uk
+  tls: true
+  type: vless
+  udp: false
+  uuid: 05519058-d2ac-4f28-9e4a-2b2a1386749e
+  ws-opts:
+    headers:
+      host: trojan.burgerip.co.uk
+    path: /telegram-channel-vlessconfig
+- name: github.com/Ruk1ng001_
+  network: ws
+  port: 443
+  server: nnchkclyx.codesofun.pp.ua
+  servername: nnchk.codesofun.pp.ua
+  tls: true
+  type: vless
+  udp: true
+  uuid: 5f077162-99ad-424d-9f77-e5f7e37d9ef8
+  ws-opts:
+    headers:
+      Host: nnchk.codesofun.pp.ua
+    path: /ea3ac731
+- name: ❓_🇩🇪_💻_github.com/Ruk1ng001_1
+  network: ws
+  port: 80
+  server: 45.80.111.134
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: '/Channel id: @ShadowProxy66/?ed=2560'
+- name: ❓_🇩🇪_💻_github.com/Ruk1ng001_2
+  network: ws
+  port: 2095
+  server: 45.80.111.119
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /Telegram:TM-@AZARBAYJAB1+TM-@AZARBAYJAB1+TM-@AZARBAYJAB1+TM-@AZARBAYJAB1+TM-@AZARBAYJAB1
+- name: ❓_🇩🇪_💻_github.com/Ruk1ng001_3
+  network: ws
+  port: 80
+  server: 45.80.111.92
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /Telegram:@ShadowProxy66/?ed=2560
+- name: ❓_🇪🇸_💻_github.com/Ruk1ng001_1
+  network: ws
+  port: 8880
+  server: 185.251.81.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: ❓_🇪🇸_💻_github.com/Ruk1ng001_2
+  network: ws
+  port: 8880
+  server: 185.238.228.213
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /?ed=2560
+- name: ❓_🇬🇧_💻_github.com/Ruk1ng001_1
+  network: ws
+  port: 8880
+  server: 91.193.58.192
+  tls: false
+  type: vless
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: us.laoyoutiao.link
+    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
+- name: ❓_🇬🇧_💻_github.com/Ruk1ng001_2
+  network: ws
+  port: 8880
+  server: 185.193.29.213
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /?ed=2560
+- name: ❓_🇬🇧_💻_github.com/Ruk1ng001_3
+  network: ws
+  port: 8880
+  server: 45.12.30.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: ❓_🇭🇺_💻_github.com/Ruk1ng001_
+  network: ws
+  port: 8880
+  server: 74.49.214.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: ❓_🇮🇳_💻_github.com/Ruk1ng001_
+  network: ws
+  port: 8880
+  server: 154.198.173.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: ❓_🇰🇿_💻_github.com/Ruk1ng001_1
+  network: ws
+  port: 8880
+  server: 195.245.221.187
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /@ShadowProxy66?ed=2560
+- name: ❓_🇰🇿_💻_github.com/Ruk1ng001_2
+  network: ws
+  port: 8880
+  server: 31.43.179.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: ❓_🇱🇹_💻_github.com/Ruk1ng001_
+  network: ws
+  port: 8880
+  server: 89.116.161.213
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /?ed=2560
+- name: ❓_🇳🇱_💻_github.com/Ruk1ng001_1
+  network: ws
+  port: 8880
+  server: 45.131.4.34
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /Telegram@ShadowProxy66/?ed=2560
+- name: ❓_🇳🇱_💻_github.com/Ruk1ng001_2
+  network: ws
+  port: 8880
+  server: 45.131.6.68
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: '/Channel id: @ShadowProxy66?ed=2560'
+- name: ❓_🇳🇱_💻_github.com/Ruk1ng001_3
+  network: ws
+  port: 80
+  server: 45.131.210.52
+  servername: redfree8.pooriashop.ir
+  tls: false
+  type: vless
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram@WangCai2/?ed
+- name: ❓_🇷🇺_💻_github.com/Ruk1ng001_1
+  network: ws
+  port: 80
+  server: 185.148.106.141
+  servername: reedfree8mahsang2.redorg.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: '/Channel id: @ShadowProxy66/?ed=2560'
+- name: ❓_🇷🇺_💻_github.com/Ruk1ng001_2
+  network: ws
+  port: 8880
+  server: 185.148.106.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
 - name: ❓_🇸🇬_💻_github.com/Ruk1ng001_
   network: ws
   port: 80
@@ -1304,7 +1734,138 @@ proxies:
     headers:
       Host: reedfree8mahsang2.redorg.ir
     path: '/Channel id: @ShadowProxy66/?ed=2560'
+- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_1
+  network: ws
+  port: 8880
+  server: 155.46.213.177
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      Host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_2
+  network: ws
+  port: 8880
+  server: 104.129.165.213
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /?ed=2560
+- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_3
+  network: ws
+  port: 8880
+  server: 199.181.197.63
+  servername: jp.laoyoutiao.link
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_4
+  network: ws
+  port: 8880
+  server: 216.24.57.20
+  servername: us.laoyoutiao.link
+  tls: false
+  type: vless
+  udp: true
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: us.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed
+- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_5
+  network: ws
+  port: 80
+  server: 141.193.213.16
+  tls: false
+  type: vless
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: us.laoyoutiao.link
+    path: Telegram🇨🇳 @MxlShare+@WangCai2+/?ed=2560
+- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_6
+  network: ws
+  port: 8880
+  server: 45.159.218.20
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: reedfree8mahsang2.redorg.ir
+    path: /
+- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_7
+  network: ws
+  port: 8880
+  server: 147.185.161.251
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: 🟠_🇺🇸_💻_github.com/Ruk1ng001_
+  network: ws
+  port: 2053
+  server: 172.66.47.82
+  servername: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: 80764883-7f6b-4c46-8ecd-887cdf541c07
+  ws-opts:
+    headers:
+      Host: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
+    path: /oqLIXWAi6lzpnumQ
+- name: 🟡_🇬🇧_💻_github.com/Ruk1ng001_
+  network: ws
+  port: 8880
+  server: 164.38.155.20
+  tls: false
+  type: vless
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  ws-opts:
+    headers:
+      Host: us.laoyoutiao.link
+    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
 - name: 🟡_🇺🇸_💻_github.com/Ruk1ng001_1
+  network: ws
+  port: 443
+  server: 104.21.13.36
+  servername: XcdvfGBnHU7.0890604.XyZ
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: a7c9c017-db10-4d15-b01b-0634db498b57
+  ws-opts:
+    headers:
+      Host: XcdvfGBnHU7.0890604.XyZ
+    path: /xZjr7v1DqrYyamxeTh7sLJtI1
+- name: 🟡_🇺🇸_💻_github.com/Ruk1ng001_2
   network: ws
   port: 443
   server: 104.21.66.157
@@ -1318,24 +1879,22 @@ proxies:
     headers:
       Host: eeEEEeR.666470.xYZ
     path: /6DuxYMYmrGrnGKRtF5UvWyyVQu
-- name: 🟡_🇺🇸_💻_github.com/Ruk1ng001_2
+- name: 🟡💻_github.com/Ruk1ng001_
   network: ws
-  port: 443
-  server: 104.19.54.50
-  servername: HarmonY-427.pages.DEV
-  skip-cert-verify: false
-  tls: true
+  port: 8880
+  server: 88.216.67.20
+  tls: false
   type: vless
-  udp: true
-  uuid: 3c36eadb-747a-4166-8db0-23fec9883ea2
+  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   ws-opts:
     headers:
-      Host: HarmonY-427.pages.DEV
-    path: /?ed=2048
+      Host: us.laoyoutiao.link
+    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
 proxy-groups:
 - name: PROXY
   type: select
   proxies:
+  - Best
   - Fallback
   - Select
   - HK
@@ -1347,301 +1906,560 @@ proxy-groups:
   type: select
   filter: .*
   proxies:
-  - 199.38.148.95_OpenAI
-  - AE_Dubai_Oracle Corporation_OpenAI1
-  - AE_Dubai_Oracle Corporation_OpenAI2
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI1
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI2
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI3
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI4
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI5
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI6
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI7
-  - DE_Frankfurt_GTHost_OpenAI1
-  - DE_Frankfurt_GTHost_OpenAI2
-  - FR_Paris_Online S.A.S._OpenAI
-  - FR_Paris_SCALEWAY_OpenAI
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co1
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co2
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co3
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co4
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co5
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co6
-  - MD_Chisinau_EDIS_OpenAI
-  - NL_Amsterdam_Aeza International LTD_OpenAI1
-  - NL_Amsterdam_Aeza International LTD_OpenAI2
-  - NL_Amsterdam_Aeza International LTD_OpenAI3
-  - NL_Amsterdam_Aeza International LTD_OpenAI4
-  - NL_Amsterdam_Aeza International LTD_OpenAI5
-  - NL_Dronten_Digital City FZE_OpenAI
-  - SG_Singapore_Shenzhen Tencent Computer Systems Company Limited_OpenAI
-  - TR_Izmir_Alastyr Telekomunikasyon A.S._OpenAI
-  - US_Ashburn_Oracle Corporation_OpenAI1
-  - US_Ashburn_Oracle Corporation_OpenAI2
-  - US_Buffalo_HostPapa_OpenAI1
-  - US_Buffalo_HostPapa_OpenAI2
-  - US_Buffalo_HostPapa_OpenAI3
-  - US_Buffalo_HostPapa_OpenAI4
-  - US_Buffalo_HostPapa_OpenAI5
-  - US_Buffalo_HostPapa_OpenAI6
-  - US_Buffalo_HostPapa_OpenAI7
-  - US_Buffalo_HostPapa_OpenAI8
-  - US_Buffalo_HostPapa_OpenAI9
-  - US_Dallas_HostPapa_OpenAI1
-  - US_Dallas_HostPapa_OpenAI2
-  - US_Dallas_Total Uptime Technologies_OpenAI1
-  - US_Dallas_Total Uptime Technologies_OpenAI10
-  - US_Dallas_Total Uptime Technologies_OpenAI2
-  - US_Dallas_Total Uptime Technologies_OpenAI3
-  - US_Dallas_Total Uptime Technologies_OpenAI4
-  - US_Dallas_Total Uptime Technologies_OpenAI5
-  - US_Dallas_Total Uptime Technologies_OpenAI6
-  - US_Dallas_Total Uptime Technologies_OpenAI7
-  - US_Dallas_Total Uptime Technologies_OpenAI8
-  - US_Dallas_Total Uptime Technologies_OpenAI9
-  - US_Elk Grove Village_HostPapa
-  - US_Elk Grove Village_HostPapa_OpenAI1
-  - US_Elk Grove Village_HostPapa_OpenAI2
-  - US_Elk Grove Village_HostPapa_OpenAI3
-  - US_Elk Grove Village_HostPapa_OpenAI4
-  - US_Elk Grove Village_HostPapa_OpenAI5
-  - US_Elk Grove Village_HostPapa_OpenAI6
-  - US_Elk Grove Village_HostPapa_OpenAI7
-  - US_Los Angeles_Dedicated.com_OpenAI
-  - US_Los Angeles_HostPapa_OpenAI1
-  - US_Los Angeles_HostPapa_OpenAI2
-  - US_Los Angeles_HostPapa_OpenAI3
-  - US_Los Angeles_Psychz Networks_OpenAI
-  - US_New York_Coaxial Cable LLC_OpenAI
-  - US_New York_Massivegrid LTD
-  - US_New York_Massivegrid LTD_OpenAI
-  - US_Phoenix_Oracle Corporation1
-  - US_Phoenix_Oracle Corporation2
-  - US_Phoenix_Oracle Corporation3
-  - US_Phoenix_Oracle Corporation4
-  - US_Phoenix_Oracle Corporation_OpenAI1
-  - US_Phoenix_Oracle Corporation_OpenAI2
-  - US_Portland_Amazon.com, Inc._OpenAI1
-  - US_Portland_Amazon.com, Inc._OpenAI2
-  - US_Portland_Amazon.com, Inc._OpenAI3
-  - US_Portland_Amazon.com, Inc._OpenAI4
-  - US_Portland_Amazon.com, Inc._OpenAI5
-  - US_Portland_Amazon.com, Inc._OpenAI6
-  - US_San Jose_Amazon.com, Inc._OpenAI1
-  - US_San Jose_Amazon.com, Inc._OpenAI2
-  - US_San Jose_Amazon.com, Inc._OpenAI3
-  - US_San Jose_Amazon.com, Inc._OpenAI4
-  - US_San Jose_Amazon.com, Inc._OpenAI5
-  - ❓_🇪🇸_💻_github.com/Ruk1ng001_
+  - 103.12.77.191_Claude
+  - 103.12.77.48_Claude
+  - 103.81.84.57_Claude
+  - 103.81.86.172_Claude
+  - 107.174.26.18_Claude
+  - 107.175.212.252_Claude
+  - 137.220.142.143_Claude
+  - 137.220.191.38_Claude1
+  - 137.220.191.38_Claude2
+  - 14|DE_speednode_1
+  - 14|DE_speednode_2
+  - 14|DE_speednode_3
+  - 14|DE_speednode_4
+  - 14|GB_speednode_1
+  - 14|GB_speednode_2
+  - 14|JP_speednode_
+  - 14|LU_speednode_
+  - 14|NL_speednode_
+  - 14|RU_speednode_
+  - 14|SA_speednode_
+  - 14|SI_speednode_
+  - 14|US_speednode_1
+  - 14|US_speednode_10
+  - 14|US_speednode_2
+  - 14|US_speednode_3
+  - 14|US_speednode_4
+  - 14|US_speednode_5
+  - 14|US_speednode_6
+  - 14|US_speednode_7
+  - 14|US_speednode_8
+  - 14|US_speednode_9
+  - 160.250.65.124_Claude
+  - 192.3.179.114_Claude
+  - 192.3.179.121_Claude
+  - 1|🇦🇪1 |  1.2MB/s|0%|Disney|Opena...
+  - 1|🇺🇸123 |  1.3MB/s|61%|Disney|Op...
+  - 203.231.242.12_Claude
+  - 59.153.216.133_Claude
+  - 59.153.217.133_Claude
+  - 59.153.217.57_Claude
+  - 59.153.218.14_Claude
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Claude1
+  - DE_Falkenstein_Hetzner Online GmbH_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Claude3
+  - DE_Falkenstein_Hetzner Online GmbH_Claude4
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini1
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini3
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
+  - FR_Paris_Online S.A.S._Claude
+  - FR_Paris_SCALEWAY_Claude
+  - NL_Amsterdam_Aeza International LTD_Claude1
+  - NL_Amsterdam_Aeza International LTD_Claude2
+  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
+  - SG_Singapore_Hetzner Online GmbH_Claude
+  - TR_Izmir_Alastyr Telekomunikasyon A.S._Claude
+  - US_Buffalo_HostPapa_Claude1
+  - US_Buffalo_HostPapa_Claude2
+  - US_Buffalo_HostPapa_Claude3
+  - US_Buffalo_HostPapa_Claude4
+  - US_Buffalo_HostPapa_Claude5
+  - US_Dallas_HostPapa_Gemini
+  - US_Dallas_HostPapa_Gemini_Claude1
+  - US_Dallas_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude1
+  - US_Elk Grove Village_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude3
+  - US_Elk Grove Village_HostPapa_Gemini_Claude4
+  - US_Elk Grove Village_HostPapa_Gemini_Claude5
+  - US_Los Angeles_HostPapa_Claude
+  - US_Los Angeles_HostPapa_Gemini
+  - US_Los Angeles_HostPapa_Gemini_Claude1
+  - US_Los Angeles_HostPapa_Gemini_Claude2
+  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_Los Angeles_Psychz Networks_Claude
+  - US_New York_Massivegrid LTD_Claude1
+  - US_New York_Massivegrid LTD_Claude2
+  - US_Phoenix_Oracle Corporation_Claude1
+  - US_Phoenix_Oracle Corporation_Claude2
+  - US_Phoenix_Oracle Corporation_Claude3
+  - US_Phoenix_Oracle Corporation_Claude4
+  - US_Portland_Amazon.com, Inc._Gemini
+  - US_San Jose_Amazon.com, Inc._Claude1
+  - US_San Jose_Amazon.com, Inc._Claude2
+  - US_San Jose_Amazon.com, Inc._Gemini1
+  - US_San Jose_Amazon.com, Inc._Gemini2
+  - US_San Jose_Amazon.com, Inc._Gemini_Claude
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude1
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Claude1
+  - US_Sterling_Total Uptime Technologies_Claude2
+  - US_Sterling_Total Uptime Technologies_Claude3
+  - US_Sterling_Total Uptime Technologies_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini1
+  - US_Sterling_Total Uptime Technologies_Gemini2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
+  - fr|0bfc|puddincat07@Telegram
+  - github.com/Ruk1ng001_
+  - ❓_🇩🇪_💻_github.com/Ruk1ng001_1
+  - ❓_🇩🇪_💻_github.com/Ruk1ng001_2
+  - ❓_🇩🇪_💻_github.com/Ruk1ng001_3
+  - ❓_🇪🇸_💻_github.com/Ruk1ng001_1
+  - ❓_🇪🇸_💻_github.com/Ruk1ng001_2
   - ❓_🇬🇧_💻_github.com/Ruk1ng001_1
   - ❓_🇬🇧_💻_github.com/Ruk1ng001_2
-  - ❓_🇯🇵_💻_github.com/Ruk1ng001_
+  - ❓_🇬🇧_💻_github.com/Ruk1ng001_3
+  - ❓_🇭🇺_💻_github.com/Ruk1ng001_
+  - ❓_🇮🇳_💻_github.com/Ruk1ng001_
+  - ❓_🇰🇿_💻_github.com/Ruk1ng001_1
+  - ❓_🇰🇿_💻_github.com/Ruk1ng001_2
+  - ❓_🇱🇹_💻_github.com/Ruk1ng001_
   - ❓_🇳🇱_💻_github.com/Ruk1ng001_1
   - ❓_🇳🇱_💻_github.com/Ruk1ng001_2
   - ❓_🇳🇱_💻_github.com/Ruk1ng001_3
-  - ❓_🇳🇿_💻_github.com/Ruk1ng001_
-  - ❓_🇷🇺_💻_github.com/Ruk1ng001_
+  - ❓_🇷🇺_💻_github.com/Ruk1ng001_1
+  - ❓_🇷🇺_💻_github.com/Ruk1ng001_2
   - ❓_🇸🇬_💻_github.com/Ruk1ng001_
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_1
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_2
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_3
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_4
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_5
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_6
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_7
+  - 🟠_🇺🇸_💻_github.com/Ruk1ng001_
+  - 🟡_🇬🇧_💻_github.com/Ruk1ng001_
   - 🟡_🇺🇸_💻_github.com/Ruk1ng001_1
   - 🟡_🇺🇸_💻_github.com/Ruk1ng001_2
+  - 🟡💻_github.com/Ruk1ng001_
+- name: Best
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  expected-status: 204
+  lazy: true
+  timeout: 2000
+  interval: 600
+  tolerance: 50
+  filter: _Gemini_Claude
+  proxies:
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
+  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
+  - US_Dallas_HostPapa_Gemini_Claude1
+  - US_Dallas_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude1
+  - US_Elk Grove Village_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude3
+  - US_Elk Grove Village_HostPapa_Gemini_Claude4
+  - US_Elk Grove Village_HostPapa_Gemini_Claude5
+  - US_Los Angeles_HostPapa_Gemini_Claude1
+  - US_Los Angeles_HostPapa_Gemini_Claude2
+  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_San Jose_Amazon.com, Inc._Gemini_Claude
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude1
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
 - name: Fallback
   type: fallback
-  url: http://www.google.com/generate_204
+  url: https://www.gstatic.com/generate_204
+  expected-status: 204
+  lazy: true
+  timeout: 2000
   interval: 600
+  tolerance: 50
+  filter: .*
   proxies:
-  - HK
-  - TW
-  - JP
-  - SG
-  - US
+  - 103.12.77.191_Claude
+  - 103.12.77.48_Claude
+  - 103.81.84.57_Claude
+  - 103.81.86.172_Claude
+  - 107.174.26.18_Claude
+  - 107.175.212.252_Claude
+  - 137.220.142.143_Claude
+  - 137.220.191.38_Claude1
+  - 137.220.191.38_Claude2
+  - 14|DE_speednode_1
+  - 14|DE_speednode_2
+  - 14|DE_speednode_3
+  - 14|DE_speednode_4
+  - 14|GB_speednode_1
+  - 14|GB_speednode_2
+  - 14|JP_speednode_
+  - 14|LU_speednode_
+  - 14|NL_speednode_
+  - 14|RU_speednode_
+  - 14|SA_speednode_
+  - 14|SI_speednode_
+  - 14|US_speednode_1
+  - 14|US_speednode_10
+  - 14|US_speednode_2
+  - 14|US_speednode_3
+  - 14|US_speednode_4
+  - 14|US_speednode_5
+  - 14|US_speednode_6
+  - 14|US_speednode_7
+  - 14|US_speednode_8
+  - 14|US_speednode_9
+  - 160.250.65.124_Claude
+  - 192.3.179.114_Claude
+  - 192.3.179.121_Claude
+  - 1|🇦🇪1 |  1.2MB/s|0%|Disney|Opena...
+  - 1|🇺🇸123 |  1.3MB/s|61%|Disney|Op...
+  - 203.231.242.12_Claude
+  - 59.153.216.133_Claude
+  - 59.153.217.133_Claude
+  - 59.153.217.57_Claude
+  - 59.153.218.14_Claude
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Claude1
+  - DE_Falkenstein_Hetzner Online GmbH_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Claude3
+  - DE_Falkenstein_Hetzner Online GmbH_Claude4
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini1
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini3
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
+  - FR_Paris_Online S.A.S._Claude
+  - FR_Paris_SCALEWAY_Claude
+  - NL_Amsterdam_Aeza International LTD_Claude1
+  - NL_Amsterdam_Aeza International LTD_Claude2
+  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
+  - SG_Singapore_Hetzner Online GmbH_Claude
+  - TR_Izmir_Alastyr Telekomunikasyon A.S._Claude
+  - US_Buffalo_HostPapa_Claude1
+  - US_Buffalo_HostPapa_Claude2
+  - US_Buffalo_HostPapa_Claude3
+  - US_Buffalo_HostPapa_Claude4
+  - US_Buffalo_HostPapa_Claude5
+  - US_Dallas_HostPapa_Gemini
+  - US_Dallas_HostPapa_Gemini_Claude1
+  - US_Dallas_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude1
+  - US_Elk Grove Village_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude3
+  - US_Elk Grove Village_HostPapa_Gemini_Claude4
+  - US_Elk Grove Village_HostPapa_Gemini_Claude5
+  - US_Los Angeles_HostPapa_Claude
+  - US_Los Angeles_HostPapa_Gemini
+  - US_Los Angeles_HostPapa_Gemini_Claude1
+  - US_Los Angeles_HostPapa_Gemini_Claude2
+  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_Los Angeles_Psychz Networks_Claude
+  - US_New York_Massivegrid LTD_Claude1
+  - US_New York_Massivegrid LTD_Claude2
+  - US_Phoenix_Oracle Corporation_Claude1
+  - US_Phoenix_Oracle Corporation_Claude2
+  - US_Phoenix_Oracle Corporation_Claude3
+  - US_Phoenix_Oracle Corporation_Claude4
+  - US_Portland_Amazon.com, Inc._Gemini
+  - US_San Jose_Amazon.com, Inc._Claude1
+  - US_San Jose_Amazon.com, Inc._Claude2
+  - US_San Jose_Amazon.com, Inc._Gemini1
+  - US_San Jose_Amazon.com, Inc._Gemini2
+  - US_San Jose_Amazon.com, Inc._Gemini_Claude
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude1
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Claude1
+  - US_Sterling_Total Uptime Technologies_Claude2
+  - US_Sterling_Total Uptime Technologies_Claude3
+  - US_Sterling_Total Uptime Technologies_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini1
+  - US_Sterling_Total Uptime Technologies_Gemini2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
+  - fr|0bfc|puddincat07@Telegram
+  - github.com/Ruk1ng001_
+  - ❓_🇩🇪_💻_github.com/Ruk1ng001_1
+  - ❓_🇩🇪_💻_github.com/Ruk1ng001_2
+  - ❓_🇩🇪_💻_github.com/Ruk1ng001_3
+  - ❓_🇪🇸_💻_github.com/Ruk1ng001_1
+  - ❓_🇪🇸_💻_github.com/Ruk1ng001_2
+  - ❓_🇬🇧_💻_github.com/Ruk1ng001_1
+  - ❓_🇬🇧_💻_github.com/Ruk1ng001_2
+  - ❓_🇬🇧_💻_github.com/Ruk1ng001_3
+  - ❓_🇭🇺_💻_github.com/Ruk1ng001_
+  - ❓_🇮🇳_💻_github.com/Ruk1ng001_
+  - ❓_🇰🇿_💻_github.com/Ruk1ng001_1
+  - ❓_🇰🇿_💻_github.com/Ruk1ng001_2
+  - ❓_🇱🇹_💻_github.com/Ruk1ng001_
+  - ❓_🇳🇱_💻_github.com/Ruk1ng001_1
+  - ❓_🇳🇱_💻_github.com/Ruk1ng001_2
+  - ❓_🇳🇱_💻_github.com/Ruk1ng001_3
+  - ❓_🇷🇺_💻_github.com/Ruk1ng001_1
+  - ❓_🇷🇺_💻_github.com/Ruk1ng001_2
+  - ❓_🇸🇬_💻_github.com/Ruk1ng001_
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_1
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_2
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_3
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_4
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_5
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_6
+  - ❓_🇺🇸_💻_github.com/Ruk1ng001_7
+  - 🟠_🇺🇸_💻_github.com/Ruk1ng001_
+  - 🟡_🇬🇧_💻_github.com/Ruk1ng001_
+  - 🟡_🇺🇸_💻_github.com/Ruk1ng001_1
+  - 🟡_🇺🇸_💻_github.com/Ruk1ng001_2
+  - 🟡💻_github.com/Ruk1ng001_
 - name: HK
   type: url-test
-  url: http://www.google.com/generate_204
+  url: https://www.gstatic.com/generate_204
+  expected-status: 204
+  lazy: true
+  timeout: 2000
   interval: 600
-  tolerance: 2000
+  tolerance: 50
   proxies:
   - DIRECT
   filter: (?i)港|HK|HongKong|hong kong
 - name: TW
   type: url-test
-  url: http://www.google.com/generate_204
+  url: https://www.gstatic.com/generate_204
+  expected-status: 204
+  lazy: true
+  timeout: 2000
   interval: 600
-  tolerance: 2000
+  tolerance: 50
   proxies:
   - DIRECT
   filter: 台湾|TW|Tw|Taiwan|新北|彰化|CHT|HINET
 - name: JP
   type: url-test
-  url: http://www.google.com/generate_204
+  url: https://www.gstatic.com/generate_204
+  expected-status: 204
+  lazy: true
+  timeout: 2000
   interval: 600
-  tolerance: 2000
+  tolerance: 50
   proxies:
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co1
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co2
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co3
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co4
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co5
-  - JP_Tokyo_Tencent Cloud Computing (Beijing) Co6
+  - 14|JP_speednode_
   filter: (?i)日|东京|大阪|JP|Japan|Tokyo|Osaka|Saitama
 - name: SG
   type: url-test
-  url: http://www.google.com/generate_204
+  url: https://www.gstatic.com/generate_204
+  expected-status: 204
+  lazy: true
+  timeout: 2000
   interval: 600
-  tolerance: 2000
+  tolerance: 50
   proxies:
-  - SG_Singapore_Shenzhen Tencent Computer Systems Company Limited_OpenAI
+  - SG_Singapore_Hetzner Online GmbH_Claude
   filter: (?i)新|狮城|SG|Singapore
 - name: US
   type: url-test
-  url: http://www.google.com/generate_204
+  url: https://www.gstatic.com/generate_204
+  expected-status: 204
+  lazy: true
+  timeout: 2000
   interval: 600
-  tolerance: 2000
+  tolerance: 50
   proxies:
-  - US_Ashburn_Oracle Corporation_OpenAI1
-  - US_Ashburn_Oracle Corporation_OpenAI2
-  - US_Buffalo_HostPapa_OpenAI1
-  - US_Buffalo_HostPapa_OpenAI2
-  - US_Buffalo_HostPapa_OpenAI3
-  - US_Buffalo_HostPapa_OpenAI4
-  - US_Buffalo_HostPapa_OpenAI5
-  - US_Buffalo_HostPapa_OpenAI6
-  - US_Buffalo_HostPapa_OpenAI7
-  - US_Buffalo_HostPapa_OpenAI8
-  - US_Buffalo_HostPapa_OpenAI9
-  - US_Dallas_HostPapa_OpenAI1
-  - US_Dallas_HostPapa_OpenAI2
-  - US_Dallas_Total Uptime Technologies_OpenAI1
-  - US_Dallas_Total Uptime Technologies_OpenAI10
-  - US_Dallas_Total Uptime Technologies_OpenAI2
-  - US_Dallas_Total Uptime Technologies_OpenAI3
-  - US_Dallas_Total Uptime Technologies_OpenAI4
-  - US_Dallas_Total Uptime Technologies_OpenAI5
-  - US_Dallas_Total Uptime Technologies_OpenAI6
-  - US_Dallas_Total Uptime Technologies_OpenAI7
-  - US_Dallas_Total Uptime Technologies_OpenAI8
-  - US_Dallas_Total Uptime Technologies_OpenAI9
-  - US_Elk Grove Village_HostPapa
-  - US_Elk Grove Village_HostPapa_OpenAI1
-  - US_Elk Grove Village_HostPapa_OpenAI2
-  - US_Elk Grove Village_HostPapa_OpenAI3
-  - US_Elk Grove Village_HostPapa_OpenAI4
-  - US_Elk Grove Village_HostPapa_OpenAI5
-  - US_Elk Grove Village_HostPapa_OpenAI6
-  - US_Elk Grove Village_HostPapa_OpenAI7
-  - US_Los Angeles_Dedicated.com_OpenAI
-  - US_Los Angeles_HostPapa_OpenAI1
-  - US_Los Angeles_HostPapa_OpenAI2
-  - US_Los Angeles_HostPapa_OpenAI3
-  - US_Los Angeles_Psychz Networks_OpenAI
-  - US_New York_Coaxial Cable LLC_OpenAI
-  - US_New York_Massivegrid LTD
-  - US_New York_Massivegrid LTD_OpenAI
-  - US_Phoenix_Oracle Corporation1
-  - US_Phoenix_Oracle Corporation2
-  - US_Phoenix_Oracle Corporation3
-  - US_Phoenix_Oracle Corporation4
-  - US_Phoenix_Oracle Corporation_OpenAI1
-  - US_Phoenix_Oracle Corporation_OpenAI2
-  - US_Portland_Amazon.com, Inc._OpenAI1
-  - US_Portland_Amazon.com, Inc._OpenAI2
-  - US_Portland_Amazon.com, Inc._OpenAI3
-  - US_Portland_Amazon.com, Inc._OpenAI4
-  - US_Portland_Amazon.com, Inc._OpenAI5
-  - US_Portland_Amazon.com, Inc._OpenAI6
-  - US_San Jose_Amazon.com, Inc._OpenAI1
-  - US_San Jose_Amazon.com, Inc._OpenAI2
-  - US_San Jose_Amazon.com, Inc._OpenAI3
-  - US_San Jose_Amazon.com, Inc._OpenAI4
-  - US_San Jose_Amazon.com, Inc._OpenAI5
+  - 14|US_speednode_1
+  - 14|US_speednode_10
+  - 14|US_speednode_2
+  - 14|US_speednode_3
+  - 14|US_speednode_4
+  - 14|US_speednode_5
+  - 14|US_speednode_6
+  - 14|US_speednode_7
+  - 14|US_speednode_8
+  - 14|US_speednode_9
+  - US_Buffalo_HostPapa_Claude1
+  - US_Buffalo_HostPapa_Claude2
+  - US_Buffalo_HostPapa_Claude3
+  - US_Buffalo_HostPapa_Claude4
+  - US_Buffalo_HostPapa_Claude5
+  - US_Dallas_HostPapa_Gemini
+  - US_Dallas_HostPapa_Gemini_Claude1
+  - US_Dallas_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude1
+  - US_Elk Grove Village_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude3
+  - US_Elk Grove Village_HostPapa_Gemini_Claude4
+  - US_Elk Grove Village_HostPapa_Gemini_Claude5
+  - US_Los Angeles_HostPapa_Claude
+  - US_Los Angeles_HostPapa_Gemini
+  - US_Los Angeles_HostPapa_Gemini_Claude1
+  - US_Los Angeles_HostPapa_Gemini_Claude2
+  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_Los Angeles_Psychz Networks_Claude
+  - US_New York_Massivegrid LTD_Claude1
+  - US_New York_Massivegrid LTD_Claude2
+  - US_Phoenix_Oracle Corporation_Claude1
+  - US_Phoenix_Oracle Corporation_Claude2
+  - US_Phoenix_Oracle Corporation_Claude3
+  - US_Phoenix_Oracle Corporation_Claude4
+  - US_Portland_Amazon.com, Inc._Gemini
+  - US_San Jose_Amazon.com, Inc._Claude1
+  - US_San Jose_Amazon.com, Inc._Claude2
+  - US_San Jose_Amazon.com, Inc._Gemini1
+  - US_San Jose_Amazon.com, Inc._Gemini2
+  - US_San Jose_Amazon.com, Inc._Gemini_Claude
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude1
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Claude1
+  - US_Sterling_Total Uptime Technologies_Claude2
+  - US_Sterling_Total Uptime Technologies_Claude3
+  - US_Sterling_Total Uptime Technologies_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini1
+  - US_Sterling_Total Uptime Technologies_Gemini2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
   filter: (?i)美|洛杉矶|芝加哥|西雅图|America|US|United.*?States
-- name: OpenAI
-  type: url-test
-  url: http://www.google.com/generate_204
-  interval: 600
-  tolerance: 500
-  proxies:
-  - 199.38.148.95_OpenAI
-  - AE_Dubai_Oracle Corporation_OpenAI1
-  - AE_Dubai_Oracle Corporation_OpenAI2
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI1
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI2
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI3
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI4
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI5
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI6
-  - DE_Falkenstein_Hetzner Online GmbH_OpenAI7
-  - DE_Frankfurt_GTHost_OpenAI1
-  - DE_Frankfurt_GTHost_OpenAI2
-  - FR_Paris_Online S.A.S._OpenAI
-  - FR_Paris_SCALEWAY_OpenAI
-  - MD_Chisinau_EDIS_OpenAI
-  - NL_Amsterdam_Aeza International LTD_OpenAI1
-  - NL_Amsterdam_Aeza International LTD_OpenAI2
-  - NL_Amsterdam_Aeza International LTD_OpenAI3
-  - NL_Amsterdam_Aeza International LTD_OpenAI4
-  - NL_Amsterdam_Aeza International LTD_OpenAI5
-  - NL_Dronten_Digital City FZE_OpenAI
-  - SG_Singapore_Shenzhen Tencent Computer Systems Company Limited_OpenAI
-  - TR_Izmir_Alastyr Telekomunikasyon A.S._OpenAI
-  - US_Ashburn_Oracle Corporation_OpenAI1
-  - US_Ashburn_Oracle Corporation_OpenAI2
-  - US_Buffalo_HostPapa_OpenAI1
-  - US_Buffalo_HostPapa_OpenAI2
-  - US_Buffalo_HostPapa_OpenAI3
-  - US_Buffalo_HostPapa_OpenAI4
-  - US_Buffalo_HostPapa_OpenAI5
-  - US_Buffalo_HostPapa_OpenAI6
-  - US_Buffalo_HostPapa_OpenAI7
-  - US_Buffalo_HostPapa_OpenAI8
-  - US_Buffalo_HostPapa_OpenAI9
-  - US_Dallas_HostPapa_OpenAI1
-  - US_Dallas_HostPapa_OpenAI2
-  - US_Dallas_Total Uptime Technologies_OpenAI1
-  - US_Dallas_Total Uptime Technologies_OpenAI10
-  - US_Dallas_Total Uptime Technologies_OpenAI2
-  - US_Dallas_Total Uptime Technologies_OpenAI3
-  - US_Dallas_Total Uptime Technologies_OpenAI4
-  - US_Dallas_Total Uptime Technologies_OpenAI5
-  - US_Dallas_Total Uptime Technologies_OpenAI6
-  - US_Dallas_Total Uptime Technologies_OpenAI7
-  - US_Dallas_Total Uptime Technologies_OpenAI8
-  - US_Dallas_Total Uptime Technologies_OpenAI9
-  - US_Elk Grove Village_HostPapa_OpenAI1
-  - US_Elk Grove Village_HostPapa_OpenAI2
-  - US_Elk Grove Village_HostPapa_OpenAI3
-  - US_Elk Grove Village_HostPapa_OpenAI4
-  - US_Elk Grove Village_HostPapa_OpenAI5
-  - US_Elk Grove Village_HostPapa_OpenAI6
-  - US_Elk Grove Village_HostPapa_OpenAI7
-  - US_Los Angeles_Dedicated.com_OpenAI
-  - US_Los Angeles_HostPapa_OpenAI1
-  - US_Los Angeles_HostPapa_OpenAI2
-  - US_Los Angeles_HostPapa_OpenAI3
-  - US_Los Angeles_Psychz Networks_OpenAI
-  - US_New York_Coaxial Cable LLC_OpenAI
-  - US_New York_Massivegrid LTD_OpenAI
-  - US_Phoenix_Oracle Corporation_OpenAI1
-  - US_Phoenix_Oracle Corporation_OpenAI2
-  - US_Portland_Amazon.com, Inc._OpenAI1
-  - US_Portland_Amazon.com, Inc._OpenAI2
-  - US_Portland_Amazon.com, Inc._OpenAI3
-  - US_Portland_Amazon.com, Inc._OpenAI4
-  - US_Portland_Amazon.com, Inc._OpenAI5
-  - US_Portland_Amazon.com, Inc._OpenAI6
-  - US_San Jose_Amazon.com, Inc._OpenAI1
-  - US_San Jose_Amazon.com, Inc._OpenAI2
-  - US_San Jose_Amazon.com, Inc._OpenAI3
-  - US_San Jose_Amazon.com, Inc._OpenAI4
-  - US_San Jose_Amazon.com, Inc._OpenAI5
-  filter: (?i)OpenAI
 - name: Claude
   type: url-test
-  url: http://www.google.com/generate_204
+  url: https://www.gstatic.com/generate_204
+  expected-status: 204
+  timeout: 2000
   interval: 600
-  tolerance: 500
+  tolerance: 50
   proxies:
-  - PROXY
-  filter: (?i)Claude
+  - 103.12.77.191_Claude
+  - 103.12.77.48_Claude
+  - 103.81.84.57_Claude
+  - 103.81.86.172_Claude
+  - 107.174.26.18_Claude
+  - 107.175.212.252_Claude
+  - 137.220.142.143_Claude
+  - 137.220.191.38_Claude1
+  - 137.220.191.38_Claude2
+  - 160.250.65.124_Claude
+  - 192.3.179.114_Claude
+  - 192.3.179.121_Claude
+  - 203.231.242.12_Claude
+  - 59.153.216.133_Claude
+  - 59.153.217.133_Claude
+  - 59.153.217.57_Claude
+  - 59.153.218.14_Claude
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Claude1
+  - DE_Falkenstein_Hetzner Online GmbH_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Claude3
+  - DE_Falkenstein_Hetzner Online GmbH_Claude4
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
+  - FR_Paris_Online S.A.S._Claude
+  - FR_Paris_SCALEWAY_Claude
+  - NL_Amsterdam_Aeza International LTD_Claude1
+  - NL_Amsterdam_Aeza International LTD_Claude2
+  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
+  - SG_Singapore_Hetzner Online GmbH_Claude
+  - TR_Izmir_Alastyr Telekomunikasyon A.S._Claude
+  - US_Buffalo_HostPapa_Claude1
+  - US_Buffalo_HostPapa_Claude2
+  - US_Buffalo_HostPapa_Claude3
+  - US_Buffalo_HostPapa_Claude4
+  - US_Buffalo_HostPapa_Claude5
+  - US_Dallas_HostPapa_Gemini_Claude1
+  - US_Dallas_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude1
+  - US_Elk Grove Village_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude3
+  - US_Elk Grove Village_HostPapa_Gemini_Claude4
+  - US_Elk Grove Village_HostPapa_Gemini_Claude5
+  - US_Los Angeles_HostPapa_Claude
+  - US_Los Angeles_HostPapa_Gemini_Claude1
+  - US_Los Angeles_HostPapa_Gemini_Claude2
+  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_Los Angeles_Psychz Networks_Claude
+  - US_New York_Massivegrid LTD_Claude1
+  - US_New York_Massivegrid LTD_Claude2
+  - US_Phoenix_Oracle Corporation_Claude1
+  - US_Phoenix_Oracle Corporation_Claude2
+  - US_Phoenix_Oracle Corporation_Claude3
+  - US_Phoenix_Oracle Corporation_Claude4
+  - US_San Jose_Amazon.com, Inc._Claude1
+  - US_San Jose_Amazon.com, Inc._Claude2
+  - US_San Jose_Amazon.com, Inc._Gemini_Claude
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude1
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Claude1
+  - US_Sterling_Total Uptime Technologies_Claude2
+  - US_Sterling_Total Uptime Technologies_Claude3
+  - US_Sterling_Total Uptime Technologies_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
+  filter: _Claude
+- name: Gemini
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  expected-status: 204
+  timeout: 2000
+  interval: 600
+  tolerance: 50
+  proxies:
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
+  - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini1
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini3
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
+  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
+  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
+  - US_Dallas_HostPapa_Gemini
+  - US_Dallas_HostPapa_Gemini_Claude1
+  - US_Dallas_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude1
+  - US_Elk Grove Village_HostPapa_Gemini_Claude2
+  - US_Elk Grove Village_HostPapa_Gemini_Claude3
+  - US_Elk Grove Village_HostPapa_Gemini_Claude4
+  - US_Elk Grove Village_HostPapa_Gemini_Claude5
+  - US_Los Angeles_HostPapa_Gemini
+  - US_Los Angeles_HostPapa_Gemini_Claude1
+  - US_Los Angeles_HostPapa_Gemini_Claude2
+  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_Portland_Amazon.com, Inc._Gemini
+  - US_San Jose_Amazon.com, Inc._Gemini1
+  - US_San Jose_Amazon.com, Inc._Gemini2
+  - US_San Jose_Amazon.com, Inc._Gemini_Claude
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude1
+  - US_Secaucus_Massivegrid LTD_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Gemini1
+  - US_Sterling_Total Uptime Technologies_Gemini2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
+  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
+  filter: _Gemini
 rules:
 - RULE-SET,ads,REJECT
 - RULE-SET,applications,DIRECT
@@ -1652,7 +2470,7 @@ rules:
 - RULE-SET,bilibili,DIRECT
 - RULE-SET,cn,DIRECT
 - RULE-SET,claude,Claude
-- RULE-SET,ai,OpenAI
+- RULE-SET,gemini,Gemini
 - RULE-SET,youtube,PROXY
 - RULE-SET,telegramip,PROXY,no-resolve
 - RULE-SET,privateip,DIRECT,no-resolve
@@ -1666,70 +2484,70 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/fakeip-filter.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/fakeip-filter.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/fakeip-filter.mrs
     interval: 86400
   ads:
     type: http
     behavior: domain
     format: mrs
     path: ./rules/ads.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/ads.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/ads.mrs
     interval: 86400
   applications:
     type: http
     behavior: classical
     format: text
     path: ./rules/applications.list
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/applications.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/applications.list
     interval: 86400
   private:
     type: http
     behavior: domain
     format: mrs
     path: ./rules/private.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/private.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/private.mrs
     interval: 86400
   games-cn:
     type: http
     behavior: domain
     format: mrs
     path: ./rules/games-cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/games-cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/games-cn.mrs
     interval: 86400
   microsoft-cn:
     type: http
     behavior: domain
     format: mrs
     path: ./rules/microsoft-cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/microsoft-cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/microsoft-cn.mrs
     interval: 86400
   apple-cn:
     type: http
     behavior: domain
     format: mrs
     path: ./rules/apple-cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/apple-cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/apple-cn.mrs
     interval: 86400
   google-cn:
     type: http
     behavior: domain
     format: mrs
     path: ./rules/google-cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/google-cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/google-cn.mrs
     interval: 86400
   bilibili:
     type: http
     behavior: domain
     format: mrs
     path: ./rules/bilibili.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/bilibili.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/bilibili.mrs
     interval: 86400
-  ai:
+  gemini:
     type: http
     behavior: domain
     format: mrs
-    path: ./rules/ai.mrs
-    url: https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/ai/ai.mrs
+    path: ./rules/gemini.mrs
+    url: https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/gemini/gemini.mrs
     interval: 86400
   claude:
     type: http
@@ -1743,33 +2561,33 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/youtube.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/youtube.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/youtube.mrs
     interval: 86400
   cn:
     type: http
     behavior: domain
     format: mrs
     path: ./rules/cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/cn.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cn.mrs
     interval: 86400
   telegramip:
     type: http
     behavior: ipcidr
     format: mrs
     path: ./rules/telegramip.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/telegramip.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/telegramip.mrs
     interval: 86400
   privateip:
     type: http
     behavior: ipcidr
     format: mrs
     path: ./rules/privateip.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/privateip.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/privateip.mrs
     interval: 86400
   cnip:
     type: http
     behavior: ipcidr
     format: mrs
     path: ./rules/cnip.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/cnip.mrs
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cnip.mrs
     interval: 86400
