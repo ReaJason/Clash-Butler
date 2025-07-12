@@ -1,23 +1,24 @@
-mixed-port: 7999
+mixed-port: 7998
 allow-lan: true
 bind-address: "*"
 mode: rule
 log-level: debug
-external-controller: ":9091"
-geodata-mode: true
+external-controller: ":9095"
 geox-url:
-  geosite: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geosite.dat"
-  geoip: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/geoip-lite.dat"
-  mmdb: "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@clash/Country-lite.mmdb"
+  geosite: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  geoip: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
 geo-auto-update: true
 geo-update-interval: 24
 profile:
   store-selected: true
   store-fake-ip: true
-ipv6: true
 find-process-mode: strict
 global-client-fingerprint: chrome
 tcp-concurrent: true
+unified-delay: true
+
 dns:
   enable: true
   prefer-h3: true
@@ -47,5 +48,5 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/fakeip-filter.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/fakeip-filter.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/fakeip-filter.mrs"
     interval: 86400

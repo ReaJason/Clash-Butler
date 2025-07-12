@@ -1,5 +1,4 @@
 mixed-port: 7890
-socks-port: 7891
 allow-lan: true
 bind-address: "*"
 mode: rule
@@ -8,9 +7,9 @@ external-controller: "127.0.0.1:9090"
 external-ui: ui
 external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
 geox-url:
-  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
-  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
-  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  geosite: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  geoip: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
   asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
 geo-auto-update: true
 geo-update-interval: 24
@@ -69,6 +68,7 @@ proxy-groups:
   - name: PROXY
     type: select
     proxies:
+      - Best
       - Fallback
       - Select
       - HK
@@ -80,65 +80,94 @@ proxy-groups:
     type: select
     filter: ".*"
     proxies: [ ]
+  - name: Best
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    lazy: true
+    timeout: 2000
+    interval: 600
+    tolerance: 50
+    filter: "_Gemini_Claude"
+    proxies: [ ]
   - name: Fallback
     type: fallback
-    url: http://www.google.com/generate_204
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    lazy: true
+    timeout: 2000
     interval: 600
-    proxies:
-      - HK
-      - TW
-      - JP
-      - SG
-      - US
+    tolerance: 50
+    filter: ".*"
+    proxies: [ ]
   - name: HK
     type: url-test
-    url: http://www.google.com/generate_204
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    lazy: true
+    timeout: 2000
     interval: 600
-    tolerance: 2000
+    tolerance: 50
     proxies: [ ]
     filter: "(?i)港|HK|HongKong|hong kong"
   - name: TW
     type: url-test
-    url: http://www.google.com/generate_204
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    lazy: true
+    timeout: 2000
     interval: 600
-    tolerance: 2000
+    tolerance: 50
     proxies: [ ]
     filter: "台湾|TW|Tw|Taiwan|新北|彰化|CHT|HINET"
   - name: JP
     type: url-test
-    url: http://www.google.com/generate_204
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    lazy: true
+    timeout: 2000
     interval: 600
-    tolerance: 2000
+    tolerance: 50
     proxies: [ ]
     filter: "(?i)日|东京|大阪|JP|Japan|Tokyo|Osaka|Saitama"
   - name: SG
     type: url-test
-    url: http://www.google.com/generate_204
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    lazy: true
+    timeout: 2000
     interval: 600
-    tolerance: 2000
+    tolerance: 50
     proxies: [ ]
     filter: "(?i)新|狮城|SG|Singapore"
   - name: US
     type: url-test
-    url: http://www.google.com/generate_204
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    lazy: true
+    timeout: 2000
     interval: 600
-    tolerance: 2000
+    tolerance: 50
     proxies: [ ]
     filter: "(?i)美|洛杉矶|芝加哥|西雅图|America|US|United.*?States"
-  - name: OpenAI
-    type: url-test
-    url: http://www.google.com/generate_204
-    interval: 600
-    tolerance: 500
-    proxies: [ PROXY ]
-    filter: "(?i)OpenAI"
   - name: Claude
     type: url-test
-    url: http://www.google.com/generate_204
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    timeout: 2000
     interval: 600
-    tolerance: 500
+    tolerance: 50
     proxies: [ PROXY ]
-    filter: "(?i)Claude"
+    filter: "_Claude"
+  - name: Gemini
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    expected-status: 204
+    timeout: 2000
+    interval: 600
+    tolerance: 50
+    proxies: [ PROXY ]
+    filter: "_Gemini"
 rules:
   - RULE-SET,ads,REJECT
   - RULE-SET,applications,DIRECT
@@ -149,7 +178,7 @@ rules:
   - RULE-SET,bilibili,DIRECT
   - RULE-SET,cn,DIRECT
   - RULE-SET,claude,Claude
-  - RULE-SET,ai,OpenAI
+  - RULE-SET,gemini,Gemini
   - RULE-SET,youtube,PROXY
   - RULE-SET,telegramip,PROXY,no-resolve
   - RULE-SET,privateip,DIRECT,no-resolve
@@ -164,7 +193,7 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/fakeip-filter.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/fakeip-filter.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/fakeip-filter.mrs"
     interval: 86400
 
   ads:
@@ -172,7 +201,7 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/ads.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/ads.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/ads.mrs"
     interval: 86400
 
   applications:
@@ -180,7 +209,7 @@ rule-providers:
     behavior: classical
     format: text
     path: ./rules/applications.list
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/applications.list"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/applications.list"
     interval: 86400
 
   private:
@@ -188,7 +217,7 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/private.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/private.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/private.mrs"
     interval: 86400
 
   games-cn:
@@ -196,7 +225,7 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/games-cn.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/games-cn.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/games-cn.mrs"
     interval: 86400
 
   microsoft-cn:
@@ -204,7 +233,7 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/microsoft-cn.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/microsoft-cn.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/microsoft-cn.mrs"
     interval: 86400
 
   apple-cn:
@@ -212,7 +241,7 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/apple-cn.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/apple-cn.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/apple-cn.mrs"
     interval: 86400
 
   google-cn:
@@ -220,7 +249,7 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/google-cn.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/google-cn.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/google-cn.mrs"
     interval: 86400
 
   bilibili:
@@ -228,15 +257,15 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/bilibili.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/bilibili.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/bilibili.mrs"
     interval: 86400
 
-  ai:
+  gemini:
     type: http
     behavior: domain
     format: mrs
-    path: ./rules/ai.mrs
-    url: "https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/ai/ai.mrs"
+    path: ./rules/gemini.mrs
+    url: "https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/gemini/gemini.mrs"
     interval: 86400
 
   claude:
@@ -252,7 +281,7 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/youtube.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/youtube.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/youtube.mrs"
     interval: 86400
 
   cn:
@@ -260,7 +289,7 @@ rule-providers:
     behavior: domain
     format: mrs
     path: ./rules/cn.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/cn.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cn.mrs"
     interval: 86400
 
   telegramip:
@@ -268,7 +297,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     path: ./rules/telegramip.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/telegramip.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/telegramip.mrs"
     interval: 86400
 
   privateip:
@@ -276,7 +305,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     path: ./rules/privateip.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/privateip.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/privateip.mrs"
     interval: 86400
 
   cnip:
@@ -284,5 +313,5 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     path: ./rules/cnip.mrs
-    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/clash-ruleset/cnip.mrs"
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cnip.mrs"
     interval: 86400
