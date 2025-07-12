@@ -186,7 +186,7 @@ pub struct ProxyDelay {
 pub struct DelayTestConfig {
     pub url: String,
     pub expected: Option<u16>,
-    pub timeout: u16,
+    pub timeout: u64,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

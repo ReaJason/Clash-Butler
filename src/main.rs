@@ -3,6 +3,7 @@ use std::collections::HashSet;
 use std::env;
 use std::fs;
 use std::path::Path;
+use std::time::Duration;
 
 use clap::Parser;
 use proxrs::protocol::Proxy;
@@ -162,7 +163,7 @@ async fn run(config: Settings) {
     } else {
         info!("当前总可用节点个数：{}", &useful_proxies.len());
     }
-
+    let timeout: Duration = Duration::from_millis(config.connect_test.timeout + 2000);
     if config.fast_mode {
         SubManager::save_proxies_into_clash_file(
             &useful_proxies,
@@ -203,12 +204,12 @@ async fn run(config: Settings) {
                     .set_group_proxy(TEST_PROXY_GROUP_NAME, node)
                     .await;
                 if ip_result.is_ok() {
-                    let ip_result = cgi_trace::get_ip(&clash_meta.proxy_url).await;
+                    let ip_result = cgi_trace::get_ip(&clash_meta.proxy_url, timeout).await;
                     if ip_result.is_ok() {
                         let (proxy_ip, from) = ip_result.unwrap();
                         info!("「{}」ip: {} from: {}", node, proxy_ip, from);
                         let mut gemini_is_ok = false;
-                        match website::gemini_is_ok(&clash_meta.proxy_url).await {
+                        match website::gemini_is_ok(&clash_meta.proxy_url, timeout).await {
                             Ok(_) => {
                                 info!("「{}」 gemini is ok", node);
                                 gemini_is_ok = true;
@@ -219,7 +220,7 @@ async fn run(config: Settings) {
                         }
 
                         let mut claude_is_ok = false;
-                        match website::claude_is_ok(&clash_meta.proxy_url).await {
+                        match website::claude_is_ok(&clash_meta.proxy_url, timeout).await {
                             Ok(_) => {
                                 info!("「{}」 claude is ok", node);
                                 claude_is_ok = true;

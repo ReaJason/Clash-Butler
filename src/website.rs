@@ -9,21 +9,20 @@ use reqwest::Client;
 use reqwest::StatusCode;
 
 const USER_AGENT: &str = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36";
-const TIMEOUT: Duration = Duration::from_secs(5);
 
-fn build_client(proxy_url: &str) -> Result<Client> {
+fn build_client(proxy_url: &str, timeout: Duration) -> Result<Client> {
     Client::builder()
         .proxy(reqwest::Proxy::all(proxy_url).context("Failed to create proxy configuration")?)
         .redirect(Policy::none())
-        .timeout(TIMEOUT)
+        .timeout(timeout)
         .build()
         .context("Failed to build HTTP client")
 }
 
 #[allow(dead_code)]
-pub async fn claude_is_ok(proxy_url: &str) -> Result<()> {
+pub async fn claude_is_ok(proxy_url: &str, timeout: Duration) -> Result<()> {
     let url = "https://claude.ai/favicon.ico";
-    let client = build_client(proxy_url)?;
+    let client = build_client(proxy_url, timeout)?;
     let resp = client
         .get(url)
         .header("User-Agent", USER_AGENT)
@@ -55,9 +54,9 @@ pub async fn claude_is_ok(proxy_url: &str) -> Result<()> {
 }
 
 #[allow(dead_code)]
-pub async fn openai_is_ok(proxy_url: &str) -> Result<()> {
+pub async fn openai_is_ok(proxy_url: &str, timeout: Duration) -> Result<()> {
     let url = "https://auth.openai.com/favicon.ico";
-    let client = build_client(proxy_url)?;
+    let client = build_client(proxy_url, timeout)?;
     let resp = client
         .get(url)
         .header("User-Agent", USER_AGENT)
@@ -72,9 +71,9 @@ pub async fn openai_is_ok(proxy_url: &str) -> Result<()> {
 }
 
 #[allow(dead_code)]
-pub async fn youtube_music_is_ok(proxy_url: &str) -> Result<()> {
+pub async fn youtube_music_is_ok(proxy_url: &str, timeout: Duration) -> Result<()> {
     let url = "https://music.youtube.com/generate_204";
-    let client = build_client(proxy_url)?;
+    let client = build_client(proxy_url, timeout)?;
     let resp = client
         .head(url)
         .header("User-Agent", USER_AGENT)
@@ -88,9 +87,9 @@ pub async fn youtube_music_is_ok(proxy_url: &str) -> Result<()> {
     Err(anyhow!("error status code: {}", status))
 }
 
-pub async fn gemini_is_ok(proxy_url: &str) -> Result<()> {
+pub async fn gemini_is_ok(proxy_url: &str, timeout: Duration) -> Result<()> {
     let url = "https://gemini.google.com";
-    let client = build_client(proxy_url)?;
+    let client = build_client(proxy_url, timeout)?;
     let resp = client
         .get(url)
         .header("User-Agent", USER_AGENT)
@@ -127,32 +126,35 @@ pub async fn gemini_is_ok(proxy_url: &str) -> Result<()> {
     Err(anyhow!("error status code: {}", status))
 }
 
+#[cfg(test)]
 mod test {
+    use super::*;
+
     #[tokio::test]
     #[ignore]
     async fn test_gemini_is_ok() {
-        let result = super::gemini_is_ok("http://localhost:7890").await;
+        let result = gemini_is_ok("http://localhost:7890", Duration::from_secs(5)).await;
         println!("{:?}", result);
     }
 
     #[tokio::test]
     #[ignore]
     async fn test_youtube_music_is_ok() {
-        let result = super::youtube_music_is_ok("http://localhost:7890").await;
+        let result = youtube_music_is_ok("http://localhost:7890", Duration::from_secs(5)).await;
         println!("{:?}", result);
     }
 
     #[tokio::test]
     #[ignore]
     async fn test_claude_is_ok() {
-        let result = super::claude_is_ok("http://localhost:7890").await;
+        let result = claude_is_ok("http://localhost:7890", Duration::from_secs(5)).await;
         println!("{:?}", result);
     }
 
     #[tokio::test]
     #[ignore]
     async fn test_openai_is_ok() {
-        let result = super::openai_is_ok("http://localhost:7890").await;
+        let result = openai_is_ok("http://localhost:7890", Duration::from_secs(5)).await;
         println!("{:?}", result);
     }
 }
