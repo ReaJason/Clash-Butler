@@ -1,9 +1,12 @@
+mod http;
+mod hysteria;
+pub(crate) mod hysteria2;
+mod socks5;
 mod ss;
 mod ssr;
 mod trojan;
 pub(crate) mod vless;
 pub(crate) mod vmess;
-pub(crate) mod hysteria2;
 
 use std::any::Any;
 use std::collections::HashMap;
@@ -20,7 +23,10 @@ use serde::Serialize;
 use serde_json::json;
 use serde_json::Value;
 
+use crate::protocol::http::Http;
+use crate::protocol::hysteria::Hysteria;
 use crate::protocol::hysteria2::Hysteria2;
+use crate::protocol::socks5::Socks5;
 use crate::protocol::ss::SS;
 use crate::protocol::ssr::Ssr;
 use crate::protocol::trojan::Trojan;
@@ -45,6 +51,10 @@ pub enum ProxyType {
     Hysteria,
     #[serde(rename = "wireguard")]
     WireGuard,
+    #[serde(rename = "http")]
+    Http,
+    #[serde(rename = "socks5")]
+    Socks5,
     #[serde(rename = "unknown")]
     Unknown,
 }
@@ -194,44 +204,66 @@ impl Proxy {
     pub fn from_json(json: &str) -> Result<Proxy, UnsupportedLinkError> {
         let value = serde_json::from_str::<Value>(json).unwrap();
         if let Some(proxy_type) = value.get("type") {
-            if proxy_type.as_str().unwrap() == "ss" {
+            let p_type = proxy_type.as_str().unwrap();
+            if p_type == "ss" {
                 return match serde_json::from_str::<SS>(json) {
                     Ok(ss) => Ok(Proxy::new(ProxyType::SS, Box::new(ss))),
                     Err(e) => Err(UnsupportedLinkError {
                         message: format!("{}", e),
                     }),
                 };
-            } else if proxy_type.as_str().unwrap() == "ssr" {
+            } else if p_type == "ssr" {
                 return match serde_json::from_str::<Ssr>(json) {
                     Ok(ssr) => Ok(Proxy::new(ProxyType::SSR, Box::new(ssr))),
                     Err(e) => Err(UnsupportedLinkError {
                         message: format!("{}", e),
                     }),
                 };
-            } else if proxy_type.as_str().unwrap() == "vmess" {
+            } else if p_type == "vmess" {
                 return match serde_json::from_str::<Vmess>(json) {
                     Ok(vmess) => Ok(Proxy::new(ProxyType::Vmess, Box::new(vmess))),
                     Err(e) => Err(UnsupportedLinkError {
                         message: format!("{}", e),
                     }),
                 };
-            } else if proxy_type.as_str().unwrap() == "vless" {
+            } else if p_type == "vless" {
                 return match serde_json::from_str::<Vless>(json) {
                     Ok(vless) => Ok(Proxy::new(ProxyType::Vless, Box::new(vless))),
                     Err(e) => Err(UnsupportedLinkError {
                         message: format!("{}", e),
                     }),
                 };
-            } else if proxy_type.as_str().unwrap() == "trojan" {
+            } else if p_type == "trojan" {
                 return match serde_json::from_str::<Trojan>(json) {
                     Ok(trojan) => Ok(Proxy::new(ProxyType::Trojan, Box::new(trojan))),
                     Err(e) => Err(UnsupportedLinkError {
                         message: format!("{}", e),
                     }),
                 };
-            } else if proxy_type.as_str().unwrap() == "hysteria2" {
+            } else if p_type == "hysteria" {
+                return match serde_json::from_str::<Hysteria>(json) {
+                    Ok(hysteria) => Ok(Proxy::new(ProxyType::Hysteria, Box::new(hysteria))),
+                    Err(e) => Err(UnsupportedLinkError {
+                        message: format!("{}", e),
+                    }),
+                };
+            } else if p_type == "hysteria2" {
                 return match serde_json::from_str::<Hysteria2>(json) {
                     Ok(hysteria2) => Ok(Proxy::new(ProxyType::Hysteria2, Box::new(hysteria2))),
+                    Err(e) => Err(UnsupportedLinkError {
+                        message: format!("{}", e),
+                    }),
+                };
+            } else if p_type == "http" {
+                return match serde_json::from_str::<Http>(json) {
+                    Ok(http) => Ok(Proxy::new(ProxyType::Http, Box::new(http))),
+                    Err(e) => Err(UnsupportedLinkError {
+                        message: format!("{}", e),
+                    }),
+                };
+            } else if p_type == "socks5" {
+                return match serde_json::from_str::<Socks5>(json) {
+                    Ok(socks5) => Ok(Proxy::new(ProxyType::Socks5, Box::new(socks5))),
                     Err(e) => Err(UnsupportedLinkError {
                         message: format!("{}", e),
                     }),
