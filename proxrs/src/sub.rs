@@ -16,6 +16,7 @@ use reqwest::Client;
 use serde_yaml::Mapping;
 use serde_yaml::Value;
 use tokio::time::sleep;
+use tracing::info;
 
 use crate::base64::base64decode;
 use crate::protocol::Proxy;
@@ -40,6 +41,7 @@ impl SubManager {
         } else if let Ok(p) = Self::parse_content(url.to_string()) {
             proxies.extend(p);
         }
+        info!("{} parsed proxies: {}", &url, &proxies.len());
         proxies
     }
 
@@ -118,7 +120,7 @@ impl SubManager {
                     "当前链接 {} 无法访问，已跳过，或请确保当前网络通顺",
                     sub_url
                 )
-                    .into());
+                .into());
             }
         }
     }
@@ -138,18 +140,14 @@ impl SubManager {
     /// 2. 尝试解析 base64 格式
     /// 3. 尝试使用纯链接格式解析
     pub fn parse_content(content: String) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
-        let mut conf_proxies: Vec<Proxy> = Vec::new();
+        let conf_proxies: Vec<Proxy> = Vec::new();
         match Self::parse_yaml_content(&content) {
-            Ok(proxies) => {
-                conf_proxies = proxies;
-            }
+            Ok(proxies) => return Ok(proxies),
             Err(_) => match Self::parse_base64_content(&content) {
-                Ok(proxies) => {
-                    conf_proxies = proxies;
-                }
+                Ok(proxies) => return Ok(proxies),
                 Err(_) => {
                     if let Ok(proxies) = Self::parse_links_content(&content) {
-                        conf_proxies = proxies;
+                        return Ok(proxies);
                     }
                 }
             },
@@ -160,8 +158,7 @@ impl SubManager {
     fn parse_yaml_content(content: &str) -> Result<Vec<Proxy>, Box<dyn std::error::Error>> {
         let mut conf_proxies: Vec<Proxy> = Vec::new();
         let yaml = serde_yaml::from_str::<serde_json::Value>(content)?;
-        let proxies = yaml.get("proxies").or_else(|| yaml.get("Proxies"));
-        match proxies {
+        match yaml.get("proxies").or_else(|| yaml.get("Proxies")) {
             None => {
                 return Err(format!("Proxy not found: {}", content).into());
             }
@@ -312,8 +309,8 @@ impl SubManager {
                                 if regex.is_match(proxy.get_name()) {
                                     if !removed_default
                                         && proxies
-                                        .first()
-                                        .is_some_and(|p| p.as_str().unwrap().eq("PROXY"))
+                                            .first()
+                                            .is_some_and(|p| p.as_str().unwrap().eq("PROXY"))
                                     {
                                         proxies.remove(0);
                                         removed_default = true;
@@ -341,14 +338,28 @@ impl SubManager {
         let mut file = File::create(&save_path).unwrap();
         file.write_all(content.as_bytes()).unwrap();
     }
+
+    pub fn save_proxies_into_base64_file(proxies: &[Proxy], save_path: String) {
+        let mut file = File::create(&save_path).unwrap();
+        let content = proxies
+            .iter()
+            .map(|p| p.adapter.to_link())
+            .collect::<Vec<_>>();
+        for b in content {
+            writeln!(file, "{}", b).unwrap();
+        }
+    }
 }
 
 #[cfg(test)]
 mod test {
+    use std::path::PathBuf;
+
     use super::*;
     use crate::protocol;
-    use crate::protocol::ProxyType::{Vless, Vmess};
-    use std::path::PathBuf;
+    use crate::protocol::ProxyType::Hysteria2;
+    use crate::protocol::ProxyType::Vless;
+    use crate::protocol::ProxyType::Vmess;
 
     #[test]
     fn test_get_clash_config_content() {
@@ -356,7 +367,7 @@ mod test {
         let mut proxies = SubManager::parse_from_path(
             "/Users/reajason/RustroverProjects/clash-butler/subs/0c1149d13476bbe3b62eecb7c9b895f4",
         )
-            .unwrap();
+        .unwrap();
         SubManager::unset_proxies_name(&mut proxies);
         let content = SubManager::get_clash_config_content(path.to_string(), &proxies).unwrap();
         println!("{}", content);
@@ -371,13 +382,11 @@ mod test {
         assert!(path.is_file());
     }
 
-    #[test]
+    #[tokio::test]
     #[ignore]
-    fn test_parse_conf() {
-        let path = Path::new(
-            "/Users/reajason/RustroverProjects/clash-butler/subs/d417717ed83bdabad1d310906a47a3a2",
-        );
-        let proxies = SubManager::parse_from_path(path).unwrap();
+    async fn test_parse_conf() {
+        let url = "https://github.com/ripaojiedian/freenode/raw/refs/heads/main/sub".to_string();
+        let proxies = SubManager::get_proxies_from_url(url).await;
         for proxy in &proxies {
             println!("{:?}", proxy);
         }
@@ -420,14 +429,21 @@ mod test {
     #[tokio::test]
     async fn test_merge_config() {
         let urls = vec![
-            "hysteria2://bc97f674-c578-4940-9234-0a1da46041b9@188.68.234.53:36604/?sni=www.bing.com&alpn=h3&insecure=1#tg%E6%8A%80%E6%9C%AF%E4%BA%A4%E6%B5%81%E7%BE%A4%EF%BC%9Ahttps%3A%2F%2Ft.me%2Fzzzjsjl"
-                .to_string(),
+            "hysteria2://bc97f674-c578-4940-9234-0a1da46041b9@188.68.234.53:36604/?sni=www.bing.com&alpn=h3&insecure=1#s14panel".to_string(),
+            "hysteria2://bc97f674-c578-4940-9234-0a1da46041b9@188.68.248.8:8220?peer=www.bing.com&insecure=1&alpn=h3#s15panel".to_string(),
+            "ss://Y2hhY2hhMjA6c0pNZGNJN05QakAxNC4xOC4yNTMuMTc4OjkwMDU#175.29.122.147_OpenAI".to_string(),
+            "ss://Y2hhY2hhMjA6djVhVVV0bWUzanhzQDE0LjE4LjI1My4xNzg6OTAwMw#175.29.122.149_OpenAI_Claude".to_string(),
+            "vmess://YXV0bzo5MjA0YWZjZC0wMjNlLTc4MWYtMWFiYy1jMTJlZmNjZDEzNDRAMTgzLjIzMi4xOTcuMjIzOjMzODAz?remarks=Tokyo-Akamai-H&path=/ray&obfs=websocket&tls=1&alterId=0".to_string(),
+            "vmess://YXV0bzo5MjA0YWZjZC0wMjNlLTc4MWYtMWFiYy1jMTJlZmNjZDEzNDRAMTEzLjU2LjIxOC4xMzozMzgwMA?remarks=Tokyo-Akamai-H&path=/ray&obfs=websocket&tls=1&alterId=0".to_string(),
+            "vmess://YXV0bzo5MjA0YWZjZC0wMjNlLTc4MWYtMWFiYy1jMTJlZmNjZDEzNDRAMTIyLjE5NS4xODkuMTI0OjMzODAw?remarks=Tokyo-Akamai-H&path=/ray&obfs=websocket&tls=1&alterId=0".to_string(),
+            "vmess://YXV0bzo5MjA0YWZjZC0wMjNlLTc4MWYtMWFiYy1jMTJlZmNjZDEzNDRANDMuMjQ4LjExOS4xNDU6MzM0MDc?remarks=%E9%A6%99%E6%B8%AF%E9%98%BF%E9%87%8C%E4%BA%91-H&path=/ray&obfs=websocket&tls=1&alterId=0".to_string(),
         ];
         let proxies = SubManager::get_proxies_from_urls(&urls).await;
         let release_clash_template_path =
             "/Users/reajason/RustroverProjects/clash-butler/conf/clash_release.yaml".to_string();
         let save_path =
-            "/Users/reajason/RustroverProjects/clash-butler/subs/release/proxy-s14.yaml".to_string();
+            "/Users/reajason/RustroverProjects/clash-butler/subs/release/proxy-merge.yaml"
+                .to_string();
         SubManager::save_proxies_into_clash_file(&proxies, release_clash_template_path, save_path);
     }
 
@@ -444,63 +460,50 @@ mod test {
 
     #[tokio::test]
     async fn test_merge_uuids() {
-        let url = "https://aq.louwangzhiyu.xyz/api/v1/client/subscribe?token=1df19eb36b48ca575ce86efb8267ada0";
+        let url = "/Users/reajason/.config/clash.meta/template4.yaml";
         let mut proxies = SubManager::get_proxies_from_url(url.to_string()).await;
 
         let mut result = vec![];
         let uuids = vec![
-            "09380338-f77f-494b-bd90-5018a32a7391",
-            "0b2c47ef-8453-4308-ba1e-bda41d0d6885",
-            "0dbbe2d1-4fbc-4102-ac1e-8fd4712a03fc",
-            "1641df69-d412-4585-9450-74b0b66677d7",
-            "16a939e6-a411-4c76-9931-d67aff2e887f",
-            "26e45c40-818a-4f7e-9c50-62906a160e99",
-            "27717caf-1ef5-4d57-a7a0-7f3a7448cbdd",
-            "394a7bab-233f-4b01-8194-2489a92ed86a",
-            "3e8e2a7c-16e3-46f6-8344-5a1dd3980d10",
-            "43763d51-002a-4e1c-aeda-ab3239887396",
-            "438ec28a-a948-4780-9153-92732c52aefa",
-            "4bd66d31-855f-4dd0-9b11-4911d4e95e00",
-            "503646cc-89a1-4e39-b028-bda1c205fdd5",
-            "63f51b3a-67a1-4afb-9de6-8533674216c1",
-            "6fdfbe5d-1502-4b22-9b79-0ad27e98db94",
-            "768898c3-f43a-4afb-bd7e-559d513865b9",
-            "79a15d6c-27a1-4dda-99fb-88c31545de5a",
-            "7b7e01d9-db81-4568-b4ea-4542b8f40f27",
-            "7d17abd8-f11b-44c7-8760-10a58e242e29",
-            "990fe0ac-8741-4fd6-be1c-91e339cfb64f",
-            "9f47af57-3a49-4248-9919-e0a6904c5b08",
-            "a39fe77c-6718-4011-8f22-4cce831ee2e6",
-            "af0bf67d-d991-431c-99f9-93e1af016f5c",
-            "b9b868ca-904a-4180-99d7-8ff7dee42433",
-            "c3d1b53d-8cbe-4455-a009-bfa08e55f11d",
-            "c5b457eb-666e-461e-a1bd-751789c8bf02",
-            "c9073c05-72f7-41d9-beb1-286e0e2696c9",
-            "d1917fc9-e091-4b9b-8c02-37220af3b6a3",
-            "d6ff192b-5ad3-4e99-be78-1680d26fad99",
-            "d7b9d4e7-6b96-46ea-aa46-576e90b9f481",
-            "da7f26fe-d6ad-47d3-be65-4b28796d1dbd",
-            "e18e9033-fcb4-4a67-b3ac-c7d2f06a7511",
-            "ee644da4-8352-4a4f-bb6b-c5487dde9a28",
-            "fd889d9c-538b-434a-9eed-f6428b0e70d2",
-            "ffcf68fb-eff2-42b2-a855-1b65cac901e7",
-            "9d655d30-cfad-4cda-82d6-9028ab41907d",
+            "f425df23-6ab6-449a-87bd-3ba74fdc1777",
+            "742104bc-2d31-4139-9db1-848e36713207",
+            "839ebb68-8a8b-4cf3-aa78-bf8d8721cd04",
         ];
 
         for uuid in uuids {
             for proxy in &mut proxies {
                 println!("{:?}", proxy);
                 if proxy.proxy_type.eq(&Vless) {
-                    if let Some(vless) = proxy.adapter.as_any().downcast_ref::<protocol::vless::Vless>() {
+                    if let Some(vless) = proxy
+                        .adapter
+                        .as_any()
+                        .downcast_ref::<protocol::vless::Vless>()
+                    {
                         let mut p = vless.clone();
                         p.uuid = uuid.to_string();
                         proxy.adapter = Box::new(p);
                         result.push(proxy.clone());
-                    } else {}
+                    } else {
+                    }
                 } else if proxy.proxy_type.eq(&Vmess) {
-                    if let Some(vmess) = proxy.adapter.as_any().downcast_ref::<protocol::vmess::Vmess>() {
+                    if let Some(vmess) = proxy
+                        .adapter
+                        .as_any()
+                        .downcast_ref::<protocol::vmess::Vmess>()
+                    {
                         let mut p = vmess.clone();
                         p.uuid = uuid.to_string();
+                        proxy.adapter = Box::new(p);
+                        result.push(proxy.clone());
+                    }
+                } else if proxy.proxy_type.eq(&Hysteria2) {
+                    if let Some(hysteria2) = proxy
+                        .adapter
+                        .as_any()
+                        .downcast_ref::<protocol::hysteria2::Hysteria2>()
+                    {
+                        let mut p = hysteria2.clone();
+                        p.password = uuid.to_string();
                         proxy.adapter = Box::new(p);
                         result.push(proxy.clone());
                     }
@@ -510,7 +513,11 @@ mod test {
 
         SubManager::rename_dup_proxies_name(&mut result);
 
-        SubManager::save_proxies_into_clash_file(&result, "/Users/reajason/RustroverProjects/clash-butler/conf/clash_release.yaml".to_string(), "/Users/reajason/RustroverProjects/clash-butler/2024.11.19.yaml".to_string());
+        SubManager::save_proxies_into_clash_file(
+            &result,
+            "/Users/reajason/RustroverProjects/clash-butler/conf/clash_release.yaml".to_string(),
+            "/Users/reajason/RustroverProjects/clash-butler/2025.02.17.yaml".to_string(),
+        );
 
         println!("{:?}", result.len());
     }

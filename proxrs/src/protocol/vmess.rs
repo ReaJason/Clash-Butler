@@ -232,7 +232,9 @@ impl ProxyAdapter for Vmess {
                     }
                 }
                 let alter_id = params_map.get("alterId").unwrap().parse::<u16>().unwrap();
-                let name = urlencoding::decode(params_map.get("remarks").unwrap()).unwrap().to_string();
+                let name = urlencoding::decode(params_map.get("remarks").unwrap())
+                    .unwrap()
+                    .to_string();
 
                 // parse server port
                 let url = base64decode(parts[0]);
@@ -247,7 +249,7 @@ impl ProxyAdapter for Vmess {
                 let server_port_parts: Vec<&str> = server_port.split(":").collect();
                 let server = server_port_parts[0].parse::<String>().unwrap();
                 let port = server_port_parts[1].parse::<u16>().unwrap();
-                Ok(Vmess{
+                Ok(Vmess {
                     name,
                     server,
                     port,

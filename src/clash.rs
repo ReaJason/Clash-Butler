@@ -203,8 +203,9 @@ mod tests {
     use crate::clash::DelayTestConfig;
 
     #[tokio::test]
+    #[ignore]
     async fn test_proxy_delay() {
-        let clash_meta = ClashMeta::new(9091, 7891);
+        let clash_meta = ClashMeta::new(9095, 7998);
         let delay = clash_meta
             .test_proxy(
                 "DIRECT",
@@ -220,15 +221,17 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_group_proxies() {
-        let clash_meta = ClashMeta::new(9091, 7999);
+        let clash_meta = ClashMeta::new(9095, 7998);
         let result = clash_meta.get_group("PROXY").await;
         println!("{:?}", result);
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_set_group_node() {
-        let clash_meta = ClashMeta::new(9091, 7999);
+        let clash_meta = ClashMeta::new(9095, 7998);
         let result = clash_meta
             .set_group_proxy("PROXY", "None_None_vmess_044")
             .await;
@@ -240,7 +243,7 @@ mod tests {
     #[tokio::test]
     #[ignore]
     async fn test_group_delay() {
-        let clash_meta = ClashMeta::new(9091, 7890);
+        let clash_meta = ClashMeta::new(9095, 7890);
         let result = clash_meta
             .test_group(
                 "PROXY",
