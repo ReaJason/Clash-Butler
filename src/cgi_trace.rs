@@ -18,14 +18,14 @@ const CF_TRACE_URL: &str = "https://1.0.0.1/cdn-cgi/trace";
 #[allow(unused)]
 const CF_CN_TRACE_URL: &str = "https://cf-ns.com/cdn-cgi/trace";
 
-// IP 查询超时时间
-const TIMEOUT: Duration = Duration::from_secs(5);
-
 type IpBoxFuture<'a> = BoxFuture<'a, Result<(IpAddr, &'a str), Box<dyn std::error::Error>>>;
 
-pub async fn get_ip(proxy_url: &str) -> Result<(IpAddr, &str), Box<dyn std::error::Error>> {
-    let cf_future: IpBoxFuture = async {
-        match get_trace_info_with_proxy(proxy_url, CF_TRACE_URL).await {
+pub async fn get_ip(
+    proxy_url: &str,
+    timeout: Duration,
+) -> Result<(IpAddr, &str), Box<dyn std::error::Error>> {
+    let cf_future: IpBoxFuture = async move {
+        match get_trace_info_with_proxy(proxy_url, CF_TRACE_URL, timeout).await {
             Ok(trace) => Ok((trace.ip, "cf")),
             Err(e) => {
                 error!("从 Cloudflare 获取 IP 失败, {e}");
@@ -35,8 +35,8 @@ pub async fn get_ip(proxy_url: &str) -> Result<(IpAddr, &str), Box<dyn std::erro
     }
     .boxed();
 
-    let ipify_future: IpBoxFuture = async {
-        match get_ip_by_ipify(proxy_url).await {
+    let ipify_future: IpBoxFuture = async move {
+        match get_ip_by_ipify(proxy_url, timeout).await {
             Ok(ip) => Ok((ip, "ipify")),
             Err(e) => {
                 error!("从 ipify 获取 IP 失败, {e}");
@@ -46,8 +46,8 @@ pub async fn get_ip(proxy_url: &str) -> Result<(IpAddr, &str), Box<dyn std::erro
     }
     .boxed();
 
-    let openai_future: IpBoxFuture = async {
-        match get_trace_info_with_proxy(proxy_url, OPENAI_TRACE_URL).await {
+    let openai_future: IpBoxFuture = async move {
+        match get_trace_info_with_proxy(proxy_url, OPENAI_TRACE_URL, timeout).await {
             Ok(trace) => Ok((trace.ip, "openai")),
             Err(e) => {
                 error!("从 OpenAI 获取 IP 失败, {e}");
@@ -66,9 +66,12 @@ pub async fn get_ip(proxy_url: &str) -> Result<(IpAddr, &str), Box<dyn std::erro
 
 // clash 规则走的是国内，没走代理所以寄
 #[allow(dead_code)]
-async fn get_ip_by_ipip(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::Error>> {
+async fn get_ip_by_ipip(
+    proxy_url: &str,
+    timeout: Duration,
+) -> Result<IpAddr, Box<dyn std::error::Error>> {
     let client = Client::builder()
-        .timeout(TIMEOUT)
+        .timeout(timeout)
         .proxy(reqwest::Proxy::all(proxy_url)?)
         .build()?;
 
@@ -85,9 +88,12 @@ async fn get_ip_by_ipip(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::E
     Err("Failed to parse IP address".into())
 }
 
-async fn get_ip_by_ipify(proxy_url: &str) -> Result<IpAddr, Box<dyn std::error::Error>> {
+async fn get_ip_by_ipify(
+    proxy_url: &str,
+    timeout: Duration,
+) -> Result<IpAddr, Box<dyn std::error::Error>> {
     let client = Client::builder()
-        .timeout(TIMEOUT)
+        .timeout(timeout)
         .proxy(reqwest::Proxy::all(proxy_url)?)
         .build()?;
 
@@ -140,9 +146,10 @@ fn parse_trace_info(text: String) -> TraceInfo {
 async fn get_trace_info_with_proxy(
     proxy_url: &str,
     trace_url: &str,
+    timeout: Duration,
 ) -> Result<TraceInfo, Box<dyn std::error::Error>> {
     let client = Client::builder()
-        .timeout(TIMEOUT)
+        .timeout(timeout)
         .proxy(reqwest::Proxy::all(proxy_url)?)
         .build()?;
 
@@ -197,27 +204,30 @@ mod tests {
     #[tokio::test]
     #[ignore]
     async fn test_get_ip() {
-        let result = get_ip(PROXY_URL).await;
+        let result = get_ip(PROXY_URL, Duration::from_secs(5)).await;
         println!("{:?}", result.unwrap())
     }
 
     #[tokio::test]
     #[ignore]
     async fn test_get_trace_info_with_proxy() {
-        let result = get_trace_info_with_proxy(PROXY_URL, OPENAI_TRACE_URL).await;
+        let result =
+            get_trace_info_with_proxy(PROXY_URL, OPENAI_TRACE_URL, Duration::from_secs(5)).await;
         println!("{:?}", result);
-        let result = get_trace_info_with_proxy(PROXY_URL, CF_TRACE_URL).await;
+        let result =
+            get_trace_info_with_proxy(PROXY_URL, CF_TRACE_URL, Duration::from_secs(5)).await;
         println!("{:?}", result);
-        let result = get_trace_info_with_proxy(PROXY_URL, CF_CN_TRACE_URL).await;
+        let result =
+            get_trace_info_with_proxy(PROXY_URL, CF_CN_TRACE_URL, Duration::from_secs(5)).await;
         println!("{:?}", result);
     }
 
     #[tokio::test]
     #[ignore]
     async fn test_get_ip_from_ipip() {
-        let result = get_ip_by_ipip(PROXY_URL).await;
+        let result = get_ip_by_ipip(PROXY_URL, Duration::from_millis(2500)).await;
         println!("{:?}", result);
-        let result = get_ip_by_ipify(PROXY_URL).await;
+        let result = get_ip_by_ipify(PROXY_URL, Duration::from_millis(2500)).await;
         println!("{:?}", result);
     }
 }
