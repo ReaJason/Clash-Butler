@@ -1,5 +1,6 @@
 use std::collections::HashMap;
-use std::net::{IpAddr, Ipv4Addr};
+use std::net::IpAddr;
+use std::net::Ipv4Addr;
 use std::str::FromStr;
 use std::time::Duration;
 
@@ -59,7 +60,7 @@ pub async fn get_ip(proxy_url: &str) -> Result<(IpAddr, &str), Box<dyn std::erro
     let futures = vec![cf_future, ipify_future, openai_future];
     match select_ok(futures).await {
         Ok(((ip, from), _)) => Ok((ip, from)),
-        Err(_) => Err("获取不到 IP 地址，可能节点已失效，已过滤".into()),
+        Err(_) => Err("获取不到 IP 地址，可能节点已失效或不稳定，已过滤".into()),
     }
 }
 
@@ -118,7 +119,8 @@ fn parse_trace_info(text: String) -> TraceInfo {
     TraceInfo {
         fl: map.get("fl").unwrap_or(&String::new()).clone(),
         h: map.get("h").unwrap_or(&String::new()).clone(),
-        ip: IpAddr::from_str(&map.get("ip").unwrap_or(&String::new()).clone()).unwrap_or(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1))),
+        ip: IpAddr::from_str(&map.get("ip").unwrap_or(&String::new()).clone())
+            .unwrap_or(IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1))),
         ts: map.get("ts").unwrap_or(&String::new()).clone(),
         visit_scheme: map.get("visit_scheme").unwrap_or(&String::new()).clone(),
         uag: map.get("uag").unwrap_or(&String::new()).clone(),
@@ -190,7 +192,7 @@ struct TraceInfo {
 mod tests {
     use super::*;
 
-    const PROXY_URL: &str = "http://127.0.0.1:7999";
+    const PROXY_URL: &str = "http://127.0.0.1:7998";
 
     #[tokio::test]
     #[ignore]
