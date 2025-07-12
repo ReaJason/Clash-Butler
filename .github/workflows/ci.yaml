@@ -25,7 +25,7 @@ jobs:
           components: rustfmt,clippy
       - uses: Swatinem/rust-cache@v2
       - run: cargo +nightly clippy
-      - run: cargo +nightly fmt
+      - run: cargo +nightly fmt --all
   build:
     name: Build
     runs-on: macos-latest
@@ -39,6 +39,6 @@ jobs:
       - name: Run
         run: cargo run
       - name: Upload
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "docs: update yaml"
