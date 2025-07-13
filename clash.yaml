@@ -82,183 +82,229 @@ proxies:
   type: vless
   udp: true
   uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
-- name: 103.12.77.48_Claude
-  port: 34045
-  reality-opts:
-    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
-    short-id: e8ab71d0
-  server: 103.12.77.48
-  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
-- name: 103.81.84.57_Claude
-  port: 34045
-  reality-opts:
-    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
-    short-id: e8ab71d0
-  server: 103.81.84.57
-  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
-- name: 103.81.86.172_Claude
+- name: 103.12.77.78_Claude
   network: tcp
   port: 34045
   reality-opts:
     public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
     short-id: e8ab71d0
-  server: 103.81.86.172
+  server: 103.12.77.78
   servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
   tls: true
   type: vless
+  udp: true
   uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
-- alterId: 0
-  cipher: auto
-  name: 107.174.26.18_Claude
+- name: 104.168.76.144_Gemini_Claude
   network: ws
-  port: 443
-  server: 3DdDf.444652.xYZ
-  servername: 3dddf.444652.xyz
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: cdec9d57-661d-456a-bbf2-b4c38e9c6711
-  ws-opts:
-    headers:
-      Host: 3DdDf.444652.xYZ
-    path: /9dZlJLjHHrL0VwSolbqFpg
-- name: 107.175.212.252_Claude
-  network: ws
-  port: 443
-  server: sssxxxcft6.444752.xyz
-  servername: sssxxxcft6.444752.xyz
+  port: 58474
+  server: 152.70.232.251
+  servername: chou3.pages.dev
   skip-cert-verify: true
   tls: true
   type: vless
   udp: true
-  uuid: 512d9674-db12-44ca-a1b5-654244549b65
+  uuid: 0c561336-b0c7-4b18-96d1-863240a224ab
   ws-opts:
     headers:
-      Host: sssxxxcft6.444752.xyz
-    path: /zzMtGpHptl8a7dX3JIrYk7zm
+      host: chou3.pages.dev
+    path: /fp=chrome
+- name: 129.146.46.164_Claude
+  network: ws
+  port: 8880
+  server: 94.247.142.177
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      Host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
 - cipher: aes-256-gcm
-  name: 137.220.142.143_Claude
-  password: 887bfcf43b52
+  name: 137.220.142.139_Claude
+  password: 70a0b8103356
   plugin: v2ray-plugin
   plugin-opts:
-    host: jp6v1.lingjfjkm002.com
+    host: jp5v1.lingjfjkm002.com
     mode: websocket
     mux: true
-    path: /svynueogf
+    path: /bezradrqccl
     skip-cert-verify: false
     tls: true
   port: 636
-  server: 137.220.142.143
+  server: 137.220.142.139
   type: ss
-- cipher: aes-256-gcm
-  name: 137.220.191.38_Claude1
-  password: 823e135ed103
-  plugin: v2ray-plugin
-  plugin-opts:
-    host: jp7v1.lingjfjkm002.com
-    mode: websocket
-    mux: true
-    path: /dchlbvrbbotc
-    skip-cert-verify: false
-    tls: true
-  port: 636
-  server: 137.220.191.40
-  type: ss
-- cipher: aes-256-gcm
-  name: 137.220.191.38_Claude2
-  password: 823e135ed103
-  plugin: v2ray-plugin
-  plugin-opts:
-    host: jp7v1.lingjfjkm002.com
-    mode: websocket
-    mux: true
-    path: /dchlbvrbbotc
-    skip-cert-verify: false
-    tls: true
-  port: 636
-  server: 137.220.191.38
-  type: ss
+- name: 14|CY_speednode_1
+  network: ws
+  port: 8880
+  server: 213.109.205.177
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: 14|CY_speednode_2
+  network: ws
+  port: 8880
+  server: 195.26.229.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|CY_speednode_3
+  network: ws
+  port: 8880
+  server: 45.67.214.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|CZ_speednode_
+  network: ws
+  port: 8880
+  server: 193.124.224.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
 - name: 14|DE_speednode_1
   network: ws
   port: 8880
-  server: 5.10.214.213
-  servername: jp.laoyoutiao.link
+  server: 140.99.233.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: jp.laoyoutiao.link
-    path: /
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
 - name: 14|DE_speednode_2
   network: ws
   port: 8880
-  server: 5.10.214.81
-  servername: reedfree8mahsang2.redorg.ir
+  server: 5.10.215.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@V2rayN5
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
 - name: 14|DE_speednode_3
   network: ws
   port: 8880
-  server: 5.10.214.247
-  servername: ex.sue.x10.mx
+  server: 45.80.111.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: ex.sue.x10.mx
-    path: /Telegram🇨🇳
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
 - name: 14|DE_speednode_4
   network: ws
   port: 8880
-  server: 5.10.214.99
-  servername: reedfree8mahsang2.redorg.ir
+  server: 77.37.33.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /TelegramU0001F1E8U0001F1F3
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|ES_speednode_
+  network: ws
+  port: 8880
+  server: 185.251.81.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|FR_speednode_
+  network: ws
+  port: 8880
+  server: 185.16.110.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
 - name: 14|GB_speednode_1
   network: ws
   port: 8880
-  server: 25.26.27.63
-  servername: jp.laoyoutiao.link
+  server: 77.75.199.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
 - name: 14|GB_speednode_2
+  network: ws
+  port: 8880
+  server: 185.193.29.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|GB_speednode_3
   network: ws
   port: 8880
   server: 25.25.25.177
@@ -272,35 +318,79 @@ proxies:
     headers:
       host: ip.langmanshanxi.top
     path: /Telegram🇨🇳 @WangCai2 /
-- name: 14|JP_speednode_
+- name: 14|GB_speednode_4
+  network: ws
+  password: trojan
+  port: 443
+  server: 91.193.58.0
+  skip-cert-verify: true
+  sni: wahaha.yingyangkuaixian.dpdns.org
+  type: trojan
+- name: 14|GB_speednode_5
   network: ws
   port: 8880
-  server: 154.92.9.63
-  servername: sg.laoyoutiao.link
+  server: 25.25.25.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: sg.laoyoutiao.link
-    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
-- name: 14|LU_speednode_
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|HR_speednode_
   network: ws
   port: 8880
-  server: 188.42.89.20
-  servername: reedfree8mahsang2.redorg.ir
+  server: 213.182.199.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
-- name: 14|NL_speednode_
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|KZ_speednode_
+  network: ws
+  password: tg-fq521free
+  port: 443
+  server: 194.76.18.129
+  skip-cert-verify: true
+  sni: torjan.xn--xhq44j.eu.org
+  type: trojan
+- name: 14|LT_speednode_1
+  network: ws
+  port: 8880
+  server: 89.116.250.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|LT_speednode_2
+  network: ws
+  port: 8880
+  server: 89.116.180.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|NL_speednode_1
   network: ws
   port: 8880
   server: 5.10.244.251
@@ -314,25 +404,109 @@ proxies:
     headers:
       host: cf.d3z.net
     path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
-- name: 14|RU_speednode_
+- name: 14|NL_speednode_2
   network: ws
   port: 8880
-  server: 45.67.215.63
-  servername: jp.laoyoutiao.link
+  server: 185.18.184.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: jp.laoyoutiao.link
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|NZ_speednode_
+  network: ws
+  port: 8880
+  server: 114.129.43.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|RO_speednode_
+  network: ws
+  port: 8880
+  server: 45.12.30.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|RU_speednode_1
+  network: ws
+  port: 8880
+  server: 188.42.145.177
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
     path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: 14|RU_speednode_2
+  network: ws
+  port: 8880
+  server: 185.176.24.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|RU_speednode_3
+  network: ws
+  port: 8880
+  server: 45.142.255.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|RU_speednode_4
+  network: ws
+  port: 8880
+  server: 185.174.138.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
 - name: 14|SA_speednode_
   network: ws
   port: 8880
-  server: 91.209.253.177
-  servername: ip.langmanshanxi.top
+  server: 91.209.253.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
@@ -341,54 +515,68 @@ proxies:
   ws-opts:
     headers:
       host: ip.langmanshanxi.top
-    path: /telegram🇨🇳 @wangcai2 /
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|SC_speednode_1
+  network: ws
+  port: 8880
+  server: 154.197.88.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|SC_speednode_2
+  network: ws
+  port: 8880
+  server: 154.83.2.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|SC_speednode_3
+  network: ws
+  port: 8880
+  server: 154.197.64.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|SG_speednode_
+  network: ws
+  port: 8880
+  server: 92.243.75.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
 - name: 14|SI_speednode_
   network: ws
   port: 8880
-  server: 92.60.74.20
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
-- name: 14|US_speednode_1
-  network: ws
-  port: 8880
-  server: 160.79.104.251
-  servername: cf.d3z.net
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /
-- name: 14|US_speednode_10
-  network: ws
-  port: 8880
-  server: 66.81.247.213
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      host: jp.laoyoutiao.link
-    path: /
-- name: 14|US_speednode_2
-  network: ws
-  port: 8880
-  server: 135.84.79.177
-  servername: ip.langmanshanxi.top
+  server: 92.53.191.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
@@ -397,25 +585,25 @@ proxies:
   ws-opts:
     headers:
       host: ip.langmanshanxi.top
-    path: /TELEGRAM-v2ray_configs_pools_v2ray_configs_pools_v2ray_configs_pools
-- name: 14|US_speednode_3
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|UA_speednode_
   network: ws
-  port: 80
-  server: 66.81.247.192
-  servername: reedfree8mahsang2.redorg.ir
+  port: 8880
+  server: 91.124.127.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /Channel+id:+@ShadowProxy66/
-- name: 14|US_speednode_4
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_1
   network: ws
   port: 8880
-  server: 69.84.182.247
+  server: 141.193.27.247
   servername: ex.sue.x10.mx
   skip-cert-verify: true
   tls: false
@@ -426,49 +614,77 @@ proxies:
     headers:
       host: ex.sue.x10.mx
     path: /Telegram🇨🇳
-- name: 14|US_speednode_5
+- name: 14|US_speednode_10
   network: ws
   port: 8880
-  server: 160.79.105.13
+  server: 185.148.106.186
   servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 9f3c4ab7-ea26-4d96-91a9-c85ff64ad9a0
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: c.82313369.xyz
-    path: /Telegram🇨🇳
-- name: 14|US_speednode_6
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_11
   network: ws
   port: 8880
-  server: 167.68.42.63
-  servername: jp.laoyoutiao.link
+  server: 199.34.229.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: jp.laoyoutiao.link
-    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
-- name: 14|US_speednode_7
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_12
   network: ws
   port: 8880
-  server: 195.13.55.63
-  servername: jp.laoyoutiao.link
+  server: 205.233.181.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: jp.laoyoutiao.link
-    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
-- name: 14|US_speednode_8
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_13
+  network: ws
+  port: 8880
+  server: 170.114.45.177
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_14
+  network: ws
+  port: 8880
+  server: 159.112.235.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_15
   network: ws
   port: 8880
   server: 199.34.229.254
@@ -482,98 +698,185 @@ proxies:
     headers:
       host: yg.bantony199.top
     path: /
+- name: 14|US_speednode_16
+  network: ws
+  port: 8880
+  server: 135.84.75.3
+  servername: bitget1.asdasd.click
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: b5441b0d-2147-4898-8a6a-9b2c87f58382
+  ws-opts:
+    headers:
+      host: bitget1.asdasd.click
+    path: /Telegram🇨🇳
+- name: 14|US_speednode_17
+  port: 443
+  server: 47.251.95.178
+  servername: 147135001195.sec22org.com
+  skip-cert-verify: true
+  tls: true
+  type: vless
+  udp: true
+  uuid: ea286109-d20f-415e-849e-4af20ab04b65
+- name: 14|US_speednode_18
+  network: ws
+  port: 8880
+  server: 108.165.216.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_19
+  network: ws
+  port: 8880
+  server: 66.225.252.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_2
+  network: ws
+  port: 8880
+  server: 209.94.90.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_20
+  network: ws
+  port: 8880
+  server: 155.46.213.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_3
+  network: ws
+  password: tg-fq521free
+  port: 443
+  server: 198.62.62.67
+  skip-cert-verify: true
+  sni: torjan.xn--xhq44j.eu.org
+  type: trojan
+- name: 14|US_speednode_4
+  network: ws
+  port: 8880
+  server: 154.85.99.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_5
+  network: ws
+  port: 8880
+  server: 160.79.104.251
+  servername: cf.d3z.net
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_6
+  network: ws
+  port: 8880
+  server: 139.64.235.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_7
+  network: ws
+  port: 8880
+  server: 130.250.137.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: 14|US_speednode_8
+  network: ws
+  port: 8880
+  server: 199.34.228.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
 - name: 14|US_speednode_9
   network: ws
   port: 8880
-  server: 209.94.90.63
-  servername: jp.laoyoutiao.link
+  server: 130.250.137.177
+  servername: ip.langmanshanxi.top
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳
-- name: 160.250.65.124_Claude
-  network: tcp
-  port: 34045
-  reality-opts:
-    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
-    short-id: e8ab71d0
-  server: 160.250.65.124
-  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
-  tls: true
-  type: vless
-  udp: true
-  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
-- name: 192.3.179.114_Claude
-  network: ws
-  port: 443
-  server: 172.67.161.129
-  servername: eeEEEeR.666470.xYZ
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 662e38ba-8427-4955-94aa-76f5347a0ce8
-  ws-opts:
-    headers:
-      Host: eeEEEeR.666470.xYZ
-    path: /6DuxYMYmrGrnGKRtF5UvWyyVQu
-- name: 192.3.179.121_Claude
-  network: ws
-  port: 443
-  server: 104.21.44.248
-  servername: EDfrT.frEEvPNatm2025.DPdNS.oRG
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: ffcf7ec1-3e09-4821-b3d9-b426a107b73b
-  ws-opts:
-    headers:
-      Host: EDfrT.frEEvPNatm2025.DPdNS.oRG
-    path: /O9jlBCbIm3xr1D40NK
-- name: 1|🇦🇪1 |  1.2MB/s|0%|Disney|Opena...
-  network: ws
-  port: 8880
-  server: 192.0.63.20
-  servername: reedfree8mahsang2.redorg.ir
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @xixv2ray /
+- name: 18.136.211.127_Claude
+  password: yoP8tOtEhMTSBUPY9LwnHABvFE
+  port: 14933
+  server: 18.136.211.127
   skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
-- name: 1|🇺🇸123 |  1.3MB/s|61%|Disney|Op...
-  network: ws
-  port: 8880
-  server: 156.238.18.106
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      host: yd.laoyoutiao.link
-    path: /Telegram🇨🇳 @MxlShare @WangCai2 /
-- cipher: aes-128-gcm
-  name: 203.231.242.12_Claude
-  password: VXPipi29nxMO
-  plugin: obfs
-  plugin-opts:
-    host: 182039459a34f64238143cd31ddebbc914362.taobao.com
-    mode: http
-  port: 1052
-  server: kr2.qiangdong.xyz
-  type: ss
-- name: 59.153.216.133_Claude
+  sni: bing.com
+  type: hysteria2
+- name: 59.153.216.133_Gemini_Claude
   port: 34045
   reality-opts:
     public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
@@ -597,19 +900,7 @@ proxies:
   type: vless
   udp: true
   uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
-- name: 59.153.217.57_Claude
-  port: 34045
-  reality-opts:
-    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
-    short-id: e8ab71d0
-  server: 59.153.217.57
-  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
-- name: 59.153.218.14_Claude
+- name: 59.153.218.14_Gemini_Claude
   network: tcp
   port: 34045
   reality-opts:
@@ -620,150 +911,147 @@ proxies:
   tls: true
   type: vless
   uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
-- name: CA_Toronto_Cloudflare, Inc._Gemini_Claude1
+- client-fingerprint: chrome
+  name: CA_Toronto_Cloudflare, Inc._Gemini_Claude1
+  password: 862e90e1-2f26-4506-b8b9-0adf20da05fc
+  port: 47262
+  server: 40.233.73.221
+  skip-cert-verify: true
+  sni: www.bing.com
+  type: hysteria2
+- name: CA_Toronto_Cloudflare, Inc._Gemini_Claude2
   password: cfe032e4-1bc3-454f-9d09-301b0aea08ff
   port: 45979
   server: 150.230.30.237
   skip-cert-verify: true
   sni: www.bing.com
   type: hysteria2
-- alpn:
-  - h3
-  name: CA_Toronto_Cloudflare, Inc._Gemini_Claude2
-  password: 862e90e1-2f26-4506-b8b9-0adf20da05fc
-  port: 54530
-  server: 129.153.59.124
-  skip-cert-verify: true
-  sni: www.bing.com
-  type: hysteria2
-- name: DE_Falkenstein_Hetzner Online GmbH_Claude1
+- fingerprint: ''
+  name: DE_Falkenstein_Hetzner Online GmbH_Claude1
   network: ws
-  port: 8880
-  server: 185.176.24.238
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: true
-  tls: false
+  port: 8443
+  server: 104.26.7.89
+  servername: brmahasang.ahaysiahzangi.dpdns.org
+  tls: true
   type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  udp: false
+  uuid: f5cf098f-5143-440f-a490-7fc24ff27fb0
   ws-opts:
     headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
+      host: brmahasang.ahaysiahzangi.dpdns.org
+    path: /v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0---v2rayng_free0?ed=2560
 - name: DE_Falkenstein_Hetzner Online GmbH_Claude2
   network: ws
+  port: 2053
+  server: 172.66.47.82
+  servername: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: 80764883-7f6b-4c46-8ecd-887cdf541c07
+  ws-opts:
+    headers:
+      Host: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
+    path: /oqLIXWAi6lzpnumQ
+- name: DE_Frankfurt am Main_Leaseweb Deutschland GmbH_Claude
+  network: ws
+  port: 443
+  server: jquery.com
+  servername: rayan-karma.parvaneh.dpdns.org
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: 60882caa-4e74-42a2-be70-220755fc1551
+  ws-opts:
+    headers:
+      Host: rayan-karma.parvaneh.dpdns.org
+    path: /?ed=2560
+- name: DE_Frankfurt am Main_Oracle Corporation_Claude1
+  network: ws
   port: 8880
-  server: 162.159.248.20
+  server: 185.251.82.177
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
-- name: DE_Falkenstein_Hetzner Online GmbH_Claude3
+      host: ip.langmanshanxi.top
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: DE_Frankfurt am Main_Oracle Corporation_Claude2
   network: ws
   port: 8880
-  server: 154.197.108.20
-  servername: reedfree8mahsang2.redorg.ir
+  server: 154.211.8.186
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
-- name: DE_Falkenstein_Hetzner Online GmbH_Claude4
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: DE_Frankfurt am Main_Oracle Corporation_Claude3
   network: ws
   port: 8880
-  server: 185.174.138.0
+  server: 154.197.108.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /@ShadowProxy66?ed=2560
-- name: DE_Falkenstein_Hetzner Online GmbH_Gemini1
-  network: ws
-  port: 80
-  server: 45.131.4.147
-  tls: false
-  type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram@WangCai2/?ed
-- name: DE_Falkenstein_Hetzner Online GmbH_Gemini2
-  network: ws
-  port: 80
-  server: 45.131.210.50
-  servername: redfree8.pooriashop.ir
-  tls: false
-  type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram@WangCai2/?ed
-- name: DE_Falkenstein_Hetzner Online GmbH_Gemini3
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: DE_Frankfurt am Main_Oracle Corporation_Claude4
   network: ws
   port: 8880
-  server: 188.42.89.100
-  servername: reedfree8mahsang2.redorg.ir
+  server: 156.243.83.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: DE_Frankfurt am Main_Oracle Corporation_Claude5
+  network: ws
+  port: 8880
+  server: 154.206.12.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: DE_Frankfurt am Main_Oracle Corporation_Claude6
+  network: ws
+  port: 8880
+  server: 185.221.160.177
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: false
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66?ed=2560'
-- name: DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
-  network: ws
-  port: 2087
-  server: newmtproxi.pages.dev
-  servername: nEwMTPROxI.PAGes.DEv
-  skip-cert-verify: true
-  tls: true
-  type: vless
-  udp: true
-  uuid: 2cec2733-389a-46a7-9053-218594a6336d
-  ws-opts:
-    headers:
-      Host: newmtproxi.pages.dev
-    path: /frzapd2v2VXBMkxJ?ed=2560
-- name: DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
-  network: ws
-  port: 8880
-  server: 45.131.211.224
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /@ShadowProxy66?ed=2560
-- name: DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
-  network: ws
-  port: 80
-  server: 45.131.4.20
-  servername: redfree8.pooriashop.ir
-  tls: false
-  type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
+      Host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
 - name: FR_Paris_Online S.A.S._Claude
   password: dongtaiwang.com
   port: 50066
@@ -778,11 +1066,499 @@ proxies:
   skip-cert-verify: true
   sni: apple.com
   type: hysteria2
-- name: NL_Amsterdam_Aeza International LTD_Claude1
+- name: GB_London_Oracle Corporation_Claude
+  password: 2a9b85bd-27cc-4e3b-b77d-54dbe5bc23af
+  port: 30000
+  server: 79.72.81.183
+  skip-cert-verify: true
+  sni: www.apple.com
+  type: hysteria2
+- name: IT_Siziano_Oracle Corporation_Claude
   network: ws
   port: 8880
-  server: 5.10.215.208
-  servername: reedfree8mahsang2.redorg.ir
+  server: 194.36.55.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- client-fingerprint: chrome
+  name: JP_Tokyo_Amazon Technologies Inc._Claude
+  password: 2a9b85bd-27cc-4e3b-b77d-54dbe5bc23af
+  port: 30000
+  server: aws-linkhy16.liangxin1.xyz
+  skip-cert-verify: true
+  sni: www.teslamotors.cn
+  type: hysteria2
+- name: JP_Tokyo_Oracle Corporation_Claude1
+  network: ws
+  port: 8880
+  server: 45.192.223.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: JP_Tokyo_Oracle Corporation_Claude2
+  network: ws
+  port: 8880
+  server: 45.159.219.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: JP_Tokyo_Oracle Corporation_Claude3
+  network: ws
+  port: 8880
+  server: 195.13.55.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Chuncheon_Oracle Corporation_Claude1
+  network: ws
+  port: 8880
+  server: 45.153.7.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Chuncheon_Oracle Corporation_Claude2
+  network: ws
+  port: 8880
+  server: 45.159.218.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- cipher: aes-256-gcm
+  name: KR_Gunsan_Korea Telecom_Gemini_Claude
+  password: NiznLvoIuy
+  port: 19378
+  server: 220.124.31.130
+  type: ss
+- cipher: aes-256-cfb
+  name: KR_Gwanak-gu_SK Broadband Co Ltd_Claude
+  password: qwerREWQ@@
+  port: 4652
+  server: p141.panda001.net
+  type: ss
+- client-fingerprint: chrome
+  name: KR_Seoul_Amazon.com, Inc._Claude
+  password: 2a9b85bd-27cc-4e3b-b77d-54dbe5bc23af
+  port: 30000
+  server: aws-linkhy22.liangxin1.xyz
+  skip-cert-verify: true
+  sni: www.apple.com
+  type: hysteria2
+- client-fingerprint: chrome
+  name: KR_Seoul_Amazon.com, Inc._Gemini_Claude
+  password: 2a9b85bd-27cc-4e3b-b77d-54dbe5bc23af
+  port: 30000
+  server: aws-linkhy21.liangxin1.xyz
+  skip-cert-verify: true
+  sni: www.apple.com
+  type: hysteria2
+- name: KR_Seoul_Oracle Corporation_Claude1
+  network: ws
+  port: 8880
+  server: 185.170.166.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude10
+  network: ws
+  port: 8880
+  server: 91.209.253.177
+  servername: ip.langmanshanxi.top
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /telegram🇨🇳 @wangcai2 /
+- name: KR_Seoul_Oracle Corporation_Claude11
+  network: ws
+  port: 8880
+  server: 154.197.121.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude12
+  network: ws
+  port: 8880
+  server: 27.50.49.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude13
+  network: ws
+  port: 8880
+  server: 104.129.166.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude14
+  network: ws
+  port: 8880
+  server: 66.45.118.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude15
+  network: ws
+  port: 8880
+  server: 185.148.104.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude16
+  network: ws
+  port: 8880
+  server: 156.225.72.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude17
+  network: ws
+  port: 8880
+  server: 104.129.164.39
+  servername: ip.langmanshanxi.top
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /TelegramU0001F1E8U0001F1F3 @MxlShare @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude18
+  network: ws
+  port: 8880
+  server: 104.254.140.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude19
+  network: ws
+  port: 8880
+  server: 103.133.1.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude2
+  network: ws
+  port: 8880
+  server: 154.218.15.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude20
+  network: ws
+  port: 8880
+  server: 199.34.230.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude21
+  network: ws
+  port: 8880
+  server: 104.129.164.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude22
+  network: ws
+  port: 8880
+  server: 170.114.45.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude23
+  network: ws
+  port: 8880
+  server: 170.114.46.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude24
+  network: ws
+  port: 8880
+  server: 141.11.203.177
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      Host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: KR_Seoul_Oracle Corporation_Claude3
+  network: ws
+  port: 8880
+  server: 154.194.12.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude4
+  network: ws
+  port: 8880
+  server: 195.245.221.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude5
+  network: ws
+  port: 8880
+  server: 194.59.5.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude6
+  network: ws
+  port: 8880
+  server: 193.227.99.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude7
+  network: ws
+  port: 8880
+  server: 185.221.160.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude8
+  network: ws
+  port: 8880
+  server: 45.135.235.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: KR_Seoul_Oracle Corporation_Claude9
+  network: ws
+  port: 8880
+  server: 46.254.93.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- alterId: 0
+  cipher: auto
+  name: NL_Amsterdam_LeaseWeb Netherlands B.V._Claude1
+  port: 15709
+  server: channel.dollardoon.com
+  servername: fast.com
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  uuid: 4ac39e8a-6d5c-48bb-b0d0-f633c829113e
+- alterId: 0
+  cipher: auto
+  name: NL_Amsterdam_LeaseWeb Netherlands B.V._Claude2
+  port: 15709
+  server: 83.149.84.145
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  uuid: 4ac39e8a-6d5c-48bb-b0d0-f633c829113e
+- cipher: chacha20-ietf-poly1305
+  name: NL_Amsterdam_Matteo Martelloni trading as DELUXHOST_Claude
+  password: 9tqhMdIrTkgQ46PvhyAtMH
+  port: 443
+  server: switcher-nick-croquet.freesocks.work
+  type: ss
+- name: PH_Manila_Alibaba (US) Technology Co., Ltd._Claude
+  network: ws
+  port: 80
+  server: 45.131.209.23
+  servername: redfree8.pooriashop.ir
   skip-cert-verify: true
   tls: false
   type: vless
@@ -790,46 +1566,101 @@ proxies:
   uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
   ws-opts:
     headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
-- name: NL_Amsterdam_Aeza International LTD_Claude2
+      host: redfree8.pooriashop.ir
+    path: /Telegram@WangCai2
+- name: SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude1
   network: ws
   port: 8880
-  server: 45.131.208.208
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
+  server: 92.53.188.177
+  servername: ip.langmanshanxi.top
+  skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /@ShadowProxy66?ed=2560
-- name: NL_Amsterdam_Aeza International LTD_Gemini_Claude
+      host: ip.langmanshanxi.top
+    path: /Telegram@WangCai2/
+- name: SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude2
   network: ws
-  port: 80
-  server: 45.131.7.64
-  servername: reedfree8mahsang2.redorg.ir
+  port: 8880
+  server: 135.84.79.177
+  servername: ip.langmanshanxi.top
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /TELEGRAM-v2ray_configs_pools_v2ray_configs_pools_v2ray_configs_pools
+- name: SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude3
+  network: ws
+  port: 8880
+  server: 160.79.105.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude4
+  network: ws
+  port: 8880
+  server: 164.38.155.177
+  servername: Telegram-channel-WangCai2
   skip-cert-verify: false
   tls: false
   type: vless
   udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   ws-opts:
     headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66/?ed=2560'
+      Host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
 - client-fingerprint: chrome
-  name: SG_Singapore_Hetzner Online GmbH_Claude
-  obfs: salamander
-  obfs_password: The_Sefr-chibegam
-  password: user10.khobbebinSEFRinjast128161
-  port: 443
-  server: lake.zone1.center
-  skip-cert-verify: false
+  name: SG_Singapore_Amazon Technologies Inc._Claude
+  password: 2a9b85bd-27cc-4e3b-b77d-54dbe5bc23af
+  port: 30000
+  server: aws-linkhy11.liangxin1.xyz
+  skip-cert-verify: true
+  sni: www.teslaenergy.com
   type: hysteria2
-- name: TR_Izmir_Alastyr Telekomunikasyon A.S._Claude
+- name: SG_Singapore_Oracle Corporation_Claude1
+  network: ws
+  port: 8880
+  server: 167.68.4.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: SG_Singapore_Oracle Corporation_Claude2
+  network: ws
+  port: 8880
+  server: 155.46.167.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: TR_Istanbul_Ultahost, Inc._Claude
   network: ws
   port: 443
   server: 104.19.54.50
@@ -843,91 +1674,47 @@ proxies:
     headers:
       Host: HarmonY-427.pages.DEV
     path: /?ed=2048
+- name: US_Ashburn_Oracle Corporation_Claude
+  network: ws
+  port: 8880
+  server: 205.233.181.177
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      Host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Ashburn_Oracle Corporation_Gemini_Claude
+  network: ws
+  port: 80
+  server: 45.131.4.147
+  tls: false
+  type: vless
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram@WangCai2/?ed
 - alterId: 0
   cipher: auto
   name: US_Buffalo_HostPapa_Claude1
   network: ws
-  port: 80
-  server: EeEDCFVg.999824.xYZ
-  servername: eeedcfvg.999824.xyz
+  port: 443
+  server: 3DdDf.444652.xYZ
+  servername: 3dddf.444652.xyz
   skip-cert-verify: false
-  tls: false
+  tls: true
   type: vmess
   uuid: cdec9d57-661d-456a-bbf2-b4c38e9c6711
   ws-opts:
     headers:
-      Host: EeEDCFVg.999824.xYZ
+      Host: 3DdDf.444652.xYZ
     path: /9dZlJLjHHrL0VwSolbqFpg
-- name: US_Buffalo_HostPapa_Claude2
-  network: ws
-  port: 443
-  server: xcvbnnmklo.00890604.xyz
-  servername: xCVbNNMklo.00890604.xyZ
-  tls: true
-  type: vless
-  udp: true
-  uuid: a7c9c017-db10-4d15-b01b-0634db498b57
-  ws-opts:
-    headers:
-      Host: xcvbnnmklo.00890604.xyz
-    path: /xZjr7v1DqrYyamxeTh7sLJtI1
-- name: US_Buffalo_HostPapa_Claude3
-  network: ws
-  port: 443
-  server: 104.21.9.71
-  servername: ddDDdDDdDDF.777198.XyZ
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: c226ac5d-65e9-4379-95c3-fb542bc242d8
-  ws-opts:
-    headers:
-      Host: ddDDdDDdDDF.777198.XyZ
-    path: /OjdW89Bpg4ykd4O
-- name: US_Buffalo_HostPapa_Claude4
-  network: ws
-  port: 443
-  server: 104.21.94.69
-  servername: FfFfffFFFf.000890604.Xyz
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: bce0c7cb-08d1-46a7-b77b-7bff8b46252f
-  ws-opts:
-    headers:
-      Host: FfFfffFFFf.000890604.Xyz
-    path: /Ryxyg63Pk7cFSnZBROjL3Q5vTymr
-- name: US_Buffalo_HostPapa_Claude5
-  network: ws
-  port: 443
-  server: 104.21.90.226
-  servername: eEedFR5.7777155.Xyz
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: e4cbe8b8-37db-4aaa-8469-b84f34c51ebc
-  ws-opts:
-    headers:
-      Host: eEedFR5.7777155.Xyz
-    path: /6OWLjRc26b0nHYr5hYXD
-- name: US_Dallas_HostPapa_Gemini
-  network: ws
-  port: 8880
-  server: 160.153.1.251
-  servername: Telegram-channel-WangCai2
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      host: cf.d3z.net
-    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
-- name: US_Dallas_HostPapa_Gemini_Claude1
+- name: US_Buffalo_HostPapa_Claude10
   network: ws
   port: 8880
   server: 185.133.35.251
@@ -941,35 +1728,7 @@ proxies:
     headers:
       host: cf.d3z.net
     path: /Telegramًں‡¨ًں‡³
-- name: US_Dallas_HostPapa_Gemini_Claude2
-  network: ws
-  port: 8880
-  server: 45.81.58.251
-  servername: Telegram-channel-WangCai2
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: US_Elk Grove Village_HostPapa_Gemini_Claude1
-  network: ws
-  port: 8880
-  server: 5.10.214.251
-  servername: cf.d3z.net
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /
-- name: US_Elk Grove Village_HostPapa_Gemini_Claude2
+- name: US_Buffalo_HostPapa_Claude11
   network: ws
   port: 8880
   server: 194.76.18.254
@@ -983,875 +1742,35 @@ proxies:
     headers:
       host: yg.bantony199.top
     path: /Telegram🇨🇳
-- name: US_Elk Grove Village_HostPapa_Gemini_Claude3
-  network: ws
-  port: 443
-  server: sxxcer4.000890604.xyz
-  servername: sxXCer4.000890604.xYz
-  tls: true
-  type: vless
-  udp: true
-  uuid: 13e26f64-2e0c-4461-92cd-d83294cc18f0
-  ws-opts:
-    headers:
-      Host: sxXCer4.000890604.xYz
-    path: /WfxcqrR5ycVpIit2OdWk0KwirdY
-- name: US_Elk Grove Village_HostPapa_Gemini_Claude4
-  network: ws
-  port: 8880
-  server: 154.206.12.251
-  servername: Telegram-channel-WangCai2
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: US_Elk Grove Village_HostPapa_Gemini_Claude5
-  network: ws
-  port: 8880
-  server: 45.194.53.251
-  servername: Telegram-channel-WangCai2
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: US_Los Angeles_HostPapa_Claude
-  network: ws
-  port: 443
-  server: 222222r.11890604.xyz
-  servername: 222222r.11890604.xyz
-  tls: true
-  type: vless
-  udp: true
-  uuid: f898ffcb-6417-4373-9640-0b66091e8206
-  ws-opts:
-    headers:
-      Host: 222222r.11890604.xyz
-    path: /33CYL4twIwItuzXyJ5XNeH1R1
-- name: US_Los Angeles_HostPapa_Gemini
-  network: ws
-  port: 8880
-  server: 27.50.48.251
-  servername: Telegram-channel-WangCai2
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: US_Los Angeles_HostPapa_Gemini_Claude1
-  network: ws
-  port: 8880
-  server: 102.177.189.254
-  servername: Telegram-channel-WangCai2
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
-  ws-opts:
-    headers:
-      host: yg.bantony199.top
-    path: /Telegram🇨🇳
-- name: US_Los Angeles_HostPapa_Gemini_Claude2
-  network: ws
-  port: 8880
-  server: 154.197.80.251
-  servername: Telegram-channel-WangCai2
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: US_Los Angeles_HostPapa_Gemini_Claude3
-  network: ws
-  port: 8880
-  server: 114.129.43.251
-  servername: Telegram-channel-WangCai2
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: US_Los Angeles_Psychz Networks_Claude
-  password: dongtaiwang.com
-  port: 4710
-  server: 108.181.5.130
-  skip-cert-verify: true
-  sni: apple.com
-  type: hysteria2
 - alterId: 0
   cipher: auto
-  name: US_New York_Massivegrid LTD_Claude1
+  name: US_Buffalo_HostPapa_Claude12
   network: ws
   port: 443
-  server: SSsXXXCvBnmjKi.931.Pp.uA
-  skip-cert-verify: true
+  server: ssssssssssssfffffffgh.2032.pp.ua
+  skip-cert-verify: false
   tls: true
   type: vmess
-  udp: true
-  uuid: da128246-33b0-4c88-a44e-d91e9e0a1e05
+  uuid: 4174b95d-115e-4d39-add6-1f8db95bb860
   ws-opts:
     headers:
-      Host: sssxxxcvbnmjki.931.pp.ua
-    path: /0FhUkqQUdxOhMB9JsgTazwz9
-- alterId: 0
-  cipher: auto
-  name: US_New York_Massivegrid LTD_Claude2
-  network: ws
-  port: 80
-  server: aAZXsdE.003330333.xYZ
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  uuid: 10b1e371-d734-4306-b67f-0fc1f95c2485
-  ws-opts:
-    headers:
-      Host: aazxsde.003330333.xyz
-    path: /SXjq8YlnGNBlbnEsM
-- name: US_Phoenix_Oracle Corporation_Claude1
-  network: ws
-  port: 8880
-  server: 185.238.228.20
-  servername: us.laoyoutiao.link
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      host: us.laoyoutiao.link
-    path: /
-- name: US_Phoenix_Oracle Corporation_Claude2
-  network: ws
-  port: 8880
-  server: 91.193.58.69
-  servername: us.laoyoutiao.link
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      host: us.laoyoutiao.link
-    path: /
-- name: US_Phoenix_Oracle Corporation_Claude3
-  network: ws
-  port: 8880
-  server: 188.42.145.20
-  servername: us.laoyoutiao.link
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      host: us.laoyoutiao.link
-    path: /TelegramU0001F1E8U0001F1F3 @MxlShare @WangCai2 /
-- name: US_Phoenix_Oracle Corporation_Claude4
-  network: ws
-  port: 80
-  server: 141.193.213.254
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare+@WangCai2+/?ed=2560
-- name: US_Portland_Amazon.com, Inc._Gemini
-  network: ws
-  port: 80
-  server: 45.131.4.157
-  servername: redfree8.pooriashop.ir
-  tls: false
-  type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: US_San Jose_Amazon.com, Inc._Claude1
+      Host: ssssssssssssfffffffgh.2032.pp.ua
+    path: /6We3U9Df1WGxgFnoFPw1
+- name: US_Buffalo_HostPapa_Claude13
   network: ws
   port: 443
-  server: 185.176.24.159
-  servername: FREEDOm.ZiStarvInbioTeCh.ir
+  server: 172.67.206.152
+  servername: EDfrT.frEEvPNatm2025.DPdNS.oRG
   skip-cert-verify: false
   tls: true
   type: vless
   udp: true
-  uuid: 0a506a60-ae3e-499d-9cbd-ab003f9f3f3b
+  uuid: ffcf7ec1-3e09-4821-b3d9-b426a107b73b
   ws-opts:
     headers:
-      Host: freedom.zistarvinbiotech.ir
-    path: /Telegram@V2ray_Alpha/?ed=2560
-- name: US_San Jose_Amazon.com, Inc._Claude2
-  network: ws
-  port: 8880
-  server: 45.131.7.174
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@ShadowProxy66/?ed=2560
-- name: US_San Jose_Amazon.com, Inc._Gemini1
-  network: ws
-  port: 8880
-  server: 5.10.247.170
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /TelegramU0001F1E8U0001F1F3
-- name: US_San Jose_Amazon.com, Inc._Gemini2
-  network: ws
-  port: 80
-  server: 185.174.138.6
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66/?ed=2560'
-- name: US_San Jose_Amazon.com, Inc._Gemini_Claude
-  network: ws
-  port: 8880
-  server: 45.159.216.20
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
-- alterId: 0
-  cipher: auto
-  name: US_Secaucus_Massivegrid LTD_Gemini_Claude1
-  network: ws
-  port: 80
-  server: 172.67.149.239
-  skip-cert-verify: true
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 3d9741da-c0e4-47cc-a5e0-f1af3d337dae
-  ws-opts:
-    headers:
-      Host: vvvvvvvvvvvvvvb.4444926.xyz
-    path: /U2Z0FoBkgtZqfwAwY2SNm
-- alterId: 0
-  cipher: auto
-  name: US_Secaucus_Massivegrid LTD_Gemini_Claude2
-  network: ws
-  port: 80
-  server: 104.21.75.75
-  tls: false
-  type: vmess
-  uuid: cf8c791e-9d0b-4e90-aaf6-41ac62468416
-  ws-opts:
-    headers:
-      Host: eeeeer.857856.xyz
-    path: /CpsfR28bJO8180gomOew3d
-- name: US_Sterling_Total Uptime Technologies_Claude1
-  network: ws
-  port: 8880
-  server: 195.85.23.200
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@vpnAndroid2/?ed=2560
-- name: US_Sterling_Total Uptime Technologies_Claude2
-  network: ws
-  port: 80
-  server: 45.12.30.136
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66/?ed=2560'
-- name: US_Sterling_Total Uptime Technologies_Claude3
-  network: ws
-  port: 8880
-  server: 45.131.210.20
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /?ed=2560
-- name: US_Sterling_Total Uptime Technologies_Claude4
-  network: ws
-  port: 80
-  server: 45.159.216.56
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram:@vpnAndroid2/?ed=2560
-- name: US_Sterling_Total Uptime Technologies_Gemini1
-  network: ws
-  port: 2053
-  server: 188.114.97.183
-  servername: nOCTYq.pAGES.DEV
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: eb568786-bb3f-4f02-a25c-7183e800a0ba
-  ws-opts:
-    headers:
-      Host: nOCTYq.pAGES.DEV
-    path: /bPJ4mgkJbA7CnY7q?ed=2560
-- name: US_Sterling_Total Uptime Technologies_Gemini2
-  network: ws
-  port: 8443
-  server: 188.114.96.153
-  servername: noctyQ.pAGES.DEV
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: eb568786-bb3f-4f02-a25c-7183e800a0ba
-  ws-opts:
-    headers:
-      Host: noctyQ.pAGES.DEV
-    path: /
-- name: US_Sterling_Total Uptime Technologies_Gemini_Claude1
-  network: ws
-  port: 8880
-  server: 185.221.160.110
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
-- name: US_Sterling_Total Uptime Technologies_Gemini_Claude2
-  network: ws
-  port: 8880
-  server: 212.183.88.20
-  skip-cert-verify: true
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      host: reedfree8mahsang2.redorg.ir
-    path: /
-- name: US_Sterling_Total Uptime Technologies_Gemini_Claude3
-  network: ws
-  port: 8880
-  server: 45.131.208.108
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@ShadowProxy66/?ed=2560
-- name: US_Sterling_Total Uptime Technologies_Gemini_Claude4
-  network: ws
-  port: 2087
-  server: 172.66.47.31
-  servername: nEwMTPROxI.PAGes.DEv
-  skip-cert-verify: true
-  tls: true
-  type: vless
-  udp: true
-  uuid: 2cec2733-389a-46a7-9053-218594a6336d
-  ws-opts:
-    headers:
-      Host: nEwMTPROxI.PAGes.DEv
-    path: /
-- name: US_Sterling_Total Uptime Technologies_Gemini_Claude5
-  network: ws
-  port: 8880
-  server: 45.142.120.145
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /@ShadowProxy66?ed=2560
-- name: US_Sterling_Total Uptime Technologies_Gemini_Claude6
-  network: ws
-  port: 2053
-  server: 104.21.16.1
-  servername: 6Ny8J3m9BCe4gTsPtivSObeOkZvyI8CM.paGeS.DEV
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 35bdc608-822d-42eb-ad20-4bb23e9c052b
-  ws-opts:
-    headers:
-      Host: 6Ny8J3m9BCe4gTsPtivSObeOkZvyI8CM.paGeS.DEV
-    path: /1BvBMhk9nOFvi0vn?ed=2560
-- fingerprint: ''
-  name: fr|0bfc|puddincat07@Telegram
-  network: ws
-  port: 22224
-  server: 13.36.253.184
-  servername: trojan.burgerip.co.uk
-  tls: true
-  type: vless
-  udp: false
-  uuid: 05519058-d2ac-4f28-9e4a-2b2a1386749e
-  ws-opts:
-    headers:
-      host: trojan.burgerip.co.uk
-    path: /telegram-channel-vlessconfig
-- name: github.com/Ruk1ng001_
-  network: ws
-  port: 443
-  server: nnchkclyx.codesofun.pp.ua
-  servername: nnchk.codesofun.pp.ua
-  tls: true
-  type: vless
-  udp: true
-  uuid: 5f077162-99ad-424d-9f77-e5f7e37d9ef8
-  ws-opts:
-    headers:
-      Host: nnchk.codesofun.pp.ua
-    path: /ea3ac731
-- name: ❓_🇩🇪_💻_github.com/Ruk1ng001_1
-  network: ws
-  port: 80
-  server: 45.80.111.134
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66/?ed=2560'
-- name: ❓_🇩🇪_💻_github.com/Ruk1ng001_2
-  network: ws
-  port: 2095
-  server: 45.80.111.119
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram:TM-@AZARBAYJAB1+TM-@AZARBAYJAB1+TM-@AZARBAYJAB1+TM-@AZARBAYJAB1+TM-@AZARBAYJAB1
-- name: ❓_🇩🇪_💻_github.com/Ruk1ng001_3
-  network: ws
-  port: 80
-  server: 45.80.111.92
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram:@ShadowProxy66/?ed=2560
-- name: ❓_🇪🇸_💻_github.com/Ruk1ng001_1
-  network: ws
-  port: 8880
-  server: 185.251.81.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇪🇸_💻_github.com/Ruk1ng001_2
-  network: ws
-  port: 8880
-  server: 185.238.228.213
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /?ed=2560
-- name: ❓_🇬🇧_💻_github.com/Ruk1ng001_1
-  network: ws
-  port: 8880
-  server: 91.193.58.192
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: ❓_🇬🇧_💻_github.com/Ruk1ng001_2
-  network: ws
-  port: 8880
-  server: 185.193.29.213
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /?ed=2560
-- name: ❓_🇬🇧_💻_github.com/Ruk1ng001_3
-  network: ws
-  port: 8880
-  server: 45.12.30.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇭🇺_💻_github.com/Ruk1ng001_
-  network: ws
-  port: 8880
-  server: 74.49.214.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇮🇳_💻_github.com/Ruk1ng001_
-  network: ws
-  port: 8880
-  server: 154.198.173.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇰🇿_💻_github.com/Ruk1ng001_1
-  network: ws
-  port: 8880
-  server: 195.245.221.187
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /@ShadowProxy66?ed=2560
-- name: ❓_🇰🇿_💻_github.com/Ruk1ng001_2
-  network: ws
-  port: 8880
-  server: 31.43.179.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇱🇹_💻_github.com/Ruk1ng001_
-  network: ws
-  port: 8880
-  server: 89.116.161.213
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /?ed=2560
-- name: ❓_🇳🇱_💻_github.com/Ruk1ng001_1
-  network: ws
-  port: 8880
-  server: 45.131.4.34
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /Telegram@ShadowProxy66/?ed=2560
-- name: ❓_🇳🇱_💻_github.com/Ruk1ng001_2
-  network: ws
-  port: 8880
-  server: 45.131.6.68
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66?ed=2560'
-- name: ❓_🇳🇱_💻_github.com/Ruk1ng001_3
-  network: ws
-  port: 80
-  server: 45.131.210.52
-  servername: redfree8.pooriashop.ir
-  tls: false
-  type: vless
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: redfree8.pooriashop.ir
-    path: /Telegram@WangCai2/?ed
-- name: ❓_🇷🇺_💻_github.com/Ruk1ng001_1
-  network: ws
-  port: 80
-  server: 185.148.106.141
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66/?ed=2560'
-- name: ❓_🇷🇺_💻_github.com/Ruk1ng001_2
-  network: ws
-  port: 8880
-  server: 185.148.106.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇸🇬_💻_github.com/Ruk1ng001_
-  network: ws
-  port: 80
-  server: 45.8.211.229
-  servername: reedfree8mahsang2.redorg.ir
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: '/Channel id: @ShadowProxy66/?ed=2560'
-- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_1
-  network: ws
-  port: 8880
-  server: 155.46.213.177
-  servername: Telegram-channel-WangCai2
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
-  ws-opts:
-    headers:
-      Host: ip.langmanshanxi.top
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_2
-  network: ws
-  port: 8880
-  server: 104.129.165.213
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /?ed=2560
-- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_3
-  network: ws
-  port: 8880
-  server: 199.181.197.63
-  servername: jp.laoyoutiao.link
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: jp.laoyoutiao.link
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_4
-  network: ws
-  port: 8880
-  server: 216.24.57.20
-  servername: us.laoyoutiao.link
-  tls: false
-  type: vless
-  udp: true
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: /Telegram@WangCai2/?ed
-- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_5
-  network: ws
-  port: 80
-  server: 141.193.213.16
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare+@WangCai2+/?ed=2560
-- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_6
-  network: ws
-  port: 8880
-  server: 45.159.218.20
-  tls: false
-  type: vless
-  udp: true
-  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
-  ws-opts:
-    headers:
-      Host: reedfree8mahsang2.redorg.ir
-    path: /
-- name: ❓_🇺🇸_💻_github.com/Ruk1ng001_7
-  network: ws
-  port: 8880
-  server: 147.185.161.251
-  servername: Telegram-channel-WangCai2
-  skip-cert-verify: false
-  tls: false
-  type: vless
-  udp: true
-  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
-  ws-opts:
-    headers:
-      Host: cf.d3z.net
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-- name: 🟠_🇺🇸_💻_github.com/Ruk1ng001_
-  network: ws
-  port: 2053
-  server: 172.66.47.82
-  servername: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 80764883-7f6b-4c46-8ecd-887cdf541c07
-  ws-opts:
-    headers:
-      Host: edC32e3B.bpb-PaNel-EN-87s.PAGes.dEv
-    path: /oqLIXWAi6lzpnumQ
-- name: 🟡_🇬🇧_💻_github.com/Ruk1ng001_
-  network: ws
-  port: 8880
-  server: 164.38.155.20
-  tls: false
-  type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
-  ws-opts:
-    headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-- name: 🟡_🇺🇸_💻_github.com/Ruk1ng001_1
+      Host: EDfrT.frEEvPNatm2025.DPdNS.oRG
+    path: /O9jlBCbIm3xr1D40NK
+- name: US_Buffalo_HostPapa_Claude14
   network: ws
   port: 443
   server: 104.21.13.36
@@ -1865,7 +1784,7 @@ proxies:
     headers:
       Host: XcdvfGBnHU7.0890604.XyZ
     path: /xZjr7v1DqrYyamxeTh7sLJtI1
-- name: 🟡_🇺🇸_💻_github.com/Ruk1ng001_2
+- name: US_Buffalo_HostPapa_Claude15
   network: ws
   port: 443
   server: 104.21.66.157
@@ -1879,17 +1798,572 @@ proxies:
     headers:
       Host: eeEEEeR.666470.xYZ
     path: /6DuxYMYmrGrnGKRtF5UvWyyVQu
-- name: 🟡💻_github.com/Ruk1ng001_
+- name: US_Buffalo_HostPapa_Claude2
   network: ws
-  port: 8880
-  server: 88.216.67.20
-  tls: false
+  port: 443
+  server: sssxxxcft6.444752.xyz
+  servername: sssxxxcft6.444752.xyz
+  skip-cert-verify: true
+  tls: true
   type: vless
-  uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
+  udp: true
+  uuid: 512d9674-db12-44ca-a1b5-654244549b65
   ws-opts:
     headers:
-      Host: us.laoyoutiao.link
-    path: Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
+      Host: sssxxxcft6.444752.xyz
+    path: /zzMtGpHptl8a7dX3JIrYk7zm
+- name: US_Buffalo_HostPapa_Claude3
+  network: ws
+  port: 443
+  server: 172.67.161.129
+  servername: eeEEEeR.666470.xYZ
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: 662e38ba-8427-4955-94aa-76f5347a0ce8
+  ws-opts:
+    headers:
+      Host: eeEEEeR.666470.xYZ
+    path: /6DuxYMYmrGrnGKRtF5UvWyyVQu
+- name: US_Buffalo_HostPapa_Claude4
+  network: ws
+  port: 443
+  server: 104.21.44.248
+  servername: EDfrT.frEEvPNatm2025.DPdNS.oRG
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: ffcf7ec1-3e09-4821-b3d9-b426a107b73b
+  ws-opts:
+    headers:
+      Host: EDfrT.frEEvPNatm2025.DPdNS.oRG
+    path: /O9jlBCbIm3xr1D40NK
+- alterId: 0
+  cipher: auto
+  name: US_Buffalo_HostPapa_Claude5
+  network: ws
+  port: 80
+  server: EeEDCFVg.999824.xYZ
+  servername: eeedcfvg.999824.xyz
+  skip-cert-verify: false
+  tls: false
+  type: vmess
+  uuid: cdec9d57-661d-456a-bbf2-b4c38e9c6711
+  ws-opts:
+    headers:
+      Host: EeEDCFVg.999824.xYZ
+    path: /9dZlJLjHHrL0VwSolbqFpg
+- name: US_Buffalo_HostPapa_Claude6
+  network: ws
+  port: 443
+  server: xcvbnnmklo.00890604.xyz
+  servername: xCVbNNMklo.00890604.xyZ
+  tls: true
+  type: vless
+  udp: true
+  uuid: a7c9c017-db10-4d15-b01b-0634db498b57
+  ws-opts:
+    headers:
+      Host: xcvbnnmklo.00890604.xyz
+    path: /xZjr7v1DqrYyamxeTh7sLJtI1
+- name: US_Buffalo_HostPapa_Claude7
+  network: ws
+  port: 443
+  server: 104.21.94.69
+  servername: FfFfffFFFf.000890604.Xyz
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: bce0c7cb-08d1-46a7-b77b-7bff8b46252f
+  ws-opts:
+    headers:
+      Host: FfFfffFFFf.000890604.Xyz
+    path: /Ryxyg63Pk7cFSnZBROjL3Q5vTymr
+- name: US_Buffalo_HostPapa_Claude8
+  network: ws
+  port: 443
+  server: 104.21.9.71
+  servername: ddDDdDDdDDF.777198.XyZ
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: c226ac5d-65e9-4379-95c3-fb542bc242d8
+  ws-opts:
+    headers:
+      Host: ddDDdDDdDDF.777198.XyZ
+    path: /OjdW89Bpg4ykd4O
+- name: US_Buffalo_HostPapa_Claude9
+  network: ws
+  port: 443
+  server: 104.21.90.226
+  servername: eEedFR5.7777155.Xyz
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: e4cbe8b8-37db-4aaa-8469-b84f34c51ebc
+  ws-opts:
+    headers:
+      Host: eEedFR5.7777155.Xyz
+    path: /6OWLjRc26b0nHYr5hYXD
+- name: US_Dallas_HostPapa_Claude1
+  network: ws
+  port: 2096
+  server: 104.16.161.143
+  servername: baomei.pages.dev
+  skip-cert-verify: true
+  tls: true
+  type: vless
+  udp: true
+  uuid: f690c2da-bdc3-4538-999e-d2bb8a541188
+  ws-opts:
+    headers:
+      host: baomei.pages.dev
+    path: /fp=chrome
+- name: US_Dallas_HostPapa_Claude2
+  network: ws
+  port: 8880
+  server: 45.81.58.251
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Dallas_HostPapa_Claude3
+  network: ws
+  port: 8880
+  server: 45.194.53.251
+  servername: Telegram-channel-WangCai2
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Dallas_HostPapa_Claude4
+  network: ws
+  port: 8880
+  server: 114.129.43.251
+  servername: Telegram-channel-WangCai2
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Dallas_HostPapa_Claude5
+  network: ws
+  port: 8880
+  server: 147.185.161.251
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Dallas_HostPapa_Gemini_Claude
+  network: ws
+  port: 8880
+  server: 154.197.80.251
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Elk Grove Village_HostPapa_Claude1
+  network: ws
+  port: 8880
+  server: 160.153.1.251
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      host: cf.d3z.net
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /
+- name: US_Elk Grove Village_HostPapa_Claude2
+  network: ws
+  port: 8880
+  server: 5.10.214.251
+  servername: cf.d3z.net
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: US_Elk Grove Village_HostPapa_Claude3
+  network: ws
+  port: 8880
+  server: 27.50.48.251
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Elk Grove Village_HostPapa_Claude4
+  network: ws
+  port: 8880
+  server: 102.177.189.254
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
+  ws-opts:
+    headers:
+      host: yg.bantony199.top
+    path: /Telegram🇨🇳
+- name: US_Elk Grove Village_HostPapa_Claude5
+  network: ws
+  port: 443
+  server: 104.21.65.31
+  servername: SssXzAw.444652.XYZ
+  tls: true
+  type: vless
+  uuid: 0f7070cd-c91d-4532-a51f-56da4f0e94be
+  ws-opts:
+    headers:
+      Host: SssXzAw.444652.XYZ
+    path: /nSABZLQbEUSLppj7jCmY
+- name: US_Elk Grove Village_HostPapa_Gemini_Claude
+  network: ws
+  port: 443
+  server: sxxcer4.000890604.xyz
+  servername: sxXCer4.000890604.xYz
+  tls: true
+  type: vless
+  udp: true
+  uuid: 13e26f64-2e0c-4461-92cd-d83294cc18f0
+  ws-opts:
+    headers:
+      Host: sxXCer4.000890604.xYz
+    path: /WfxcqrR5ycVpIit2OdWk0KwirdY
+- name: US_Los Angeles_HostPapa_Claude1
+  network: ws
+  port: 8880
+  server: 154.206.12.251
+  servername: Telegram-channel-WangCai2
+  tls: false
+  type: vless
+  udp: true
+  uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
+  ws-opts:
+    headers:
+      Host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+- name: US_Los Angeles_HostPapa_Claude2
+  network: ws
+  port: 443
+  server: 222222r.11890604.xyz
+  servername: 222222r.11890604.xyz
+  tls: true
+  type: vless
+  udp: true
+  uuid: f898ffcb-6417-4373-9640-0b66091e8206
+  ws-opts:
+    headers:
+      Host: 222222r.11890604.xyz
+    path: /33CYL4twIwItuzXyJ5XNeH1R1
+- name: US_Los Angeles_Leaseweb USA, Inc._Claude
+  password: 27e473f8-d610-4b04-bdf7-d0c39b47c897
+  port: 45000
+  server: 23.80.81.213
+  skip-cert-verify: true
+  sni: www.apple.com
+  type: hysteria2
+- name: US_Los Angeles_Psychz Networks_Claude
+  password: dongtaiwang.com
+  port: 4710
+  server: 108.181.5.130
+  skip-cert-verify: true
+  sni: apple.com
+  type: hysteria2
+- name: US_Los Angeles_Total Uptime Technologies_Claude
+  network: ws
+  port: 2096
+  server: 212.183.88.29
+  servername: pOStWArE-2Jm.PAgEs.dEv
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: 65ee27b8-88b6-45f5-a2f8-8392c4afd82d
+  ws-opts:
+    headers:
+      Host: pOStWArE-2Jm.PAgEs.dEv
+    path: /ssqKt5JYIXEwDOMJ?ed=2560
+- name: US_Los Angeles_Total Uptime Technologies_Gemini_Claude1
+  network: ws
+  port: 2053
+  server: 104.21.16.1
+  servername: 6Ny8J3m9BCe4gTsPtivSObeOkZvyI8CM.paGeS.DEV
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: 35bdc608-822d-42eb-ad20-4bb23e9c052b
+  ws-opts:
+    headers:
+      Host: 6Ny8J3m9BCe4gTsPtivSObeOkZvyI8CM.paGeS.DEV
+    path: /1BvBMhk9nOFvi0vn?ed=2560
+- name: US_Los Angeles_Total Uptime Technologies_Gemini_Claude2
+  network: ws
+  port: 80
+  server: 45.131.210.52
+  servername: redfree8.pooriashop.ir
+  tls: false
+  type: vless
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram@WangCai2/?ed
+- name: US_Phoenix_Oracle Corporation_Claude1
+  network: ws
+  port: 8880
+  server: 88.216.69.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: US_Phoenix_Oracle Corporation_Claude2
+  network: ws
+  port: 8880
+  server: 27.50.48.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- name: US_Phoenix_Oracle Corporation_Claude3
+  network: ws
+  port: 8880
+  server: 199.181.197.186
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /
+- client-fingerprint: chrome
+  name: US_Phoenix_Oracle Corporation_Gemini_Claude1
+  password: 2a9b85bd-27cc-4e3b-b77d-54dbe5bc23af
+  port: 30000
+  server: 129.153.119.42
+  skip-cert-verify: true
+  sni: www.apple.com
+  type: hysteria2
+- client-fingerprint: chrome
+  name: US_Phoenix_Oracle Corporation_Gemini_Claude2
+  password: 2a9b85bd-27cc-4e3b-b77d-54dbe5bc23af
+  port: 30000
+  server: 132.226.117.48
+  skip-cert-verify: true
+  sni: www.apple.com
+  type: hysteria2
+- name: US_Portland_Amazon.com, Inc._Claude1
+  network: ws
+  port: 80
+  server: 45.131.4.157
+  servername: redfree8.pooriashop.ir
+  tls: false
+  type: vless
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
+- name: US_Portland_Amazon.com, Inc._Claude2
+  network: ws
+  port: 8443
+  server: 188.114.96.153
+  servername: noctyQ.pAGES.DEV
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: eb568786-bb3f-4f02-a25c-7183e800a0ba
+  ws-opts:
+    headers:
+      Host: noctyQ.pAGES.DEV
+    path: /
+- name: US_Portland_Amazon.com, Inc._Gemini_Claude
+  password: hfWoFliBzz7DzJ4AhSrCpNsiw
+  port: 21779
+  server: 54.212.32.103
+  skip-cert-verify: true
+  sni: bing.com
+  type: hysteria2
+- name: US_San Jose_Amazon.com, Inc._Claude1
+  network: ws
+  port: 80
+  server: 104.17.147.22
+  servername: redfree8.pooriashop.ir
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      host: redfree8.pooriashop.ir
+    path: /Telegram@V2ray_Alpha/
+- name: US_San Jose_Amazon.com, Inc._Claude2
+  network: ws
+  port: 2087
+  server: newmtproxi.pages.dev
+  servername: nEwMTPROxI.PAGes.DEv
+  skip-cert-verify: true
+  tls: true
+  type: vless
+  udp: true
+  uuid: 2cec2733-389a-46a7-9053-218594a6336d
+  ws-opts:
+    headers:
+      Host: newmtproxi.pages.dev
+    path: /frzapd2v2VXBMkxJ?ed=2560
+- name: US_San Jose_Amazon.com, Inc._Claude3
+  network: ws
+  port: 80
+  server: 45.131.6.231
+  servername: redfree8.pooriashop.ir
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram@WangCai2
+- name: US_San Jose_Amazon.com, Inc._Gemini_Claude
+  network: ws
+  port: 80
+  server: 45.131.4.20
+  servername: redfree8.pooriashop.ir
+  tls: false
+  type: vless
+  uuid: 53fa8faf-ba4b-4322-9c69-a3e5b1555049
+  ws-opts:
+    headers:
+      Host: redfree8.pooriashop.ir
+    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
+- alterId: 0
+  cipher: auto
+  name: US_Secaucus_Massivegrid LTD_Gemini_Claude1
+  network: ws
+  port: 80
+  server: 104.21.75.75
+  tls: false
+  type: vmess
+  uuid: cf8c791e-9d0b-4e90-aaf6-41ac62468416
+  ws-opts:
+    headers:
+      Host: eeeeer.857856.xyz
+    path: /CpsfR28bJO8180gomOew3d
+- alterId: 0
+  cipher: auto
+  name: US_Secaucus_Massivegrid LTD_Gemini_Claude2
+  network: ws
+  port: 80
+  server: 172.67.149.239
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  udp: true
+  uuid: 3d9741da-c0e4-47cc-a5e0-f1af3d337dae
+  ws-opts:
+    headers:
+      Host: vvvvvvvvvvvvvvb.4444926.xyz
+    path: /U2Z0FoBkgtZqfwAwY2SNm
+- name: VN_Cầu Diễn_WEB 360 TECHNOLOGY JOINT STOCK COMPANY_Claude
+  network: tcp
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 160.250.65.124
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
+  tls: true
+  type: vless
+  udp: true
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: VN_Hai BàTrưng_GLTEC_Claude
+  port: 34045
+  reality-opts:
+    public-key: cDaDzPr3PlS3NM8lreHZbdo-Mhqz8vMBzMSkHXhGIUA
+    short-id: e8ab71d0
+  server: 59.153.217.57
+  servername: visit-this-invitation-link-to-join-tg-enkelte-notif.ekt.me
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: d8dd94fd-540e-461d-b5d4-acebef02c22a
+- name: ❓_🇨🇳:🇭🇰_💻_github.com/Ruk1ng001_
+  network: ws
+  port: 8880
+  server: 104.129.167.177
+  servername: Telegram-channel-WangCai2
+  skip-cert-verify: false
+  tls: false
+  type: vless
+  udp: true
+  uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
+  ws-opts:
+    headers:
+      Host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
 proxy-groups:
 - name: PROXY
   type: select
@@ -1907,29 +2381,57 @@ proxy-groups:
   filter: .*
   proxies:
   - 103.12.77.191_Claude
-  - 103.12.77.48_Claude
-  - 103.81.84.57_Claude
-  - 103.81.86.172_Claude
-  - 107.174.26.18_Claude
-  - 107.175.212.252_Claude
-  - 137.220.142.143_Claude
-  - 137.220.191.38_Claude1
-  - 137.220.191.38_Claude2
+  - 103.12.77.78_Claude
+  - 104.168.76.144_Gemini_Claude
+  - 129.146.46.164_Claude
+  - 137.220.142.139_Claude
+  - 14|CY_speednode_1
+  - 14|CY_speednode_2
+  - 14|CY_speednode_3
+  - 14|CZ_speednode_
   - 14|DE_speednode_1
   - 14|DE_speednode_2
   - 14|DE_speednode_3
   - 14|DE_speednode_4
+  - 14|ES_speednode_
+  - 14|FR_speednode_
   - 14|GB_speednode_1
   - 14|GB_speednode_2
-  - 14|JP_speednode_
-  - 14|LU_speednode_
-  - 14|NL_speednode_
-  - 14|RU_speednode_
+  - 14|GB_speednode_3
+  - 14|GB_speednode_4
+  - 14|GB_speednode_5
+  - 14|HR_speednode_
+  - 14|KZ_speednode_
+  - 14|LT_speednode_1
+  - 14|LT_speednode_2
+  - 14|NL_speednode_1
+  - 14|NL_speednode_2
+  - 14|NZ_speednode_
+  - 14|RO_speednode_
+  - 14|RU_speednode_1
+  - 14|RU_speednode_2
+  - 14|RU_speednode_3
+  - 14|RU_speednode_4
   - 14|SA_speednode_
+  - 14|SC_speednode_1
+  - 14|SC_speednode_2
+  - 14|SC_speednode_3
+  - 14|SG_speednode_
   - 14|SI_speednode_
+  - 14|UA_speednode_
   - 14|US_speednode_1
   - 14|US_speednode_10
+  - 14|US_speednode_11
+  - 14|US_speednode_12
+  - 14|US_speednode_13
+  - 14|US_speednode_14
+  - 14|US_speednode_15
+  - 14|US_speednode_16
+  - 14|US_speednode_17
+  - 14|US_speednode_18
+  - 14|US_speednode_19
   - 14|US_speednode_2
+  - 14|US_speednode_20
   - 14|US_speednode_3
   - 14|US_speednode_4
   - 14|US_speednode_5
@@ -1937,113 +2439,124 @@ proxy-groups:
   - 14|US_speednode_7
   - 14|US_speednode_8
   - 14|US_speednode_9
-  - 160.250.65.124_Claude
-  - 192.3.179.114_Claude
-  - 192.3.179.121_Claude
-  - 1|🇦🇪1 |  1.2MB/s|0%|Disney|Opena...
-  - 1|🇺🇸123 |  1.3MB/s|61%|Disney|Op...
-  - 203.231.242.12_Claude
-  - 59.153.216.133_Claude
+  - 18.136.211.127_Claude
+  - 59.153.216.133_Gemini_Claude
   - 59.153.217.133_Claude
-  - 59.153.217.57_Claude
-  - 59.153.218.14_Claude
+  - 59.153.218.14_Gemini_Claude
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
   - DE_Falkenstein_Hetzner Online GmbH_Claude1
   - DE_Falkenstein_Hetzner Online GmbH_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Claude3
-  - DE_Falkenstein_Hetzner Online GmbH_Claude4
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini1
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini3
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
+  - DE_Frankfurt am Main_Leaseweb Deutschland GmbH_Claude
+  - DE_Frankfurt am Main_Oracle Corporation_Claude1
+  - DE_Frankfurt am Main_Oracle Corporation_Claude2
+  - DE_Frankfurt am Main_Oracle Corporation_Claude3
+  - DE_Frankfurt am Main_Oracle Corporation_Claude4
+  - DE_Frankfurt am Main_Oracle Corporation_Claude5
+  - DE_Frankfurt am Main_Oracle Corporation_Claude6
   - FR_Paris_Online S.A.S._Claude
   - FR_Paris_SCALEWAY_Claude
-  - NL_Amsterdam_Aeza International LTD_Claude1
-  - NL_Amsterdam_Aeza International LTD_Claude2
-  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
-  - SG_Singapore_Hetzner Online GmbH_Claude
-  - TR_Izmir_Alastyr Telekomunikasyon A.S._Claude
+  - GB_London_Oracle Corporation_Claude
+  - IT_Siziano_Oracle Corporation_Claude
+  - JP_Tokyo_Amazon Technologies Inc._Claude
+  - JP_Tokyo_Oracle Corporation_Claude1
+  - JP_Tokyo_Oracle Corporation_Claude2
+  - JP_Tokyo_Oracle Corporation_Claude3
+  - KR_Chuncheon_Oracle Corporation_Claude1
+  - KR_Chuncheon_Oracle Corporation_Claude2
+  - KR_Gunsan_Korea Telecom_Gemini_Claude
+  - KR_Gwanak-gu_SK Broadband Co Ltd_Claude
+  - KR_Seoul_Amazon.com, Inc._Claude
+  - KR_Seoul_Amazon.com, Inc._Gemini_Claude
+  - KR_Seoul_Oracle Corporation_Claude1
+  - KR_Seoul_Oracle Corporation_Claude10
+  - KR_Seoul_Oracle Corporation_Claude11
+  - KR_Seoul_Oracle Corporation_Claude12
+  - KR_Seoul_Oracle Corporation_Claude13
+  - KR_Seoul_Oracle Corporation_Claude14
+  - KR_Seoul_Oracle Corporation_Claude15
+  - KR_Seoul_Oracle Corporation_Claude16
+  - KR_Seoul_Oracle Corporation_Claude17
+  - KR_Seoul_Oracle Corporation_Claude18
+  - KR_Seoul_Oracle Corporation_Claude19
+  - KR_Seoul_Oracle Corporation_Claude2
+  - KR_Seoul_Oracle Corporation_Claude20
+  - KR_Seoul_Oracle Corporation_Claude21
+  - KR_Seoul_Oracle Corporation_Claude22
+  - KR_Seoul_Oracle Corporation_Claude23
+  - KR_Seoul_Oracle Corporation_Claude24
+  - KR_Seoul_Oracle Corporation_Claude3
+  - KR_Seoul_Oracle Corporation_Claude4
+  - KR_Seoul_Oracle Corporation_Claude5
+  - KR_Seoul_Oracle Corporation_Claude6
+  - KR_Seoul_Oracle Corporation_Claude7
+  - KR_Seoul_Oracle Corporation_Claude8
+  - KR_Seoul_Oracle Corporation_Claude9
+  - NL_Amsterdam_LeaseWeb Netherlands B.V._Claude1
+  - NL_Amsterdam_LeaseWeb Netherlands B.V._Claude2
+  - NL_Amsterdam_Matteo Martelloni trading as DELUXHOST_Claude
+  - PH_Manila_Alibaba (US) Technology Co., Ltd._Claude
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude1
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude2
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude3
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude4
+  - SG_Singapore_Amazon Technologies Inc._Claude
+  - SG_Singapore_Oracle Corporation_Claude1
+  - SG_Singapore_Oracle Corporation_Claude2
+  - TR_Istanbul_Ultahost, Inc._Claude
+  - US_Ashburn_Oracle Corporation_Claude
+  - US_Ashburn_Oracle Corporation_Gemini_Claude
   - US_Buffalo_HostPapa_Claude1
+  - US_Buffalo_HostPapa_Claude10
+  - US_Buffalo_HostPapa_Claude11
+  - US_Buffalo_HostPapa_Claude12
+  - US_Buffalo_HostPapa_Claude13
+  - US_Buffalo_HostPapa_Claude14
+  - US_Buffalo_HostPapa_Claude15
   - US_Buffalo_HostPapa_Claude2
   - US_Buffalo_HostPapa_Claude3
   - US_Buffalo_HostPapa_Claude4
   - US_Buffalo_HostPapa_Claude5
-  - US_Dallas_HostPapa_Gemini
-  - US_Dallas_HostPapa_Gemini_Claude1
-  - US_Dallas_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude1
-  - US_Elk Grove Village_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude3
-  - US_Elk Grove Village_HostPapa_Gemini_Claude4
-  - US_Elk Grove Village_HostPapa_Gemini_Claude5
-  - US_Los Angeles_HostPapa_Claude
-  - US_Los Angeles_HostPapa_Gemini
-  - US_Los Angeles_HostPapa_Gemini_Claude1
-  - US_Los Angeles_HostPapa_Gemini_Claude2
-  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_Buffalo_HostPapa_Claude6
+  - US_Buffalo_HostPapa_Claude7
+  - US_Buffalo_HostPapa_Claude8
+  - US_Buffalo_HostPapa_Claude9
+  - US_Dallas_HostPapa_Claude1
+  - US_Dallas_HostPapa_Claude2
+  - US_Dallas_HostPapa_Claude3
+  - US_Dallas_HostPapa_Claude4
+  - US_Dallas_HostPapa_Claude5
+  - US_Dallas_HostPapa_Gemini_Claude
+  - US_Elk Grove Village_HostPapa_Claude1
+  - US_Elk Grove Village_HostPapa_Claude2
+  - US_Elk Grove Village_HostPapa_Claude3
+  - US_Elk Grove Village_HostPapa_Claude4
+  - US_Elk Grove Village_HostPapa_Claude5
+  - US_Elk Grove Village_HostPapa_Gemini_Claude
+  - US_Los Angeles_HostPapa_Claude1
+  - US_Los Angeles_HostPapa_Claude2
+  - US_Los Angeles_Leaseweb USA, Inc._Claude
   - US_Los Angeles_Psychz Networks_Claude
-  - US_New York_Massivegrid LTD_Claude1
-  - US_New York_Massivegrid LTD_Claude2
+  - US_Los Angeles_Total Uptime Technologies_Claude
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude1
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude2
   - US_Phoenix_Oracle Corporation_Claude1
   - US_Phoenix_Oracle Corporation_Claude2
   - US_Phoenix_Oracle Corporation_Claude3
-  - US_Phoenix_Oracle Corporation_Claude4
-  - US_Portland_Amazon.com, Inc._Gemini
+  - US_Phoenix_Oracle Corporation_Gemini_Claude1
+  - US_Phoenix_Oracle Corporation_Gemini_Claude2
+  - US_Portland_Amazon.com, Inc._Claude1
+  - US_Portland_Amazon.com, Inc._Claude2
+  - US_Portland_Amazon.com, Inc._Gemini_Claude
   - US_San Jose_Amazon.com, Inc._Claude1
   - US_San Jose_Amazon.com, Inc._Claude2
-  - US_San Jose_Amazon.com, Inc._Gemini1
-  - US_San Jose_Amazon.com, Inc._Gemini2
+  - US_San Jose_Amazon.com, Inc._Claude3
   - US_San Jose_Amazon.com, Inc._Gemini_Claude
   - US_Secaucus_Massivegrid LTD_Gemini_Claude1
   - US_Secaucus_Massivegrid LTD_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Claude1
-  - US_Sterling_Total Uptime Technologies_Claude2
-  - US_Sterling_Total Uptime Technologies_Claude3
-  - US_Sterling_Total Uptime Technologies_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini1
-  - US_Sterling_Total Uptime Technologies_Gemini2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
-  - fr|0bfc|puddincat07@Telegram
-  - github.com/Ruk1ng001_
-  - ❓_🇩🇪_💻_github.com/Ruk1ng001_1
-  - ❓_🇩🇪_💻_github.com/Ruk1ng001_2
-  - ❓_🇩🇪_💻_github.com/Ruk1ng001_3
-  - ❓_🇪🇸_💻_github.com/Ruk1ng001_1
-  - ❓_🇪🇸_💻_github.com/Ruk1ng001_2
-  - ❓_🇬🇧_💻_github.com/Ruk1ng001_1
-  - ❓_🇬🇧_💻_github.com/Ruk1ng001_2
-  - ❓_🇬🇧_💻_github.com/Ruk1ng001_3
-  - ❓_🇭🇺_💻_github.com/Ruk1ng001_
-  - ❓_🇮🇳_💻_github.com/Ruk1ng001_
-  - ❓_🇰🇿_💻_github.com/Ruk1ng001_1
-  - ❓_🇰🇿_💻_github.com/Ruk1ng001_2
-  - ❓_🇱🇹_💻_github.com/Ruk1ng001_
-  - ❓_🇳🇱_💻_github.com/Ruk1ng001_1
-  - ❓_🇳🇱_💻_github.com/Ruk1ng001_2
-  - ❓_🇳🇱_💻_github.com/Ruk1ng001_3
-  - ❓_🇷🇺_💻_github.com/Ruk1ng001_1
-  - ❓_🇷🇺_💻_github.com/Ruk1ng001_2
-  - ❓_🇸🇬_💻_github.com/Ruk1ng001_
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_1
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_2
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_3
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_4
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_5
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_6
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_7
-  - 🟠_🇺🇸_💻_github.com/Ruk1ng001_
-  - 🟡_🇬🇧_💻_github.com/Ruk1ng001_
-  - 🟡_🇺🇸_💻_github.com/Ruk1ng001_1
-  - 🟡_🇺🇸_💻_github.com/Ruk1ng001_2
-  - 🟡💻_github.com/Ruk1ng001_
+  - VN_Cầu Diễn_WEB 360 TECHNOLOGY JOINT STOCK COMPANY_Claude
+  - VN_Hai BàTrưng_GLTEC_Claude
+  - ❓_🇨🇳:🇭🇰_💻_github.com/Ruk1ng001_
 - name: Best
   type: url-test
   url: https://www.gstatic.com/generate_204
@@ -2054,31 +2567,24 @@ proxy-groups:
   tolerance: 50
   filter: _Gemini_Claude
   proxies:
+  - 104.168.76.144_Gemini_Claude
+  - 59.153.216.133_Gemini_Claude
+  - 59.153.218.14_Gemini_Claude
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
-  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
-  - US_Dallas_HostPapa_Gemini_Claude1
-  - US_Dallas_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude1
-  - US_Elk Grove Village_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude3
-  - US_Elk Grove Village_HostPapa_Gemini_Claude4
-  - US_Elk Grove Village_HostPapa_Gemini_Claude5
-  - US_Los Angeles_HostPapa_Gemini_Claude1
-  - US_Los Angeles_HostPapa_Gemini_Claude2
-  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - KR_Gunsan_Korea Telecom_Gemini_Claude
+  - KR_Seoul_Amazon.com, Inc._Gemini_Claude
+  - US_Ashburn_Oracle Corporation_Gemini_Claude
+  - US_Dallas_HostPapa_Gemini_Claude
+  - US_Elk Grove Village_HostPapa_Gemini_Claude
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude1
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude2
+  - US_Phoenix_Oracle Corporation_Gemini_Claude1
+  - US_Phoenix_Oracle Corporation_Gemini_Claude2
+  - US_Portland_Amazon.com, Inc._Gemini_Claude
   - US_San Jose_Amazon.com, Inc._Gemini_Claude
   - US_Secaucus_Massivegrid LTD_Gemini_Claude1
   - US_Secaucus_Massivegrid LTD_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
 - name: Fallback
   type: fallback
   url: https://www.gstatic.com/generate_204
@@ -2090,29 +2596,57 @@ proxy-groups:
   filter: .*
   proxies:
   - 103.12.77.191_Claude
-  - 103.12.77.48_Claude
-  - 103.81.84.57_Claude
-  - 103.81.86.172_Claude
-  - 107.174.26.18_Claude
-  - 107.175.212.252_Claude
-  - 137.220.142.143_Claude
-  - 137.220.191.38_Claude1
-  - 137.220.191.38_Claude2
+  - 103.12.77.78_Claude
+  - 104.168.76.144_Gemini_Claude
+  - 129.146.46.164_Claude
+  - 137.220.142.139_Claude
+  - 14|CY_speednode_1
+  - 14|CY_speednode_2
+  - 14|CY_speednode_3
+  - 14|CZ_speednode_
   - 14|DE_speednode_1
   - 14|DE_speednode_2
   - 14|DE_speednode_3
   - 14|DE_speednode_4
+  - 14|ES_speednode_
+  - 14|FR_speednode_
   - 14|GB_speednode_1
   - 14|GB_speednode_2
-  - 14|JP_speednode_
-  - 14|LU_speednode_
-  - 14|NL_speednode_
-  - 14|RU_speednode_
+  - 14|GB_speednode_3
+  - 14|GB_speednode_4
+  - 14|GB_speednode_5
+  - 14|HR_speednode_
+  - 14|KZ_speednode_
+  - 14|LT_speednode_1
+  - 14|LT_speednode_2
+  - 14|NL_speednode_1
+  - 14|NL_speednode_2
+  - 14|NZ_speednode_
+  - 14|RO_speednode_
+  - 14|RU_speednode_1
+  - 14|RU_speednode_2
+  - 14|RU_speednode_3
+  - 14|RU_speednode_4
   - 14|SA_speednode_
+  - 14|SC_speednode_1
+  - 14|SC_speednode_2
+  - 14|SC_speednode_3
+  - 14|SG_speednode_
   - 14|SI_speednode_
+  - 14|UA_speednode_
   - 14|US_speednode_1
   - 14|US_speednode_10
+  - 14|US_speednode_11
+  - 14|US_speednode_12
+  - 14|US_speednode_13
+  - 14|US_speednode_14
+  - 14|US_speednode_15
+  - 14|US_speednode_16
+  - 14|US_speednode_17
+  - 14|US_speednode_18
+  - 14|US_speednode_19
   - 14|US_speednode_2
+  - 14|US_speednode_20
   - 14|US_speednode_3
   - 14|US_speednode_4
   - 14|US_speednode_5
@@ -2120,113 +2654,124 @@ proxy-groups:
   - 14|US_speednode_7
   - 14|US_speednode_8
   - 14|US_speednode_9
-  - 160.250.65.124_Claude
-  - 192.3.179.114_Claude
-  - 192.3.179.121_Claude
-  - 1|🇦🇪1 |  1.2MB/s|0%|Disney|Opena...
-  - 1|🇺🇸123 |  1.3MB/s|61%|Disney|Op...
-  - 203.231.242.12_Claude
-  - 59.153.216.133_Claude
+  - 18.136.211.127_Claude
+  - 59.153.216.133_Gemini_Claude
   - 59.153.217.133_Claude
-  - 59.153.217.57_Claude
-  - 59.153.218.14_Claude
+  - 59.153.218.14_Gemini_Claude
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
   - DE_Falkenstein_Hetzner Online GmbH_Claude1
   - DE_Falkenstein_Hetzner Online GmbH_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Claude3
-  - DE_Falkenstein_Hetzner Online GmbH_Claude4
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini1
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini3
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
+  - DE_Frankfurt am Main_Leaseweb Deutschland GmbH_Claude
+  - DE_Frankfurt am Main_Oracle Corporation_Claude1
+  - DE_Frankfurt am Main_Oracle Corporation_Claude2
+  - DE_Frankfurt am Main_Oracle Corporation_Claude3
+  - DE_Frankfurt am Main_Oracle Corporation_Claude4
+  - DE_Frankfurt am Main_Oracle Corporation_Claude5
+  - DE_Frankfurt am Main_Oracle Corporation_Claude6
   - FR_Paris_Online S.A.S._Claude
   - FR_Paris_SCALEWAY_Claude
-  - NL_Amsterdam_Aeza International LTD_Claude1
-  - NL_Amsterdam_Aeza International LTD_Claude2
-  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
-  - SG_Singapore_Hetzner Online GmbH_Claude
-  - TR_Izmir_Alastyr Telekomunikasyon A.S._Claude
+  - GB_London_Oracle Corporation_Claude
+  - IT_Siziano_Oracle Corporation_Claude
+  - JP_Tokyo_Amazon Technologies Inc._Claude
+  - JP_Tokyo_Oracle Corporation_Claude1
+  - JP_Tokyo_Oracle Corporation_Claude2
+  - JP_Tokyo_Oracle Corporation_Claude3
+  - KR_Chuncheon_Oracle Corporation_Claude1
+  - KR_Chuncheon_Oracle Corporation_Claude2
+  - KR_Gunsan_Korea Telecom_Gemini_Claude
+  - KR_Gwanak-gu_SK Broadband Co Ltd_Claude
+  - KR_Seoul_Amazon.com, Inc._Claude
+  - KR_Seoul_Amazon.com, Inc._Gemini_Claude
+  - KR_Seoul_Oracle Corporation_Claude1
+  - KR_Seoul_Oracle Corporation_Claude10
+  - KR_Seoul_Oracle Corporation_Claude11
+  - KR_Seoul_Oracle Corporation_Claude12
+  - KR_Seoul_Oracle Corporation_Claude13
+  - KR_Seoul_Oracle Corporation_Claude14
+  - KR_Seoul_Oracle Corporation_Claude15
+  - KR_Seoul_Oracle Corporation_Claude16
+  - KR_Seoul_Oracle Corporation_Claude17
+  - KR_Seoul_Oracle Corporation_Claude18
+  - KR_Seoul_Oracle Corporation_Claude19
+  - KR_Seoul_Oracle Corporation_Claude2
+  - KR_Seoul_Oracle Corporation_Claude20
+  - KR_Seoul_Oracle Corporation_Claude21
+  - KR_Seoul_Oracle Corporation_Claude22
+  - KR_Seoul_Oracle Corporation_Claude23
+  - KR_Seoul_Oracle Corporation_Claude24
+  - KR_Seoul_Oracle Corporation_Claude3
+  - KR_Seoul_Oracle Corporation_Claude4
+  - KR_Seoul_Oracle Corporation_Claude5
+  - KR_Seoul_Oracle Corporation_Claude6
+  - KR_Seoul_Oracle Corporation_Claude7
+  - KR_Seoul_Oracle Corporation_Claude8
+  - KR_Seoul_Oracle Corporation_Claude9
+  - NL_Amsterdam_LeaseWeb Netherlands B.V._Claude1
+  - NL_Amsterdam_LeaseWeb Netherlands B.V._Claude2
+  - NL_Amsterdam_Matteo Martelloni trading as DELUXHOST_Claude
+  - PH_Manila_Alibaba (US) Technology Co., Ltd._Claude
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude1
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude2
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude3
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude4
+  - SG_Singapore_Amazon Technologies Inc._Claude
+  - SG_Singapore_Oracle Corporation_Claude1
+  - SG_Singapore_Oracle Corporation_Claude2
+  - TR_Istanbul_Ultahost, Inc._Claude
+  - US_Ashburn_Oracle Corporation_Claude
+  - US_Ashburn_Oracle Corporation_Gemini_Claude
   - US_Buffalo_HostPapa_Claude1
+  - US_Buffalo_HostPapa_Claude10
+  - US_Buffalo_HostPapa_Claude11
+  - US_Buffalo_HostPapa_Claude12
+  - US_Buffalo_HostPapa_Claude13
+  - US_Buffalo_HostPapa_Claude14
+  - US_Buffalo_HostPapa_Claude15
   - US_Buffalo_HostPapa_Claude2
   - US_Buffalo_HostPapa_Claude3
   - US_Buffalo_HostPapa_Claude4
   - US_Buffalo_HostPapa_Claude5
-  - US_Dallas_HostPapa_Gemini
-  - US_Dallas_HostPapa_Gemini_Claude1
-  - US_Dallas_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude1
-  - US_Elk Grove Village_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude3
-  - US_Elk Grove Village_HostPapa_Gemini_Claude4
-  - US_Elk Grove Village_HostPapa_Gemini_Claude5
-  - US_Los Angeles_HostPapa_Claude
-  - US_Los Angeles_HostPapa_Gemini
-  - US_Los Angeles_HostPapa_Gemini_Claude1
-  - US_Los Angeles_HostPapa_Gemini_Claude2
-  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_Buffalo_HostPapa_Claude6
+  - US_Buffalo_HostPapa_Claude7
+  - US_Buffalo_HostPapa_Claude8
+  - US_Buffalo_HostPapa_Claude9
+  - US_Dallas_HostPapa_Claude1
+  - US_Dallas_HostPapa_Claude2
+  - US_Dallas_HostPapa_Claude3
+  - US_Dallas_HostPapa_Claude4
+  - US_Dallas_HostPapa_Claude5
+  - US_Dallas_HostPapa_Gemini_Claude
+  - US_Elk Grove Village_HostPapa_Claude1
+  - US_Elk Grove Village_HostPapa_Claude2
+  - US_Elk Grove Village_HostPapa_Claude3
+  - US_Elk Grove Village_HostPapa_Claude4
+  - US_Elk Grove Village_HostPapa_Claude5
+  - US_Elk Grove Village_HostPapa_Gemini_Claude
+  - US_Los Angeles_HostPapa_Claude1
+  - US_Los Angeles_HostPapa_Claude2
+  - US_Los Angeles_Leaseweb USA, Inc._Claude
   - US_Los Angeles_Psychz Networks_Claude
-  - US_New York_Massivegrid LTD_Claude1
-  - US_New York_Massivegrid LTD_Claude2
+  - US_Los Angeles_Total Uptime Technologies_Claude
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude1
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude2
   - US_Phoenix_Oracle Corporation_Claude1
   - US_Phoenix_Oracle Corporation_Claude2
   - US_Phoenix_Oracle Corporation_Claude3
-  - US_Phoenix_Oracle Corporation_Claude4
-  - US_Portland_Amazon.com, Inc._Gemini
+  - US_Phoenix_Oracle Corporation_Gemini_Claude1
+  - US_Phoenix_Oracle Corporation_Gemini_Claude2
+  - US_Portland_Amazon.com, Inc._Claude1
+  - US_Portland_Amazon.com, Inc._Claude2
+  - US_Portland_Amazon.com, Inc._Gemini_Claude
   - US_San Jose_Amazon.com, Inc._Claude1
   - US_San Jose_Amazon.com, Inc._Claude2
-  - US_San Jose_Amazon.com, Inc._Gemini1
-  - US_San Jose_Amazon.com, Inc._Gemini2
+  - US_San Jose_Amazon.com, Inc._Claude3
   - US_San Jose_Amazon.com, Inc._Gemini_Claude
   - US_Secaucus_Massivegrid LTD_Gemini_Claude1
   - US_Secaucus_Massivegrid LTD_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Claude1
-  - US_Sterling_Total Uptime Technologies_Claude2
-  - US_Sterling_Total Uptime Technologies_Claude3
-  - US_Sterling_Total Uptime Technologies_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini1
-  - US_Sterling_Total Uptime Technologies_Gemini2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
-  - fr|0bfc|puddincat07@Telegram
-  - github.com/Ruk1ng001_
-  - ❓_🇩🇪_💻_github.com/Ruk1ng001_1
-  - ❓_🇩🇪_💻_github.com/Ruk1ng001_2
-  - ❓_🇩🇪_💻_github.com/Ruk1ng001_3
-  - ❓_🇪🇸_💻_github.com/Ruk1ng001_1
-  - ❓_🇪🇸_💻_github.com/Ruk1ng001_2
-  - ❓_🇬🇧_💻_github.com/Ruk1ng001_1
-  - ❓_🇬🇧_💻_github.com/Ruk1ng001_2
-  - ❓_🇬🇧_💻_github.com/Ruk1ng001_3
-  - ❓_🇭🇺_💻_github.com/Ruk1ng001_
-  - ❓_🇮🇳_💻_github.com/Ruk1ng001_
-  - ❓_🇰🇿_💻_github.com/Ruk1ng001_1
-  - ❓_🇰🇿_💻_github.com/Ruk1ng001_2
-  - ❓_🇱🇹_💻_github.com/Ruk1ng001_
-  - ❓_🇳🇱_💻_github.com/Ruk1ng001_1
-  - ❓_🇳🇱_💻_github.com/Ruk1ng001_2
-  - ❓_🇳🇱_💻_github.com/Ruk1ng001_3
-  - ❓_🇷🇺_💻_github.com/Ruk1ng001_1
-  - ❓_🇷🇺_💻_github.com/Ruk1ng001_2
-  - ❓_🇸🇬_💻_github.com/Ruk1ng001_
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_1
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_2
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_3
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_4
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_5
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_6
-  - ❓_🇺🇸_💻_github.com/Ruk1ng001_7
-  - 🟠_🇺🇸_💻_github.com/Ruk1ng001_
-  - 🟡_🇬🇧_💻_github.com/Ruk1ng001_
-  - 🟡_🇺🇸_💻_github.com/Ruk1ng001_1
-  - 🟡_🇺🇸_💻_github.com/Ruk1ng001_2
-  - 🟡💻_github.com/Ruk1ng001_
+  - VN_Cầu Diễn_WEB 360 TECHNOLOGY JOINT STOCK COMPANY_Claude
+  - VN_Hai BàTrưng_GLTEC_Claude
+  - ❓_🇨🇳:🇭🇰_💻_github.com/Ruk1ng001_
 - name: HK
   type: url-test
   url: https://www.gstatic.com/generate_204
@@ -2258,7 +2803,10 @@ proxy-groups:
   interval: 600
   tolerance: 50
   proxies:
-  - 14|JP_speednode_
+  - JP_Tokyo_Amazon Technologies Inc._Claude
+  - JP_Tokyo_Oracle Corporation_Claude1
+  - JP_Tokyo_Oracle Corporation_Claude2
+  - JP_Tokyo_Oracle Corporation_Claude3
   filter: (?i)日|东京|大阪|JP|Japan|Tokyo|Osaka|Saitama
 - name: SG
   type: url-test
@@ -2269,7 +2817,14 @@ proxy-groups:
   interval: 600
   tolerance: 50
   proxies:
-  - SG_Singapore_Hetzner Online GmbH_Claude
+  - 14|SG_speednode_
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude1
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude2
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude3
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude4
+  - SG_Singapore_Amazon Technologies Inc._Claude
+  - SG_Singapore_Oracle Corporation_Claude1
+  - SG_Singapore_Oracle Corporation_Claude2
   filter: (?i)新|狮城|SG|Singapore
 - name: US
   type: url-test
@@ -2282,7 +2837,17 @@ proxy-groups:
   proxies:
   - 14|US_speednode_1
   - 14|US_speednode_10
+  - 14|US_speednode_11
+  - 14|US_speednode_12
+  - 14|US_speednode_13
+  - 14|US_speednode_14
+  - 14|US_speednode_15
+  - 14|US_speednode_16
+  - 14|US_speednode_17
+  - 14|US_speednode_18
+  - 14|US_speednode_19
   - 14|US_speednode_2
+  - 14|US_speednode_20
   - 14|US_speednode_3
   - 14|US_speednode_4
   - 14|US_speednode_5
@@ -2290,51 +2855,61 @@ proxy-groups:
   - 14|US_speednode_7
   - 14|US_speednode_8
   - 14|US_speednode_9
+  - PH_Manila_Alibaba (US) Technology Co., Ltd._Claude
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude1
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude2
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude3
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude4
+  - US_Ashburn_Oracle Corporation_Claude
+  - US_Ashburn_Oracle Corporation_Gemini_Claude
   - US_Buffalo_HostPapa_Claude1
+  - US_Buffalo_HostPapa_Claude10
+  - US_Buffalo_HostPapa_Claude11
+  - US_Buffalo_HostPapa_Claude12
+  - US_Buffalo_HostPapa_Claude13
+  - US_Buffalo_HostPapa_Claude14
+  - US_Buffalo_HostPapa_Claude15
   - US_Buffalo_HostPapa_Claude2
   - US_Buffalo_HostPapa_Claude3
   - US_Buffalo_HostPapa_Claude4
   - US_Buffalo_HostPapa_Claude5
-  - US_Dallas_HostPapa_Gemini
-  - US_Dallas_HostPapa_Gemini_Claude1
-  - US_Dallas_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude1
-  - US_Elk Grove Village_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude3
-  - US_Elk Grove Village_HostPapa_Gemini_Claude4
-  - US_Elk Grove Village_HostPapa_Gemini_Claude5
-  - US_Los Angeles_HostPapa_Claude
-  - US_Los Angeles_HostPapa_Gemini
-  - US_Los Angeles_HostPapa_Gemini_Claude1
-  - US_Los Angeles_HostPapa_Gemini_Claude2
-  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_Buffalo_HostPapa_Claude6
+  - US_Buffalo_HostPapa_Claude7
+  - US_Buffalo_HostPapa_Claude8
+  - US_Buffalo_HostPapa_Claude9
+  - US_Dallas_HostPapa_Claude1
+  - US_Dallas_HostPapa_Claude2
+  - US_Dallas_HostPapa_Claude3
+  - US_Dallas_HostPapa_Claude4
+  - US_Dallas_HostPapa_Claude5
+  - US_Dallas_HostPapa_Gemini_Claude
+  - US_Elk Grove Village_HostPapa_Claude1
+  - US_Elk Grove Village_HostPapa_Claude2
+  - US_Elk Grove Village_HostPapa_Claude3
+  - US_Elk Grove Village_HostPapa_Claude4
+  - US_Elk Grove Village_HostPapa_Claude5
+  - US_Elk Grove Village_HostPapa_Gemini_Claude
+  - US_Los Angeles_HostPapa_Claude1
+  - US_Los Angeles_HostPapa_Claude2
+  - US_Los Angeles_Leaseweb USA, Inc._Claude
   - US_Los Angeles_Psychz Networks_Claude
-  - US_New York_Massivegrid LTD_Claude1
-  - US_New York_Massivegrid LTD_Claude2
+  - US_Los Angeles_Total Uptime Technologies_Claude
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude1
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude2
   - US_Phoenix_Oracle Corporation_Claude1
   - US_Phoenix_Oracle Corporation_Claude2
   - US_Phoenix_Oracle Corporation_Claude3
-  - US_Phoenix_Oracle Corporation_Claude4
-  - US_Portland_Amazon.com, Inc._Gemini
+  - US_Phoenix_Oracle Corporation_Gemini_Claude1
+  - US_Phoenix_Oracle Corporation_Gemini_Claude2
+  - US_Portland_Amazon.com, Inc._Claude1
+  - US_Portland_Amazon.com, Inc._Claude2
+  - US_Portland_Amazon.com, Inc._Gemini_Claude
   - US_San Jose_Amazon.com, Inc._Claude1
   - US_San Jose_Amazon.com, Inc._Claude2
-  - US_San Jose_Amazon.com, Inc._Gemini1
-  - US_San Jose_Amazon.com, Inc._Gemini2
+  - US_San Jose_Amazon.com, Inc._Claude3
   - US_San Jose_Amazon.com, Inc._Gemini_Claude
   - US_Secaucus_Massivegrid LTD_Gemini_Claude1
   - US_Secaucus_Massivegrid LTD_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Claude1
-  - US_Sterling_Total Uptime Technologies_Claude2
-  - US_Sterling_Total Uptime Technologies_Claude3
-  - US_Sterling_Total Uptime Technologies_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini1
-  - US_Sterling_Total Uptime Technologies_Gemini2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
   filter: (?i)美|洛杉矶|芝加哥|西雅图|America|US|United.*?States
 - name: Claude
   type: url-test
@@ -2345,76 +2920,127 @@ proxy-groups:
   tolerance: 50
   proxies:
   - 103.12.77.191_Claude
-  - 103.12.77.48_Claude
-  - 103.81.84.57_Claude
-  - 103.81.86.172_Claude
-  - 107.174.26.18_Claude
-  - 107.175.212.252_Claude
-  - 137.220.142.143_Claude
-  - 137.220.191.38_Claude1
-  - 137.220.191.38_Claude2
-  - 160.250.65.124_Claude
-  - 192.3.179.114_Claude
-  - 192.3.179.121_Claude
-  - 203.231.242.12_Claude
-  - 59.153.216.133_Claude
+  - 103.12.77.78_Claude
+  - 104.168.76.144_Gemini_Claude
+  - 129.146.46.164_Claude
+  - 137.220.142.139_Claude
+  - 18.136.211.127_Claude
+  - 59.153.216.133_Gemini_Claude
   - 59.153.217.133_Claude
-  - 59.153.217.57_Claude
-  - 59.153.218.14_Claude
+  - 59.153.218.14_Gemini_Claude
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
   - DE_Falkenstein_Hetzner Online GmbH_Claude1
   - DE_Falkenstein_Hetzner Online GmbH_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Claude3
-  - DE_Falkenstein_Hetzner Online GmbH_Claude4
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
+  - DE_Frankfurt am Main_Leaseweb Deutschland GmbH_Claude
+  - DE_Frankfurt am Main_Oracle Corporation_Claude1
+  - DE_Frankfurt am Main_Oracle Corporation_Claude2
+  - DE_Frankfurt am Main_Oracle Corporation_Claude3
+  - DE_Frankfurt am Main_Oracle Corporation_Claude4
+  - DE_Frankfurt am Main_Oracle Corporation_Claude5
+  - DE_Frankfurt am Main_Oracle Corporation_Claude6
   - FR_Paris_Online S.A.S._Claude
   - FR_Paris_SCALEWAY_Claude
-  - NL_Amsterdam_Aeza International LTD_Claude1
-  - NL_Amsterdam_Aeza International LTD_Claude2
-  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
-  - SG_Singapore_Hetzner Online GmbH_Claude
-  - TR_Izmir_Alastyr Telekomunikasyon A.S._Claude
+  - GB_London_Oracle Corporation_Claude
+  - IT_Siziano_Oracle Corporation_Claude
+  - JP_Tokyo_Amazon Technologies Inc._Claude
+  - JP_Tokyo_Oracle Corporation_Claude1
+  - JP_Tokyo_Oracle Corporation_Claude2
+  - JP_Tokyo_Oracle Corporation_Claude3
+  - KR_Chuncheon_Oracle Corporation_Claude1
+  - KR_Chuncheon_Oracle Corporation_Claude2
+  - KR_Gunsan_Korea Telecom_Gemini_Claude
+  - KR_Gwanak-gu_SK Broadband Co Ltd_Claude
+  - KR_Seoul_Amazon.com, Inc._Claude
+  - KR_Seoul_Amazon.com, Inc._Gemini_Claude
+  - KR_Seoul_Oracle Corporation_Claude1
+  - KR_Seoul_Oracle Corporation_Claude10
+  - KR_Seoul_Oracle Corporation_Claude11
+  - KR_Seoul_Oracle Corporation_Claude12
+  - KR_Seoul_Oracle Corporation_Claude13
+  - KR_Seoul_Oracle Corporation_Claude14
+  - KR_Seoul_Oracle Corporation_Claude15
+  - KR_Seoul_Oracle Corporation_Claude16
+  - KR_Seoul_Oracle Corporation_Claude17
+  - KR_Seoul_Oracle Corporation_Claude18
+  - KR_Seoul_Oracle Corporation_Claude19
+  - KR_Seoul_Oracle Corporation_Claude2
+  - KR_Seoul_Oracle Corporation_Claude20
+  - KR_Seoul_Oracle Corporation_Claude21
+  - KR_Seoul_Oracle Corporation_Claude22
+  - KR_Seoul_Oracle Corporation_Claude23
+  - KR_Seoul_Oracle Corporation_Claude24
+  - KR_Seoul_Oracle Corporation_Claude3
+  - KR_Seoul_Oracle Corporation_Claude4
+  - KR_Seoul_Oracle Corporation_Claude5
+  - KR_Seoul_Oracle Corporation_Claude6
+  - KR_Seoul_Oracle Corporation_Claude7
+  - KR_Seoul_Oracle Corporation_Claude8
+  - KR_Seoul_Oracle Corporation_Claude9
+  - NL_Amsterdam_LeaseWeb Netherlands B.V._Claude1
+  - NL_Amsterdam_LeaseWeb Netherlands B.V._Claude2
+  - NL_Amsterdam_Matteo Martelloni trading as DELUXHOST_Claude
+  - PH_Manila_Alibaba (US) Technology Co., Ltd._Claude
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude1
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude2
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude3
+  - SG_Singapore_Alibaba (US) Technology Co., Ltd._Claude4
+  - SG_Singapore_Amazon Technologies Inc._Claude
+  - SG_Singapore_Oracle Corporation_Claude1
+  - SG_Singapore_Oracle Corporation_Claude2
+  - TR_Istanbul_Ultahost, Inc._Claude
+  - US_Ashburn_Oracle Corporation_Claude
+  - US_Ashburn_Oracle Corporation_Gemini_Claude
   - US_Buffalo_HostPapa_Claude1
+  - US_Buffalo_HostPapa_Claude10
+  - US_Buffalo_HostPapa_Claude11
+  - US_Buffalo_HostPapa_Claude12
+  - US_Buffalo_HostPapa_Claude13
+  - US_Buffalo_HostPapa_Claude14
+  - US_Buffalo_HostPapa_Claude15
   - US_Buffalo_HostPapa_Claude2
   - US_Buffalo_HostPapa_Claude3
   - US_Buffalo_HostPapa_Claude4
   - US_Buffalo_HostPapa_Claude5
-  - US_Dallas_HostPapa_Gemini_Claude1
-  - US_Dallas_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude1
-  - US_Elk Grove Village_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude3
-  - US_Elk Grove Village_HostPapa_Gemini_Claude4
-  - US_Elk Grove Village_HostPapa_Gemini_Claude5
-  - US_Los Angeles_HostPapa_Claude
-  - US_Los Angeles_HostPapa_Gemini_Claude1
-  - US_Los Angeles_HostPapa_Gemini_Claude2
-  - US_Los Angeles_HostPapa_Gemini_Claude3
+  - US_Buffalo_HostPapa_Claude6
+  - US_Buffalo_HostPapa_Claude7
+  - US_Buffalo_HostPapa_Claude8
+  - US_Buffalo_HostPapa_Claude9
+  - US_Dallas_HostPapa_Claude1
+  - US_Dallas_HostPapa_Claude2
+  - US_Dallas_HostPapa_Claude3
+  - US_Dallas_HostPapa_Claude4
+  - US_Dallas_HostPapa_Claude5
+  - US_Dallas_HostPapa_Gemini_Claude
+  - US_Elk Grove Village_HostPapa_Claude1
+  - US_Elk Grove Village_HostPapa_Claude2
+  - US_Elk Grove Village_HostPapa_Claude3
+  - US_Elk Grove Village_HostPapa_Claude4
+  - US_Elk Grove Village_HostPapa_Claude5
+  - US_Elk Grove Village_HostPapa_Gemini_Claude
+  - US_Los Angeles_HostPapa_Claude1
+  - US_Los Angeles_HostPapa_Claude2
+  - US_Los Angeles_Leaseweb USA, Inc._Claude
   - US_Los Angeles_Psychz Networks_Claude
-  - US_New York_Massivegrid LTD_Claude1
-  - US_New York_Massivegrid LTD_Claude2
+  - US_Los Angeles_Total Uptime Technologies_Claude
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude1
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude2
   - US_Phoenix_Oracle Corporation_Claude1
   - US_Phoenix_Oracle Corporation_Claude2
   - US_Phoenix_Oracle Corporation_Claude3
-  - US_Phoenix_Oracle Corporation_Claude4
+  - US_Phoenix_Oracle Corporation_Gemini_Claude1
+  - US_Phoenix_Oracle Corporation_Gemini_Claude2
+  - US_Portland_Amazon.com, Inc._Claude1
+  - US_Portland_Amazon.com, Inc._Claude2
+  - US_Portland_Amazon.com, Inc._Gemini_Claude
   - US_San Jose_Amazon.com, Inc._Claude1
   - US_San Jose_Amazon.com, Inc._Claude2
+  - US_San Jose_Amazon.com, Inc._Claude3
   - US_San Jose_Amazon.com, Inc._Gemini_Claude
   - US_Secaucus_Massivegrid LTD_Gemini_Claude1
   - US_Secaucus_Massivegrid LTD_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Claude1
-  - US_Sterling_Total Uptime Technologies_Claude2
-  - US_Sterling_Total Uptime Technologies_Claude3
-  - US_Sterling_Total Uptime Technologies_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
+  - VN_Cầu Diễn_WEB 360 TECHNOLOGY JOINT STOCK COMPANY_Claude
+  - VN_Hai BàTrưng_GLTEC_Claude
   filter: _Claude
 - name: Gemini
   type: url-test
@@ -2424,41 +3050,24 @@ proxy-groups:
   interval: 600
   tolerance: 50
   proxies:
+  - 104.168.76.144_Gemini_Claude
+  - 59.153.216.133_Gemini_Claude
+  - 59.153.218.14_Gemini_Claude
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude1
   - CA_Toronto_Cloudflare, Inc._Gemini_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini1
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini3
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude1
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude2
-  - DE_Falkenstein_Hetzner Online GmbH_Gemini_Claude3
-  - NL_Amsterdam_Aeza International LTD_Gemini_Claude
-  - US_Dallas_HostPapa_Gemini
-  - US_Dallas_HostPapa_Gemini_Claude1
-  - US_Dallas_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude1
-  - US_Elk Grove Village_HostPapa_Gemini_Claude2
-  - US_Elk Grove Village_HostPapa_Gemini_Claude3
-  - US_Elk Grove Village_HostPapa_Gemini_Claude4
-  - US_Elk Grove Village_HostPapa_Gemini_Claude5
-  - US_Los Angeles_HostPapa_Gemini
-  - US_Los Angeles_HostPapa_Gemini_Claude1
-  - US_Los Angeles_HostPapa_Gemini_Claude2
-  - US_Los Angeles_HostPapa_Gemini_Claude3
-  - US_Portland_Amazon.com, Inc._Gemini
-  - US_San Jose_Amazon.com, Inc._Gemini1
-  - US_San Jose_Amazon.com, Inc._Gemini2
+  - KR_Gunsan_Korea Telecom_Gemini_Claude
+  - KR_Seoul_Amazon.com, Inc._Gemini_Claude
+  - US_Ashburn_Oracle Corporation_Gemini_Claude
+  - US_Dallas_HostPapa_Gemini_Claude
+  - US_Elk Grove Village_HostPapa_Gemini_Claude
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude1
+  - US_Los Angeles_Total Uptime Technologies_Gemini_Claude2
+  - US_Phoenix_Oracle Corporation_Gemini_Claude1
+  - US_Phoenix_Oracle Corporation_Gemini_Claude2
+  - US_Portland_Amazon.com, Inc._Gemini_Claude
   - US_San Jose_Amazon.com, Inc._Gemini_Claude
   - US_Secaucus_Massivegrid LTD_Gemini_Claude1
   - US_Secaucus_Massivegrid LTD_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Gemini1
-  - US_Sterling_Total Uptime Technologies_Gemini2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude1
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude2
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude3
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude4
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude5
-  - US_Sterling_Total Uptime Technologies_Gemini_Claude6
   filter: _Gemini
 rules:
 - RULE-SET,ads,REJECT
