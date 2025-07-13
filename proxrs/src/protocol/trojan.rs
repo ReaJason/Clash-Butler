@@ -58,7 +58,6 @@ impl ProxyAdapter for Trojan {
         // allowInsecure=1#%F0%9F%87%AD%F0%9F%87%B0%E9%A6%99%E6%B8%AF%2001%20%7C%20%E4%B8%93%E7%BA%
         // BF%0D
         let mut url = &link[9..];
-
         let mut name = String::from("");
         if let Some((v1, v2)) = url.rsplit_once("#") {
             url = v1;
@@ -69,7 +68,7 @@ impl ProxyAdapter for Trojan {
         // the-best-airport.com:443?type=tcp&sni=new.download.the-best-airport.com&allowInsecure=1
         // 53fa8faf-ba4b-4322-9c69-a3e5b1555049@156.238.18.163:2095/?type=ws
         let mut parts: Vec<&str> = url.split("/?").collect();
-        if parts.len() == 1 {
+        if parts.len() == 1 || parts[0].contains("?") {
             parts = url.split("?").collect();
         }
         let mut network = None;
