@@ -21,7 +21,7 @@ pub async fn get_ip_detail(
         match get_ip_detail_from_ipsb(ip_addr, proxy_url).await {
             Ok(ip_detail) => Ok(ip_detail),
             Err(err) => {
-                error!("从 ipSb 获取 IP 详情失败, {err}");
+                error!("从 ipSb 获取 IP 详情失败，{err}");
                 Err(err)
             }
         }
@@ -32,7 +32,7 @@ pub async fn get_ip_detail(
         match get_ip_detail_from_ipapi(ip_addr, proxy_url).await {
             Ok(ip_detail) => Ok(ip_detail),
             Err(err) => {
-                error!("从 ipApi 获取 IP 详情失败, {err}");
+                error!("从 ipApi 获取 IP 详情失败，{err}");
                 Err(err)
             }
         }

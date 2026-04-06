@@ -135,7 +135,7 @@ impl ProxyAdapter for SS {
         let url = parts[0];
         let secret_server_port_parts: Vec<&str> = url.split("@").collect();
 
-        let secret = base64decode(secret_server_port_parts[0]);
+        let secret = base64decode(&urlencoding::decode(secret_server_port_parts[0]).unwrap());
         let cipher_pwd_parts: Vec<&str> = secret.splitn(2, ":").collect();
         let cipher = cipher_pwd_parts[0].parse().unwrap();
         let password = cipher_pwd_parts[1].parse().unwrap();
@@ -143,7 +143,7 @@ impl ProxyAdapter for SS {
         let server_port = secret_server_port_parts[1];
         let server_port_parts: Vec<&str> = server_port.split(":").collect();
         let server = server_port_parts[0].parse::<String>().unwrap();
-        let port = server_port_parts[1].parse::<u16>().unwrap();
+        let port = server_port_parts[1].trim_matches('/').parse::<u16>().unwrap();
 
         Ok(SS {
             name,
