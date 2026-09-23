@@ -133,7 +133,7 @@ mod test {
     #[tokio::test]
     #[ignore]
     async fn test_gemini_is_ok() {
-        let result = gemini_is_ok("http://localhost:7890", Duration::from_secs(5)).await;
+        let result = gemini_is_ok("http://localhost:7897", Duration::from_secs(5)).await;
         println!("{:?}", result);
     }
 

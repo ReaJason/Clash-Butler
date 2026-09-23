@@ -7,6 +7,7 @@ use serde::Deserialize;
 use serde::Serialize;
 use serde_json::Error;
 
+use crate::base64::base64decode;
 use crate::protocol::deserialize_u16_or_string;
 use crate::protocol::GrpcOptions;
 use crate::protocol::ProxyAdapter;
@@ -94,16 +95,31 @@ impl ProxyAdapter for Vless {
             }
         }
 
-        let tls = params_map.get("security").is_some_and(|s| s == "tls");
-        let network = params_map.get("type").cloned();
-        let servername = params_map.get("sni").cloned();
+        if name.is_empty() {
+            if let Some(remarks) = params_map.get("remarks") {
+                name = urlencoding::decode(remarks).unwrap().to_string();
+            }
+        }
+
+        let tls = params_map.get("security").is_some_and(|s| s == "tls")
+            || params_map.get("tls").is_some_and(|s| s == "1");
+        let network = params_map.get("type").cloned().or_else(|| {
+            params_map.get("obfs").and_then(|obfs| match obfs.as_str() {
+                "websocket" => Some("ws".to_string()),
+                _ => None,
+            })
+        });
+        let servername = params_map
+            .get("sni")
+            .cloned()
+            .or_else(|| params_map.get("peer").cloned());
         let flow = params_map.get("flow").cloned();
         let fingerprint = params_map.get("fp").cloned();
         let mut ws_opts = None;
 
         if network.as_deref().is_some_and(|s| s == "ws") {
             let mut headers = HashMap::new();
-            if let Some(host) = params_map.get("host") {
+            if let Some(host) = params_map.get("host").or_else(|| params_map.get("obfsParam")) {
                 headers.insert(String::from("host"), host.to_string());
             }
             ws_opts = Some(WSOptions {
@@ -115,10 +131,17 @@ impl ProxyAdapter for Vless {
         }
 
         let url = parts[0];
-        let parts: Vec<&str> = url.split("@").collect();
-        let uuid = String::from(parts[0]);
+        let decoded_url = base64decode(url);
+        let url = if decoded_url.contains('@') {
+            decoded_url.as_str()
+        } else {
+            url
+        };
+        let (uuid, addr) = url.split_once('@').ok_or_else(|| UnsupportedLinkError {
+            message: format!("Invalid vless link format: {}", link),
+        })?;
+        let uuid = uuid.rsplit_once(':').map_or(uuid, |(_, uuid)| uuid).to_string();
 
-        let addr = parts[1];
         let (server, port) = if addr.starts_with('[') {
             // IPv6 format: [2001:bc8:1d90:d4e::]:9999
             let (ip, port) = addr.rsplit_once(':').unwrap_or((addr, ""));
@@ -131,11 +154,14 @@ impl ProxyAdapter for Vless {
         if name.is_empty() {
             name = server.to_owned() + port.to_string().as_str();
         }
+        let port = port.parse::<u16>().map_err(|e| UnsupportedLinkError {
+            message: format!("Invalid vless port '{}': {}", port, e),
+        })?;
 
         Ok(Vless {
             name,
             server: server.to_owned(),
-            port: port.parse::<u16>().unwrap(),
+            port,
             uuid,
             flow,
             udp: Some(true),
@@ -254,6 +280,28 @@ mod test {
         let link = "vless://fa3129d0-5d5c-4bdf-99d7-708b25e92241@[2603:c022:8013:f300:2859:298e:1387:7c28]:35803?encryption=none&security=reality&sni=sega.com&fp=firefox&pbk=euJOlEl0IAbuX8rsStBPM_DVHBtWF0e5uinEhHCzYxw&sid=32ae7737&spx=%2F&type=tcp&headerType=none#yx9mzoya".to_string();
         let vless = Vless::from_link(link).unwrap();
         assert_eq!(vless.server, "2603:c022:8013:f300:2859:298e:1387:7c28");
+    }
+
+    #[test]
+    fn test_parse_vless_base64_userinfo() {
+        let link = "vless://bm9uZTo5NzVhZjVmMS1lMWEyLTQ1NDUtYjNmYi1jODRmYzdjMTA0MjdAMTA0LjE3LjE0NS4xOTc6NDQz?path=/%3Fed%3D2048&remarks=%E8%81%94%E9%80%9A-SJC-443-WS-TLS&obfsParam=pp-f8s.pages.dev&obfs=websocket&tls=1&peer=pp-f8s.pages.dev".to_string();
+        let vless = Vless::from_link(link).unwrap();
+        assert_eq!(vless.name, "联通-SJC-443-WS-TLS");
+        assert_eq!(vless.server, "104.17.145.197");
+        assert_eq!(vless.port, 443);
+        assert_eq!(vless.tls, Some(true));
+        assert_eq!(vless.network, Some("ws".to_string()));
+        assert_eq!(vless.uuid, "975af5f1-e1a2-4545-b3fb-c84fc7c10427");
+        assert_eq!(vless.servername, Some("pp-f8s.pages.dev".to_string()));
+        let mut headers = HashMap::new();
+        headers.insert("host".to_string(), "pp-f8s.pages.dev".to_string());
+        assert_eq!(
+            vless.ws_opts,
+            Some(WSOptions {
+                path: Some("/?ed=2048".to_string()),
+                headers: Some(headers),
+            })
+        );
     }
 
     // vless://b3524347-d27b-4d4a-8371-6cf837dea4d2@us1.helloco.xyz:60001?mode=multi&

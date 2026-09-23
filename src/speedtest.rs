@@ -55,7 +55,7 @@ mod test {
 
     #[tokio::test]
     async fn test_download() {
-        let url = "https://speed.cloudflare.com/__down?bytes=1024"; // 100MB download
+        let url = "https://speed.cloudflare.com/__down?bytes=10485760"; // 10MB download
         match crate::speedtest::test_download(
             url,
             Duration::from_secs(10),
@@ -68,33 +68,3 @@ mod test {
         }
     }
 }
-
-// #[tokio::main]
-// async fn main() {
-//     let url = "https://speed.cloudflare.com/__down?bytes=104857600";  // 100MB download
-//     let proxy_url = "http://127.0.0.1:7890";
-//     let result = test_download(url, proxy_url).await.unwrap();
-//     println!("{:?}", result);
-//
-//
-//     // let handles = (0..5).map(|_| {
-//     //     tokio::spawn(async move {
-//     //         test_download(url, proxy_url).await.unwrap()
-//     //     })
-//     // });
-//     //
-//     // let mut total_ttfb: Duration = Duration::new(0, 0);
-//     // let mut total_bandwidth = 0.0;
-//     // let mut results = Vec::new();
-//     // for handle in handles {
-//     //     let result = handle.await.unwrap();
-//     //     results.push(result);
-//     //     total_ttfb += result.2;
-//     //     total_bandwidth += result.1;
-//     // }
-//     //
-//     // let avg_ttfb = total_ttfb / results.len() as u32;
-//     // let avg_bandwidth = total_bandwidth / results.len() as f64;
-//
-//     // println!("Average TTFB: {:.2?} seconds, Average Bandwidth: {:.2} bytes/sec", avg_ttfb,
-// avg_bandwidth); }

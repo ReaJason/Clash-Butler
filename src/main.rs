@@ -1,13 +1,18 @@
 use std::collections::HashMap;
 use std::collections::HashSet;
+use std::collections::VecDeque;
 use std::env;
 use std::fs;
 use std::path::Path;
+use std::sync::Arc;
 use std::time::Duration;
 
 use clap::Parser;
 use proxrs::protocol::Proxy;
 use proxrs::sub::SubManager;
+use serde_yaml::Mapping;
+use serde_yaml::Value as YamlValue;
+use tokio::sync::Mutex;
 use tracing::error;
 use tracing::info;
 use tracing::Level;
@@ -36,6 +41,8 @@ struct Cli {
 }
 
 const TEST_PROXY_GROUP_NAME: &str = "PROXY";
+/// 并发连通性测试 worker 的端口基址，worker i 使用 port_base + i
+const WORKER_PORT_BASE: u64 = 8001;
 
 #[tokio::main]
 async fn main() {
@@ -179,13 +186,6 @@ async fn run(config: Settings) {
             test_yaml_path.to_string(),
         );
 
-        if let Err(e) = clash_meta.start().await {
-            error!("原神启动失败，第一次启动可能会下载 geo 相关的文件，重新启动即可，打开 logs/clash.log，查看具体错误原因，{}", e);
-            clash_meta.stop().unwrap();
-            return;
-        }
-        info!("当前节点个数为：{}", useful_proxies.len());
-
         let nodes = &mut useful_proxies
             .iter()
             .map(|p| p.get_name().to_string())
@@ -194,82 +194,43 @@ async fn run(config: Settings) {
         if config.rename_node {
             if nodes.is_empty() {
                 error!("当前无可用节点，请尝试更换订阅节点或重试");
-                clash_meta.stop().unwrap();
                 return;
             }
-            let mut i = 0;
-            while i < nodes.len() {
-                let node = &nodes[i];
-                let ip_result = clash_meta
-                    .set_group_proxy(TEST_PROXY_GROUP_NAME, node)
-                    .await;
-                if ip_result.is_ok() {
-                    let ip_result = cgi_trace::get_ip(&clash_meta.proxy_url, timeout).await;
-                    if ip_result.is_ok() {
-                        let (proxy_ip, from) = ip_result.unwrap();
-                        info!("「{}」ip: {} from: {}", node, proxy_ip, from);
-                        let mut gemini_is_ok = false;
-                        match website::gemini_is_ok(&clash_meta.proxy_url, timeout).await {
-                            Ok(_) => {
-                                info!("「{}」 gemini is ok", node);
-                                gemini_is_ok = true;
-                            }
-                            Err(err) => {
-                                error!("「{}」 gemini is not ok, {:#}", node, err)
-                            }
-                        }
-
-                        let mut claude_is_ok = false;
-                        match website::claude_is_ok(&clash_meta.proxy_url, timeout).await {
-                            Ok(_) => {
-                                info!("「{}」 claude is ok", node);
-                                claude_is_ok = true;
-                            }
-                            Err(err) => {
-                                error!("「{}」 claude is not ok, {:#}", node, err)
-                            }
-                        }
-                        if !gemini_is_ok && !claude_is_ok {
-                            nodes.remove(i);
-                            continue;
-                        }
-                        let ip_detail_result =
-                            ip::get_ip_detail(&proxy_ip, &clash_meta.proxy_url).await;
-                        let mut new_name = proxy_ip.to_string();
-                        match ip_detail_result {
-                            Ok(ip_detail) => {
-                                info!("{:?}", ip_detail);
-                                if config.rename_node {
-                                    new_name = config
-                                        .rename_pattern
-                                        .replace("${IP}", &proxy_ip.to_string())
-                                        .replace("${COUNTRYCODE}", &ip_detail.country_code)
-                                        .replace("${ISP}", &ip_detail.isp)
-                                        .replace("${CITY}", &ip_detail.city);
-                                }
-                            }
-                            Err(e) => {
-                                error!("获取节点 {node} 的 IP 信息失败, {e}");
-                            }
-                        }
-                        if gemini_is_ok {
-                            new_name += "_Gemini";
-                        }
-                        if claude_is_ok {
-                            new_name += "_Claude";
-                        }
-                        node_rename_map.insert(node.clone(), new_name);
-                    } else {
-                        let err_msg = ip_result.err().unwrap();
-                        error!("获取节点 {} 的 IP 失败, {}", node, err_msg);
-                        nodes.remove(i);
-                    }
-                } else {
-                    let err_msg = ip_result.err().unwrap();
-                    error!("设置节点 {} 失败, {}", node, err_msg);
-                }
-                i += 1;
+            // 注入独立的 select 组和监听端口，让 worker 并发切组互不影响
+            if let Err(e) = inject_worker_groups(
+                test_yaml_path,
+                nodes,
+                config.rename_test_workers,
+                WORKER_PORT_BASE,
+            ) {
+                error!("注入并发测试配置失败，{}", e);
+                return;
             }
+        }
+
+        if let Err(e) = clash_meta.start().await {
+            error!("原神启动失败，第一次启动可能会下载 geo 相关的文件，重新启动即可，打开 logs/clash.log，查看具体错误原因，{}", e);
+            clash_meta.stop().unwrap();
+            return;
+        }
+        info!("当前节点个数为：{}", useful_proxies.len());
+
+        if config.rename_node {
+            let shared_meta = Arc::new(clash_meta);
+            let (alive_nodes, rename_map) = test_nodes_concurrently(
+                &shared_meta,
+                nodes,
+                config.rename_test_workers,
+                WORKER_PORT_BASE,
+                timeout,
+                config.rename_pattern.clone(),
+            )
+            .await;
+            *nodes = alive_nodes;
+            node_rename_map = rename_map;
+            info!("网站连通性测试结果：{} 个节点可用", nodes.len());
+            clash_meta =
+                Arc::try_unwrap(shared_meta).unwrap_or_else(|_| panic!("仍有 worker 未退出"));
         }
 
         let mut release_proxies = useful_proxies
@@ -297,6 +258,214 @@ async fn run(config: Settings) {
         info!("release 文件地址：{}", release_yaml_path.to_string_lossy());
         clash_meta.stop().unwrap();
     }
+}
+
+/// 向测试配置注入 N 个独立的 select 组和绑定端口的 listener，
+/// 使网站连通性测试可以并发进行（每个 worker 独占一组一端口，切组互不影响）
+fn inject_worker_groups(
+    config_path: &str,
+    proxy_names: &[String],
+    worker_count: usize,
+    port_base: u64,
+) -> std::io::Result<()> {
+    let worker_count = worker_count.min(proxy_names.len()).max(1);
+    let content = fs::read_to_string(config_path)?;
+    let mut yaml: YamlValue = serde_yaml::from_str(&content).expect("解析测试配置失败");
+
+    let groups = yaml
+        .get_mut("proxy-groups")
+        .and_then(YamlValue::as_sequence_mut)
+        .expect("测试配置缺少 proxy-groups");
+    for w in 0..worker_count {
+        let mut group = Mapping::new();
+        group.insert(
+            YamlValue::String("name".to_string()),
+            YamlValue::String(format!("TEST{w}")),
+        );
+        group.insert(
+            YamlValue::String("type".to_string()),
+            YamlValue::String("select".to_string()),
+        );
+        group.insert(
+            YamlValue::String("proxies".to_string()),
+            YamlValue::Sequence(
+                proxy_names
+                    .iter()
+                    .map(|n| YamlValue::String(n.clone()))
+                    .collect(),
+            ),
+        );
+        groups.push(YamlValue::Mapping(group));
+    }
+
+    let listeners: Vec<YamlValue> = (0..worker_count)
+        .map(|w| {
+            let mut listener = Mapping::new();
+            listener.insert(
+                YamlValue::String("name".to_string()),
+                YamlValue::String(format!("worker{w}")),
+            );
+            listener.insert(
+                YamlValue::String("type".to_string()),
+                YamlValue::String("mixed".to_string()),
+            );
+            listener.insert(
+                YamlValue::String("port".to_string()),
+                YamlValue::Number((port_base + w as u64).into()),
+            );
+            listener.insert(
+                YamlValue::String("proxy".to_string()),
+                YamlValue::String(format!("TEST{w}")),
+            );
+            YamlValue::Mapping(listener)
+        })
+        .collect();
+    yaml.as_mapping_mut()
+        .expect("测试配置不是 mapping")
+        .insert(
+            YamlValue::String("listeners".to_string()),
+            YamlValue::Sequence(listeners),
+        );
+
+    fs::write(config_path, serde_yaml::to_string(&yaml).expect("序列化测试配置失败"))
+}
+
+enum NodeOutcome {
+    /// 节点保留；new_name 为 None 表示未参与测试（切组失败），不重命名
+    Alive { node: String, new_name: Option<String> },
+    /// 节点不可用，过滤
+    Dead,
+}
+
+/// 测试单个节点：获取出口 IP、并发检测 gemini/claude 连通性，并生成重命名
+async fn test_node(
+    clash_meta: &ClashMeta,
+    group: &str,
+    proxy_url: &str,
+    node: String,
+    timeout: Duration,
+    rename_pattern: &str,
+) -> NodeOutcome {
+    if let Err(e) = clash_meta.set_group_proxy(group, &node).await {
+        error!("设置节点 {} 失败，{}", node, e);
+        return NodeOutcome::Alive {
+            node,
+            new_name: None,
+        };
+    }
+    let (proxy_ip, from) = match cgi_trace::get_ip(proxy_url, timeout).await {
+        Ok(result) => result,
+        Err(e) => {
+            error!("获取节点 {} 的 IP 失败，{}", node, e);
+            return NodeOutcome::Dead;
+        }
+    };
+    info!("[{}] ip: {} from: {}", node, proxy_ip, from);
+
+    let (gemini_result, claude_result) = tokio::join!(
+        website::gemini_is_ok(proxy_url, timeout),
+        website::claude_is_ok(proxy_url, timeout),
+    );
+    let gemini_is_ok = match gemini_result {
+        Ok(_) => {
+            info!("[{}] gemini is ok", node);
+            true
+        }
+        Err(err) => {
+            error!("[{}] gemini is not ok, {:#}", node, err);
+            false
+        }
+    };
+    let claude_is_ok = match claude_result {
+        Ok(_) => {
+            info!("[{}] claude is ok", node);
+            true
+        }
+        Err(err) => {
+            error!("[{}] claude is not ok, {:#}", node, err);
+            false
+        }
+    };
+    if !gemini_is_ok && !claude_is_ok {
+        return NodeOutcome::Dead;
+    }
+
+    let mut new_name = proxy_ip.to_string();
+    match ip::get_ip_detail(&proxy_ip, proxy_url).await {
+        Ok(ip_detail) => {
+            info!("{:?}", ip_detail);
+            new_name = rename_pattern
+                .replace("${IP}", &proxy_ip.to_string())
+                .replace("${COUNTRYCODE}", &ip_detail.country_code)
+                .replace("${ISP}", &ip_detail.isp)
+                .replace("${CITY}", &ip_detail.city);
+        }
+        Err(e) => {
+            error!("获取节点 {node} 的 IP 信息失败，{e}");
+        }
+    }
+    if gemini_is_ok {
+        new_name += "_Gemini";
+    }
+    if claude_is_ok {
+        new_name += "_Claude";
+    }
+    NodeOutcome::Alive {
+        node,
+        new_name: Some(new_name),
+    }
+}
+
+/// 并发测试所有节点的网站连通性与出口 IP，返回存活节点名与重命名映射
+async fn test_nodes_concurrently(
+    clash_meta: &Arc<ClashMeta>,
+    nodes: &[String],
+    worker_count: usize,
+    port_base: u64,
+    timeout: Duration,
+    rename_pattern: String,
+) -> (Vec<String>, HashMap<String, String>) {
+    let worker_count = worker_count.min(nodes.len()).max(1);
+    info!("并发测试节点网站连通性，worker 数：{}", worker_count);
+    let queue = Arc::new(Mutex::new(VecDeque::from(nodes.to_vec())));
+    let mut handles = Vec::with_capacity(worker_count);
+    for w in 0..worker_count {
+        let group = format!("TEST{w}");
+        let proxy_url = format!("http://127.0.0.1:{}", port_base + w as u64);
+        let queue = Arc::clone(&queue);
+        let clash_meta = Arc::clone(clash_meta);
+        let rename_pattern = rename_pattern.clone();
+        handles.push(tokio::spawn(async move {
+            let mut outcomes = Vec::new();
+            loop {
+                // 锁只在取节点时持有，测试期间释放
+                let node = queue.lock().await.pop_front();
+                let Some(node) = node else { break };
+                outcomes.push(
+                    test_node(&clash_meta, &group, &proxy_url, node, timeout, &rename_pattern)
+                        .await,
+                );
+            }
+            outcomes
+        }));
+    }
+
+    let mut alive_nodes = Vec::new();
+    let mut node_rename_map = HashMap::new();
+    for handle in handles {
+        for outcome in handle.await.expect("worker 任务异常退出") {
+            match outcome {
+                NodeOutcome::Alive { node, new_name } => {
+                    if let Some(new_name) = new_name {
+                        node_rename_map.insert(node.clone(), new_name);
+                    }
+                    alive_nodes.push(node);
+                }
+                NodeOutcome::Dead => {}
+            }
+        }
+    }
+    (alive_nodes, node_rename_map)
 }
 
 #[allow(dead_code)]
@@ -437,6 +606,39 @@ fn create_folder() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_inject_worker_groups() {
+        let dir = env::temp_dir().join("clash-butler-test");
+        fs::create_dir_all(&dir).unwrap();
+        let path = dir.join("config.yaml");
+        fs::write(
+            &path,
+            "mixed-port: 7998\nproxies: []\nproxy-groups:\n  - name: PROXY\n    type: select\n    proxies: []\nrules:\n  - MATCH,PROXY\n",
+        )
+        .unwrap();
+        inject_worker_groups(
+            path.to_str().unwrap(),
+            &["节点A".to_string(), "节点B".to_string()],
+            2,
+            WORKER_PORT_BASE,
+        )
+        .unwrap();
+        let content = fs::read_to_string(&path).unwrap();
+        println!("{}", content);
+        let yaml: YamlValue = serde_yaml::from_str(&content).unwrap();
+        let groups = yaml["proxy-groups"].as_sequence().unwrap();
+        assert_eq!(groups.len(), 3);
+        assert_eq!(groups[1]["name"].as_str().unwrap(), "TEST0");
+        assert_eq!(
+            groups[2]["proxies"].as_sequence().unwrap().len(),
+            2
+        );
+        let listeners = yaml["listeners"].as_sequence().unwrap();
+        assert_eq!(listeners.len(), 2);
+        assert_eq!(listeners[0]["port"].as_u64().unwrap(), 8001);
+        assert_eq!(listeners[1]["proxy"].as_str().unwrap(), "TEST1");
+    }
 
     #[test]
     fn test_get_stable_nodes() {
