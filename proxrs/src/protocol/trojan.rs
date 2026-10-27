@@ -10,6 +10,7 @@ use serde_json::Error;
 use crate::protocol::deserialize_u16_or_string;
 use crate::protocol::ProxyAdapter;
 use crate::protocol::UnsupportedLinkError;
+use crate::protocol::WSOptions;
 
 #[derive(Deserialize, Debug, Serialize, Eq, Clone)]
 pub struct Trojan {
@@ -24,6 +25,8 @@ pub struct Trojan {
     pub skip_cert_verify: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub network: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none", rename = "ws-opts")]
+    pub ws_opts: Option<WSOptions>,
 }
 
 impl PartialEq for Trojan {
@@ -74,6 +77,7 @@ impl ProxyAdapter for Trojan {
         let mut network = None;
         let mut sni = None;
         let mut skip_cert_verify = None;
+        let mut ws_opts = None;
         if parts.len() > 1 {
             let params = parts[1];
             let mut params_map: HashMap<&str, String> = HashMap::new();
@@ -83,9 +87,56 @@ impl ProxyAdapter for Trojan {
                     params_map.insert(key, value);
                 }
             }
-            network = params_map.get("type").cloned();
-            sni = params_map.get("sni").cloned();
-            skip_cert_verify = params_map.get("allowInsecure").map(|value| value == "1");
+            // Shadowrocket 把 ws 参数编码成插件：
+            // plugin=obfs-local;obfs%3Dwebsocket;obfs-host%3D;obfs-uri%3D/ed2048
+            let plugin_opts: HashMap<String, String> = params_map
+                .get("plugin")
+                .map(|plugin| {
+                    plugin
+                        .split(';')
+                        .filter_map(|param| {
+                            let param = urlencoding::decode(param).ok()?;
+                            let (key, value) = param.split_once('=')?;
+                            Some((key.to_string(), value.to_string()))
+                        })
+                        .collect()
+                })
+                .unwrap_or_default();
+
+            network = params_map.get("type").cloned().or_else(|| {
+                (params_map.get("obfs").is_some_and(|v| v == "websocket")
+                    || plugin_opts.get("obfs").is_some_and(|v| v == "websocket"))
+                .then(|| "ws".to_string())
+            });
+            sni = params_map
+                .get("sni")
+                .or_else(|| params_map.get("peer"))
+                .cloned();
+            skip_cert_verify = params_map
+                .get("allowInsecure")
+                .or_else(|| params_map.get("insecure"))
+                .map(|value| value == "1");
+
+            if network.as_deref() == Some("ws") {
+                let path = params_map
+                    .get("path")
+                    .or_else(|| plugin_opts.get("obfs-uri"))
+                    .and_then(|path| urlencoding::decode(path).ok())
+                    .map(|path| path.into_owned());
+                let mut headers = HashMap::new();
+                if let Some(host) = params_map
+                    .get("host")
+                    .or_else(|| params_map.get("obfsParam"))
+                    .or_else(|| plugin_opts.get("obfs-host"))
+                    .filter(|host| !host.is_empty())
+                {
+                    headers.insert(String::from("Host"), host.to_string());
+                }
+                ws_opts = Some(WSOptions {
+                    path,
+                    headers: (!headers.is_empty()).then_some(headers),
+                });
+            }
         }
 
         let url = parts[0];
@@ -106,6 +157,7 @@ impl ProxyAdapter for Trojan {
             sni,
             skip_cert_verify,
             network,
+            ws_opts,
         })
     }
 
@@ -159,5 +211,37 @@ mod test {
     fn test_parse_trojan1() {
         let link = String::from("trojan://ed4f18fc-fdc9-4296-a69a-a2c908f9b09e@211.99.98.83:32039?security=tls&type=tcp&headerType=none#%F0%9F%87%A8%F0%9F%87%A6%20%E5%8A%A0%E6%8B%BF%E5%A4%A7-BGP");
         println!("{:?}", Trojan::from_link(link).unwrap().to_json());
+    }
+
+    #[test]
+    fn test_parse_trojan_ws() {
+        let link = String::from("trojan://rBLqkQqyTSvlgMHCtTtkhaTNpmtMmYEY@211.99.98.83:7604?sni=hotspot-unlimited.com&type=ws&path=%2Fed2048");
+        let trojan = Trojan::from_link(link).unwrap();
+        assert_eq!(trojan.network, Some("ws".to_string()));
+        assert_eq!(trojan.sni, Some("hotspot-unlimited.com".to_string()));
+        assert_eq!(
+            trojan.ws_opts,
+            Some(WSOptions {
+                path: Some("/ed2048".to_string()),
+                headers: None,
+            })
+        );
+        let json = trojan.to_json().unwrap();
+        assert!(json.contains(r#""ws-opts":{"path":"/ed2048"}"#));
+    }
+
+    #[test]
+    fn test_parse_trojan_obfs_plugin() {
+        let link = String::from("trojan://rBLqkQqyTSvlgMHCtTtkhaTNpmtMmYEY@211.99.98.83:7604?peer=hotspot-unlimited.com&plugin=obfs-local;obfs%3Dwebsocket;obfs-host%3D;obfs-uri%3D/ed2048");
+        let trojan = Trojan::from_link(link).unwrap();
+        assert_eq!(trojan.network, Some("ws".to_string()));
+        assert_eq!(trojan.sni, Some("hotspot-unlimited.com".to_string()));
+        assert_eq!(
+            trojan.ws_opts,
+            Some(WSOptions {
+                path: Some("/ed2048".to_string()),
+                headers: None,
+            })
+        );
     }
 }
