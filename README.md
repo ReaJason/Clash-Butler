@@ -36,7 +36,8 @@
 > [!WARNING]
 > 精力有限，目前仅支持 MacOS 使用
 
-1. 修改 config.toml，加入自己订阅地址
+1. 运行 `./scripts/init.sh` 下载/更新当前系统架构对应的 mihomo 内核
+2. 修改 config.toml，加入自己订阅地址
     ```yaml
    # 待测速的订阅节点
    # 支持网络地址 https://xxx
@@ -49,7 +50,20 @@
    ]
    ```
 
-2. (可选) 关闭 clash tun 模式或全局模式
-3. 使用 `cargo run` 启动，即可自动开始节点测速过滤
+3. (可选) 关闭 clash tun 模式或全局模式
+4. 使用 `cargo run` 启动，即可自动开始节点测速过滤
 
 预计先写 CLI 批量跑完现有节点筛选节点的功能，再考虑后续写成 Web 部署自动化形式
+
+## 相关站点
+
+1. https://github.com/v2rayA/v2rayA/blob/main/service/core/serverObj/shadowsocks.go
+2. https://github.com/2dust/v2rayN/blob/da3d4c36a9931df6b9f3ca1402b0adbd1c0b2df5/v2rayN/ServiceLib/Handler/Fmt/TrojanFmt.cs
+3. 
+3. https://scamalytics.com/ip/209.141.32.64
+3. https://ip.gs/
+4. https://ipdata.co/
+5. https://ping0.cc/
+6. https://github.com/faceair/clash-speedtest
+7. https://github.com/lmc999/RegionRestrictionCheck/blob/main/check.sh
+9. https://blog.baicai.me/article/2023/urltest-urltest/

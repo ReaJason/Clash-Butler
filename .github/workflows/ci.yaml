@@ -34,6 +34,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: Swatinem/rust-cache@v2
+      - name: Init mihomo
+        run: ./scripts/init.sh
       - name: Build
         run: cargo build --verbose
       - name: Run

@@ -16,6 +16,9 @@ Cargo.lock
 
 .idea/**
 
+# mihomo 内核由 scripts/init.sh 下载
+/clash-meta/mihomo
+
 subs/**
 
 logs/**
