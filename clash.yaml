@@ -3,9 +3,9 @@ allow-lan: true
 bind-address: '*'
 mode: rule
 log-level: info
-external-controller: 127.0.0.1:9090
+external-controller: :9090
 external-ui: ui
-external-ui-url: https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
 geox-url:
   geosite: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
   geoip: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
@@ -49,9 +49,7 @@ sniffer:
 tun:
   enable: true
   stack: mixed
-  strict_route: true
   auto-route: true
-  auto-redirect: true
   auto-detect-interface: true
   dns-hijack:
   - any:53
@@ -65,853 +63,690 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-filter:
   - rule-set:fakeip-filter,private,cn
+  - 111.198.46.148
   nameserver:
   - https://223.5.5.5/dns-query
   - https://doh.pub/dns-query
   - https://dns.alidns.com/dns-query
 proxies:
-- cipher: aes-256-cfb
-  name: 103.186.154.11_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.11
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.12_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.12
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.173_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.173
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.178_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.178
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.181_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.181
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.185_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.185
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.186_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.186
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.187_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.187
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.194_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.194
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.201_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.201
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.202_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.202
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.207_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.207
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.210_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.210
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.215_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.215
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.219_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.219
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.221_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.221
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.223_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.223
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.224_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.224
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.225_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.225
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.227_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.227
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.22_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.22
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.234_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.234
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.235_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.235
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.238_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.238
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.239_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.239
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.240_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.240
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.242_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.242
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.245_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.245
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.246_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.246
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.248_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.248
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.253_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.253
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.29_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.29
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.32_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.32
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.34_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.34
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.35_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.35
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.39_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.39
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.42_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.42
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.43_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.43
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.46_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.46
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.47_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.47
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.4_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.4
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.50_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.50
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.52_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.52
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.54_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.54
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.57_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.57
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.59_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.59
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.61_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.61
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.154.63_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.154.63
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.106_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.106
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.108_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.108
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.111_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.111
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.114_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.114
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.116_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.116
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.117_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.117
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.119_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.119
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.121_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.121
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.127_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.127
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.128_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.128
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.135_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.135
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.137_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.137
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.144_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.144
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.148_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.148
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.153_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.153
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.15_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.15
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.17_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.17
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.204_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.204
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.207_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.207
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.209_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.209
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.223_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.223
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.224_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.224
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.225_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.225
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.226_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.226
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.227_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.227
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.229_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.229
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.230_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.230
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.231_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.231
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.232_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.232
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.233_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.233
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.28_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.28
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.30_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.30
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.31_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.31
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.32_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.32
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.35_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.35
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.37_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.37
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.38_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.38
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.43_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.43
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.46_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.46
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.47_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.47
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.57_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.57
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.62_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.62
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.67_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.67
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.69_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.69
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.71_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.71
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.76_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.76
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.81_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.81
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.83_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.83
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.84_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.84
-  type: ss
-- cipher: aes-256-cfb
-  name: 103.186.155.9_Claude
-  password: Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV
-  port: 38388
-  server: 103.186.155.9
-  type: ss
-- name: 36.232.82.28_Claude1
-  password: exaxgqkKkd0TAMrCxeonWg==
-  port: 1443
-  server: twmoon1-cdn-route.couldflare-cdn.com
-  tls: true
-  type: http
-  username: mrwdfNTD8M79LCukCieldrqZWqs=
-- name: 36.232.82.28_Claude2
-  password: mrwdfNTD8M79LCukCieldrqZWqs=
-  port: 1443
-  server: twmoon1-cdn-route.couldflare-cdn.com
+- name: 102.244.78.57_Claude
+  password: ''
+  port: 8086
+  server: 102.244.78.61
   skip-cert-verify: true
-  sni: twmoon1-cdn-route.couldflare-cdn.com
+  type: http
+  username: ''
+- name: 109.248.147.70_Claude
+  port: 443
+  server: 109.248.147.66
+  skip-cert-verify: true
   tls: true
   type: http
-  username: mrwdfNTD8M79LCukCieldrqZWqs=
-- alterId: 2
-  cipher: auto
-  name: 42.98.100.183_Claude1
-  network: ws
-  port: 80
-  server: 3f637c17-t94cg0-tcuz7t-1ta58.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: e2d8b574-e089-11ef-9cc7-f23c9164ca5d
-  ws-opts:
-    headers:
-      Host: 3f637c17-t94cg0-tcuz7t-1ta58.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: 42.98.100.183_Claude2
-  network: ws
-  port: 80
-  server: dc2d90a8-t9sf40-tar8u7-1fy29.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  uuid: 500dd8cc-a21c-11ec-bd7c-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: 42.98.100.183_Claude3
-  network: ws
-  port: 80
-  server: 168ec8b9-t70f40-tiqsce-t6fv.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: af7ddbb2-3567-11ec-bd7c-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: 168ec8b9-t70f40-tiqsce-t6fv.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: 42.98.100.183_Claude4
-  network: ws
-  port: 80
-  server: hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: f7d95364-607b-11ee-93af-f23c91369f2d
-  ws-opts:
-    headers: {}
-    path: /
-- alterId: 2
-  cipher: auto
-  name: 42.98.100.183_Claude5
-  network: ws
-  port: 80
-  server: a741d435-t9w4g0-tbao5v-gacy.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 20f87b02-0eaa-11eb-8684-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: 42.98.100.183_Claude6
-  network: ws
-  port: 80
-  server: 3c12fe42-t8lts0-ta1wsm-1ryup.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 3ee091ca-ab9c-11ef-a791-f23c9164ca5d
-  ws-opts:
-    headers:
-      Host: 3c12fe42-t8lts0-ta1wsm-1ryup.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: 42.98.100.183_Claude7
-  network: ws
-  port: 80
-  server: 584a79d6-t9w4g0-tb5rbt-1kcpe.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 3f514ea2-4662-11ed-a8bf-f23c91cfbbc9
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- flow: xtls-rprx-vision
-  name: 61.111.247.53_Claude1
-  network: tcp
-  port: 19001
-  reality-opts:
-    public-key: UtL7E0Gmxj3X5JdcPAutpTRKo7K2hugkR0vwk2XroUM
-    short-id: ''
-  server: krp01.jumperservice.com
-  servername: addons.mozilla.org
-  tls: true
-  type: vless
-  udp: true
-  uuid: 455fc271-3ee2-493b-8c75-9324b4851e2f
-- flow: xtls-rprx-vision
-  name: 61.111.247.53_Claude2
-  network: tcp
-  port: 19001
-  reality-opts:
-    public-key: UtL7E0Gmxj3X5JdcPAutpTRKo7K2hugkR0vwk2XroUM
-    short-id: ''
-  server: krp01.jumperservice.com
-  servername: addons.mozilla.org
-  tls: true
-  type: vless
-  udp: true
-  uuid: 6eeb820e-89ef-4b60-9060-ddcaea0580f0
-- name: CA_Montreal_OVH SAS_Claude1
-  network: ws
-  port: 2096
-  server: 77.105.163.138
-  servername: sni.111000.indevs.in
-  tls: true
-  type: vless
-  udp: true
-  uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d
-  ws-opts:
-    headers:
-      Host: sni.111000.indevs.in
-      User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36
-    path: /?ed=2560&Telegram🇨🇳@WangCai2
-- name: CA_Montreal_OVH SAS_Claude2
-  network: ws
-  port: 16058
-  server: 14.32.3.193
-  servername: sni.111000.indevs.in
-  tls: true
-  type: vless
-  udp: true
-  uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d
-  ws-opts:
-    headers:
-      Host: sni.111000.indevs.in
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36
-    path: /?ed=2560&Telegram🇨🇳@WangCai2
-- name: CA_Toronto_Choopa_Claude
-  network: ws
+- name: 13.212.207.226_Claude
+  password: '1234'
+  port: 2080
+  server: 13.212.207.226
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: 13.212.249.115_Claude
+  password: '1234'
+  port: 2080
+  server: 13.212.249.115
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: 13.229.54.109_Claude
+  password: '1234'
+  port: 2080
+  server: 13.229.54.109
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: 137.220.221.179_Claude
   port: 443
-  server: 173.212.207.89
-  servername: sni.111000.indevs.in
-  tls: true
-  type: vless
-  udp: true
-  uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d
-  ws-opts:
-    headers:
-      Host: sni.111000.indevs.in
-    path: /?ed=2560
-- name: CA_Toronto_DigitalOcean, LLC_Claude
-  network: ws
-  port: 2096
-  server: 114.129.43.238
-  servername: sni.jpmj.dev
-  tls: true
-  type: vless
-  udp: true
-  uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d
-  ws-opts:
-    headers:
-      Host: sni.jpmj.dev
-      User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; de-DE) AppleWebKit/534.17 (KHTML, like Gecko) Chrome/10.0.649.0 Safari/534.17
-    path: /?ed=2560&Telegram🇨🇳@WangCai2
-- name: DE_Frankfurt am Main_F5 Networks SARL_Claude1
-  network: ws
-  port: 443
-  server: 94.159.98.113
-  servername: sni.111000.indevs.in
-  tls: true
-  type: vless
-  udp: true
-  uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d
-  ws-opts:
-    headers:
-      Host: sni.111000.indevs.in
-      User-Agent: Mozilla/5.0 (Linux; Android 6.0; CAM-L21 Build/HUAWEICAM-L21; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36
-    path: /?ed=2560&Telegram🇨🇳@WangCai2
-- name: DE_Frankfurt am Main_F5 Networks SARL_Claude2
-  network: ws
-  port: 2053
-  server: 162.19.243.8
-  servername: sni.111000.indevs.in
-  tls: true
-  type: vless
-  udp: true
-  uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d
-  ws-opts:
-    headers:
-      Host: sni.111000.indevs.in
-      User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36
-    path: /?ed=2560&Telegram🇨🇳@WangCai2
-- name: DE_Frankfurt am Main_F5 Networks SARL_Claude3
-  network: ws
-  port: 2053
-  server: 188.241.241.33
-  servername: sni.111000.indevs.in
-  tls: true
-  type: vless
-  uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d
-  ws-opts:
-    headers:
-      Host: sni.111000.indevs.in
-    path: /?ed=2560&Telegram🇨🇳@WangCai2
-- name: DE_Frankfurt am Main_First Server Limited_Claude
-  network: ws
-  port: 2052
-  server: www.visa.com.sg
+  server: 137.220.221.179
+  skip-cert-verify: true
   tls: false
   type: vless
   udp: true
-  uuid: 25efc727-e853-49ba-9609-3c20009d0e7a
+  uuid: a16a3336-c9ab-489f-9b85-c973f5e2cfa4
+- name: 146.70.244.10_Claude
+  port: 443
+  server: 146.70.244.2
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 149.36.50.15_Claude
+  port: 443
+  server: 149.36.50.1
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 149.88.21.139_Claude
+  password: ''
+  port: 443
+  server: 149.88.21.129
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: ''
+- name: 169.150.237.8_Claude
+  password: None
+  port: 9443
+  server: 169.150.237.1
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 185.221.132.246_Claude1
+  password: None
+  port: 443
+  server: 185.221.132.242
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 185.221.132.246_Claude2
+  port: 443
+  server: 185.221.132.242
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 212.102.63.8_Claude
+  port: 443
+  server: 212.102.63.1
+  skip-cert-verify: true
+  tls: true
+  type: http
+- cipher: rc4-md5
+  name: 23.142.200.235_Claude
+  obfs: tls1.2_ticket_auth
+  obfs-param: 6f5218522.douyin.com
+  password: di15PV
+  port: 29392
+  protocol: auth_aes128_md5
+  protocol-param: 218522:0hfCJk
+  server: api.meituan88.com
+  type: ssr
+- name: 2406:da18:ad0:a400:b312:73dc:ae5:d92_Claude
+  password: '1234'
+  port: 2080
+  server: 13.229.236.228
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: 31.186.220.204_Claude
+  port: 443
+  server: 31.186.220.204
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 43.160.239.37_Claude
+  port: 443
+  server: 43.160.239.37
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 47.236.168.243_Claude
+  password: '8888'
+  port: 1080
+  server: 47.236.168.243
+  skip-cert-verify: true
+  type: socks5
+  username: '8888'
+- name: 5.178.109.174_Claude
+  network: ws
+  port: 14430
+  server: 5.178.109.174
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 80de563a-cac8-40ea-8cb0-4cb082dd92f9
   ws-opts:
     headers:
-      Host: winbiss-0tpka6-v1.winbiss.workers.dev
-    path: /?ed=2560
+      host: 5.178.109.174
+    path: /vless
+- name: 5.255.118.82_Claude
+  port: 443
+  server: 5.255.118.82
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 51.15.20.32_Claude
+  port: 1088
+  server: 51.15.20.32
+  skip-cert-verify: true
+  type: socks5
+- name: 77.221.148.116_Claude
+  port: 10808
+  server: 77.221.148.116
+  type: socks5
+  udp: true
+- name: 80.124.109.22_Claude
+  port: 8090
+  server: 80.124.109.22
+  skip-cert-verify: true
+  tls: true
+  type: http
+- cipher: aes-256-gcm
+  name: 80.174.118.60_Claude
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 202.50.253.63
+  type: ss
+- cipher: aes-256-gcm
+  name: 80.174.118.80_Claude
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 202.50.253.81
+  type: ss
+- name: 82.102.17.190_Claude
+  port: 443
+  server: 82.102.17.178
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 82.29.101.5_Claude
+  port: 9443
+  server: 138.199.47.247
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 82.65.137.141_Claude
+  password: None
+  port: 9443
+  server: 213.139.9.142
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 82.96.128.175_Claude
+  port: 8090
+  server: 82.96.128.175
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 83.206.1.225_Claude
+  port: 8090
+  server: 83.206.1.225
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 87.106.223.158_Claude
+  port: 443
+  server: 87.106.223.158
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: 96.45.193.51_Claude
+  password: None
+  port: 9443
+  server: 149.88.98.81
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: AE_Dubai_Oracle Corporation_Claude
+  network: ws
+  port: 22573
+  server: 84.235.244.108
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 39947382-3212-41c9-bc3a-589574ac8b23
+  ws-opts:
+    headers:
+      host: uae.unixzone.us
+    path: /
+- name: AL_Tirana_Albanian Hosting SH.P.K._Claude
+  port: 443
+  server: 91.92.250.33
+  skip-cert-verify: true
+  tls: true
+  type: http
+- cipher: aes-256-gcm
+  name: AT_Vienna_Datacamp Limited_Claude
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 82.110.60.9
+  type: ss
+- name: BR_Vinhedo_Oracle Corporation_Claude
+  port: 443
+  server: 134.65.17.77
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: CA_Beauharnois_OVH SAS_Claude
+  port: 8080
+  server: milo.rubinaz.xyz
+  servername: milo.rubinaz.xyz
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 6bceb548-d9b6-461f-8e37-a5a7fbcdc2c8
+- name: CA_Montreal_Cloudflare, Inc._Claude
+  password: None
+  port: 443
+  server: 172.64.68.89
+  skip-cert-verify: true
+  tls: true
+  type: http
+- cipher: aes-256-gcm
+  name: CA_Montreal_OVH SAS_Claude1
+  password: kDWvXYZoTBcGkC4
+  port: 8882
+  server: 51.79.49.116
+  type: ss
+- cipher: aes-256-gcm
+  name: CA_Montreal_OVH SAS_Claude2
+  password: kDWvXYZoTBcGkC4
+  port: 8882
+  server: 51.222.136.236
+  type: ss
+- name: CA_Toronto_Microsoft Corporation_Claude
+  port: 443
+  server: 4.172.245.121
+  skip-cert-verify: true
+  tls: true
+  type: http
 - cipher: chacha20-ietf-poly1305
-  name: EC_Quito_IPXON Networks_Claude
-  password: ARgvGZywA+gacgGV26Bvmu05+wZmRW/j+AdU+Z8Bt44=
-  port: 990
-  server: 38.165.231.25
+  name: CH_Zurich_Alexhost SRL_Claude
+  password: e8KgS8fD0yDqYFpgN4G5piCOt9aFyqA3
+  port: 8388
+  server: 132.243.175.144
+  type: ss
+- name: CZ_Prague_M247 Europe SRL_Claude
+  port: 443
+  server: 185.216.35.66
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: CZ_Prague_WIA spol. s.r.o._Claude
+  port: 443
+  server: 193.35.104.196
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Bad Soden am Taunus_GHOSTnet GmbH_Claude
+  port: 27774
+  server: 5.175.205.190
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 653137c6-474e-4a3d-9a20-5a5afb3d4a4f
+- name: DE_Berlin_Deutsche Telekom AG_Claude
+  port: 443
+  server: 217.92.132.233
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Falkenstein_Hetzner Online GmbH_Claude
+  port: 443
+  server: 116.202.172.99
+  skip-cert-verify: true
+  tls: true
+  type: http
+- client-fingerprint: chrome
+  name: DE_Frankfurt am Main_Collin Schneeweiss trading as Unesty Company_Claude
+  obfs: salamander
+  obfs_password: Telegram@vpnjey
+  password: vpnjey
+  port: 36264
+  server: 179.61.138.145
+  skip-cert-verify: true
+  sni: de2.jey.cc.cd
+  type: hysteria2
+- name: DE_Frankfurt am Main_Datacamp Limited_Claude1
+  port: 9002
+  server: 158.173.154.2
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Frankfurt am Main_Datacamp Limited_Claude2
+  port: 9002
+  server: 158.173.154.4
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Frankfurt am Main_Datacamp Limited_Claude3
+  password: None
+  port: 9002
+  server: 158.173.154.3
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Frankfurt am Main_Datacamp Limited_Claude4
+  port: 9002
+  server: 158.173.154.1
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Frankfurt am Main_Datacamp Limited_Claude5
+  port: 9002
+  server: 158.173.154.5
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Frankfurt am Main_Digital Hosting Provider LLC_Claude
+  port: 443
+  server: 193.233.75.115
+  skip-cert-verify: true
+  tls: true
+  type: http
+- client-fingerprint: chrome
+  name: DE_Frankfurt am Main_Interkvm Host SRL_Claude
+  obfs: salamander
+  obfs_password: c1b4086fea89914496c7e10967a419216566
+  password: QCgqi_I4EkV8UR-OgQ_tG4EnVTEVvIyR2GgRBzrIn2s
+  port: 443
+  server: 162.249.125.133
+  skip-cert-verify: false
+  sni: hy2-new.aspidnet.xyz
+  type: hysteria2
+- name: DE_Frankfurt am Main_Oracle Corporation_Claude
+  port: 443
+  server: 79.76.126.155
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Frankfurt am Main_Sculk Ltd._Claude
+  port: 8443
+  server: 188.120.225.125
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Frankfurt am Main_meerfarbig GmbH & Co. KG_Claude
+  port: 443
+  server: 185.44.107.166
+  skip-cert-verify: true
+  tls: true
+  type: http
+- cipher: aes-256-gcm
+  name: DE_Frankfurt_GTHost_Claude
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 185.176.204.18
+  type: ss
+- name: DE_Leipzig_Cloudflare, Inc._Claude
+  password: ''
+  port: 10809
+  server: 91.107.179.68
+  type: socks5
+  udp: true
+  username: ''
+- name: DE_Limburg an der Lahn_OVH SAS_Claude
+  network: ws
+  port: 80
+  server: support.zoom.us
+  servername: support.zoom.us
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: fcdb24e3-5e66-4c45-b89e-ac9441f4dcda
+  ws-opts:
+    headers:
+      host: free.sahanwickramasinghe.me
+    path: /
+- name: DE_Nuremberg_Hetzner Online GmbH_Claude
+  port: 443
+  server: 159.69.94.125
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Nuremberg_netcup GmbH_Claude
+  port: 443
+  server: 213.109.163.119
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: DE_Wuppertal_ARCOR-IP_Claude
+  port: 443
+  server: 176.94.74.21
+  skip-cert-verify: true
+  tls: true
+  type: http
+- client-fingerprint: chrome
+  name: ES_Madrid_Baxet Group Inc._Claude
+  password: 5d0a6445-a30d-4522-bb1f-94f1d3ad63be
+  port: 2060
+  server: xby.mangshe.xyz
+  skip-cert-verify: true
+  sni: xby.mangshe.xyz
+  type: hysteria2
+- name: FI_Helsinki_Baykov Ilya Sergeevich_Claude
+  network: ws
+  port: 14430
+  server: 45.144.234.157
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 59b0d30e-9b29-4fda-a35c-b2901ec32db7
+  ws-opts:
+    headers:
+      host: 45.144.234.157
+    path: /vless
+- name: FR_Agen_Proxad / Free SAS_Claude
+  password: None
+  port: 443
+  server: 82.66.235.221
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: FR_Gravelines_MCPECloud SAS_Claude
+  password: None
+  port: 6103
+  server: 87.98.174.157
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: FR_Gravelines_OVH SAS_Claude1
+  port: 443
+  server: 141.94.16.4
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: FR_Gravelines_OVH SAS_Claude2
+  port: 443
+  server: 51.210.167.149
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: FR_Gravelines_OVH SAS_Claude3
+  network: ws
+  port: 80
+  server: ov-france1.09vpn.com
+  servername: ov-france1.09vpn.com
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: f5c47e9c-914a-4a91-a81e-a5a77bc10fc1
+  ws-opts:
+    headers:
+      host: ov-france1.09vpn.com
+    path: /vless/
+- name: FR_Lauterbourg_Contabo GmbH_Claude
+  password: ''
+  port: 1080
+  server: 213.199.47.140
+  skip-cert-verify: true
+  type: socks5
+  udp: true
+  username: ''
+- name: FR_Paris_Baykov Ilya Sergeevich_Claude
+  network: ws
+  port: 14430
+  server: 138.124.70.41
+  servername: 138.124.70.41
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 6cc745e3-4eb9-46c8-a4a1-85dee7b87edc
+  ws-opts:
+    headers:
+      host: 138.124.70.41
+    path: /vless
+- name: FR_Paris_Bouygues Telecom ISP_Claude
+  port: 8081
+  server: 31.32.19.111
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: FR_Paris_Melbikomas UAB_Claude1
+  port: 443
+  server: 103.82.101.43
+  skip-cert-verify: true
+  sni: 76d1d3ecadca44efa2339867d7dfc9a1-8e928736d0f8dbdc.apache-iv.com
+  tls: true
+  type: http
+- name: FR_Paris_Melbikomas UAB_Claude2
+  port: 443
+  server: 103.82.101.44
+  skip-cert-verify: true
+  sni: f3a61d8406d537345747f99f8a281007-3f754ed5da1bba09.apache-iv.com
+  tls: true
+  type: http
+- name: FR_Paris_Proxad / Free SAS_Claude
+  port: 443
+  server: 82.65.162.76
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: FR_Paris_SCALEWAY_Claude1
+  network: ws
+  password: humanity
+  port: 443
+  server: 212.183.88.136
+  sni: www.calmlunch.com
+  type: trojan
+  ws-opts:
+    headers:
+      Host: www.calmlunch.com
+    path: /assignment
+- name: FR_Paris_SCALEWAY_Claude2
+  network: ws
+  password: humanity
+  port: 2053
+  server: 185.114.72.31
+  skip-cert-verify: false
+  sni: www.calmlunch.com
+  type: trojan
+  ws-opts:
+    headers:
+      Host: www.calmlunch.com
+    path: /assignment
+- name: FR_Paris_SCALEWAY_Claude3
+  network: ws
+  password: humanity
+  port: 443
+  server: 185.220.100.168
+  skip-cert-verify: false
+  sni: www.calmlunch.com
+  type: trojan
+  ws-opts:
+    headers:
+      Host: www.calmlunch.com
+    path: /assignment
+- name: FR_Paris_SCALEWAY_Claude4
+  network: ws
+  password: humanity
+  port: 443
+  server: 45.130.125.160
+  skip-cert-verify: false
+  sni: www.calmlunch.com
+  type: trojan
+  ws-opts:
+    headers:
+      Host: www.calmlunch.com
+    path: /assignment
+- name: FR_Paris_SCALEWAY_Claude5
+  network: ws
+  password: humanity
+  port: 443
+  server: 185.18.250.252
+  skip-cert-verify: true
+  sni: www.calmlunch.com
+  type: trojan
+  ws-opts:
+    headers:
+      Host: www.calmlunch.com
+    path: /assignment
+- name: FR_Paris_SCALEWAY_Claude6
+  network: ws
+  password: humanity
+  port: 443
+  server: 104.19.229.21
+  skip-cert-verify: false
+  sni: www.calmlunch.com
+  type: trojan
+  ws-opts:
+    headers:
+      Host: www.calmlunch.com
+    path: /assignment
+- name: FR_Paris_SCALEWAY_Claude7
+  network: ws
+  password: humanity
+  port: 443
+  server: www.calmlunch.com
+  sni: www.calmlunch.com
+  type: trojan
+  ws-opts:
+    headers:
+      Host: www.calmlunch.com
+    path: /assignment
+- name: FR_Paris_SCALEWAY_Claude8
+  network: ws
+  password: humanity
+  port: 443
+  server: 45.87.41.18
+  skip-cert-verify: false
+  sni: www.calmlunch.com
+  type: trojan
+  ws-opts:
+    headers:
+      Host: www.calmlunch.com
+    path: /assignment
+- name: FR_Paris_Scaleway SAS_Claude
+  network: ws
+  password: humanity
+  port: 443
+  server: 185.255.179.166
+  skip-cert-verify: false
+  sni: www.calmlunch.com
+  type: trojan
+  ws-opts:
+    headers:
+      Host: www.calmlunch.com
+    path: /assignment
+- name: FR_Paris_Sewan SAS_Claude
+  port: 8090
+  server: 217.181.201.254
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: FR_Paris_Skydigital Telecom LTD_Claude
+  port: 443
+  server: 62.210.27.111
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: GB_Bexley_OVH SAS_Claude
+  port: 10002
+  server: connect.hondamotor.site
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: c6362720-0931-4b91-b187-d8ecf3149734
+- cipher: aes-256-gcm
+  name: GB_City of London_BrainStorm Network, Inc_Claude
+  password: RexnBgU7EV5ADxG
+  port: 7001
+  server: 94.156.250.148
   type: ss
 - cipher: rc4-md5
   name: GB_City of London_M247 Europe SRL_Claude
@@ -919,462 +754,931 @@ proxies:
   port: 8080
   server: 146.70.61.37
   type: ss
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude1
-  network: ws
-  port: 80
-  server: e6f07391-t8v340-tcfo40-17xo8.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: b4e40aa2-74a1-11ed-b0b5-f23c9164ca5d
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude10
-  network: ws
-  port: 80
-  server: f30bc1db-t9xz40-td5oia-1m49t.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: c357a728-1211-11f0-9a65-f23c9164ca5d
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude11
-  network: ws
-  port: 80
-  server: c42e53b8-t8v340-t8yr82-jx5r.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 73bfcc1c-5814-5f2a-b43a-3ef6af011db8
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude12
-  network: ws
-  port: 80
-  server: 2a8b036d-t6r5s0-t7enwo-1f1f1.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 61c4be90-6235-11ec-a8bf-f23c91cfbbc9
-  ws-opts:
-    headers:
-      Host: 2a8b036d-t6r5s0-t7enwo-1f1f1.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude13
-  network: ws
-  port: 80
-  server: f6d8c7bd-t9sf40-ts40sw-14g76.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 4729b4c8-1790-11eb-8684-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude14
-  network: ws
-  port: 80
-  server: 4599746a-t8rds0-tbnk1n-ueq.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 91df5a86-fcdd-11ef-94aa-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: 4599746a-t8rds0-tbnk1n-ueq.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude15
-  network: ws
-  port: 80
-  server: hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 55cce5a4-56b7-11ee-af82-f23c9164ca5d
-  ws-opts:
-    headers: {}
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude16
-  network: ws
-  port: 80
-  server: hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: a2b0fd2b-716f-0df8-d4e2-03a1c00e5f1a
-  ws-opts:
-    headers:
-      Host: hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude17
-  network: ws
-  port: 80
-  server: 95930bfa-t70f40-t83bw1-1f596.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: e3975a05-b89e-11ec-a50d-f23c91cfbbc9
-  ws-opts:
-    headers:
-      Host: 95930bfa-t70f40-t83bw1-1f596.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude18
-  network: ws
-  port: 80
-  server: 2490a342-t9w4g0-tdq4vj-1l0qa.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 0720c874-35e8-11ef-aa88-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude19
-  network: ws
-  port: 80
-  server: bdcfc55c-t70f40-tonrqx-1khwf.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 92bd8c68-6434-11ee-b644-f23c91cfbbc9
-  ws-opts:
-    headers:
-      Host: bdcfc55c-t70f40-tonrqx-1khwf.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude2
-  network: ws
-  port: 80
-  server: 6bb95974-t70f40-t94bdb-mrtr.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 28a8a4d0-3e02-11eb-a8bf-f23c91cfbbc9
-  ws-opts:
-    headers:
-      Host: 6bb95974-t70f40-t94bdb-mrtr.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude20
-  network: ws
-  port: 80
-  server: 8ce46d62-t9w4g0-tahh2s-tng5.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 2ec58858-976b-11ea-82ef-f23c9164ca5d
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude21
-  network: ws
-  port: 80
-  server: 10aa877c-t9hb40-tarsld-1gevg.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: f02ee2b4-d760-11ec-bd7c-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude22
-  network: ws
-  port: 80
-  server: 9ef7d9d8-t8pj40-tr9h64-1f1f1.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  uuid: 61c4be90-6235-11ec-a8bf-f23c91cfbbc9
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude23
-  network: ws
-  port: 80
-  server: 02f1afb7-t8lts0-tiaexf-ufc0.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 22308988-8548-11ea-a22e-f23c91cfbbc9
-  ws-opts:
-    headers:
-      Host: 02f1afb7-t8lts0-tiaexf-ufc0.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude24
-  network: ws
-  port: 80
-  server: hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 3fed19ea-1671-11f0-bd2e-f23c9164ca5d
-  ws-opts:
-    headers:
-      Host: hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude25
-  network: ws
-  port: 80
-  server: hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 3be8cba8-b721-11ec-8b04-f23c91cfbbc9
-  ws-opts:
-    headers:
-      Host: hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude3
-  network: ws
-  port: 80
-  server: 7de95a20-t9w4g0-tdfzix-fm2v.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 3fed19ea-1671-11f0-bd2e-f23c9164ca5d
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude4
-  network: ws
-  port: 80
-  server: 3aa6ac28-t8ysg0-tvb36r-1qwom.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 8d0ec7cc-eefa-11ee-9b59-f23c91cfbbc9
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude5
-  network: ws
-  port: 80
-  server: 25d91caa-t8nog0-thpx3l-141tv.hkt.gotochinatown.net
-  tls: false
-  type: vmess
-  udp: true
-  uuid: bd77bfe8-e0f3-11ec-bd7c-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: broadcastlv.chat.bilibili.com
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude6
-  network: ws
-  port: 80
-  server: 6c4abe27-t70f40-tfjz9x-1t5n1.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  uuid: ea800f9e-ca6c-11ef-8e74-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: 6c4abe27-t70f40-tfjz9x-1t5n1.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude7
-  network: ws
-  port: 80
-  server: eb552654-t6r5s0-te0v28-1mh67.hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: e1c7fbbc-96b6-11ef-8563-f23c913c8d2b
-  ws-opts:
-    headers:
-      Host: eb552654-t6r5s0-te0v28-1mh67.hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude8
-  network: ws
-  port: 80
-  server: hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 47e91fb6-25b8-df52-bc18-3cdc8548192f
-  ws-opts:
-    headers:
-      Host: hkt.gotochinatown.net
-    path: /
-- alterId: 2
-  cipher: auto
-  name: HK_Fanling_PCCW IMS Limited_Claude9
-  network: ws
-  port: 80
-  server: hkt.gotochinatown.net
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  udp: true
-  uuid: 5f091cbe-fb34-11ea-9777-f23c9164ca5d
-  ws-opts:
-    headers:
-      Host: hkt.gotochinatown.net
-    path: /
-- cipher: none
-  name: JP_Tokyo_Oracle Corporation_Claude
-  password: 3e96ef7d-8637-42c2-ac73-75182196e755
-  plugin: v2ray-plugin
-  plugin-opts:
-    host: mfvpn.fuchen.indevs.in
-    mode: websocket
-    mux: false
-    path: /3e96ef7d-8637-42c2-ac73-75182196e755/?ed=2560
-    tls: true
-  port: 443
-  server: store.ubi.com
+- cipher: aes-256-gcm
+  name: GB_London_GTHost_Claude
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 185.176.206.9
   type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV_Claude1
-  password: oZIoA69Q8yhcQV8ka3Pa3A
-  port: 8080
-  server: 82.38.31.124
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Greenhost BV_Claude2
-  password: k1dBOmOB4oqi7Ump37a1bQ
-  port: 8080
-  server: 82.38.31.191
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: NL_Amsterdam_Matteo Martelloni trading as DELUXHOST_Claude
-  password: 9tqhMdIrTkgQ46PvhyAtMH
-  port: 443
-  server: switcher-nick-croquet.freesocks.work
-  type: ss
-- name: NL_Amsterdam_Servers Tech Fzco_Claude
-  network: ws
-  port: 8080
-  server: 198.41.222.50
-  servername: 198.41.222.50
+- name: GB_London_OVH SAS_Claude
+  port: 41432
+  server: rabin.142.251.153.7.savfasf.ir
+  skip-cert-verify: true
+  tls: false
   type: vless
   udp: true
-  uuid: c9b45f2f-6cbe-4a86-b4d2-a327f4055a59
+  uuid: 09931b77-0f40-4734-9b36-5df6e2308e4e
+- name: HK_Hong Kong_Iens Technology Pte. LTD_Claude
+  port: 10007
+  server: 118.25.131.160
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: ID_Jakarta_Alibaba (US) Technology Co., Ltd._Claude
+  port: 2080
+  server: 8.215.25.3
+  type: socks5
+- name: ID_Jakarta_Hurricane Electric LLC_Claude
+  port: 443
+  server: webdrone.club
+  sni: webdrone.club
+  tls: true
+  type: http
+- name: ID_Jakarta_PT Industri Kreatif Digital_Claude
+  port: 443
+  server: 178.248.73.58
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: ID_Lenteng_PT Link Data Sumber Barokah_Claude
+  port: 443
+  server: 103.86.117.202
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: IE_Dublin_Amazon Technologies Inc._Claude
+  password: None
+  port: 443
+  server: 18.200.158.139
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: IE_Dublin_Amazon.com, Inc._Claude
+  port: 443
+  server: 34.249.214.108
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: IL_Tel Aviv_013 Netvision Network_Claude
+  port: 443
+  server: 62.90.77.30
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: IN_Mumbai_Contabo Asia Private Limited_Claude
+  network: ws
+  port: 14430
+  server: 13.140.56.100
+  skip-cert-verify: true
+  tls: false
+  type: vless
+  udp: true
+  uuid: 68512eac-cd53-4de3-8d1e-08f6e04af1a9
   ws-opts:
     headers:
-      Host: 001.electrocellco-cf-001.workers.dev
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36
-    path: /eyJqdW5rIjoiRzBvTDBuZEFVIiwicHJvdG9jb2wiOiJ2bCIsIm1vZGUiOiJwcm94eWlwIiwicGFuZWxJUHMiOlsiMTg1LjIxMy4yMTEuMjkiLCIzMS40NC4yLjU3IiwiNzcuMjQ2LjEwOC4xMzAiXX0=?ed=2560
-- cipher: aes-256-cfb
-  name: NL_Haarlem_SCALEWAY_Claude
-  password: f8f7aCzcPKbsF8p3
-  port: 989
-  server: 51.15.17.169
-  type: ss
-- name: NL_Meppel_WorkTitans B.V._Claude
-  password: strong-secret-pass-777
-  port: 4443
-  server: 94.131.105.125
+      host: 13.140.56.100
+    path: /vless
+- name: IT_Arezzo_Aruba S.p.A. Network_Claude
+  port: 443
+  server: 94.177.163.156
   skip-cert-verify: true
-  type: trojan
-- cipher: 2022-blake3-aes-256-gcm
-  name: TH_Nonthaburi_Siamdata Communication Co., ltd._Claude
-  password: mtMkp+1FttkSLmDOF9blnNMLigcCRacprQS3ry0nf3o=:6YebGRecdqKoInRf4i8SZqlAevOV13VtNw+oNecrWPQ=
-  port: 14999
-  server: th1.07c06051-81fd-4aa4-a94e-a0860315df8f.org
+  tls: true
+  type: http
+- cipher: aes-256-gcm
+  name: IT_Milan_Datacamp Limited_Claude
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 185.164.175.81
   type: ss
+- cipher: aes-256-gcm
+  name: IT_Milan_EUROPEAN-LEASE1_Claude1
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 202.50.253.99
+  type: ss
+- cipher: aes-256-gcm
+  name: IT_Milan_EUROPEAN-LEASE1_Claude2
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 202.50.253.36
+  type: ss
+- cipher: aes-256-gcm
+  name: IT_Milan_EUROPEAN-LEASE1_Claude3
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 202.50.253.27
+  type: ss
+- cipher: aes-256-gcm
+  name: IT_Milan_EUROPEAN-LEASE1_Claude4
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 202.50.253.72
+  type: ss
+- cipher: aes-256-gcm
+  name: IT_Milan_EUROPEAN-LEASE1_Claude5
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 202.50.253.54
+  type: ss
+- cipher: aes-256-gcm
+  name: IT_Milan_EUROPEAN-LEASE1_Claude6
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 202.50.253.90
+  type: ss
+- cipher: aes-256-gcm
+  name: IT_Milan_EUROPEAN-LEASE1_Claude7
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  port: 19999
+  server: 202.50.253.18
+  type: ss
+- name: IT_Milan_Fastweb SpA_Claude
+  port: 443
+  server: 93.42.177.250
+  skip-cert-verify: true
+  tls: true
+  type: http
+- cipher: aes-256-gcm
+  name: IT_Milan_OVH SAS_Claude
+  password: itzvpn@321
+  port: 8388
+  server: 57.131.48.45
+  type: ss
+- name: IT_Naples_Vodafone_Claude
+  port: 8090
+  server: 93.71.245.84
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: IT_Rovigo_Telecom Italia S.p.A._Claude
+  password: None
+  port: 443
+  server: 95.229.15.89
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: JP_Tokyo_ALPHA-JP-SUB_Claude
+  password: ''
+  port: 443
+  server: fan.571589.xyz
+  skip-cert-verify: true
+  sni: fan.571589.xyz
+  tls: true
+  type: http
+  username: ''
+- cipher: aes-256-gcm
+  name: JP_Tokyo_DMIT Cloud Services_Claude
+  password: JuD6MNgtX3nVpCzFzXYVYjDTZ7nsmaTv
+  port: 8388
+  server: 191.223.221.53
+  type: ss
+- cipher: aes-256-gcm
+  name: JP_Tokyo_NetLab Global_Claude
+  password: BeaUf9c0AEWH40Pu
+  port: 8388
+  server: 154.36.158.197
+  type: ss
+- name: JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude1
+  password: ''
+  port: 10808
+  server: 101.36.104.46
+  skip-cert-verify: true
+  type: socks5
+  udp: true
+  username: ''
+- name: JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude2
+  port: 10808
+  server: 101.36.104.239
+  type: socks5
+  udp: true
+- name: LT_Vilnius_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude
+  port: 443
+  server: 89.124.11.9
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: LV_Riga_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude1
+  password: None
+  port: 443
+  server: 185.219.159.16
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: ''
+- name: LV_Riga_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude2
+  port: 443
+  server: 185.219.159.15
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: NL_Amsterdam_DataCamp Limited_Claude1
+  port: 9002
+  server: 84.17.47.124
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: NL_Amsterdam_DataCamp Limited_Claude2
+  port: 9002
+  server: 84.17.47.126
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: NL_Amsterdam_DataCamp Limited_Claude3
+  password: None
+  port: 9002
+  server: 84.17.47.125
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: NL_Amsterdam_DataCamp Limited_Claude4
+  port: 9002
+  server: 84.17.47.148
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: NL_Amsterdam_DataCamp Limited_Claude5
+  port: 9002
+  server: 84.17.47.147
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: NL_Amsterdam_DataCamp Limited_Claude6
+  password: 'null'
+  port: 9002
+  server: 84.17.47.150
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: 'null'
+- name: NL_Amsterdam_DataCamp Limited_Claude7
+  password: None
+  port: 9002
+  server: 84.17.47.123
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: NL_Amsterdam_DataCamp Limited_Claude8
+  password: ''
+  port: 9002
+  server: 84.17.47.146
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: ''
+- name: NL_Amsterdam_DataCamp Limited_Claude9
+  password: None
+  port: 9002
+  server: 84.17.47.149
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: NL_Amsterdam_Datacamp Limited_Claude
+  password: ''
+  port: 9443
+  server: 149.36.51.161
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: ''
+- name: NL_Amsterdam_DigitalOcean, LLC_Claude
+  password: e4b72b531a2d10900519
+  port: 443
+  server: 82.196.9.7
+  sni: 52c40907.acsnet.co
+  tls: true
+  type: http
+  username: testuser1
 - cipher: chacha20-ietf-poly1305
-  name: TW_Taipei_Chunghwa Telecom_Claude
-  password: 7e731ec3-f8e1-43f6-92cf-3978d14705c4
-  port: 50099
-  server: r3mrcg007117fb8.cybervena.com
+  name: NL_Amsterdam_Hostkey B.V._Claude
+  password: AwW1fV6oDDQKh8r2znmptv59tPgt4eHVTgFaTqgKS2jiSdikJ7GyGCBYehDaK38S8yMgHFdbJqcTmRJSfYS5CFw345bNhFZa
+  port: 43385
+  server: sql.popmintxo.cc
   type: ss
-- alterId: 0
-  cipher: auto
-  name: US_Los Angeles_Datacamp Limited_Claude1
-  port: 180
-  server: 82.198.246.46
+- name: NL_Amsterdam_Melbikomas UAB_Claude1
+  password: 'null'
+  port: 443
+  server: 103.97.88.154
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: 'null'
+- name: NL_Amsterdam_Melbikomas UAB_Claude2
+  port: 443
+  server: 185.246.153.28
+  skip-cert-verify: true
+  sni: 4a8c2906c96058315dffbc2b0e7ff19b-0c66a58858a795df.apache-iv.com
+  tls: true
+  type: http
+- name: NL_Amsterdam_Melbikomas UAB_Claude3
+  password: 'null'
+  port: 443
+  server: 185.140.209.235
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: 'null'
+- name: NL_Amsterdam_Melbikomas UAB_Claude4
+  port: 443
+  server: 185.246.153.42
+  skip-cert-verify: true
+  sni: 482c8436a1f7c908b48a1757abb5dd79-3791fb4df2db250b.apache-iv.com
+  tls: true
+  type: http
+- name: NL_Amsterdam_Scalaxy B.V._Claude
+  password: None
+  port: 443
+  server: 185.93.106.214
+  skip-cert-verify: true
+  tls: true
+  type: http
+- client-fingerprint: chrome
+  name: NL_Dronten_Digital City FZE_Claude
+  obfs: salamander
+  obfs_password: rG07s3COMIEvdnQipRyWzx_H_2xygNC3
+  password: p7Q76LzlnS4hIzr1W3staBOnUe_WwSkR
+  port: 443
+  server: 130.49.161.70
+  skip-cert-verify: false
+  sni: hy2.aspidnet.xyz
+  type: hysteria2
+- client-fingerprint: chrome
+  name: NL_Eygelshoven_Paul Sagov_Claude
+  password: 146d567c-6335-4e63-a8aa-7ec068642440
+  port: 4443
+  server: nlll.obxodvpn.us
+  skip-cert-verify: true
+  sni: nl1.obxodvpn.us
+  type: hysteria2
+- name: NL_Haarlem_SCALEWAY_Claude1
+  port: 19362
+  server: 51.159.225.197
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: NL_Haarlem_SCALEWAY_Claude2
+  password: 'null'
+  port: 23856
+  server: 51.159.225.196
+  skip-cert-verify: true
+  sni: 51.159.225.196
+  tls: true
+  type: http
+  username: 'null'
+- name: NL_Haarlem_Scaleway SAS_Claude
+  password: 'null'
+  port: 443
+  server: 51.158.243.91
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: 'null'
+- cipher: chacha20-ietf-poly1305
+  name: NO_Oslo_BrainStorm Network, Inc_Claude
+  password: ARgvGZywA+gacgGV26Bvmu05+wZmRW/j+AdU+Z8Bt44=
+  port: 990
+  server: 185.213.23.63
+  type: ss
+- name: PL_Warsaw_KABAT-OU_Claude
+  port: 2052
+  server: edge10.cyrionflare.com
   skip-cert-verify: true
   tls: false
-  type: vmess
+  type: vless
   udp: true
-  uuid: d13fc2f5-3e05-4795-81eb-44143a09e552
-- alterId: 0
-  cipher: auto
-  name: US_Los Angeles_Datacamp Limited_Claude2
+  uuid: 1a8ecc41-6e62-431b-8eca-87c2fa4dc286
+- name: PL_Warsaw_Mitelis Security_Claude
   network: tcp
-  port: 180
-  server: 82.198.246.250
+  port: 2087
+  server: 2.26.6.1
+  servername: 2.26.6.1
   skip-cert-verify: false
-  tls: false
-  type: vmess
+  tls: true
+  type: vless
   udp: true
-  uuid: d13fc2f5-3e05-4795-81eb-44143a09e552
-- cipher: aes-256-cfb
-  name: US_Los Angeles_Dedicated.com_Claude
-  password: f8f7aCzcPKbsF8p3
-  port: 989
-  server: 104.192.226.106
-  type: ss
+  uuid: b9fdc03f-389b-4cda-9be4-155b623bee15
+- name: PL_Warsaw_Scaleway SAS_Claude
+  password: 'null'
+  port: 443
+  server: 151.115.54.133
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: 'null'
+- name: RO_Bucharest_M247 Europe SRL_Claude1
+  port: 9002
+  server: 193.176.84.22
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: RO_Bucharest_M247 Europe SRL_Claude2
+  port: 9002
+  server: 193.176.84.18
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: RU_St Petersburg_EstNOC OU_Claude
+  password: 9jkvAVV-9ufV6IGd
+  port: 44008
+  server: chalo-ru.nexorcdn.com
+  skip-cert-verify: true
+  sni: chalo-ru.nexorcdn.com
+  tls: true
+  type: http
+  username: ef37886e2aacd6fa622e3de3810299c2
+- name: SE_Huskvarna_Telia Company AB_Claude
+  port: 443
+  server: 217.210.129.243
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: SG_Singapore_Amazon Technologies Inc._Claude1
+  password: '1234'
+  port: 2080
+  server: 13.212.87.168
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: SG_Singapore_Amazon Technologies Inc._Claude2
+  password: '1234'
+  port: 2080
+  server: 13.229.57.163
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: SG_Singapore_Amazon.com, Inc._Claude1
+  password: '1234'
+  port: 2080
+  server: 13.212.235.123
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: SG_Singapore_Amazon.com, Inc._Claude2
+  password: '1234'
+  port: 2080
+  server: 13.212.14.88
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: SG_Singapore_Amazon.com, Inc._Claude3
+  password: '1234'
+  port: 2080
+  server: 18.143.144.220
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: SG_Singapore_Amazon.com, Inc._Claude4
+  password: '1234'
+  port: 2080
+  server: 18.143.163.241
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: SG_Singapore_Amazon.com, Inc._Claude5
+  password: '1234'
+  port: 2080
+  server: 54.151.160.36
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: SG_Singapore_Amazon.com, Inc._Claude6
+  password: '1234'
+  port: 2080
+  server: 54.251.149.207
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: SG_Singapore_Amazon.com, Inc._Claude7
+  password: '1234'
+  port: 2080
+  server: 13.250.6.200
+  skip-cert-verify: true
+  type: http
+  username: '1234'
+- name: SG_Singapore_DigitalOcean, LLC_Claude1
+  port: 9090
+  server: 128.199.121.61
+  type: http
+- name: SG_Singapore_DigitalOcean, LLC_Claude2
+  port: 9090
+  server: 128.199.116.219
+  type: http
+- name: SG_Singapore_DigitalOcean, LLC_Claude3
+  port: 9090
+  server: 104.248.151.93
+  type: http
+- name: SG_Singapore_DigitalOcean, LLC_Claude4
+  port: 9090
+  server: 152.42.170.187
+  type: http
+- name: TW_Chang-hua_Chunghwa Telecom Co., Ltd._Claude
+  password: exaxgqkKkd0TAMrCxeonWg==
+  port: 1443
+  server: twmoon1-cdn-route.couldflare-cdn.com
+  tls: true
+  type: http
+  username: mrwdfNTD8M79LCukCieldrqZWqs=
+- name: TW_Taipei_Akari Networks Limited_Claude
+  password: 29086912-33e4-4e06-ba2b-60f1a195864f
+  port: 24999
+  server: tjtw.m2k699.com
+  skip-cert-verify: true
+  sni: www.itunes.com
+  type: trojan
+- name: TW_Taipei_Turing Group Limited_Claude
+  port: 8443
+  server: 154.81.36.92
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Boardman_Amazon.com, Inc._Claude1
+  password: None
+  port: 8443
+  server: 44.229.69.166
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Boardman_Amazon.com, Inc._Claude2
+  port: 8443
+  server: 54.190.176.228
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Boardman_Amazon.com, Inc._Claude3
+  port: 8443
+  server: 35.84.133.236
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Boardman_Amazon.com, Inc._Claude4
+  port: 8443
+  server: 44.248.167.117
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Buffalo_HostPapa_Claude
+  network: ws
+  port: 443
+  server: cdn.8211992.xyz
+  servername: mao.kipfelmaomao.de5.net
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: 30610baf-4645-4c7b-9a22-0d0a0a79eab5
+  ws-opts:
+    headers:
+      Host: mao.kipfelmaomao.de5.net
+    path: /api/v1/guests/profiles/5de14443985f/
+- name: US_Centennial_Ting Fiber Inc._Claude
+  password: None
+  port: 443
+  server: 64.98.50.100
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Charlotte_Spectrum_Claude
+  port: 8090
+  server: 24.142.229.178
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Charlottesville_Alibaba.com LLC_Claude
+  port: 7615
+  server: 47.90.206.169
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Cheyenne_Hurricane Electric LLC_Claude1
+  port: 443
+  server: jgwynphotoarts.pro
+  sni: jgwynphotoarts.pro
+  tls: true
+  type: http
+- name: US_Cheyenne_Hurricane Electric LLC_Claude2
+  port: 443
+  server: carolinafreigh.fun
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_Cheyenne_Hurricane Electric LLC_Claude3
+  password: 'null'
+  port: 443
+  server: purposebydesig.club
+  tls: true
+  type: http
+  username: 'null'
+- name: US_Cheyenne_Hurricane Electric LLC_Claude4
+  password: None
+  port: 443
+  server: tzoa.fun
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_Cheyenne_Hurricane Electric LLC_Claude5
+  password: None
+  port: 443
+  server: purecambogiasl.live
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Cheyenne_Hurricane Electric LLC_Claude6
+  password: None
+  port: 443
+  server: kimberlymilano.icu
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_Cheyenne_Hurricane Electric LLC_Claude7
+  port: 443
+  server: jewelscollecti.icu
+  skip-cert-verify: true
+  sni: jewelscollecti.icu
+  tls: true
+  type: http
+- name: US_Cheyenne_Hurricane Electric LLC_Claude8
+  password: ''
+  port: 443
+  server: jewelscollecti.icu
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: ''
+- name: US_Chicago_Ryamer, LLC_Claude
+  port: 443
+  server: 121.127.34.82
+  skip-cert-verify: true
+  tls: true
+  type: http
+- client-fingerprint: chrome
+  name: US_Chicago_UAB Cherry Servers_Claude
+  password: 94c2b91777f8de3a5bc12d2a91b732c2
+  port: 443
+  server: promo3.betust.net
+  skip-cert-verify: true
+  sni: promo3.betust.net
+  type: hysteria2
+- name: US_Dallas_Hivelocity_Claude
+  port: 443
+  server: 23.133.176.14
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Durham_NetActuate, Inc_Claude
+  port: 443
+  server: 162.217.114.50
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude1
+  password: ''
+  port: 443
+  server: goedkoopgeluid.icu
+  skip-cert-verify: true
+  sni: goedkoopgeluid.icu
+  tls: true
+  type: http
+  username: ''
+- name: US_Fremont_Hurricane Electric LLC_Claude10
+  password: 'null'
+  port: 443
+  server: kimberlymilano.icu
+  tls: true
+  type: http
+  username: 'null'
+- name: US_Fremont_Hurricane Electric LLC_Claude11
+  password: sni=\"goedkoopgeluid.icu\"
+  port: 443
+  server: goedkoopgeluid.icu
+  sni: goedkoopgeluid.icu
+  tls: true
+  type: http
+  username: None
+- name: US_Fremont_Hurricane Electric LLC_Claude12
+  port: 443
+  server: zebpay.site
+  sni: zebpay.site
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude13
+  password: None
+  port: 443
+  server: efr-marktplatz.club
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude14
+  port: 443
+  server: purecambogiasl.live
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude15
+  password: None
+  port: 443
+  server: zebpay.site
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude16
+  password: None
+  port: 443
+  server: crosscards.site
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude17
+  password: None
+  port: 443
+  server: mmgr.club
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude18
+  password: ''
+  port: 443
+  server: mmgr.club
+  skip-cert-verify: true
+  sni: mmgr.club
+  tls: true
+  type: http
+  username: ''
+- name: US_Fremont_Hurricane Electric LLC_Claude19
+  password: 'null'
+  port: 443
+  server: jgwynphotoarts.pro
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: 'null'
+- name: US_Fremont_Hurricane Electric LLC_Claude2
+  port: 443
+  server: mmgr.club
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude20
+  password: ''
+  port: 443
+  server: zebpay.site
+  skip-cert-verify: true
+  sni: zebpay.site
+  tls: true
+  type: http
+  username: ''
+- name: US_Fremont_Hurricane Electric LLC_Claude21
+  password: 'null'
+  port: 443
+  server: berniesbodybla.fun
+  tls: true
+  type: http
+  username: 'null'
+- name: US_Fremont_Hurricane Electric LLC_Claude22
+  password: ''
+  port: 443
+  server: webdrone.club
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: Ok5vbmU=
+- name: US_Fremont_Hurricane Electric LLC_Claude23
+  password: None
+  port: 443
+  server: goedkoopgeluid.icu
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude24
+  password: None
+  port: 443
+  server: jgwynphotoarts.pro
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude25
+  password: 'null'
+  port: 443
+  server: webdrone.club
+  tls: true
+  type: http
+  username: 'null'
+- name: US_Fremont_Hurricane Electric LLC_Claude26
+  password: 'null'
+  port: 443
+  server: goedkoopgeluid.icu
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: 'null'
+- name: US_Fremont_Hurricane Electric LLC_Claude3
+  port: 443
+  server: efr-marktplatz.club
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude4
+  password: 'null'
+  port: 443
+  server: carolinafreigh.fun
+  tls: true
+  type: http
+  username: 'null'
+- name: US_Fremont_Hurricane Electric LLC_Claude5
+  password: None
+  port: 443
+  server: webdrone.club
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude6
+  port: 443
+  server: goedkoopgeluid.icu
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude7
+  password: 'null'
+  port: 443
+  server: efr-marktplatz.club
+  tls: true
+  type: http
+  username: 'null'
+- name: US_Fremont_Hurricane Electric LLC_Claude8
+  port: 443
+  server: crosscards.site
+  sni: crosscards.site
+  tls: true
+  type: http
+- name: US_Fremont_Hurricane Electric LLC_Claude9
+  password: ''
+  port: 443
+  server: purecambogiasl.live
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: ''
+- name: US_Irvine_1515 ROUNDTABLE DR PROPERTY, LLC_Claude
+  port: 443
+  server: 38.247.141.135
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Kent_The Constant Company_Claude
+  password: None
+  port: 443
+  server: 45.63.38.134
+  skip-cert-verify: true
+  tls: true
+  type: http
+- cipher: chacha20-ietf
+  name: US_Los Angeles_Akari Networks Limited_Claude1
+  obfs: tls1.2_ticket_auth
+  obfs-param: 6f5218522.douyin.com
+  password: di15PV
+  port: 44883
+  protocol: auth_aes128_md5
+  protocol-param: 218522:0hfCJk
+  server: api.meituan88.com
+  type: ssr
+- cipher: rc4-md5
+  name: US_Los Angeles_Akari Networks Limited_Claude2
+  obfs: plain
+  obfs-param: 6f5218522.douyin.com
+  password: di15PV
+  port: 27561
+  protocol: auth_aes128_md5
+  protocol-param: 218522:0hfCJk
+  server: api.meituan88.com
+  type: ssr
+- cipher: chacha20-ietf
+  name: US_Los Angeles_Akari Networks Limited_Claude3
+  obfs: tls1.2_ticket_auth
+  obfs-param: f7d23929.douyin.com
+  password: di15PV
+  port: 29790
+  protocol: auth_aes128_md5
+  protocol-param: 23929:563537032
+  server: api.meituan88.com
+  type: ssr
+- cipher: chacha20-ietf
+  name: US_Los Angeles_Akari Networks Limited_Claude4
+  obfs: tls1.2_ticket_auth
+  obfs-param: f7d23929.douyin.com
+  password: di15PV
+  port: 18534
+  protocol: auth_aes128_md5
+  protocol-param: 23929:563537032
+  server: api.meituan88.com
+  type: ssr
+- cipher: rc4-md5
+  name: US_Los Angeles_Akari Networks Limited_Claude5
+  obfs: plain
+  obfs-param: f7d23929.douyin.com
+  password: di15PV
+  port: 27726
+  protocol: auth_aes128_md5
+  protocol-param: 23929:563537032
+  server: api.meituan88.com
+  type: ssr
+- cipher: rc4-md5
+  name: US_Los Angeles_Akari Networks Limited_Claude6
+  obfs: tls1.2_ticket_auth
+  obfs-param: 6f5218522.douyin.com
+  password: di15PV
+  port: 43694
+  protocol: auth_aes128_md5
+  protocol-param: 218522:0hfCJk
+  server: api.meituan88.com
+  type: ssr
 - name: US_Los Angeles_FSC NETWORK LTD_Claude
   password: gs4BXwT6SW
   port: 10988
@@ -1383,51 +1687,177 @@ proxies:
   tls: false
   type: http
   username: fQ67Dpe5dU
-- name: US_Los Angeles_HostPapa_Claude
-  network: ws
+- cipher: rc4-md5
+  name: US_Los Angeles_The Constant Company_Claude
+  obfs: plain
+  obfs-param: f7d23929.douyin.com
+  password: di15PV
+  port: 39266
+  protocol: auth_aes128_md5
+  protocol-param: 23929:563537032
+  server: api.meituan88.com
+  type: ssr
+- name: US_New York_Latitude.sh_Claude
   port: 443
-  server: 104.17.106.12
-  servername: xn--cz8h.pages.dev
+  server: 216.107.139.82
+  skip-cert-verify: true
+  sni: 991cc80f13caf81d3426ddebb2da7f49-92ff472ddc24e5b7.apache-iv.com
   tls: true
-  type: vless
-  udp: true
-  uuid: 6fb65356-788e-4118-8280-148ec6eca18a
-  ws-opts:
-    headers:
-      Host: xn--cz8h.pages.dev
-      User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36
-    path: /pyip=proxyip.cmliussss.net
-- cipher: none
-  name: cf|6dbe|puddincat07@Telegram
-  password: 3e96ef7d-8637-42c2-ac73-75182196e755
-  plugin: v2ray-plugin
-  plugin-opts:
-    host: mfvpn.fuchen.indevs.in
-    mode: websocket
-    mux: false
-    path: 3e96ef7d-8637-42c2-ac73-75182196e755/?ed=2560
-    tls: true
-  port: 443
-  server: 199.181.197.38
-  type: ss
-- cipher: aes-256-gcm
-  name: 🔴🇭🇰[🎬📺🎭🎪]_github.com/Ruk1ng001_4bd1ce
-  password: 176c983f-6a7f-4a96-9865-891a6c48ec86
-  port: 50000
-  server: a001.standard-nodes-chickenfarms.com
-  type: ss
-- cipher: chacha20-ietf
-  name: 🔴🇭🇰_github.com/Ruk1ng001_deefc73a
-  password: asd123456
-  port: 8388
-  server: 103.149.183.12
-  type: ss
-- name: 🔴🇰🇷[📺📦]_github.com/Ruk1ng001_5b8e1a9b
-  port: 1090
-  server: 121.169.46.116
-  tls: false
+  type: http
+- name: US_New York_Zayo Bandwidth_Claude
+  port: 8090
+  server: 209.148.53.153
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_North Bergen_DigitalOcean, LLC_Claude1
+  port: 1088
+  server: 67.207.92.87
   type: socks5
-  username: Og%3D%3D
+- name: US_North Bergen_DigitalOcean, LLC_Claude2
+  port: 38182
+  server: 69.55.49.177
+  type: socks5
+  udp: true
+- client-fingerprint: chrome
+  name: US_Orem_Vodafone-Libertel-BV_Claude
+  password: c0242d1b-db7a-4dcf-95ff-e10a3ef1c1a3
+  port: 4443
+  server: 201.58.181.179
+  skip-cert-verify: true
+  sni: pl1.shvpn.ru
+  type: hysteria2
+- name: US_Sabetha_Carson Communications, LLC_Claude
+  port: 443
+  server: 162.244.227.36
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Salina_Rural Telephone Service Company_Claude
+  port: 443
+  server: 24.225.10.211
+  skip-cert-verify: true
+  tls: true
+  type: http
+- cipher: rc4-md5
+  name: US_Salt Lake City_PoloCloud Computing (United States) LLC_Claude
+  obfs: tls1.2_ticket_auth
+  obfs-param: 6f5218522.douyin.com
+  password: di15PV
+  port: 61558
+  protocol: auth_aes128_md5
+  protocol-param: 218522:0hfCJk
+  server: api.meituan88.com
+  type: ssr
+- name: US_San Francisco_DigitalOcean, LLC_Claude
+  password: e4b72b531a2d10900519
+  port: 443
+  server: 162.243.146.243
+  sni: a2f392f3.acsnet.co
+  tls: true
+  type: http
+  username: testuser1
+- name: US_San Jose_Hurricane Electric LLC_Claude1
+  password: None
+  port: 443
+  server: fullmanfirm.icu
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_San Jose_Hurricane Electric LLC_Claude2
+  password: ''
+  port: 443
+  server: fullmanfirm.icu
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: ''
+- name: US_San Jose_Hurricane Electric LLC_Claude3
+  password: 'null'
+  port: 443
+  server: fullmanfirm.icu
+  tls: true
+  type: http
+  username: 'null'
+- name: US_San Jose_Hurricane Electric LLC_Claude4
+  port: 443
+  server: fullmanfirm.icu
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Sanford_Charter Communications_Claude
+  port: 443
+  server: 71.43.26.234
+  skip-cert-verify: true
+  tls: true
+  type: http
+- name: US_Seattle_HostPapa_Claude
+  password: test123
+  port: 1080
+  server: 104.168.249.36
+  type: socks5
+  username: test123
+- name: US_West Wendover_Hurricane Electric LLC_Claude1
+  password: 'null'
+  port: 443
+  server: jewelscollecti.icu
+  skip-cert-verify: true
+  tls: true
+  type: http
+  username: 'null'
+- name: US_West Wendover_Hurricane Electric LLC_Claude2
+  password: 'null'
+  port: 443
+  server: tzoa.fun
+  tls: true
+  type: http
+  username: 'null'
+- name: US_West Wendover_Hurricane Electric LLC_Claude3
+  port: 443
+  server: kimberlymilano.icu
+  sni: kimberlymilano.icu
+  tls: true
+  type: http
+- name: US_West Wendover_Hurricane Electric LLC_Claude4
+  password: None
+  port: 443
+  server: carolinafreigh.fun
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_West Wendover_Hurricane Electric LLC_Claude5
+  port: 443
+  server: purposebydesig.club
+  skip-cert-verify: false
+  tls: true
+  type: http
+- name: US_West Wendover_Hurricane Electric LLC_Claude6
+  password: ''
+  port: 443
+  server: carolinafreigh.fun
+  skip-cert-verify: true
+  sni: carolinafreigh.fun
+  tls: true
+  type: http
+  username: ''
+- name: US_West Wendover_Hurricane Electric LLC_Claude7
+  port: 443
+  server: tzoa.fun
+  sni: tzoa.fun
+  tls: true
+  type: http
+- cipher: chacha20-ietf-poly1305
+  name: ZA_Johannesburg_Microsoft Corporation_Claude1
+  password: Xsy8Ox4yOV3xLlpxtjzs3X
+  port: 16233
+  server: 102.133.165.160
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: ZA_Johannesburg_Microsoft Corporation_Claude2
+  password: aduB9HGxQHjA2SBMRjkHX6
+  port: 443
+  server: 102.37.156.224
+  type: ss
 proxy-groups:
 - name: PROXY
   type: select
@@ -1444,171 +1874,258 @@ proxy-groups:
   type: select
   filter: .*
   proxies:
-  - 103.186.154.11_Claude
-  - 103.186.154.12_Claude
-  - 103.186.154.173_Claude
-  - 103.186.154.178_Claude
-  - 103.186.154.181_Claude
-  - 103.186.154.185_Claude
-  - 103.186.154.186_Claude
-  - 103.186.154.187_Claude
-  - 103.186.154.194_Claude
-  - 103.186.154.201_Claude
-  - 103.186.154.202_Claude
-  - 103.186.154.207_Claude
-  - 103.186.154.210_Claude
-  - 103.186.154.215_Claude
-  - 103.186.154.219_Claude
-  - 103.186.154.221_Claude
-  - 103.186.154.223_Claude
-  - 103.186.154.224_Claude
-  - 103.186.154.225_Claude
-  - 103.186.154.227_Claude
-  - 103.186.154.22_Claude
-  - 103.186.154.234_Claude
-  - 103.186.154.235_Claude
-  - 103.186.154.238_Claude
-  - 103.186.154.239_Claude
-  - 103.186.154.240_Claude
-  - 103.186.154.242_Claude
-  - 103.186.154.245_Claude
-  - 103.186.154.246_Claude
-  - 103.186.154.248_Claude
-  - 103.186.154.253_Claude
-  - 103.186.154.29_Claude
-  - 103.186.154.32_Claude
-  - 103.186.154.34_Claude
-  - 103.186.154.35_Claude
-  - 103.186.154.39_Claude
-  - 103.186.154.42_Claude
-  - 103.186.154.43_Claude
-  - 103.186.154.46_Claude
-  - 103.186.154.47_Claude
-  - 103.186.154.4_Claude
-  - 103.186.154.50_Claude
-  - 103.186.154.52_Claude
-  - 103.186.154.54_Claude
-  - 103.186.154.57_Claude
-  - 103.186.154.59_Claude
-  - 103.186.154.61_Claude
-  - 103.186.154.63_Claude
-  - 103.186.155.106_Claude
-  - 103.186.155.108_Claude
-  - 103.186.155.111_Claude
-  - 103.186.155.114_Claude
-  - 103.186.155.116_Claude
-  - 103.186.155.117_Claude
-  - 103.186.155.119_Claude
-  - 103.186.155.121_Claude
-  - 103.186.155.127_Claude
-  - 103.186.155.128_Claude
-  - 103.186.155.135_Claude
-  - 103.186.155.137_Claude
-  - 103.186.155.144_Claude
-  - 103.186.155.148_Claude
-  - 103.186.155.153_Claude
-  - 103.186.155.15_Claude
-  - 103.186.155.17_Claude
-  - 103.186.155.204_Claude
-  - 103.186.155.207_Claude
-  - 103.186.155.209_Claude
-  - 103.186.155.223_Claude
-  - 103.186.155.224_Claude
-  - 103.186.155.225_Claude
-  - 103.186.155.226_Claude
-  - 103.186.155.227_Claude
-  - 103.186.155.229_Claude
-  - 103.186.155.230_Claude
-  - 103.186.155.231_Claude
-  - 103.186.155.232_Claude
-  - 103.186.155.233_Claude
-  - 103.186.155.28_Claude
-  - 103.186.155.30_Claude
-  - 103.186.155.31_Claude
-  - 103.186.155.32_Claude
-  - 103.186.155.35_Claude
-  - 103.186.155.37_Claude
-  - 103.186.155.38_Claude
-  - 103.186.155.43_Claude
-  - 103.186.155.46_Claude
-  - 103.186.155.47_Claude
-  - 103.186.155.57_Claude
-  - 103.186.155.62_Claude
-  - 103.186.155.67_Claude
-  - 103.186.155.69_Claude
-  - 103.186.155.71_Claude
-  - 103.186.155.76_Claude
-  - 103.186.155.81_Claude
-  - 103.186.155.83_Claude
-  - 103.186.155.84_Claude
-  - 103.186.155.9_Claude
-  - 36.232.82.28_Claude1
-  - 36.232.82.28_Claude2
-  - 42.98.100.183_Claude1
-  - 42.98.100.183_Claude2
-  - 42.98.100.183_Claude3
-  - 42.98.100.183_Claude4
-  - 42.98.100.183_Claude5
-  - 42.98.100.183_Claude6
-  - 42.98.100.183_Claude7
-  - 61.111.247.53_Claude1
-  - 61.111.247.53_Claude2
+  - 102.244.78.57_Claude
+  - 109.248.147.70_Claude
+  - 13.212.207.226_Claude
+  - 13.212.249.115_Claude
+  - 13.229.54.109_Claude
+  - 137.220.221.179_Claude
+  - 146.70.244.10_Claude
+  - 149.36.50.15_Claude
+  - 149.88.21.139_Claude
+  - 169.150.237.8_Claude
+  - 185.221.132.246_Claude1
+  - 185.221.132.246_Claude2
+  - 212.102.63.8_Claude
+  - 23.142.200.235_Claude
+  - 2406:da18:ad0:a400:b312:73dc:ae5:d92_Claude
+  - 31.186.220.204_Claude
+  - 43.160.239.37_Claude
+  - 47.236.168.243_Claude
+  - 5.178.109.174_Claude
+  - 5.255.118.82_Claude
+  - 51.15.20.32_Claude
+  - 77.221.148.116_Claude
+  - 80.124.109.22_Claude
+  - 80.174.118.60_Claude
+  - 80.174.118.80_Claude
+  - 82.102.17.190_Claude
+  - 82.29.101.5_Claude
+  - 82.65.137.141_Claude
+  - 82.96.128.175_Claude
+  - 83.206.1.225_Claude
+  - 87.106.223.158_Claude
+  - 96.45.193.51_Claude
+  - AE_Dubai_Oracle Corporation_Claude
+  - AL_Tirana_Albanian Hosting SH.P.K._Claude
+  - AT_Vienna_Datacamp Limited_Claude
+  - BR_Vinhedo_Oracle Corporation_Claude
+  - CA_Beauharnois_OVH SAS_Claude
+  - CA_Montreal_Cloudflare, Inc._Claude
   - CA_Montreal_OVH SAS_Claude1
   - CA_Montreal_OVH SAS_Claude2
-  - CA_Toronto_Choopa_Claude
-  - CA_Toronto_DigitalOcean, LLC_Claude
-  - DE_Frankfurt am Main_F5 Networks SARL_Claude1
-  - DE_Frankfurt am Main_F5 Networks SARL_Claude2
-  - DE_Frankfurt am Main_F5 Networks SARL_Claude3
-  - DE_Frankfurt am Main_First Server Limited_Claude
-  - EC_Quito_IPXON Networks_Claude
+  - CA_Toronto_Microsoft Corporation_Claude
+  - CH_Zurich_Alexhost SRL_Claude
+  - CZ_Prague_M247 Europe SRL_Claude
+  - CZ_Prague_WIA spol. s.r.o._Claude
+  - DE_Bad Soden am Taunus_GHOSTnet GmbH_Claude
+  - DE_Berlin_Deutsche Telekom AG_Claude
+  - DE_Falkenstein_Hetzner Online GmbH_Claude
+  - DE_Frankfurt am Main_Collin Schneeweiss trading as Unesty Company_Claude
+  - DE_Frankfurt am Main_Datacamp Limited_Claude1
+  - DE_Frankfurt am Main_Datacamp Limited_Claude2
+  - DE_Frankfurt am Main_Datacamp Limited_Claude3
+  - DE_Frankfurt am Main_Datacamp Limited_Claude4
+  - DE_Frankfurt am Main_Datacamp Limited_Claude5
+  - DE_Frankfurt am Main_Digital Hosting Provider LLC_Claude
+  - DE_Frankfurt am Main_Interkvm Host SRL_Claude
+  - DE_Frankfurt am Main_Oracle Corporation_Claude
+  - DE_Frankfurt am Main_Sculk Ltd._Claude
+  - DE_Frankfurt am Main_meerfarbig GmbH & Co. KG_Claude
+  - DE_Frankfurt_GTHost_Claude
+  - DE_Leipzig_Cloudflare, Inc._Claude
+  - DE_Limburg an der Lahn_OVH SAS_Claude
+  - DE_Nuremberg_Hetzner Online GmbH_Claude
+  - DE_Nuremberg_netcup GmbH_Claude
+  - DE_Wuppertal_ARCOR-IP_Claude
+  - ES_Madrid_Baxet Group Inc._Claude
+  - FI_Helsinki_Baykov Ilya Sergeevich_Claude
+  - FR_Agen_Proxad / Free SAS_Claude
+  - FR_Gravelines_MCPECloud SAS_Claude
+  - FR_Gravelines_OVH SAS_Claude1
+  - FR_Gravelines_OVH SAS_Claude2
+  - FR_Gravelines_OVH SAS_Claude3
+  - FR_Lauterbourg_Contabo GmbH_Claude
+  - FR_Paris_Baykov Ilya Sergeevich_Claude
+  - FR_Paris_Bouygues Telecom ISP_Claude
+  - FR_Paris_Melbikomas UAB_Claude1
+  - FR_Paris_Melbikomas UAB_Claude2
+  - FR_Paris_Proxad / Free SAS_Claude
+  - FR_Paris_SCALEWAY_Claude1
+  - FR_Paris_SCALEWAY_Claude2
+  - FR_Paris_SCALEWAY_Claude3
+  - FR_Paris_SCALEWAY_Claude4
+  - FR_Paris_SCALEWAY_Claude5
+  - FR_Paris_SCALEWAY_Claude6
+  - FR_Paris_SCALEWAY_Claude7
+  - FR_Paris_SCALEWAY_Claude8
+  - FR_Paris_Scaleway SAS_Claude
+  - FR_Paris_Sewan SAS_Claude
+  - FR_Paris_Skydigital Telecom LTD_Claude
+  - GB_Bexley_OVH SAS_Claude
+  - GB_City of London_BrainStorm Network, Inc_Claude
   - GB_City of London_M247 Europe SRL_Claude
-  - HK_Fanling_PCCW IMS Limited_Claude1
-  - HK_Fanling_PCCW IMS Limited_Claude10
-  - HK_Fanling_PCCW IMS Limited_Claude11
-  - HK_Fanling_PCCW IMS Limited_Claude12
-  - HK_Fanling_PCCW IMS Limited_Claude13
-  - HK_Fanling_PCCW IMS Limited_Claude14
-  - HK_Fanling_PCCW IMS Limited_Claude15
-  - HK_Fanling_PCCW IMS Limited_Claude16
-  - HK_Fanling_PCCW IMS Limited_Claude17
-  - HK_Fanling_PCCW IMS Limited_Claude18
-  - HK_Fanling_PCCW IMS Limited_Claude19
-  - HK_Fanling_PCCW IMS Limited_Claude2
-  - HK_Fanling_PCCW IMS Limited_Claude20
-  - HK_Fanling_PCCW IMS Limited_Claude21
-  - HK_Fanling_PCCW IMS Limited_Claude22
-  - HK_Fanling_PCCW IMS Limited_Claude23
-  - HK_Fanling_PCCW IMS Limited_Claude24
-  - HK_Fanling_PCCW IMS Limited_Claude25
-  - HK_Fanling_PCCW IMS Limited_Claude3
-  - HK_Fanling_PCCW IMS Limited_Claude4
-  - HK_Fanling_PCCW IMS Limited_Claude5
-  - HK_Fanling_PCCW IMS Limited_Claude6
-  - HK_Fanling_PCCW IMS Limited_Claude7
-  - HK_Fanling_PCCW IMS Limited_Claude8
-  - HK_Fanling_PCCW IMS Limited_Claude9
-  - JP_Tokyo_Oracle Corporation_Claude
-  - NL_Amsterdam_Greenhost BV_Claude1
-  - NL_Amsterdam_Greenhost BV_Claude2
-  - NL_Amsterdam_Matteo Martelloni trading as DELUXHOST_Claude
-  - NL_Amsterdam_Servers Tech Fzco_Claude
-  - NL_Haarlem_SCALEWAY_Claude
-  - NL_Meppel_WorkTitans B.V._Claude
-  - TH_Nonthaburi_Siamdata Communication Co., ltd._Claude
-  - TW_Taipei_Chunghwa Telecom_Claude
-  - US_Los Angeles_Datacamp Limited_Claude1
-  - US_Los Angeles_Datacamp Limited_Claude2
-  - US_Los Angeles_Dedicated.com_Claude
+  - GB_London_GTHost_Claude
+  - GB_London_OVH SAS_Claude
+  - HK_Hong Kong_Iens Technology Pte. LTD_Claude
+  - ID_Jakarta_Alibaba (US) Technology Co., Ltd._Claude
+  - ID_Jakarta_Hurricane Electric LLC_Claude
+  - ID_Jakarta_PT Industri Kreatif Digital_Claude
+  - ID_Lenteng_PT Link Data Sumber Barokah_Claude
+  - IE_Dublin_Amazon Technologies Inc._Claude
+  - IE_Dublin_Amazon.com, Inc._Claude
+  - IL_Tel Aviv_013 Netvision Network_Claude
+  - IN_Mumbai_Contabo Asia Private Limited_Claude
+  - IT_Arezzo_Aruba S.p.A. Network_Claude
+  - IT_Milan_Datacamp Limited_Claude
+  - IT_Milan_EUROPEAN-LEASE1_Claude1
+  - IT_Milan_EUROPEAN-LEASE1_Claude2
+  - IT_Milan_EUROPEAN-LEASE1_Claude3
+  - IT_Milan_EUROPEAN-LEASE1_Claude4
+  - IT_Milan_EUROPEAN-LEASE1_Claude5
+  - IT_Milan_EUROPEAN-LEASE1_Claude6
+  - IT_Milan_EUROPEAN-LEASE1_Claude7
+  - IT_Milan_Fastweb SpA_Claude
+  - IT_Milan_OVH SAS_Claude
+  - IT_Naples_Vodafone_Claude
+  - IT_Rovigo_Telecom Italia S.p.A._Claude
+  - JP_Tokyo_ALPHA-JP-SUB_Claude
+  - JP_Tokyo_DMIT Cloud Services_Claude
+  - JP_Tokyo_NetLab Global_Claude
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude1
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude2
+  - LT_Vilnius_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude
+  - LV_Riga_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude1
+  - LV_Riga_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude2
+  - NL_Amsterdam_DataCamp Limited_Claude1
+  - NL_Amsterdam_DataCamp Limited_Claude2
+  - NL_Amsterdam_DataCamp Limited_Claude3
+  - NL_Amsterdam_DataCamp Limited_Claude4
+  - NL_Amsterdam_DataCamp Limited_Claude5
+  - NL_Amsterdam_DataCamp Limited_Claude6
+  - NL_Amsterdam_DataCamp Limited_Claude7
+  - NL_Amsterdam_DataCamp Limited_Claude8
+  - NL_Amsterdam_DataCamp Limited_Claude9
+  - NL_Amsterdam_Datacamp Limited_Claude
+  - NL_Amsterdam_DigitalOcean, LLC_Claude
+  - NL_Amsterdam_Hostkey B.V._Claude
+  - NL_Amsterdam_Melbikomas UAB_Claude1
+  - NL_Amsterdam_Melbikomas UAB_Claude2
+  - NL_Amsterdam_Melbikomas UAB_Claude3
+  - NL_Amsterdam_Melbikomas UAB_Claude4
+  - NL_Amsterdam_Scalaxy B.V._Claude
+  - NL_Dronten_Digital City FZE_Claude
+  - NL_Eygelshoven_Paul Sagov_Claude
+  - NL_Haarlem_SCALEWAY_Claude1
+  - NL_Haarlem_SCALEWAY_Claude2
+  - NL_Haarlem_Scaleway SAS_Claude
+  - NO_Oslo_BrainStorm Network, Inc_Claude
+  - PL_Warsaw_KABAT-OU_Claude
+  - PL_Warsaw_Mitelis Security_Claude
+  - PL_Warsaw_Scaleway SAS_Claude
+  - RO_Bucharest_M247 Europe SRL_Claude1
+  - RO_Bucharest_M247 Europe SRL_Claude2
+  - RU_St Petersburg_EstNOC OU_Claude
+  - SE_Huskvarna_Telia Company AB_Claude
+  - SG_Singapore_Amazon Technologies Inc._Claude1
+  - SG_Singapore_Amazon Technologies Inc._Claude2
+  - SG_Singapore_Amazon.com, Inc._Claude1
+  - SG_Singapore_Amazon.com, Inc._Claude2
+  - SG_Singapore_Amazon.com, Inc._Claude3
+  - SG_Singapore_Amazon.com, Inc._Claude4
+  - SG_Singapore_Amazon.com, Inc._Claude5
+  - SG_Singapore_Amazon.com, Inc._Claude6
+  - SG_Singapore_Amazon.com, Inc._Claude7
+  - SG_Singapore_DigitalOcean, LLC_Claude1
+  - SG_Singapore_DigitalOcean, LLC_Claude2
+  - SG_Singapore_DigitalOcean, LLC_Claude3
+  - SG_Singapore_DigitalOcean, LLC_Claude4
+  - TW_Chang-hua_Chunghwa Telecom Co., Ltd._Claude
+  - TW_Taipei_Akari Networks Limited_Claude
+  - TW_Taipei_Turing Group Limited_Claude
+  - US_Boardman_Amazon.com, Inc._Claude1
+  - US_Boardman_Amazon.com, Inc._Claude2
+  - US_Boardman_Amazon.com, Inc._Claude3
+  - US_Boardman_Amazon.com, Inc._Claude4
+  - US_Buffalo_HostPapa_Claude
+  - US_Centennial_Ting Fiber Inc._Claude
+  - US_Charlotte_Spectrum_Claude
+  - US_Charlottesville_Alibaba.com LLC_Claude
+  - US_Cheyenne_Hurricane Electric LLC_Claude1
+  - US_Cheyenne_Hurricane Electric LLC_Claude2
+  - US_Cheyenne_Hurricane Electric LLC_Claude3
+  - US_Cheyenne_Hurricane Electric LLC_Claude4
+  - US_Cheyenne_Hurricane Electric LLC_Claude5
+  - US_Cheyenne_Hurricane Electric LLC_Claude6
+  - US_Cheyenne_Hurricane Electric LLC_Claude7
+  - US_Cheyenne_Hurricane Electric LLC_Claude8
+  - US_Chicago_Ryamer, LLC_Claude
+  - US_Chicago_UAB Cherry Servers_Claude
+  - US_Dallas_Hivelocity_Claude
+  - US_Durham_NetActuate, Inc_Claude
+  - US_Fremont_Hurricane Electric LLC_Claude1
+  - US_Fremont_Hurricane Electric LLC_Claude10
+  - US_Fremont_Hurricane Electric LLC_Claude11
+  - US_Fremont_Hurricane Electric LLC_Claude12
+  - US_Fremont_Hurricane Electric LLC_Claude13
+  - US_Fremont_Hurricane Electric LLC_Claude14
+  - US_Fremont_Hurricane Electric LLC_Claude15
+  - US_Fremont_Hurricane Electric LLC_Claude16
+  - US_Fremont_Hurricane Electric LLC_Claude17
+  - US_Fremont_Hurricane Electric LLC_Claude18
+  - US_Fremont_Hurricane Electric LLC_Claude19
+  - US_Fremont_Hurricane Electric LLC_Claude2
+  - US_Fremont_Hurricane Electric LLC_Claude20
+  - US_Fremont_Hurricane Electric LLC_Claude21
+  - US_Fremont_Hurricane Electric LLC_Claude22
+  - US_Fremont_Hurricane Electric LLC_Claude23
+  - US_Fremont_Hurricane Electric LLC_Claude24
+  - US_Fremont_Hurricane Electric LLC_Claude25
+  - US_Fremont_Hurricane Electric LLC_Claude26
+  - US_Fremont_Hurricane Electric LLC_Claude3
+  - US_Fremont_Hurricane Electric LLC_Claude4
+  - US_Fremont_Hurricane Electric LLC_Claude5
+  - US_Fremont_Hurricane Electric LLC_Claude6
+  - US_Fremont_Hurricane Electric LLC_Claude7
+  - US_Fremont_Hurricane Electric LLC_Claude8
+  - US_Fremont_Hurricane Electric LLC_Claude9
+  - US_Irvine_1515 ROUNDTABLE DR PROPERTY, LLC_Claude
+  - US_Kent_The Constant Company_Claude
+  - US_Los Angeles_Akari Networks Limited_Claude1
+  - US_Los Angeles_Akari Networks Limited_Claude2
+  - US_Los Angeles_Akari Networks Limited_Claude3
+  - US_Los Angeles_Akari Networks Limited_Claude4
+  - US_Los Angeles_Akari Networks Limited_Claude5
+  - US_Los Angeles_Akari Networks Limited_Claude6
   - US_Los Angeles_FSC NETWORK LTD_Claude
-  - US_Los Angeles_HostPapa_Claude
-  - cf|6dbe|puddincat07@Telegram
-  - 🔴🇭🇰[🎬📺🎭🎪]_github.com/Ruk1ng001_4bd1ce
-  - 🔴🇭🇰_github.com/Ruk1ng001_deefc73a
-  - 🔴🇰🇷[📺📦]_github.com/Ruk1ng001_5b8e1a9b
+  - US_Los Angeles_The Constant Company_Claude
+  - US_New York_Latitude.sh_Claude
+  - US_New York_Zayo Bandwidth_Claude
+  - US_North Bergen_DigitalOcean, LLC_Claude1
+  - US_North Bergen_DigitalOcean, LLC_Claude2
+  - US_Orem_Vodafone-Libertel-BV_Claude
+  - US_Sabetha_Carson Communications, LLC_Claude
+  - US_Salina_Rural Telephone Service Company_Claude
+  - US_Salt Lake City_PoloCloud Computing (United States) LLC_Claude
+  - US_San Francisco_DigitalOcean, LLC_Claude
+  - US_San Jose_Hurricane Electric LLC_Claude1
+  - US_San Jose_Hurricane Electric LLC_Claude2
+  - US_San Jose_Hurricane Electric LLC_Claude3
+  - US_San Jose_Hurricane Electric LLC_Claude4
+  - US_Sanford_Charter Communications_Claude
+  - US_Seattle_HostPapa_Claude
+  - US_West Wendover_Hurricane Electric LLC_Claude1
+  - US_West Wendover_Hurricane Electric LLC_Claude2
+  - US_West Wendover_Hurricane Electric LLC_Claude3
+  - US_West Wendover_Hurricane Electric LLC_Claude4
+  - US_West Wendover_Hurricane Electric LLC_Claude5
+  - US_West Wendover_Hurricane Electric LLC_Claude6
+  - US_West Wendover_Hurricane Electric LLC_Claude7
+  - ZA_Johannesburg_Microsoft Corporation_Claude1
+  - ZA_Johannesburg_Microsoft Corporation_Claude2
 - name: Best
   type: url-test
-  url: https://www.gstatic.com/generate_204
+  url: https://www.google.com/generate_204
   expected-status: 204
   lazy: true
   timeout: 2000
@@ -1619,7 +2136,7 @@ proxy-groups:
   - DIRECT
 - name: Fallback
   type: fallback
-  url: https://www.gstatic.com/generate_204
+  url: https://www.google.com/generate_204
   expected-status: 204
   lazy: true
   timeout: 2000
@@ -1627,422 +2144,674 @@ proxy-groups:
   tolerance: 50
   filter: .*
   proxies:
-  - 103.186.154.11_Claude
-  - 103.186.154.12_Claude
-  - 103.186.154.173_Claude
-  - 103.186.154.178_Claude
-  - 103.186.154.181_Claude
-  - 103.186.154.185_Claude
-  - 103.186.154.186_Claude
-  - 103.186.154.187_Claude
-  - 103.186.154.194_Claude
-  - 103.186.154.201_Claude
-  - 103.186.154.202_Claude
-  - 103.186.154.207_Claude
-  - 103.186.154.210_Claude
-  - 103.186.154.215_Claude
-  - 103.186.154.219_Claude
-  - 103.186.154.221_Claude
-  - 103.186.154.223_Claude
-  - 103.186.154.224_Claude
-  - 103.186.154.225_Claude
-  - 103.186.154.227_Claude
-  - 103.186.154.22_Claude
-  - 103.186.154.234_Claude
-  - 103.186.154.235_Claude
-  - 103.186.154.238_Claude
-  - 103.186.154.239_Claude
-  - 103.186.154.240_Claude
-  - 103.186.154.242_Claude
-  - 103.186.154.245_Claude
-  - 103.186.154.246_Claude
-  - 103.186.154.248_Claude
-  - 103.186.154.253_Claude
-  - 103.186.154.29_Claude
-  - 103.186.154.32_Claude
-  - 103.186.154.34_Claude
-  - 103.186.154.35_Claude
-  - 103.186.154.39_Claude
-  - 103.186.154.42_Claude
-  - 103.186.154.43_Claude
-  - 103.186.154.46_Claude
-  - 103.186.154.47_Claude
-  - 103.186.154.4_Claude
-  - 103.186.154.50_Claude
-  - 103.186.154.52_Claude
-  - 103.186.154.54_Claude
-  - 103.186.154.57_Claude
-  - 103.186.154.59_Claude
-  - 103.186.154.61_Claude
-  - 103.186.154.63_Claude
-  - 103.186.155.106_Claude
-  - 103.186.155.108_Claude
-  - 103.186.155.111_Claude
-  - 103.186.155.114_Claude
-  - 103.186.155.116_Claude
-  - 103.186.155.117_Claude
-  - 103.186.155.119_Claude
-  - 103.186.155.121_Claude
-  - 103.186.155.127_Claude
-  - 103.186.155.128_Claude
-  - 103.186.155.135_Claude
-  - 103.186.155.137_Claude
-  - 103.186.155.144_Claude
-  - 103.186.155.148_Claude
-  - 103.186.155.153_Claude
-  - 103.186.155.15_Claude
-  - 103.186.155.17_Claude
-  - 103.186.155.204_Claude
-  - 103.186.155.207_Claude
-  - 103.186.155.209_Claude
-  - 103.186.155.223_Claude
-  - 103.186.155.224_Claude
-  - 103.186.155.225_Claude
-  - 103.186.155.226_Claude
-  - 103.186.155.227_Claude
-  - 103.186.155.229_Claude
-  - 103.186.155.230_Claude
-  - 103.186.155.231_Claude
-  - 103.186.155.232_Claude
-  - 103.186.155.233_Claude
-  - 103.186.155.28_Claude
-  - 103.186.155.30_Claude
-  - 103.186.155.31_Claude
-  - 103.186.155.32_Claude
-  - 103.186.155.35_Claude
-  - 103.186.155.37_Claude
-  - 103.186.155.38_Claude
-  - 103.186.155.43_Claude
-  - 103.186.155.46_Claude
-  - 103.186.155.47_Claude
-  - 103.186.155.57_Claude
-  - 103.186.155.62_Claude
-  - 103.186.155.67_Claude
-  - 103.186.155.69_Claude
-  - 103.186.155.71_Claude
-  - 103.186.155.76_Claude
-  - 103.186.155.81_Claude
-  - 103.186.155.83_Claude
-  - 103.186.155.84_Claude
-  - 103.186.155.9_Claude
-  - 36.232.82.28_Claude1
-  - 36.232.82.28_Claude2
-  - 42.98.100.183_Claude1
-  - 42.98.100.183_Claude2
-  - 42.98.100.183_Claude3
-  - 42.98.100.183_Claude4
-  - 42.98.100.183_Claude5
-  - 42.98.100.183_Claude6
-  - 42.98.100.183_Claude7
-  - 61.111.247.53_Claude1
-  - 61.111.247.53_Claude2
+  - 102.244.78.57_Claude
+  - 109.248.147.70_Claude
+  - 13.212.207.226_Claude
+  - 13.212.249.115_Claude
+  - 13.229.54.109_Claude
+  - 137.220.221.179_Claude
+  - 146.70.244.10_Claude
+  - 149.36.50.15_Claude
+  - 149.88.21.139_Claude
+  - 169.150.237.8_Claude
+  - 185.221.132.246_Claude1
+  - 185.221.132.246_Claude2
+  - 212.102.63.8_Claude
+  - 23.142.200.235_Claude
+  - 2406:da18:ad0:a400:b312:73dc:ae5:d92_Claude
+  - 31.186.220.204_Claude
+  - 43.160.239.37_Claude
+  - 47.236.168.243_Claude
+  - 5.178.109.174_Claude
+  - 5.255.118.82_Claude
+  - 51.15.20.32_Claude
+  - 77.221.148.116_Claude
+  - 80.124.109.22_Claude
+  - 80.174.118.60_Claude
+  - 80.174.118.80_Claude
+  - 82.102.17.190_Claude
+  - 82.29.101.5_Claude
+  - 82.65.137.141_Claude
+  - 82.96.128.175_Claude
+  - 83.206.1.225_Claude
+  - 87.106.223.158_Claude
+  - 96.45.193.51_Claude
+  - AE_Dubai_Oracle Corporation_Claude
+  - AL_Tirana_Albanian Hosting SH.P.K._Claude
+  - AT_Vienna_Datacamp Limited_Claude
+  - BR_Vinhedo_Oracle Corporation_Claude
+  - CA_Beauharnois_OVH SAS_Claude
+  - CA_Montreal_Cloudflare, Inc._Claude
   - CA_Montreal_OVH SAS_Claude1
   - CA_Montreal_OVH SAS_Claude2
-  - CA_Toronto_Choopa_Claude
-  - CA_Toronto_DigitalOcean, LLC_Claude
-  - DE_Frankfurt am Main_F5 Networks SARL_Claude1
-  - DE_Frankfurt am Main_F5 Networks SARL_Claude2
-  - DE_Frankfurt am Main_F5 Networks SARL_Claude3
-  - DE_Frankfurt am Main_First Server Limited_Claude
-  - EC_Quito_IPXON Networks_Claude
+  - CA_Toronto_Microsoft Corporation_Claude
+  - CH_Zurich_Alexhost SRL_Claude
+  - CZ_Prague_M247 Europe SRL_Claude
+  - CZ_Prague_WIA spol. s.r.o._Claude
+  - DE_Bad Soden am Taunus_GHOSTnet GmbH_Claude
+  - DE_Berlin_Deutsche Telekom AG_Claude
+  - DE_Falkenstein_Hetzner Online GmbH_Claude
+  - DE_Frankfurt am Main_Collin Schneeweiss trading as Unesty Company_Claude
+  - DE_Frankfurt am Main_Datacamp Limited_Claude1
+  - DE_Frankfurt am Main_Datacamp Limited_Claude2
+  - DE_Frankfurt am Main_Datacamp Limited_Claude3
+  - DE_Frankfurt am Main_Datacamp Limited_Claude4
+  - DE_Frankfurt am Main_Datacamp Limited_Claude5
+  - DE_Frankfurt am Main_Digital Hosting Provider LLC_Claude
+  - DE_Frankfurt am Main_Interkvm Host SRL_Claude
+  - DE_Frankfurt am Main_Oracle Corporation_Claude
+  - DE_Frankfurt am Main_Sculk Ltd._Claude
+  - DE_Frankfurt am Main_meerfarbig GmbH & Co. KG_Claude
+  - DE_Frankfurt_GTHost_Claude
+  - DE_Leipzig_Cloudflare, Inc._Claude
+  - DE_Limburg an der Lahn_OVH SAS_Claude
+  - DE_Nuremberg_Hetzner Online GmbH_Claude
+  - DE_Nuremberg_netcup GmbH_Claude
+  - DE_Wuppertal_ARCOR-IP_Claude
+  - ES_Madrid_Baxet Group Inc._Claude
+  - FI_Helsinki_Baykov Ilya Sergeevich_Claude
+  - FR_Agen_Proxad / Free SAS_Claude
+  - FR_Gravelines_MCPECloud SAS_Claude
+  - FR_Gravelines_OVH SAS_Claude1
+  - FR_Gravelines_OVH SAS_Claude2
+  - FR_Gravelines_OVH SAS_Claude3
+  - FR_Lauterbourg_Contabo GmbH_Claude
+  - FR_Paris_Baykov Ilya Sergeevich_Claude
+  - FR_Paris_Bouygues Telecom ISP_Claude
+  - FR_Paris_Melbikomas UAB_Claude1
+  - FR_Paris_Melbikomas UAB_Claude2
+  - FR_Paris_Proxad / Free SAS_Claude
+  - FR_Paris_SCALEWAY_Claude1
+  - FR_Paris_SCALEWAY_Claude2
+  - FR_Paris_SCALEWAY_Claude3
+  - FR_Paris_SCALEWAY_Claude4
+  - FR_Paris_SCALEWAY_Claude5
+  - FR_Paris_SCALEWAY_Claude6
+  - FR_Paris_SCALEWAY_Claude7
+  - FR_Paris_SCALEWAY_Claude8
+  - FR_Paris_Scaleway SAS_Claude
+  - FR_Paris_Sewan SAS_Claude
+  - FR_Paris_Skydigital Telecom LTD_Claude
+  - GB_Bexley_OVH SAS_Claude
+  - GB_City of London_BrainStorm Network, Inc_Claude
   - GB_City of London_M247 Europe SRL_Claude
-  - HK_Fanling_PCCW IMS Limited_Claude1
-  - HK_Fanling_PCCW IMS Limited_Claude10
-  - HK_Fanling_PCCW IMS Limited_Claude11
-  - HK_Fanling_PCCW IMS Limited_Claude12
-  - HK_Fanling_PCCW IMS Limited_Claude13
-  - HK_Fanling_PCCW IMS Limited_Claude14
-  - HK_Fanling_PCCW IMS Limited_Claude15
-  - HK_Fanling_PCCW IMS Limited_Claude16
-  - HK_Fanling_PCCW IMS Limited_Claude17
-  - HK_Fanling_PCCW IMS Limited_Claude18
-  - HK_Fanling_PCCW IMS Limited_Claude19
-  - HK_Fanling_PCCW IMS Limited_Claude2
-  - HK_Fanling_PCCW IMS Limited_Claude20
-  - HK_Fanling_PCCW IMS Limited_Claude21
-  - HK_Fanling_PCCW IMS Limited_Claude22
-  - HK_Fanling_PCCW IMS Limited_Claude23
-  - HK_Fanling_PCCW IMS Limited_Claude24
-  - HK_Fanling_PCCW IMS Limited_Claude25
-  - HK_Fanling_PCCW IMS Limited_Claude3
-  - HK_Fanling_PCCW IMS Limited_Claude4
-  - HK_Fanling_PCCW IMS Limited_Claude5
-  - HK_Fanling_PCCW IMS Limited_Claude6
-  - HK_Fanling_PCCW IMS Limited_Claude7
-  - HK_Fanling_PCCW IMS Limited_Claude8
-  - HK_Fanling_PCCW IMS Limited_Claude9
-  - JP_Tokyo_Oracle Corporation_Claude
-  - NL_Amsterdam_Greenhost BV_Claude1
-  - NL_Amsterdam_Greenhost BV_Claude2
-  - NL_Amsterdam_Matteo Martelloni trading as DELUXHOST_Claude
-  - NL_Amsterdam_Servers Tech Fzco_Claude
-  - NL_Haarlem_SCALEWAY_Claude
-  - NL_Meppel_WorkTitans B.V._Claude
-  - TH_Nonthaburi_Siamdata Communication Co., ltd._Claude
-  - TW_Taipei_Chunghwa Telecom_Claude
-  - US_Los Angeles_Datacamp Limited_Claude1
-  - US_Los Angeles_Datacamp Limited_Claude2
-  - US_Los Angeles_Dedicated.com_Claude
+  - GB_London_GTHost_Claude
+  - GB_London_OVH SAS_Claude
+  - HK_Hong Kong_Iens Technology Pte. LTD_Claude
+  - ID_Jakarta_Alibaba (US) Technology Co., Ltd._Claude
+  - ID_Jakarta_Hurricane Electric LLC_Claude
+  - ID_Jakarta_PT Industri Kreatif Digital_Claude
+  - ID_Lenteng_PT Link Data Sumber Barokah_Claude
+  - IE_Dublin_Amazon Technologies Inc._Claude
+  - IE_Dublin_Amazon.com, Inc._Claude
+  - IL_Tel Aviv_013 Netvision Network_Claude
+  - IN_Mumbai_Contabo Asia Private Limited_Claude
+  - IT_Arezzo_Aruba S.p.A. Network_Claude
+  - IT_Milan_Datacamp Limited_Claude
+  - IT_Milan_EUROPEAN-LEASE1_Claude1
+  - IT_Milan_EUROPEAN-LEASE1_Claude2
+  - IT_Milan_EUROPEAN-LEASE1_Claude3
+  - IT_Milan_EUROPEAN-LEASE1_Claude4
+  - IT_Milan_EUROPEAN-LEASE1_Claude5
+  - IT_Milan_EUROPEAN-LEASE1_Claude6
+  - IT_Milan_EUROPEAN-LEASE1_Claude7
+  - IT_Milan_Fastweb SpA_Claude
+  - IT_Milan_OVH SAS_Claude
+  - IT_Naples_Vodafone_Claude
+  - IT_Rovigo_Telecom Italia S.p.A._Claude
+  - JP_Tokyo_ALPHA-JP-SUB_Claude
+  - JP_Tokyo_DMIT Cloud Services_Claude
+  - JP_Tokyo_NetLab Global_Claude
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude1
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude2
+  - LT_Vilnius_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude
+  - LV_Riga_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude1
+  - LV_Riga_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude2
+  - NL_Amsterdam_DataCamp Limited_Claude1
+  - NL_Amsterdam_DataCamp Limited_Claude2
+  - NL_Amsterdam_DataCamp Limited_Claude3
+  - NL_Amsterdam_DataCamp Limited_Claude4
+  - NL_Amsterdam_DataCamp Limited_Claude5
+  - NL_Amsterdam_DataCamp Limited_Claude6
+  - NL_Amsterdam_DataCamp Limited_Claude7
+  - NL_Amsterdam_DataCamp Limited_Claude8
+  - NL_Amsterdam_DataCamp Limited_Claude9
+  - NL_Amsterdam_Datacamp Limited_Claude
+  - NL_Amsterdam_DigitalOcean, LLC_Claude
+  - NL_Amsterdam_Hostkey B.V._Claude
+  - NL_Amsterdam_Melbikomas UAB_Claude1
+  - NL_Amsterdam_Melbikomas UAB_Claude2
+  - NL_Amsterdam_Melbikomas UAB_Claude3
+  - NL_Amsterdam_Melbikomas UAB_Claude4
+  - NL_Amsterdam_Scalaxy B.V._Claude
+  - NL_Dronten_Digital City FZE_Claude
+  - NL_Eygelshoven_Paul Sagov_Claude
+  - NL_Haarlem_SCALEWAY_Claude1
+  - NL_Haarlem_SCALEWAY_Claude2
+  - NL_Haarlem_Scaleway SAS_Claude
+  - NO_Oslo_BrainStorm Network, Inc_Claude
+  - PL_Warsaw_KABAT-OU_Claude
+  - PL_Warsaw_Mitelis Security_Claude
+  - PL_Warsaw_Scaleway SAS_Claude
+  - RO_Bucharest_M247 Europe SRL_Claude1
+  - RO_Bucharest_M247 Europe SRL_Claude2
+  - RU_St Petersburg_EstNOC OU_Claude
+  - SE_Huskvarna_Telia Company AB_Claude
+  - SG_Singapore_Amazon Technologies Inc._Claude1
+  - SG_Singapore_Amazon Technologies Inc._Claude2
+  - SG_Singapore_Amazon.com, Inc._Claude1
+  - SG_Singapore_Amazon.com, Inc._Claude2
+  - SG_Singapore_Amazon.com, Inc._Claude3
+  - SG_Singapore_Amazon.com, Inc._Claude4
+  - SG_Singapore_Amazon.com, Inc._Claude5
+  - SG_Singapore_Amazon.com, Inc._Claude6
+  - SG_Singapore_Amazon.com, Inc._Claude7
+  - SG_Singapore_DigitalOcean, LLC_Claude1
+  - SG_Singapore_DigitalOcean, LLC_Claude2
+  - SG_Singapore_DigitalOcean, LLC_Claude3
+  - SG_Singapore_DigitalOcean, LLC_Claude4
+  - TW_Chang-hua_Chunghwa Telecom Co., Ltd._Claude
+  - TW_Taipei_Akari Networks Limited_Claude
+  - TW_Taipei_Turing Group Limited_Claude
+  - US_Boardman_Amazon.com, Inc._Claude1
+  - US_Boardman_Amazon.com, Inc._Claude2
+  - US_Boardman_Amazon.com, Inc._Claude3
+  - US_Boardman_Amazon.com, Inc._Claude4
+  - US_Buffalo_HostPapa_Claude
+  - US_Centennial_Ting Fiber Inc._Claude
+  - US_Charlotte_Spectrum_Claude
+  - US_Charlottesville_Alibaba.com LLC_Claude
+  - US_Cheyenne_Hurricane Electric LLC_Claude1
+  - US_Cheyenne_Hurricane Electric LLC_Claude2
+  - US_Cheyenne_Hurricane Electric LLC_Claude3
+  - US_Cheyenne_Hurricane Electric LLC_Claude4
+  - US_Cheyenne_Hurricane Electric LLC_Claude5
+  - US_Cheyenne_Hurricane Electric LLC_Claude6
+  - US_Cheyenne_Hurricane Electric LLC_Claude7
+  - US_Cheyenne_Hurricane Electric LLC_Claude8
+  - US_Chicago_Ryamer, LLC_Claude
+  - US_Chicago_UAB Cherry Servers_Claude
+  - US_Dallas_Hivelocity_Claude
+  - US_Durham_NetActuate, Inc_Claude
+  - US_Fremont_Hurricane Electric LLC_Claude1
+  - US_Fremont_Hurricane Electric LLC_Claude10
+  - US_Fremont_Hurricane Electric LLC_Claude11
+  - US_Fremont_Hurricane Electric LLC_Claude12
+  - US_Fremont_Hurricane Electric LLC_Claude13
+  - US_Fremont_Hurricane Electric LLC_Claude14
+  - US_Fremont_Hurricane Electric LLC_Claude15
+  - US_Fremont_Hurricane Electric LLC_Claude16
+  - US_Fremont_Hurricane Electric LLC_Claude17
+  - US_Fremont_Hurricane Electric LLC_Claude18
+  - US_Fremont_Hurricane Electric LLC_Claude19
+  - US_Fremont_Hurricane Electric LLC_Claude2
+  - US_Fremont_Hurricane Electric LLC_Claude20
+  - US_Fremont_Hurricane Electric LLC_Claude21
+  - US_Fremont_Hurricane Electric LLC_Claude22
+  - US_Fremont_Hurricane Electric LLC_Claude23
+  - US_Fremont_Hurricane Electric LLC_Claude24
+  - US_Fremont_Hurricane Electric LLC_Claude25
+  - US_Fremont_Hurricane Electric LLC_Claude26
+  - US_Fremont_Hurricane Electric LLC_Claude3
+  - US_Fremont_Hurricane Electric LLC_Claude4
+  - US_Fremont_Hurricane Electric LLC_Claude5
+  - US_Fremont_Hurricane Electric LLC_Claude6
+  - US_Fremont_Hurricane Electric LLC_Claude7
+  - US_Fremont_Hurricane Electric LLC_Claude8
+  - US_Fremont_Hurricane Electric LLC_Claude9
+  - US_Irvine_1515 ROUNDTABLE DR PROPERTY, LLC_Claude
+  - US_Kent_The Constant Company_Claude
+  - US_Los Angeles_Akari Networks Limited_Claude1
+  - US_Los Angeles_Akari Networks Limited_Claude2
+  - US_Los Angeles_Akari Networks Limited_Claude3
+  - US_Los Angeles_Akari Networks Limited_Claude4
+  - US_Los Angeles_Akari Networks Limited_Claude5
+  - US_Los Angeles_Akari Networks Limited_Claude6
   - US_Los Angeles_FSC NETWORK LTD_Claude
-  - US_Los Angeles_HostPapa_Claude
-  - cf|6dbe|puddincat07@Telegram
-  - 🔴🇭🇰[🎬📺🎭🎪]_github.com/Ruk1ng001_4bd1ce
-  - 🔴🇭🇰_github.com/Ruk1ng001_deefc73a
-  - 🔴🇰🇷[📺📦]_github.com/Ruk1ng001_5b8e1a9b
+  - US_Los Angeles_The Constant Company_Claude
+  - US_New York_Latitude.sh_Claude
+  - US_New York_Zayo Bandwidth_Claude
+  - US_North Bergen_DigitalOcean, LLC_Claude1
+  - US_North Bergen_DigitalOcean, LLC_Claude2
+  - US_Orem_Vodafone-Libertel-BV_Claude
+  - US_Sabetha_Carson Communications, LLC_Claude
+  - US_Salina_Rural Telephone Service Company_Claude
+  - US_Salt Lake City_PoloCloud Computing (United States) LLC_Claude
+  - US_San Francisco_DigitalOcean, LLC_Claude
+  - US_San Jose_Hurricane Electric LLC_Claude1
+  - US_San Jose_Hurricane Electric LLC_Claude2
+  - US_San Jose_Hurricane Electric LLC_Claude3
+  - US_San Jose_Hurricane Electric LLC_Claude4
+  - US_Sanford_Charter Communications_Claude
+  - US_Seattle_HostPapa_Claude
+  - US_West Wendover_Hurricane Electric LLC_Claude1
+  - US_West Wendover_Hurricane Electric LLC_Claude2
+  - US_West Wendover_Hurricane Electric LLC_Claude3
+  - US_West Wendover_Hurricane Electric LLC_Claude4
+  - US_West Wendover_Hurricane Electric LLC_Claude5
+  - US_West Wendover_Hurricane Electric LLC_Claude6
+  - US_West Wendover_Hurricane Electric LLC_Claude7
+  - ZA_Johannesburg_Microsoft Corporation_Claude1
+  - ZA_Johannesburg_Microsoft Corporation_Claude2
 - name: HK
   type: url-test
-  url: https://www.gstatic.com/generate_204
+  url: https://www.google.com/generate_204
   expected-status: 204
   lazy: true
   timeout: 2000
   interval: 600
   tolerance: 50
   proxies:
-  - HK_Fanling_PCCW IMS Limited_Claude1
-  - HK_Fanling_PCCW IMS Limited_Claude10
-  - HK_Fanling_PCCW IMS Limited_Claude11
-  - HK_Fanling_PCCW IMS Limited_Claude12
-  - HK_Fanling_PCCW IMS Limited_Claude13
-  - HK_Fanling_PCCW IMS Limited_Claude14
-  - HK_Fanling_PCCW IMS Limited_Claude15
-  - HK_Fanling_PCCW IMS Limited_Claude16
-  - HK_Fanling_PCCW IMS Limited_Claude17
-  - HK_Fanling_PCCW IMS Limited_Claude18
-  - HK_Fanling_PCCW IMS Limited_Claude19
-  - HK_Fanling_PCCW IMS Limited_Claude2
-  - HK_Fanling_PCCW IMS Limited_Claude20
-  - HK_Fanling_PCCW IMS Limited_Claude21
-  - HK_Fanling_PCCW IMS Limited_Claude22
-  - HK_Fanling_PCCW IMS Limited_Claude23
-  - HK_Fanling_PCCW IMS Limited_Claude24
-  - HK_Fanling_PCCW IMS Limited_Claude25
-  - HK_Fanling_PCCW IMS Limited_Claude3
-  - HK_Fanling_PCCW IMS Limited_Claude4
-  - HK_Fanling_PCCW IMS Limited_Claude5
-  - HK_Fanling_PCCW IMS Limited_Claude6
-  - HK_Fanling_PCCW IMS Limited_Claude7
-  - HK_Fanling_PCCW IMS Limited_Claude8
-  - HK_Fanling_PCCW IMS Limited_Claude9
+  - HK_Hong Kong_Iens Technology Pte. LTD_Claude
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude1
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude2
   filter: (?i)港|HK|HongKong|hong kong
 - name: TW
   type: url-test
-  url: https://www.gstatic.com/generate_204
+  url: https://www.google.com/generate_204
   expected-status: 204
   lazy: true
   timeout: 2000
   interval: 600
   tolerance: 50
   proxies:
-  - TW_Taipei_Chunghwa Telecom_Claude
+  - TW_Chang-hua_Chunghwa Telecom Co., Ltd._Claude
+  - TW_Taipei_Akari Networks Limited_Claude
+  - TW_Taipei_Turing Group Limited_Claude
   - US_Los Angeles_FSC NETWORK LTD_Claude
   filter: 台湾|TW|Tw|Taiwan|新北|彰化|CHT|HINET
 - name: JP
   type: url-test
-  url: https://www.gstatic.com/generate_204
+  url: https://www.google.com/generate_204
   expected-status: 204
   lazy: true
   timeout: 2000
   interval: 600
   tolerance: 50
   proxies:
-  - JP_Tokyo_Oracle Corporation_Claude
+  - JP_Tokyo_ALPHA-JP-SUB_Claude
+  - JP_Tokyo_DMIT Cloud Services_Claude
+  - JP_Tokyo_NetLab Global_Claude
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude1
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude2
   filter: (?i)日|东京|大阪|JP|Japan|Tokyo|Osaka|Saitama
 - name: SG
   type: url-test
-  url: https://www.gstatic.com/generate_204
+  url: https://www.google.com/generate_204
   expected-status: 204
   lazy: true
   timeout: 2000
   interval: 600
   tolerance: 50
   proxies:
-  - DIRECT
+  - SG_Singapore_Amazon Technologies Inc._Claude1
+  - SG_Singapore_Amazon Technologies Inc._Claude2
+  - SG_Singapore_Amazon.com, Inc._Claude1
+  - SG_Singapore_Amazon.com, Inc._Claude2
+  - SG_Singapore_Amazon.com, Inc._Claude3
+  - SG_Singapore_Amazon.com, Inc._Claude4
+  - SG_Singapore_Amazon.com, Inc._Claude5
+  - SG_Singapore_Amazon.com, Inc._Claude6
+  - SG_Singapore_Amazon.com, Inc._Claude7
+  - SG_Singapore_DigitalOcean, LLC_Claude1
+  - SG_Singapore_DigitalOcean, LLC_Claude2
+  - SG_Singapore_DigitalOcean, LLC_Claude3
+  - SG_Singapore_DigitalOcean, LLC_Claude4
   filter: (?i)新|狮城|SG|Singapore
 - name: US
   type: url-test
-  url: https://www.gstatic.com/generate_204
+  url: https://www.google.com/generate_204
   expected-status: 204
   lazy: true
   timeout: 2000
   interval: 600
   tolerance: 50
   proxies:
-  - US_Los Angeles_Datacamp Limited_Claude1
-  - US_Los Angeles_Datacamp Limited_Claude2
-  - US_Los Angeles_Dedicated.com_Claude
+  - DE_Bad Soden am Taunus_GHOSTnet GmbH_Claude
+  - ID_Jakarta_Alibaba (US) Technology Co., Ltd._Claude
+  - ID_Jakarta_PT Industri Kreatif Digital_Claude
+  - LT_Vilnius_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude
+  - SE_Huskvarna_Telia Company AB_Claude
+  - US_Boardman_Amazon.com, Inc._Claude1
+  - US_Boardman_Amazon.com, Inc._Claude2
+  - US_Boardman_Amazon.com, Inc._Claude3
+  - US_Boardman_Amazon.com, Inc._Claude4
+  - US_Buffalo_HostPapa_Claude
+  - US_Centennial_Ting Fiber Inc._Claude
+  - US_Charlotte_Spectrum_Claude
+  - US_Charlottesville_Alibaba.com LLC_Claude
+  - US_Cheyenne_Hurricane Electric LLC_Claude1
+  - US_Cheyenne_Hurricane Electric LLC_Claude2
+  - US_Cheyenne_Hurricane Electric LLC_Claude3
+  - US_Cheyenne_Hurricane Electric LLC_Claude4
+  - US_Cheyenne_Hurricane Electric LLC_Claude5
+  - US_Cheyenne_Hurricane Electric LLC_Claude6
+  - US_Cheyenne_Hurricane Electric LLC_Claude7
+  - US_Cheyenne_Hurricane Electric LLC_Claude8
+  - US_Chicago_Ryamer, LLC_Claude
+  - US_Chicago_UAB Cherry Servers_Claude
+  - US_Dallas_Hivelocity_Claude
+  - US_Durham_NetActuate, Inc_Claude
+  - US_Fremont_Hurricane Electric LLC_Claude1
+  - US_Fremont_Hurricane Electric LLC_Claude10
+  - US_Fremont_Hurricane Electric LLC_Claude11
+  - US_Fremont_Hurricane Electric LLC_Claude12
+  - US_Fremont_Hurricane Electric LLC_Claude13
+  - US_Fremont_Hurricane Electric LLC_Claude14
+  - US_Fremont_Hurricane Electric LLC_Claude15
+  - US_Fremont_Hurricane Electric LLC_Claude16
+  - US_Fremont_Hurricane Electric LLC_Claude17
+  - US_Fremont_Hurricane Electric LLC_Claude18
+  - US_Fremont_Hurricane Electric LLC_Claude19
+  - US_Fremont_Hurricane Electric LLC_Claude2
+  - US_Fremont_Hurricane Electric LLC_Claude20
+  - US_Fremont_Hurricane Electric LLC_Claude21
+  - US_Fremont_Hurricane Electric LLC_Claude22
+  - US_Fremont_Hurricane Electric LLC_Claude23
+  - US_Fremont_Hurricane Electric LLC_Claude24
+  - US_Fremont_Hurricane Electric LLC_Claude25
+  - US_Fremont_Hurricane Electric LLC_Claude26
+  - US_Fremont_Hurricane Electric LLC_Claude3
+  - US_Fremont_Hurricane Electric LLC_Claude4
+  - US_Fremont_Hurricane Electric LLC_Claude5
+  - US_Fremont_Hurricane Electric LLC_Claude6
+  - US_Fremont_Hurricane Electric LLC_Claude7
+  - US_Fremont_Hurricane Electric LLC_Claude8
+  - US_Fremont_Hurricane Electric LLC_Claude9
+  - US_Irvine_1515 ROUNDTABLE DR PROPERTY, LLC_Claude
+  - US_Kent_The Constant Company_Claude
+  - US_Los Angeles_Akari Networks Limited_Claude1
+  - US_Los Angeles_Akari Networks Limited_Claude2
+  - US_Los Angeles_Akari Networks Limited_Claude3
+  - US_Los Angeles_Akari Networks Limited_Claude4
+  - US_Los Angeles_Akari Networks Limited_Claude5
+  - US_Los Angeles_Akari Networks Limited_Claude6
   - US_Los Angeles_FSC NETWORK LTD_Claude
-  - US_Los Angeles_HostPapa_Claude
+  - US_Los Angeles_The Constant Company_Claude
+  - US_New York_Latitude.sh_Claude
+  - US_New York_Zayo Bandwidth_Claude
+  - US_North Bergen_DigitalOcean, LLC_Claude1
+  - US_North Bergen_DigitalOcean, LLC_Claude2
+  - US_Orem_Vodafone-Libertel-BV_Claude
+  - US_Sabetha_Carson Communications, LLC_Claude
+  - US_Salina_Rural Telephone Service Company_Claude
+  - US_Salt Lake City_PoloCloud Computing (United States) LLC_Claude
+  - US_San Francisco_DigitalOcean, LLC_Claude
+  - US_San Jose_Hurricane Electric LLC_Claude1
+  - US_San Jose_Hurricane Electric LLC_Claude2
+  - US_San Jose_Hurricane Electric LLC_Claude3
+  - US_San Jose_Hurricane Electric LLC_Claude4
+  - US_Sanford_Charter Communications_Claude
+  - US_Seattle_HostPapa_Claude
+  - US_West Wendover_Hurricane Electric LLC_Claude1
+  - US_West Wendover_Hurricane Electric LLC_Claude2
+  - US_West Wendover_Hurricane Electric LLC_Claude3
+  - US_West Wendover_Hurricane Electric LLC_Claude4
+  - US_West Wendover_Hurricane Electric LLC_Claude5
+  - US_West Wendover_Hurricane Electric LLC_Claude6
+  - US_West Wendover_Hurricane Electric LLC_Claude7
   filter: (?i)美|洛杉矶|芝加哥|西雅图|America|US|United.*?States
 - name: Claude
   type: url-test
-  url: https://www.gstatic.com/generate_204
+  url: https://www.google.com/generate_204
   expected-status: 204
   timeout: 2000
   interval: 600
   tolerance: 50
   proxies:
-  - 103.186.154.11_Claude
-  - 103.186.154.12_Claude
-  - 103.186.154.173_Claude
-  - 103.186.154.178_Claude
-  - 103.186.154.181_Claude
-  - 103.186.154.185_Claude
-  - 103.186.154.186_Claude
-  - 103.186.154.187_Claude
-  - 103.186.154.194_Claude
-  - 103.186.154.201_Claude
-  - 103.186.154.202_Claude
-  - 103.186.154.207_Claude
-  - 103.186.154.210_Claude
-  - 103.186.154.215_Claude
-  - 103.186.154.219_Claude
-  - 103.186.154.221_Claude
-  - 103.186.154.223_Claude
-  - 103.186.154.224_Claude
-  - 103.186.154.225_Claude
-  - 103.186.154.227_Claude
-  - 103.186.154.22_Claude
-  - 103.186.154.234_Claude
-  - 103.186.154.235_Claude
-  - 103.186.154.238_Claude
-  - 103.186.154.239_Claude
-  - 103.186.154.240_Claude
-  - 103.186.154.242_Claude
-  - 103.186.154.245_Claude
-  - 103.186.154.246_Claude
-  - 103.186.154.248_Claude
-  - 103.186.154.253_Claude
-  - 103.186.154.29_Claude
-  - 103.186.154.32_Claude
-  - 103.186.154.34_Claude
-  - 103.186.154.35_Claude
-  - 103.186.154.39_Claude
-  - 103.186.154.42_Claude
-  - 103.186.154.43_Claude
-  - 103.186.154.46_Claude
-  - 103.186.154.47_Claude
-  - 103.186.154.4_Claude
-  - 103.186.154.50_Claude
-  - 103.186.154.52_Claude
-  - 103.186.154.54_Claude
-  - 103.186.154.57_Claude
-  - 103.186.154.59_Claude
-  - 103.186.154.61_Claude
-  - 103.186.154.63_Claude
-  - 103.186.155.106_Claude
-  - 103.186.155.108_Claude
-  - 103.186.155.111_Claude
-  - 103.186.155.114_Claude
-  - 103.186.155.116_Claude
-  - 103.186.155.117_Claude
-  - 103.186.155.119_Claude
-  - 103.186.155.121_Claude
-  - 103.186.155.127_Claude
-  - 103.186.155.128_Claude
-  - 103.186.155.135_Claude
-  - 103.186.155.137_Claude
-  - 103.186.155.144_Claude
-  - 103.186.155.148_Claude
-  - 103.186.155.153_Claude
-  - 103.186.155.15_Claude
-  - 103.186.155.17_Claude
-  - 103.186.155.204_Claude
-  - 103.186.155.207_Claude
-  - 103.186.155.209_Claude
-  - 103.186.155.223_Claude
-  - 103.186.155.224_Claude
-  - 103.186.155.225_Claude
-  - 103.186.155.226_Claude
-  - 103.186.155.227_Claude
-  - 103.186.155.229_Claude
-  - 103.186.155.230_Claude
-  - 103.186.155.231_Claude
-  - 103.186.155.232_Claude
-  - 103.186.155.233_Claude
-  - 103.186.155.28_Claude
-  - 103.186.155.30_Claude
-  - 103.186.155.31_Claude
-  - 103.186.155.32_Claude
-  - 103.186.155.35_Claude
-  - 103.186.155.37_Claude
-  - 103.186.155.38_Claude
-  - 103.186.155.43_Claude
-  - 103.186.155.46_Claude
-  - 103.186.155.47_Claude
-  - 103.186.155.57_Claude
-  - 103.186.155.62_Claude
-  - 103.186.155.67_Claude
-  - 103.186.155.69_Claude
-  - 103.186.155.71_Claude
-  - 103.186.155.76_Claude
-  - 103.186.155.81_Claude
-  - 103.186.155.83_Claude
-  - 103.186.155.84_Claude
-  - 103.186.155.9_Claude
-  - 36.232.82.28_Claude1
-  - 36.232.82.28_Claude2
-  - 42.98.100.183_Claude1
-  - 42.98.100.183_Claude2
-  - 42.98.100.183_Claude3
-  - 42.98.100.183_Claude4
-  - 42.98.100.183_Claude5
-  - 42.98.100.183_Claude6
-  - 42.98.100.183_Claude7
-  - 61.111.247.53_Claude1
-  - 61.111.247.53_Claude2
+  - 102.244.78.57_Claude
+  - 109.248.147.70_Claude
+  - 13.212.207.226_Claude
+  - 13.212.249.115_Claude
+  - 13.229.54.109_Claude
+  - 137.220.221.179_Claude
+  - 146.70.244.10_Claude
+  - 149.36.50.15_Claude
+  - 149.88.21.139_Claude
+  - 169.150.237.8_Claude
+  - 185.221.132.246_Claude1
+  - 185.221.132.246_Claude2
+  - 212.102.63.8_Claude
+  - 23.142.200.235_Claude
+  - 2406:da18:ad0:a400:b312:73dc:ae5:d92_Claude
+  - 31.186.220.204_Claude
+  - 43.160.239.37_Claude
+  - 47.236.168.243_Claude
+  - 5.178.109.174_Claude
+  - 5.255.118.82_Claude
+  - 51.15.20.32_Claude
+  - 77.221.148.116_Claude
+  - 80.124.109.22_Claude
+  - 80.174.118.60_Claude
+  - 80.174.118.80_Claude
+  - 82.102.17.190_Claude
+  - 82.29.101.5_Claude
+  - 82.65.137.141_Claude
+  - 82.96.128.175_Claude
+  - 83.206.1.225_Claude
+  - 87.106.223.158_Claude
+  - 96.45.193.51_Claude
+  - AE_Dubai_Oracle Corporation_Claude
+  - AL_Tirana_Albanian Hosting SH.P.K._Claude
+  - AT_Vienna_Datacamp Limited_Claude
+  - BR_Vinhedo_Oracle Corporation_Claude
+  - CA_Beauharnois_OVH SAS_Claude
+  - CA_Montreal_Cloudflare, Inc._Claude
   - CA_Montreal_OVH SAS_Claude1
   - CA_Montreal_OVH SAS_Claude2
-  - CA_Toronto_Choopa_Claude
-  - CA_Toronto_DigitalOcean, LLC_Claude
-  - DE_Frankfurt am Main_F5 Networks SARL_Claude1
-  - DE_Frankfurt am Main_F5 Networks SARL_Claude2
-  - DE_Frankfurt am Main_F5 Networks SARL_Claude3
-  - DE_Frankfurt am Main_First Server Limited_Claude
-  - EC_Quito_IPXON Networks_Claude
+  - CA_Toronto_Microsoft Corporation_Claude
+  - CH_Zurich_Alexhost SRL_Claude
+  - CZ_Prague_M247 Europe SRL_Claude
+  - CZ_Prague_WIA spol. s.r.o._Claude
+  - DE_Bad Soden am Taunus_GHOSTnet GmbH_Claude
+  - DE_Berlin_Deutsche Telekom AG_Claude
+  - DE_Falkenstein_Hetzner Online GmbH_Claude
+  - DE_Frankfurt am Main_Collin Schneeweiss trading as Unesty Company_Claude
+  - DE_Frankfurt am Main_Datacamp Limited_Claude1
+  - DE_Frankfurt am Main_Datacamp Limited_Claude2
+  - DE_Frankfurt am Main_Datacamp Limited_Claude3
+  - DE_Frankfurt am Main_Datacamp Limited_Claude4
+  - DE_Frankfurt am Main_Datacamp Limited_Claude5
+  - DE_Frankfurt am Main_Digital Hosting Provider LLC_Claude
+  - DE_Frankfurt am Main_Interkvm Host SRL_Claude
+  - DE_Frankfurt am Main_Oracle Corporation_Claude
+  - DE_Frankfurt am Main_Sculk Ltd._Claude
+  - DE_Frankfurt am Main_meerfarbig GmbH & Co. KG_Claude
+  - DE_Frankfurt_GTHost_Claude
+  - DE_Leipzig_Cloudflare, Inc._Claude
+  - DE_Limburg an der Lahn_OVH SAS_Claude
+  - DE_Nuremberg_Hetzner Online GmbH_Claude
+  - DE_Nuremberg_netcup GmbH_Claude
+  - DE_Wuppertal_ARCOR-IP_Claude
+  - ES_Madrid_Baxet Group Inc._Claude
+  - FI_Helsinki_Baykov Ilya Sergeevich_Claude
+  - FR_Agen_Proxad / Free SAS_Claude
+  - FR_Gravelines_MCPECloud SAS_Claude
+  - FR_Gravelines_OVH SAS_Claude1
+  - FR_Gravelines_OVH SAS_Claude2
+  - FR_Gravelines_OVH SAS_Claude3
+  - FR_Lauterbourg_Contabo GmbH_Claude
+  - FR_Paris_Baykov Ilya Sergeevich_Claude
+  - FR_Paris_Bouygues Telecom ISP_Claude
+  - FR_Paris_Melbikomas UAB_Claude1
+  - FR_Paris_Melbikomas UAB_Claude2
+  - FR_Paris_Proxad / Free SAS_Claude
+  - FR_Paris_SCALEWAY_Claude1
+  - FR_Paris_SCALEWAY_Claude2
+  - FR_Paris_SCALEWAY_Claude3
+  - FR_Paris_SCALEWAY_Claude4
+  - FR_Paris_SCALEWAY_Claude5
+  - FR_Paris_SCALEWAY_Claude6
+  - FR_Paris_SCALEWAY_Claude7
+  - FR_Paris_SCALEWAY_Claude8
+  - FR_Paris_Scaleway SAS_Claude
+  - FR_Paris_Sewan SAS_Claude
+  - FR_Paris_Skydigital Telecom LTD_Claude
+  - GB_Bexley_OVH SAS_Claude
+  - GB_City of London_BrainStorm Network, Inc_Claude
   - GB_City of London_M247 Europe SRL_Claude
-  - HK_Fanling_PCCW IMS Limited_Claude1
-  - HK_Fanling_PCCW IMS Limited_Claude10
-  - HK_Fanling_PCCW IMS Limited_Claude11
-  - HK_Fanling_PCCW IMS Limited_Claude12
-  - HK_Fanling_PCCW IMS Limited_Claude13
-  - HK_Fanling_PCCW IMS Limited_Claude14
-  - HK_Fanling_PCCW IMS Limited_Claude15
-  - HK_Fanling_PCCW IMS Limited_Claude16
-  - HK_Fanling_PCCW IMS Limited_Claude17
-  - HK_Fanling_PCCW IMS Limited_Claude18
-  - HK_Fanling_PCCW IMS Limited_Claude19
-  - HK_Fanling_PCCW IMS Limited_Claude2
-  - HK_Fanling_PCCW IMS Limited_Claude20
-  - HK_Fanling_PCCW IMS Limited_Claude21
-  - HK_Fanling_PCCW IMS Limited_Claude22
-  - HK_Fanling_PCCW IMS Limited_Claude23
-  - HK_Fanling_PCCW IMS Limited_Claude24
-  - HK_Fanling_PCCW IMS Limited_Claude25
-  - HK_Fanling_PCCW IMS Limited_Claude3
-  - HK_Fanling_PCCW IMS Limited_Claude4
-  - HK_Fanling_PCCW IMS Limited_Claude5
-  - HK_Fanling_PCCW IMS Limited_Claude6
-  - HK_Fanling_PCCW IMS Limited_Claude7
-  - HK_Fanling_PCCW IMS Limited_Claude8
-  - HK_Fanling_PCCW IMS Limited_Claude9
-  - JP_Tokyo_Oracle Corporation_Claude
-  - NL_Amsterdam_Greenhost BV_Claude1
-  - NL_Amsterdam_Greenhost BV_Claude2
-  - NL_Amsterdam_Matteo Martelloni trading as DELUXHOST_Claude
-  - NL_Amsterdam_Servers Tech Fzco_Claude
-  - NL_Haarlem_SCALEWAY_Claude
-  - NL_Meppel_WorkTitans B.V._Claude
-  - TH_Nonthaburi_Siamdata Communication Co., ltd._Claude
-  - TW_Taipei_Chunghwa Telecom_Claude
-  - US_Los Angeles_Datacamp Limited_Claude1
-  - US_Los Angeles_Datacamp Limited_Claude2
-  - US_Los Angeles_Dedicated.com_Claude
+  - GB_London_GTHost_Claude
+  - GB_London_OVH SAS_Claude
+  - HK_Hong Kong_Iens Technology Pte. LTD_Claude
+  - ID_Jakarta_Alibaba (US) Technology Co., Ltd._Claude
+  - ID_Jakarta_Hurricane Electric LLC_Claude
+  - ID_Jakarta_PT Industri Kreatif Digital_Claude
+  - ID_Lenteng_PT Link Data Sumber Barokah_Claude
+  - IE_Dublin_Amazon Technologies Inc._Claude
+  - IE_Dublin_Amazon.com, Inc._Claude
+  - IL_Tel Aviv_013 Netvision Network_Claude
+  - IN_Mumbai_Contabo Asia Private Limited_Claude
+  - IT_Arezzo_Aruba S.p.A. Network_Claude
+  - IT_Milan_Datacamp Limited_Claude
+  - IT_Milan_EUROPEAN-LEASE1_Claude1
+  - IT_Milan_EUROPEAN-LEASE1_Claude2
+  - IT_Milan_EUROPEAN-LEASE1_Claude3
+  - IT_Milan_EUROPEAN-LEASE1_Claude4
+  - IT_Milan_EUROPEAN-LEASE1_Claude5
+  - IT_Milan_EUROPEAN-LEASE1_Claude6
+  - IT_Milan_EUROPEAN-LEASE1_Claude7
+  - IT_Milan_Fastweb SpA_Claude
+  - IT_Milan_OVH SAS_Claude
+  - IT_Naples_Vodafone_Claude
+  - IT_Rovigo_Telecom Italia S.p.A._Claude
+  - JP_Tokyo_ALPHA-JP-SUB_Claude
+  - JP_Tokyo_DMIT Cloud Services_Claude
+  - JP_Tokyo_NetLab Global_Claude
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude1
+  - JP_Tokyo_UCLOUD INFORMATION TECHNOLOGY (HK) LIMITED_Claude2
+  - LT_Vilnius_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude
+  - LV_Riga_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude1
+  - LV_Riga_Sabiedriba ar ierobezotu atbildibu DELSKA Latvia_Claude2
+  - NL_Amsterdam_DataCamp Limited_Claude1
+  - NL_Amsterdam_DataCamp Limited_Claude2
+  - NL_Amsterdam_DataCamp Limited_Claude3
+  - NL_Amsterdam_DataCamp Limited_Claude4
+  - NL_Amsterdam_DataCamp Limited_Claude5
+  - NL_Amsterdam_DataCamp Limited_Claude6
+  - NL_Amsterdam_DataCamp Limited_Claude7
+  - NL_Amsterdam_DataCamp Limited_Claude8
+  - NL_Amsterdam_DataCamp Limited_Claude9
+  - NL_Amsterdam_Datacamp Limited_Claude
+  - NL_Amsterdam_DigitalOcean, LLC_Claude
+  - NL_Amsterdam_Hostkey B.V._Claude
+  - NL_Amsterdam_Melbikomas UAB_Claude1
+  - NL_Amsterdam_Melbikomas UAB_Claude2
+  - NL_Amsterdam_Melbikomas UAB_Claude3
+  - NL_Amsterdam_Melbikomas UAB_Claude4
+  - NL_Amsterdam_Scalaxy B.V._Claude
+  - NL_Dronten_Digital City FZE_Claude
+  - NL_Eygelshoven_Paul Sagov_Claude
+  - NL_Haarlem_SCALEWAY_Claude1
+  - NL_Haarlem_SCALEWAY_Claude2
+  - NL_Haarlem_Scaleway SAS_Claude
+  - NO_Oslo_BrainStorm Network, Inc_Claude
+  - PL_Warsaw_KABAT-OU_Claude
+  - PL_Warsaw_Mitelis Security_Claude
+  - PL_Warsaw_Scaleway SAS_Claude
+  - RO_Bucharest_M247 Europe SRL_Claude1
+  - RO_Bucharest_M247 Europe SRL_Claude2
+  - RU_St Petersburg_EstNOC OU_Claude
+  - SE_Huskvarna_Telia Company AB_Claude
+  - SG_Singapore_Amazon Technologies Inc._Claude1
+  - SG_Singapore_Amazon Technologies Inc._Claude2
+  - SG_Singapore_Amazon.com, Inc._Claude1
+  - SG_Singapore_Amazon.com, Inc._Claude2
+  - SG_Singapore_Amazon.com, Inc._Claude3
+  - SG_Singapore_Amazon.com, Inc._Claude4
+  - SG_Singapore_Amazon.com, Inc._Claude5
+  - SG_Singapore_Amazon.com, Inc._Claude6
+  - SG_Singapore_Amazon.com, Inc._Claude7
+  - SG_Singapore_DigitalOcean, LLC_Claude1
+  - SG_Singapore_DigitalOcean, LLC_Claude2
+  - SG_Singapore_DigitalOcean, LLC_Claude3
+  - SG_Singapore_DigitalOcean, LLC_Claude4
+  - TW_Chang-hua_Chunghwa Telecom Co., Ltd._Claude
+  - TW_Taipei_Akari Networks Limited_Claude
+  - TW_Taipei_Turing Group Limited_Claude
+  - US_Boardman_Amazon.com, Inc._Claude1
+  - US_Boardman_Amazon.com, Inc._Claude2
+  - US_Boardman_Amazon.com, Inc._Claude3
+  - US_Boardman_Amazon.com, Inc._Claude4
+  - US_Buffalo_HostPapa_Claude
+  - US_Centennial_Ting Fiber Inc._Claude
+  - US_Charlotte_Spectrum_Claude
+  - US_Charlottesville_Alibaba.com LLC_Claude
+  - US_Cheyenne_Hurricane Electric LLC_Claude1
+  - US_Cheyenne_Hurricane Electric LLC_Claude2
+  - US_Cheyenne_Hurricane Electric LLC_Claude3
+  - US_Cheyenne_Hurricane Electric LLC_Claude4
+  - US_Cheyenne_Hurricane Electric LLC_Claude5
+  - US_Cheyenne_Hurricane Electric LLC_Claude6
+  - US_Cheyenne_Hurricane Electric LLC_Claude7
+  - US_Cheyenne_Hurricane Electric LLC_Claude8
+  - US_Chicago_Ryamer, LLC_Claude
+  - US_Chicago_UAB Cherry Servers_Claude
+  - US_Dallas_Hivelocity_Claude
+  - US_Durham_NetActuate, Inc_Claude
+  - US_Fremont_Hurricane Electric LLC_Claude1
+  - US_Fremont_Hurricane Electric LLC_Claude10
+  - US_Fremont_Hurricane Electric LLC_Claude11
+  - US_Fremont_Hurricane Electric LLC_Claude12
+  - US_Fremont_Hurricane Electric LLC_Claude13
+  - US_Fremont_Hurricane Electric LLC_Claude14
+  - US_Fremont_Hurricane Electric LLC_Claude15
+  - US_Fremont_Hurricane Electric LLC_Claude16
+  - US_Fremont_Hurricane Electric LLC_Claude17
+  - US_Fremont_Hurricane Electric LLC_Claude18
+  - US_Fremont_Hurricane Electric LLC_Claude19
+  - US_Fremont_Hurricane Electric LLC_Claude2
+  - US_Fremont_Hurricane Electric LLC_Claude20
+  - US_Fremont_Hurricane Electric LLC_Claude21
+  - US_Fremont_Hurricane Electric LLC_Claude22
+  - US_Fremont_Hurricane Electric LLC_Claude23
+  - US_Fremont_Hurricane Electric LLC_Claude24
+  - US_Fremont_Hurricane Electric LLC_Claude25
+  - US_Fremont_Hurricane Electric LLC_Claude26
+  - US_Fremont_Hurricane Electric LLC_Claude3
+  - US_Fremont_Hurricane Electric LLC_Claude4
+  - US_Fremont_Hurricane Electric LLC_Claude5
+  - US_Fremont_Hurricane Electric LLC_Claude6
+  - US_Fremont_Hurricane Electric LLC_Claude7
+  - US_Fremont_Hurricane Electric LLC_Claude8
+  - US_Fremont_Hurricane Electric LLC_Claude9
+  - US_Irvine_1515 ROUNDTABLE DR PROPERTY, LLC_Claude
+  - US_Kent_The Constant Company_Claude
+  - US_Los Angeles_Akari Networks Limited_Claude1
+  - US_Los Angeles_Akari Networks Limited_Claude2
+  - US_Los Angeles_Akari Networks Limited_Claude3
+  - US_Los Angeles_Akari Networks Limited_Claude4
+  - US_Los Angeles_Akari Networks Limited_Claude5
+  - US_Los Angeles_Akari Networks Limited_Claude6
   - US_Los Angeles_FSC NETWORK LTD_Claude
-  - US_Los Angeles_HostPapa_Claude
+  - US_Los Angeles_The Constant Company_Claude
+  - US_New York_Latitude.sh_Claude
+  - US_New York_Zayo Bandwidth_Claude
+  - US_North Bergen_DigitalOcean, LLC_Claude1
+  - US_North Bergen_DigitalOcean, LLC_Claude2
+  - US_Orem_Vodafone-Libertel-BV_Claude
+  - US_Sabetha_Carson Communications, LLC_Claude
+  - US_Salina_Rural Telephone Service Company_Claude
+  - US_Salt Lake City_PoloCloud Computing (United States) LLC_Claude
+  - US_San Francisco_DigitalOcean, LLC_Claude
+  - US_San Jose_Hurricane Electric LLC_Claude1
+  - US_San Jose_Hurricane Electric LLC_Claude2
+  - US_San Jose_Hurricane Electric LLC_Claude3
+  - US_San Jose_Hurricane Electric LLC_Claude4
+  - US_Sanford_Charter Communications_Claude
+  - US_Seattle_HostPapa_Claude
+  - US_West Wendover_Hurricane Electric LLC_Claude1
+  - US_West Wendover_Hurricane Electric LLC_Claude2
+  - US_West Wendover_Hurricane Electric LLC_Claude3
+  - US_West Wendover_Hurricane Electric LLC_Claude4
+  - US_West Wendover_Hurricane Electric LLC_Claude5
+  - US_West Wendover_Hurricane Electric LLC_Claude6
+  - US_West Wendover_Hurricane Electric LLC_Claude7
+  - ZA_Johannesburg_Microsoft Corporation_Claude1
+  - ZA_Johannesburg_Microsoft Corporation_Claude2
   filter: _Claude
 - name: Gemini
   type: url-test
-  url: https://www.gstatic.com/generate_204
+  url: https://www.google.com/generate_204
   expected-status: 204
   timeout: 2000
   interval: 600
@@ -2052,6 +2821,7 @@ proxy-groups:
   filter: _Gemini
 rules:
 - RULE-SET,ads,REJECT
+- DOMAIN-SUFFIX,boundaryx.net,DIRECT
 - RULE-SET,applications,DIRECT
 - RULE-SET,private,DIRECT
 - RULE-SET,apple-cn,DIRECT
@@ -2072,16 +2842,16 @@ rule-providers:
   fakeip-filter:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/fakeip-filter.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/fakeip-filter.mrs
+    format: text
+    path: ./rules/fakeip-filter.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/fakeip-filter.list
     interval: 86400
   ads:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/ads.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/ads.mrs
+    format: text
+    path: ./rules/ads.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/ads.list
     interval: 86400
   applications:
     type: http
@@ -2093,91 +2863,91 @@ rule-providers:
   private:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/private.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/private.mrs
+    format: text
+    path: ./rules/private.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/private.list
     interval: 86400
   games-cn:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/games-cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/games-cn.mrs
+    format: text
+    path: ./rules/games-cn.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/games-cn.list
     interval: 86400
   microsoft-cn:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/microsoft-cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/microsoft-cn.mrs
+    format: text
+    path: ./rules/microsoft-cn.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/microsoft-cn.list
     interval: 86400
   apple-cn:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/apple-cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/apple-cn.mrs
+    format: text
+    path: ./rules/apple-cn.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/apple-cn.list
     interval: 86400
   google-cn:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/google-cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/google-cn.mrs
+    format: text
+    path: ./rules/google-cn.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/google-cn.list
     interval: 86400
   bilibili:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/bilibili.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/bilibili.mrs
+    format: text
+    path: ./rules/bilibili.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/bilibili.list
     interval: 86400
   gemini:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/gemini.mrs
-    url: https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/gemini/gemini.mrs
+    format: text
+    path: ./rules/gemini.list
+    url: https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/gemini/gemini.list
     interval: 86400
   claude:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/claude.mrs
-    url: https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/claude/claude.mrs
+    format: text
+    path: ./rules/claude.list
+    url: https://github.com/ReaJason/Clash-Butler/raw/refs/heads/master/rules/claude/claude.list
     interval: 86400
   youtube:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/youtube.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/youtube.mrs
+    format: text
+    path: ./rules/youtube.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/youtube.list
     interval: 86400
   cn:
     type: http
     behavior: domain
-    format: mrs
-    path: ./rules/cn.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cn.mrs
+    format: text
+    path: ./rules/cn.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cn.list
     interval: 86400
   telegramip:
     type: http
     behavior: ipcidr
-    format: mrs
-    path: ./rules/telegramip.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/telegramip.mrs
+    format: text
+    path: ./rules/telegramip.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/telegramip.list
     interval: 86400
   privateip:
     type: http
     behavior: ipcidr
-    format: mrs
-    path: ./rules/privateip.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/privateip.mrs
+    format: text
+    path: ./rules/privateip.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/privateip.list
     interval: 86400
   cnip:
     type: http
     behavior: ipcidr
-    format: mrs
-    path: ./rules/cnip.mrs
-    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cnip.mrs
+    format: text
+    path: ./rules/cnip.list
+    url: https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cnip.list
     interval: 86400
